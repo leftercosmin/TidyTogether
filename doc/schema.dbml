@@ -1,0 +1,66 @@
+ENUM UserRole {
+  civilian   // regular individual
+  supervisor // decision factor
+  authority  // dude that cleans up the mess
+}
+
+TABLE User {
+  id        INTEGER PK
+  email     STRING UNIQUE
+  password  STRING // obviously hashed
+  picture   STRING // url to the picture
+  role      UserRole
+  createdAt DATETIME
+  updatedAt DATETIME
+}
+
+TABLE LovedZone {
+  idUser INTEGER [ref: > User.id]
+  idZone INTEGER [ref: > Zone.id]
+
+  PRIMARY KEY (idUser, idZone)
+}
+
+TABLE Zone {
+  id   INTEGER PK
+  name STRING
+}
+
+TABLE Post {
+  id          INTEGER PK
+  description STRING
+  isAccepted  BOOLEAN
+  idUser      INTEGER [ref: > User.id]
+  idZone      INTEGER [ref: > Zone.id]
+  latitude    DECIMAL
+  longitude   DECIMAL
+  createdAt   DATETIME
+}
+
+ENUM MediaFormat {
+  jpg
+  png
+  mp4
+  webm
+}
+
+TABLE Media {
+  id     INTEGER PK
+  name   STRING
+  size   STRING
+  source STRING
+  format MediaFormat
+  idPost INTEGER [ref: > Post.id]
+}
+
+TABLE Mark {
+  id     INTEGER PK
+  name   STRING
+  idPost INTEGER [ref: > Post.id]
+
+  // PRIMARY KEY (name, idPost)
+  // TABLE TAG = persistent and independent tags
+}
+
+// CASCADE constaints
+// DEFAULT constaints
