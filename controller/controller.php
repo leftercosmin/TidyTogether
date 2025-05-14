@@ -1,8 +1,9 @@
 <?php
 
 // test map
-//include_once 'view/dashboard/civilian.php';
-// exit();
+// include_once 'view/dashboard/civilian.php';
+echo $_ENV["MAP_KEY"];
+exit();
 
 
 if (!isset($_COOKIE['userSession'])) {
