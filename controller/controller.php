@@ -1,7 +1,7 @@
 <?php
 
-$example = $_ENV['MAP_KEY'];
-echo $example;
+# test map
+include_once 'view/dashboard/civilian.php';
 exit();
 
 if (!isset($_COOKIE['userSession'])) {

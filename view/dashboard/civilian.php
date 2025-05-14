@@ -75,7 +75,7 @@
   <!-- using php to generate the secret key -->
   <?php
   echo "<gmpx-api-loader key=";
-  echo $_ENV["MAP_KEY"];
+  echo "\"" . $_ENV["MAP_KEY"] . "\"";
   echo "solution-channel=\"GMP_GE_mapsandplacesautocomplete_v2\">";
   ?>
 
