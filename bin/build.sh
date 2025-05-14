@@ -1,10 +1,10 @@
 #!/bin/bash
 
 name="TidyTogether"
-source="../$name"
+source="."
 destination="/opt/lampp/htdocs/$name"
 
-sudo rm -rf $destination
+sudo rm -r $destination
 sudo mkdir $destination
 sudo cp -a "$source/." $destination
 
