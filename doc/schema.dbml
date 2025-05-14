@@ -8,7 +8,8 @@ TABLE User {
   id        INTEGER PK
   email     STRING UNIQUE
   password  STRING // obviously hashed
-  picture   STRING // url to the picture
+  fname     STRING
+  lname     STRING
   role      UserRole
   createdAt DATETIME
   updatedAt DATETIME
@@ -18,23 +19,33 @@ TABLE LovedZone {
   idUser INTEGER [ref: > User.id]
   idZone INTEGER [ref: > Zone.id]
 
-  PRIMARY KEY (idUser, idZone)
+  // PRIMARY KEY (idUser, idZone)
 }
 
 TABLE Zone {
-  id   INTEGER PK
-  name STRING
+  id      INTEGER PK
+  name    STRING
+  city    STRING
+  country STRING
+}
+
+// null or done => decision maker
+// pending pr inProgress => authority
+ENUM PostStatus {
+  pending    // accepted by decision maker
+  inProgress
+  done
 }
 
 TABLE Post {
   id          INTEGER PK
   description STRING
-  isAccepted  BOOLEAN
+  status      PostStatus
   idUser      INTEGER [ref: > User.id]
   idZone      INTEGER [ref: > Zone.id]
-  latitude    DECIMAL
-  longitude   DECIMAL
+  address     STRING
   createdAt   DATETIME
+  updatedAt   DATETIME
 }
 
 ENUM MediaFormat {
@@ -46,21 +57,35 @@ ENUM MediaFormat {
 
 TABLE Media {
   id     INTEGER PK
-  name   STRING
-  size   STRING
-  source STRING
+  name   STRING  // filename
+  size   INTEGER // in bytes
+  source STRING  // url
   format MediaFormat
   idPost INTEGER [ref: > Post.id]
 }
 
+ENUM TagColor {
+  red
+  orange
+  yellow
+  blue
+  purple
+  green
+}
+
+TABLE Tag {
+  id    INTEGER PK
+  name  STRING
+  color TagColor
+}
+
 TABLE Mark {
   id     INTEGER PK
-  name   STRING
+  idTag  INTEGER [ref: > Tag.id]
   idPost INTEGER [ref: > Post.id]
 
   // PRIMARY KEY (name, idPost)
-  // TABLE TAG = persistent and independent tags
 }
 
-// CASCADE constaints
-// DEFAULT constaints
+// CASCADE constraints
+// DEFAULT constraints

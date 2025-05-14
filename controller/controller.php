@@ -2,7 +2,7 @@
 
 // test map
 // include_once 'view/dashboard/civilian.php';
-echo $_ENV["MAP_KEY"];
+echo getenv("MAP_KEY");
 exit();
 
 
