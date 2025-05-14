@@ -1,10 +1,8 @@
 <?php
 
-// test map
-// include_once 'view/dashboard/civilian.php';
-echo getenv("MAP_KEY");
+$example = $_ENV['MAP_KEY'];
+echo $example;
 exit();
-
 
 if (!isset($_COOKIE['userSession'])) {
   include_once 'view/login.html';

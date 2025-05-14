@@ -6,6 +6,7 @@
 
 - XAMPP
 - GoogleMaps API
+- [phpdotenv](https://github.com/vlucas/phpdotenv)
 
 ## Featires
 
