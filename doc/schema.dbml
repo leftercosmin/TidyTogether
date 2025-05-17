@@ -1,16 +1,16 @@
 ENUM UserRole {
-  civilian   // regular individual
+  civilian // regular individual
   supervisor // decision factor
-  authority  // dude that cleans up the mess
+  authority // dude that cleans up the mess
 }
 
 TABLE User {
-  id        INTEGER PK
-  email     STRING UNIQUE
-  password  STRING // obviously hashed
-  fname     STRING
-  lname     STRING
-  role      UserRole
+  id INTEGER PK
+  email STRING UNIQUE
+  password STRING // obviously hashed
+  fname STRING
+  lname STRING
+  role UserRole
   createdAt DATETIME
   updatedAt DATETIME
 }
@@ -23,29 +23,29 @@ TABLE LovedZone {
 }
 
 TABLE Zone {
-  id      INTEGER PK
-  name    STRING
-  city    STRING
+  id INTEGER PK
+  name STRING
+  city STRING
   country STRING
 }
 
 // null or done => decision maker
 // pending pr inProgress => authority
 ENUM PostStatus {
-  pending    // accepted by decision maker
+  pending // accepted by decision maker
   inProgress
   done
 }
 
 TABLE Post {
-  id          INTEGER PK
+  id INTEGER PK
   description STRING
-  status      PostStatus
-  idUser      INTEGER [ref: > User.id]
-  idZone      INTEGER [ref: > Zone.id]
-  address     STRING
-  createdAt   DATETIME
-  updatedAt   DATETIME
+  status PostStatus
+  idUser INTEGER [ref: > User.id]
+  idZone INTEGER [ref: > Zone.id]
+  address STRING
+  createdAt DATETIME
+  updatedAt DATETIME
 }
 
 ENUM MediaFormat {
@@ -56,10 +56,10 @@ ENUM MediaFormat {
 }
 
 TABLE Media {
-  id     INTEGER PK
-  name   STRING  // filename
-  size   INTEGER // in bytes
-  source STRING  // url
+  id INTEGER PK
+  name STRING // filename
+  size INTEGER // in bytes
+  source STRING // url
   format MediaFormat
   idPost INTEGER [ref: > Post.id]
 }
@@ -74,18 +74,12 @@ ENUM TagColor {
 }
 
 TABLE Tag {
-  id    INTEGER PK
-  name  STRING
+  id INTEGER PK
+  name STRING
   color TagColor
 }
 
 TABLE Mark {
-  id     INTEGER PK
-  idTag  INTEGER [ref: > Tag.id]
+  idTag INTEGER [ref: > Tag.id]
   idPost INTEGER [ref: > Post.id]
-
-  // PRIMARY KEY (name, idPost)
 }
-
-// CASCADE constraints
-// DEFAULT constraints
