@@ -1,5 +1,9 @@
 #!/bin/bash
 
+if [ ! -d /etc/init.d/apache2 ]; then
+	sudo /etc/init.d/apache2 stop > temp.txt; rm temp.txt
+fi
+
 name="TidyTogether"
 source="."
 destination="/opt/lampp/htdocs/$name"

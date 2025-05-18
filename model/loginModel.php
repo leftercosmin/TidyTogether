@@ -54,9 +54,8 @@ if (!password_verify($passw, $row['password'])) {
 }
 
 // todo set coockie/session conn role
-// todo set role
 
 $result->close();
 $db->close();
 
-// todo send to dashboard/reload/ create post http
+// todo send to dashboard/reload/create post http
