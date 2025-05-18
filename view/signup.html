@@ -13,7 +13,7 @@
     <div class="wrapper">
       <h1>Sign Up</h1>
 
-      <form>
+      <form method="post">
         <div class="input-block">
           <div class="label-header">
             <label for="firstname-input">
@@ -32,7 +32,6 @@
             </label>
           </div>
           <input
-            required
             type="text"
             name="firstname"
             id="firstname-input"
@@ -58,7 +57,6 @@
             </label>
           </div>
           <input
-            required
             type="text"
             name="lastname"
             id="lastname-input"
@@ -138,7 +136,7 @@
           <input
             required
             type="password"
-            name="password"
+            name="passwordAgain"
             id="confirm-password"
             placeholder="Confirm password"
           />
