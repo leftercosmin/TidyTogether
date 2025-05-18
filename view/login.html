@@ -12,6 +12,7 @@
   <body>
     <div class="wrapper">
       <h1>Log In</h1>
+
       <form>
         <div class="input-block">
           <div class="label-header">
@@ -38,6 +39,7 @@
             placeholder="Email"
           />
         </div>
+
         <div class="input-block">
           <div class="label-header">
             <label for="password-input">
@@ -66,9 +68,11 @@
 
         <button type="submit">Log In</button>
       </form>
-      <p class="footer">
-        Don't have an account?<a href="view/signup.html"> Sign up</a>
-      </p>
+
+      <p>Don't have an account?</p>
+      <form method="post">
+        <button type="submit" name="whatPage" value="Signup">Signup</button>
+      </form>
     </div>
   </body>
 </html>

@@ -6,12 +6,13 @@
     <title>SignUp page</title>
     <meta name="description" content="signup page for the users" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="view/style.css" />
   </head>
 
   <body>
     <div class="wrapper">
       <h1>Sign Up</h1>
+
       <form>
         <div class="input-block">
           <div class="label-header">
@@ -64,6 +65,7 @@
             placeholder="Lastname"
           />
         </div>
+
         <div class="input-block">
           <div class="label-header">
             <label for="email-input">
@@ -89,6 +91,7 @@
             placeholder="Email"
           />
         </div>
+
         <div class="input-block">
           <div class="label-header">
             <label for="password-input">
@@ -114,6 +117,7 @@
             placeholder="Password"
           />
         </div>
+
         <div class="input-block">
           <div class="label-header">
             <label for="confirm-password">
@@ -139,11 +143,14 @@
             placeholder="Confirm password"
           />
         </div>
+
         <button type="submit">Sign Up</button>
       </form>
-      <p class="footer">
-        Already have an account?<a href="login.html"> Log in</a>
-      </p>
+
+      <p>Already have an account?</p>
+      <form method="post">
+        <button type="submit" name="whatPage" value="Login">Login</button>
+      </form>
     </div>
   </body>
 </html>

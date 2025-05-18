@@ -114,7 +114,8 @@ form button:hover {
   border-color: #faf8eb;
 }
 
-.footer {
+body p {
+  background-color: #0f5949;
   font-size: 18px;
 }
 a {
