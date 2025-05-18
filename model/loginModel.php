@@ -34,17 +34,17 @@ if ($db->connect_error) {
   exit("error: " . $db->connect_error);
 }
 
-$result =
+$statement =
   $db->prepare(
     'SELECT email, password, role FROM User WHERE email=?'
   );
-$result->bind_param('s', $email);
-$result->execute();
-$result = $result->get_result();
+$statement->bind_param('s', $email);
+$statement->execute();
+$result = $statement->get_result();
+$statement->close();
+$db->close();
 
 if (!$result || 0 == $result->num_rows) {
-  $result->close();
-  $db->close();
   exit("error: can not log invalid credentials");
 }
 
@@ -53,9 +53,18 @@ if (!password_verify($passw, $row['password'])) {
   exit("error: can not log invalid credentials");
 }
 
-// todo set coockie/session conn role
+// session
+$token = json_encode(
+  ['email' => $email, 'username' => $row['role']]
+);
+session_start([
+  'cookie_lifetime' => 10,
+  'cookie_path' => '/',
+  'cookie_secure' => isset($_SERVER['HTTPS']),
+  'cookie_httponly' => true
+]);
+$_SESSION[CONN] = $token;
+$_SESSION['lastLogin'] = time();
 
-$result->close();
-$db->close();
-
-// todo send to dashboard/reload/create post http
+include_once "controller/homeController.php";
+exit();

@@ -45,17 +45,17 @@ if ($db->connect_error) {
   exit("error: " . $db->connect_error);
 }
 
-$result =
+$statement =
   $db->prepare(
     'SELECT email FROM User WHERE email=?'
   );
-$result->bind_param('s', $email);
-$result->execute();
-$result = $result->get_result();
+$statement->bind_param('s', $email);
+$statement->execute();
+$result = $statement->get_result();
 
 // not unique
 if ($result->num_rows > 0) {
-  $result->close();
+  $statement->close();
   $db->close();
   exit("error: email already registered");
 }
@@ -64,17 +64,28 @@ if ($result->num_rows > 0) {
 
 $passw = password_hash($passw, PASSWORD_DEFAULT);
 $db->begin_transaction();
-$result =
+$statement =
   $db->prepare(
     'INSERT INTO
-    User (email, password, fname, lname)
-    VALUES (?, ?, ?, ?)'
+    User (email, password, fname, lname, role)
+    VALUES (?, ?, ?, ?, ?)'
   );
-$result->bind_param('ssss', $fname, $lname, $email, $passw);
-$result->execute();
+$statement->bind_param(
+  'ssss',
+  $fname,
+  $lname,
+  $email,
+  $passw,
+  "civilian" // todo automate this
+);
+$statement->execute();
 $db->commit();
 
-$result->close();
+$statement->close();
 $db->close();
 
-// todo realods
+// todo big error
+unset($_POST["email"]);
+$_POST[PAGE] = "Login";
+include_once "controller/homeController.php";
+exit();
