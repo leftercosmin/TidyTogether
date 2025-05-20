@@ -9,25 +9,22 @@ define("ROLE", "role");
 
 
 if (!isset($_SESSION[CONN])) {
-  include_once 'controller/accountController.php';
-  exit();
+  require_once 'controller/accountController.php';
+  if (!isset($_SESSION[CONN])) {
+    exit();
+  }
 }
 
-if (!isset($_SESSION[ROLE]) || null == $_SESSION[ROLE]) {
-  echo "error: invalid session coockie";
-  exit();
+if (!isset($_SESSION[ROLE])) {
+  exit("error: invalid session coockie");
 }
 
 if (USER_CIVL === $_SESSION[ROLE]) {
-  include_once 'view/home/civilian.php';
-  exit();
+  require_once 'view/home/civilian.php';
 } elseif (USER_SPRV === $_SESSION[ROLE]) {
-  include_once 'view/home/supervisor.php';
-  exit();
+  require_once 'view/home/supervisor.php';
 } elseif (USER_AUTH === $_SESSION[ROLE]) {
-  include_once 'view/home/authority.html';
-  exit();
+  require_once 'view/home/authority.html';
 }
 
-echo "error: invalid session coockie";
-exit();
+exit("error: invalid role coockie");

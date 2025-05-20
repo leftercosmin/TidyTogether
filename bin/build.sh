@@ -2,11 +2,6 @@
 
 # call it to locally deploy your solution with all the updates
 
-if [ ! -d /etc/init.d/apache2 ]; then
-	sudo /etc/init.d/apache2 stop > temp3434.txt
-	rm temp3434.txt
-fi
-
 name="TidyTogether"
 source="."
 destination="/opt/lampp/htdocs/$name"

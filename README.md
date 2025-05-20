@@ -2,6 +2,8 @@
 
 ## Build
 
+`tree -L 2 -I "bin|doc|vendor|composer*|*.md|LICENSE"`
+
 ## Technologies
 
 - XAMPP

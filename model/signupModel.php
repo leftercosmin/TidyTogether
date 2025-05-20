@@ -27,16 +27,16 @@ if (is_null($email) || strlen($email) < 2) {
 
 if (
   is_null($passw) ||
-  strlen($passw) < 5 ||
+  strlen($passw) < 4 ||
   $passw != $pasAg
 ) {
-  exit("error: passwords do not match");
+  exit("error: invalid password");
 }
 
 $db = new mysqli(
   $_ENV['DB_HOSTNAME'],
   $_ENV['DB_USERNAME'],
-  $_ENV['DB_HOSTNAME'],
+  $_ENV['DB_PASSWORD'],
   $_ENV['DB_DATABASE']
 );
 
@@ -49,9 +49,29 @@ $statement =
   $db->prepare(
     'SELECT email FROM User WHERE email=?'
   );
-$statement->bind_param('s', $email);
-$statement->execute();
+if (!$statement) {
+  $db->close();
+  exit("error: failed to prepare SELECT statement");
+}
+
+if (!$statement->bind_param('s', $email)) {
+  $statement->close();
+  $db->close();
+  exit("error: failed to bind SELECT parameters");
+}
+
+if (!$statement->execute()) {
+  $statement->close();
+  $db->close();
+  exit("error: failed to execute SELECT");
+}
+
 $result = $statement->get_result();
+if (!$result) {
+  $statement->close();
+  $db->close();
+  exit("error: failed to fetch result");
+}
 
 // not unique
 if ($result->num_rows > 0) {
@@ -63,29 +83,57 @@ if ($result->num_rows > 0) {
 // todo assign role
 
 $passw = password_hash($passw, PASSWORD_DEFAULT);
-$db->begin_transaction();
+if (!$passw) {
+  $db->close();
+  exit("error: failed to hash password");
+}
+
+// transaction
+if(!$db->begin_transaction()){
+  exit("error: failed to begin transaction");
+}
+
 $statement =
   $db->prepare(
     'INSERT INTO
     User (email, password, fname, lname, role)
     VALUES (?, ?, ?, ?, ?)'
   );
-$statement->bind_param(
-  'ssss',
-  $fname,
-  $lname,
+if (!$statement) {
+  $db->rollback();
+  $db->close();
+  exit("error: failed to prepare INSERT statement");
+}
+
+$role = 'civilian'; // todo automate this
+$test = $statement->bind_param(
+  'sssss',
   $email,
   $passw,
-  "civilian" // todo automate this
+  $fname,
+  $lname,
+  $role
 );
-$statement->execute();
-$db->commit();
 
-$statement->close();
-$db->close();
+if (!$test) {
+  exit("error: failed to bind to INSERT statement");
+}
 
-// todo big error
-unset($_POST["email"]);
+if (!$statement->execute()) {
+  exit("error: failed to execute INSERT statement");
+}
+
+if (!$db->commit()) {
+  exit("error: failed to commit");
+}
+
+if (!$statement->close()) {
+  exit("error: failed to close statement");
+}
+
+if (!$db->close()) {
+  exit("error: failed to close statement");
+}
+
+unset($_POST);
 $_POST[PAGE] = "Login";
-include_once "controller/homeController.php";
-exit();

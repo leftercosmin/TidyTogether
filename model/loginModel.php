@@ -25,7 +25,7 @@ $passw = password_hash($_POST["password"], PASSWORD_DEFAULT);
 $db = new mysqli(
   $_ENV['DB_HOSTNAME'],
   $_ENV['DB_USERNAME'],
-  $_ENV['DB_HOSTNAME'],
+  $_ENV['DB_PASSWORD'],
   $_ENV['DB_DATABASE']
 );
 
@@ -45,7 +45,7 @@ $statement->close();
 $db->close();
 
 if (!$result || 0 == $result->num_rows) {
-  exit("error: can not log invalid credentials");
+  exit("error: invalid credentials");
 }
 
 $row = $result->fetch_assoc();
@@ -64,7 +64,6 @@ session_start([
   'cookie_httponly' => true
 ]);
 $_SESSION[CONN] = $token;
-$_SESSION['lastLogin'] = time();
+$_SESSION[ROLE] = 0; // todo automate this
 
-include_once "controller/homeController.php";
-exit();
+unset($_POST);

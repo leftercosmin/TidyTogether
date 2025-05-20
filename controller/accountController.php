@@ -10,23 +10,19 @@ if (isset($_SESSION[CONN])) {
   exit();
 }
 
+// page switcher
+if ($_POST["whatPage"] == "Signup") {
+  require "view/signup.html";
+} else {
+  require "view/login.html";
+}
+
 // credentials inserted
 if (isset($_POST["email"]) && isset($_POST["password"])) {
 
-  if ($_POST[PAGE] == "Signup") {
-    include_once "model/signupModel.php";
-    exit();
+  if (isset($_POST["passwordAgain"])) {
+    require "model/signupModel.php";
+  } else {
+    require "model/loginModel.php";
   }
-
-  include_once "model/loginModel.php";
-  exit();
 }
-
-// page switcher
-if ($_POST["whatPage"] == "Signup") {
-  include_once "view/signup.html";
-  exit();
-}
-
-include_once "view/login.html";
-exit();
