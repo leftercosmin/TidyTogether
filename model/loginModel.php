@@ -1,9 +1,5 @@
 <?php // prints user type
 
-define("USER_CIVL", 0);
-define("USER_SPRV", 1);
-define("USER_AUTH", 2);
-
 define("CONN", "userSession");
 
 
@@ -19,7 +15,7 @@ if (!isset($_POST["email"]) || !isset($_POST["password"])) {
 }
 
 $email = $_POST["email"];
-$passw = password_hash($_POST["password"], PASSWORD_DEFAULT);
+$passw = $_POST["password"];
 
 // database
 $db = new mysqli(
@@ -55,7 +51,7 @@ if (!password_verify($passw, $row['password'])) {
 
 // session
 $token = json_encode(
-  ['email' => $email, 'username' => $row['role']]
+  ['email' => $email, 'role' => $row['role']]
 );
 session_start([
   'cookie_lifetime' => 10,
@@ -64,6 +60,5 @@ session_start([
   'cookie_httponly' => true
 ]);
 $_SESSION[CONN] = $token;
-$_SESSION[ROLE] = 0; // todo automate this
 
 unset($_POST);

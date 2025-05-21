@@ -12,17 +12,17 @@ if (isset($_SESSION[CONN])) {
 
 // page switcher
 if ($_POST["whatPage"] == "Signup") {
-  require "view/signup.html";
+  require_once "view/signup.html";
 } else {
-  require "view/login.html";
+  require_once "view/login.html";
 }
 
 // credentials inserted
 if (isset($_POST["email"]) && isset($_POST["password"])) {
 
   if (isset($_POST["passwordAgain"])) {
-    require "model/signupModel.php";
+    require_once "model/signupModel.php";
   } else {
-    require "model/loginModel.php";
+    require_once "model/loginModel.php";
   }
 }

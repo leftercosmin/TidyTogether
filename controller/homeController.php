@@ -1,11 +1,10 @@
 <?php
 
-define("USER_CIVL", 0);
-define("USER_SPRV", 1);
-define("USER_AUTH", 2);
+define("USER_CIVL", "civilian");
+define("USER_SPRV", "supervisor");
+define("USER_AUTH", "authority");
 
 define("CONN", "userSession");
-define("ROLE", "role");
 
 
 if (!isset($_SESSION[CONN])) {
@@ -15,15 +14,14 @@ if (!isset($_SESSION[CONN])) {
   }
 }
 
-if (!isset($_SESSION[ROLE])) {
-  exit("error: invalid session coockie");
-}
+$role = json_decode($_SESSION[CONN])->{"role"};
+$role = str_replace(" ", "", $role);
 
-if (USER_CIVL === $_SESSION[ROLE]) {
-  require_once 'view/home/civilian.php';
-} elseif (USER_SPRV === $_SESSION[ROLE]) {
+if (USER_CIVL === $role) {
+  header("Location:view/home/civilian.php");
+} elseif (USER_SPRV === $role) {
   require_once 'view/home/supervisor.php';
-} elseif (USER_AUTH === $_SESSION[ROLE]) {
+} elseif (USER_AUTH === $role) {
   require_once 'view/home/authority.html';
 }
 

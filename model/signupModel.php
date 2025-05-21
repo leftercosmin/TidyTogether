@@ -89,7 +89,7 @@ if (!$passw) {
 }
 
 // transaction
-if(!$db->begin_transaction()){
+if (!$db->begin_transaction()) {
   exit("error: failed to begin transaction");
 }
 
@@ -128,11 +128,11 @@ if (!$db->commit()) {
 }
 
 if (!$statement->close()) {
-  exit("error: failed to close statement");
+  exit("error: failed to close the statement");
 }
 
 if (!$db->close()) {
-  exit("error: failed to close statement");
+  exit("error: failed to close the database");
 }
 
 unset($_POST);
