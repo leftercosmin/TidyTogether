@@ -3,6 +3,7 @@
 
 [fs]
 "/app" = "app"
+"/vendor" = "vendor"
 
 [[command]]
 name = "run"
