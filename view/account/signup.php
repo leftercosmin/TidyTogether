@@ -162,10 +162,12 @@ $display_role = isset($display_names[$role]) ? $display_names[$role] : htmlspeci
         <button type="submit">Sign Up</button>
       </form>
 
+        <div class="footer">
       <p>Already have an account?</p>
-        <form method="get" action="login.php">
+        <form class="redirect" method="get" action="/TidyTogether/view/account/login.php">
             <button type="submit">Login</button>
         </form>
+        </div>
     </div>
   </body>
 </html>

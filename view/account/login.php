@@ -69,10 +69,12 @@
         <button type="submit">Log In</button>
       </form>
 
-      <p>Don't have an account?</p>
-        <form method="get" action="signup.php">
-            <button type="submit">Sign up</button>
-        </form>
+        <div class="footer">
+          <p>Don't have an account?</p>
+            <form class="redirect" method="get" action="/TidyTogether/view/account/signup.php">
+                <button type="submit">Sign up</button>
+            </form>
+        </div>
     </div>
   </body>
 </html>
