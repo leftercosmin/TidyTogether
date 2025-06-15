@@ -34,10 +34,11 @@ if (
 }
 
 $db = new mysqli(
-  getenv('DB_HOSTNAME'),
+  getenv('DB_HOST'),
   getenv('DB_USERNAME'),
   getenv('DB_PASSWORD'),
-  getenv('DB_DATABASE')
+  getenv('DB_NAME'),
+  getenv('DB_PORT'),
 );
 
 if ($db->connect_error) {
