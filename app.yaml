@@ -1,0 +1,6 @@
+kind: wasmer.io/App.v0
+name: TidyTogether
+owner: petru-braha
+package: .
+scaling:
+  mode: single_concurrency
