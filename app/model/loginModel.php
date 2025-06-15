@@ -19,10 +19,10 @@ $passw = $_POST["password"];
 
 // database
 $db = new mysqli(
-  $_ENV['DB_HOSTNAME'],
-  $_ENV['DB_USERNAME'],
-  $_ENV['DB_PASSWORD'],
-  $_ENV['DB_DATABASE']
+  getenv('DB_HOSTNAME'),
+  getenv('DB_USERNAME'),
+  getenv('DB_PASSWORD'),
+  getenv('DB_DATABASE')
 );
 
 if ($db->connect_error) {
