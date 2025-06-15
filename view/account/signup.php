@@ -1,20 +1,38 @@
+<?php
+$role = isset($_GET['role']) ? $_GET['role'] : null;
+$valid_roles = ['citizen', 'authorized', 'decision-maker'];
+
+if (!$role || !in_array($role, $valid_roles)) {
+    header("Location: select-role.php");
+    exit();
+}
+
+$display_names = [
+    'citizen' => 'citizen',
+    'authorized' => 'personnel',
+    'decision-maker' => 'decision maker'
+    ];
+
+$display_role = isset($display_names[$role]) ? $display_names[$role] : htmlspecialchars($role);
+?>
+
 <!DOCTYPE html>
 
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <title>SignUp page</title>
-    <meta name="description" content="signup page for the users" />
+      <title>Sign up</title>
+      <meta name="description" content="signup page for the users" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="view/style.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
     <div class="wrapper">
-      <h1>Sign Up</h1>
-
+        <h1>Sign up as <?php echo $display_role; ?></h1>
       <form method="post">
-        <div class="input-block">
+          <input type="hidden" name="role" value="<?php echo htmlspecialchars($role); ?>">
+          <div class="input-block">
           <div class="label-header">
             <label for="firstname-input">
               <svg
@@ -141,14 +159,13 @@
             placeholder="Confirm password"
           />
         </div>
-
         <button type="submit">Sign Up</button>
       </form>
 
       <p>Already have an account?</p>
-      <form method="post">
-        <button type="submit" name="whatPage" value="Login">Login</button>
-      </form>
+        <form method="get" action="login.php">
+            <button type="submit">Login</button>
+        </form>
     </div>
   </body>
 </html>

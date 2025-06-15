@@ -12,9 +12,9 @@ if (isset($_SESSION[CONN])) {
 
 // page switcher
 if ($_POST["whatPage"] == "Signup") {
-  require_once "view/signup.html";
+  require_once "view/signup.php";
 } else {
-  require_once "view/login.html";
+  require_once "view/login.php";
 }
 
 // credentials inserted

@@ -19,7 +19,7 @@ html {
 
 body {
   min-height: 100vh;
-  background-image: url(media/background.jpg);
+  background-image: url(../media/background.jpg);
   background-size: cover;
   background-position: right;
   overflow: hidden;
@@ -125,4 +125,20 @@ a:hover {
 
 p {
   font-size: 18px;
+}
+
+.role-button {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 85%;
+  align-items: center;
+}
+
+
+.role-buttons button {
+  padding: 1em;
+  font-size: 18px;
+  width: 100%;
+  max-width: 20em;
 }

@@ -6,7 +6,7 @@
     <title>Login page</title>
     <meta name="description" content="login page for the users" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="view/style.css" />
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
@@ -70,9 +70,9 @@
       </form>
 
       <p>Don't have an account?</p>
-      <form method="post">
-        <button type="submit" name="whatPage" value="Signup">Signup</button>
-      </form>
+        <form method="get" action="signup.php">
+            <button type="submit">Sign up</button>
+        </form>
     </div>
   </body>
 </html>
