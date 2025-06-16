@@ -1,6 +1,5 @@
 <?php
 
-define("CONN", "userSession");
 define("PAGE", "whatPage");
 
 
@@ -11,8 +10,8 @@ if (isset($_SESSION[CONN])) {
 }
 
 // page switcher
-if ($_POST["whatPage"] == "Signup") {
-  require_once "view/signup.php";
+if ($_POST[PAGE] == "Signup") {
+  require_once "view/signup.html";
 } else {
   require_once "view/login.php";
 }

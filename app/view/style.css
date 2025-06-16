@@ -1,0 +1,158 @@
+@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap");
+
+:root {
+  --text-color: #0f5949;
+  --base-color: #faf8eb;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: Karla, sans-serif;
+  font-size: 12pt;
+  color: var(--text-color);
+  text-align: center;
+}
+
+body {
+  min-height: 100vh;
+  background-image: url(../media/background.jpg);
+  background-size: cover;
+  background-position: right;
+  overflow: hidden;
+}
+
+.wrapper {
+  box-sizing: border-box;
+  background-color: rgb(250, 248, 235, 0.8);
+  border-radius: 0 25px 25px 0;
+  height: 100vh;
+  width: max(40%, 400px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  font-size: 3rem;
+  font-weight: 800;
+}
+
+form {
+  width: max(40%, 400px);
+  margin-top: 20px;
+  margin-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.input-block {
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+}
+
+.label-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 12px;
+  border-radius: 8px 8px 0 0;
+  background-color: var(--text-color);
+  color: var(--base-color);
+  font-weight: 600;
+}
+
+.label-header svg {
+  height: 1em;
+  width: 1em;
+  fill: var(--base-color);
+  vertical-align: middle;
+}
+
+form input {
+  box-sizing: border-box;
+  flex-grow: 1;
+  min-width: 0;
+  height: 45px;
+  border-radius: 0 0 8px 8px;
+  padding: 1em;
+  font: inherit;
+  border: 2px solid #faf8eb;
+  border-top: none;
+  transition: 150ms ease;
+}
+
+form input:hover {
+  border-color: #0f5949;
+}
+
+form input:focus {
+  outline: none;
+  border-color: #0f5949;
+}
+
+form button {
+  margin-top: 10px;
+  border-radius: 1000px;
+  padding: 0.85em 4em;
+  background-color: #0f5949;
+  color: #faf8eb;
+  border: 3px solid #0f5949;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 150ms ease;
+}
+
+form button:hover {
+  border-color: #faf8eb;
+}
+
+a {
+  text-decoration: none;
+  color: #0f5949;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+p {
+  font-size: 18px;
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 100px;
+}
+
+.redirect{
+  margin-top: -.5em;
+}
+
+
+.role-button {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 85%;
+  align-items: center;
+}
+
+
+.role-buttons button {
+  padding: 1em;
+  font-size: 18px;
+  width: 100%;
+  max-width: 20em;
+}

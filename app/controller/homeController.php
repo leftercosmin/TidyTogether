@@ -25,4 +25,4 @@ if (USER_CIVL === $role) {
   require_once 'view/home/authority.html';
 }
 
-exit("error: invalid role coockie");
+exit("error: invalid role cookie");
