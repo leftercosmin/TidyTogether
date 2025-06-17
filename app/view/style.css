@@ -20,8 +20,7 @@ html {
 .title-text{
   color: var(--accent-color);
   font-size: 2.5em;
-  margin: .8em;
-  margin-top: 1em;
+  margin: .3em;
 }
 
 body {
@@ -56,11 +55,11 @@ h1 {
 form {
   width: max(35%, 400px);
   margin-top: 0;
-  margin-bottom: 2em;
+  margin-bottom: 1em;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2vh;
+  gap: 1.5vh;
 }
 
 .input-block {
