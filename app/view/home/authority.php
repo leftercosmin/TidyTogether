@@ -13,6 +13,12 @@
 
 <body>
   <p>authority</p>
+    <form method="post">
+    <button type="submit">
+      Logout
+    </button>
+  </form>
+
 </body>
 
 </html>

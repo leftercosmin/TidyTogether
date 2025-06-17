@@ -13,6 +13,12 @@
 
 <body>
   <p>supervisor</p>
+    <form method="post">
+    <button type="submit">
+      Logout
+    </button>
+  </form>
+
 </body>
 
 </html>

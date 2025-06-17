@@ -17,6 +17,8 @@ if (!isset($_POST["email"]) || !isset($_POST["password"])) {
 $email = $_POST["email"];
 $passw = $_POST["password"];
 
+unset($_POST["email"], $_POST["password"]);
+
 // database
 $db = new mysqli(
   getenv('DB_HOST'),
@@ -55,11 +57,8 @@ $token = json_encode(
   ['email' => $email, 'role' => $row['role']]
 );
 session_start([
-  'cookie_lifetime' => 10,
   'cookie_path' => '/',
   'cookie_secure' => isset($_SERVER['HTTPS']),
   'cookie_httponly' => true
 ]);
 $_SESSION[CONN] = $token;
-
-unset($_POST);

@@ -21,6 +21,15 @@ $passw = $_POST["password"];
 $pasAg = $_POST["passwordAgain"];
 $role = $_POST["role"];
 
+unset(
+  $_POST["firstname"],
+  $_POST["lastname"],
+  $_POST["email"],
+  $_POST["password"],
+  $_POST["passwordAgain"],
+  $_POST["role"]
+);
+
 // basic input validation
 if (is_null($email) || strlen($email) < 2) {
   exit("error: can not signup invalid credentials");
@@ -133,6 +142,3 @@ if (!$statement->close()) {
 if (!$db->close()) {
   exit("error: failed to close the database");
 }
-
-unset($_POST);
-$_POST[PAGE] = "Login";
