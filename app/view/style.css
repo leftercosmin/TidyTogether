@@ -25,7 +25,7 @@ html {
 }
 
 body {
-  background-image: url(../media/background.jpg);
+  background-image: url(media/background.jpg);
   background-size: cover;
   background-position: right;
   min-height: 100vh;
@@ -223,15 +223,13 @@ p {
 }
 
 
-/* Additional protection for top content */
 .label-header {
-  position: relative; /* Ensure headers stay visible */
+  position: relative;
   z-index: 1;
 }
 
-/* Make sure inputs don't get cut off */
 .input-block {
-  min-height: 80px; /* Adjust based on your needs */
+  min-height: 80px;
 }
 
 @media (max-width: 768px) {
@@ -243,7 +241,7 @@ p {
   }
 
   .role-option {
-    width: 90%; /* Make role options slightly narrower */
-    max-width: 300px; /* But not too wide */
+    width: 90%;
+    max-width: 300px;
   }
 }
