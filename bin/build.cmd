@@ -2,7 +2,7 @@
 
 set "name=TidyTogether"
 set "source=..\%name%"
-set "destination=F:\xampp\htdocs\%name%"
+set "destination=C:\xampp\htdocs\%name%"
 
 if exist "%destination%" (
     rmdir /s /q "%destination%"
@@ -21,5 +21,5 @@ echo $uri .= $_SERVER['HTTP_HOST'];>> p.php
 echo header('Location: ' . $uri . '/%name%');>> p.php
 echo exit;>> p.php
 
-del "F:\xampp\htdocs\index.php"
-move p.php "F:\xampp\htdocs\index.php"
+del "C:\xampp\htdocs\index.php"
+move p.php "C:\xampp\htdocs\index.php"
