@@ -53,6 +53,8 @@ if (!password_verify($passw, $row['password'])) {
 $token = json_encode(
   ['email' => $email, 'role' => $row['role']]
 );
+
+session_destroy();
 session_start([
   'cookie_path' => '/',
   'cookie_secure' => isset($_SERVER['HTTPS']),
