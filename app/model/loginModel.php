@@ -32,7 +32,7 @@ if ($db->connect_error) {
 
 $statement =
   $db->prepare(
-    'SELECT email, password, role FROM User WHERE email=?'
+    'SELECT id, password, role FROM User WHERE email=?'
   );
 $statement->bind_param('s', $email);
 $statement->execute();
@@ -51,7 +51,7 @@ if (!password_verify($passw, $row['password'])) {
 
 // session
 $token = json_encode(
-  ['email' => $email, 'role' => $row['role']]
+  ['id' => $row['id'], 'email' => $email, 'role' => $row['role']]
 );
 
 session_destroy();

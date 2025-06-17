@@ -24,19 +24,17 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
 if (isset($_SESSION[CONN])) {
 
   $role = json_decode($_SESSION[CONN])->{"role"};
-  $role = str_replace(" ", "", $role);
-
   if (USER_CIVL === $role) {
-    header("Location:view/home/civilian.php");
+    require_once "controller/civilianController.php";
   } elseif (USER_SPRV === $role) {
-    header("Location:view/home/supervisor.php");
+    require_once "controller/supervisorController.php";
   } elseif (USER_AUTH === $role) {
-    header("Location:view/home/authority.php");
+    require_once "controller/authorityController.php";
   } else {
     exit("error: invalid role cookie");
   }
 
-  exit(0);
+  exit();
 }
 
 // session not set && page switcher

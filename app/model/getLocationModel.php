@@ -61,4 +61,4 @@ $city = $locationData["city"];
 $long = $locationData["lon"];
 $latd = $locationData["lat"];
 
-echo $coun, " ", $city, " ", $long, " ", $latd;
+// echo $coun, " ", $city, " ", $long, " ", $latd;
