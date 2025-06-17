@@ -1,8 +1,5 @@
 <?php // prints user type
 
-define("CONN", "userSession");
-
-
 // do not access this page manually
 if (isset($_SESSION[CONN])) {
   header("Location: ../index.php");

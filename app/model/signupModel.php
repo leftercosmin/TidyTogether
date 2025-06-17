@@ -1,8 +1,5 @@
 <?php // prints error status
 
-define("CONN", "userSession");
-
-
 // do not access this page manually
 if (isset($_SESSION[CONN])) {
   header("Location: ../index.php");
