@@ -19,6 +19,7 @@ $lname = $_POST["lastname"];
 $email = $_POST["email"];
 $passw = $_POST["password"];
 $pasAg = $_POST["passwordAgain"];
+$role = $_POST["role"];
 
 // basic input validation
 if (is_null($email) || strlen($email) < 2) {
@@ -81,8 +82,6 @@ if ($result->num_rows > 0) {
   exit("error: email already registered");
 }
 
-// todo assign role
-
 $passw = password_hash($passw, PASSWORD_DEFAULT);
 if (!$passw) {
   $db->close();
@@ -106,7 +105,6 @@ if (!$statement) {
   exit("error: failed to prepare INSERT statement");
 }
 
-$role = 'civilian'; // todo automate this
 $test = $statement->bind_param(
   'sssss',
   $email,
