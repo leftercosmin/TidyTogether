@@ -1,8 +1,5 @@
 <?php // prints error status
 
-define("CONN", "userSession");
-
-
 // do not access this page manually
 if (isset($_SESSION[CONN])) {
   header("Location: ../index.php");
@@ -20,6 +17,15 @@ $email = $_POST["email"];
 $passw = $_POST["password"];
 $pasAg = $_POST["passwordAgain"];
 $role = $_POST["role"];
+
+unset(
+  $_POST["firstname"],
+  $_POST["lastname"],
+  $_POST["email"],
+  $_POST["password"],
+  $_POST["passwordAgain"],
+  $_POST["role"]
+);
 
 // basic input validation
 if (is_null($email) || strlen($email) < 2) {

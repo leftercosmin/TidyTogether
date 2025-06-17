@@ -2,7 +2,7 @@
 
 ## Build
 
-`tree -L 2 -I "bin|doc|vendor|composer*|*.md|LICENSE"`
+`tree -L 3 -I "bin|doc|vendor|composer*|*.md|*.yaml|*.toml|LICENSE"`
 
 ## Technologies
 

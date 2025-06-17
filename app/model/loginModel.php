@@ -1,8 +1,5 @@
 <?php // prints user type
 
-define("CONN", "userSession");
-
-
 // do not access this page manually
 if (isset($_SESSION[CONN])) {
   header("Location: ../index.php");
@@ -16,6 +13,8 @@ if (!isset($_POST["email"]) || !isset($_POST["password"])) {
 
 $email = $_POST["email"];
 $passw = $_POST["password"];
+
+unset($_POST["email"], $_POST["password"]);
 
 // database
 $db = new mysqli(
@@ -54,12 +53,11 @@ if (!password_verify($passw, $row['password'])) {
 $token = json_encode(
   ['email' => $email, 'role' => $row['role']]
 );
+
+session_destroy();
 session_start([
-  'cookie_lifetime' => 10,
   'cookie_path' => '/',
   'cookie_secure' => isset($_SERVER['HTTPS']),
   'cookie_httponly' => true
 ]);
 $_SESSION[CONN] = $token;
-
-unset($_POST);
