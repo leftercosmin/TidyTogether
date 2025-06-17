@@ -20,6 +20,7 @@ $email = $_POST["email"];
 $passw = $_POST["password"];
 $pasAg = $_POST["passwordAgain"];
 $role = $_POST["role"];
+$role = $_POST["role"];
 
 // basic input validation
 if (is_null($email) || strlen($email) < 2) {
@@ -81,8 +82,6 @@ if ($result->num_rows > 0) {
   $db->close();
   exit("error: email already registered");
 }
-
-// todo assign role
 
 $passw = password_hash($passw, PASSWORD_DEFAULT);
 if (!$passw) {

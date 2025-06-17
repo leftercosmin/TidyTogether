@@ -13,7 +13,7 @@ if (isset($_SESSION[CONN])) {
 if ($_POST[PAGE] == "Signup") {
   require_once "view/signup.html";
 } else {
-  require_once "view/login.php";
+  require_once "view/login.html";
 }
 
 // credentials inserted
