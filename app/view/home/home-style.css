@@ -42,6 +42,7 @@ body {
   box-shadow: 2px 0 5px rgba(0,0,0,0.1);
   position: relative;
   z-index: 1000;
+  border-right: 3px solid #1a2f18
 }
 
 .navbar-container {
@@ -118,7 +119,6 @@ body {
   flex: 1;
   min-width: 60%;
   position: relative;
-  border-left: 3px solid #1a2f18;
 }
 
 .report-panel {
@@ -205,7 +205,7 @@ form button {
   background-color: #2a482a;
   margin: 10% auto;
   padding: 2rem;
-  border: 1px solid #1f351f;
+  border: 2px solid #1f351f;
   width: 90%;
   max-width: 500px;
   border-radius: 10px;

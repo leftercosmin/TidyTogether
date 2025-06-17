@@ -2,7 +2,6 @@
 
 define("PAGE", "whatPage");
 
-
 // do not access this page manually
 if (isset($_SESSION[CONN])) {
   header("Location: ../index.php");
@@ -11,10 +10,10 @@ if (isset($_SESSION[CONN])) {
 
 // page switcher
 if ($_POST[PAGE] == "Signup") {
-  require_once "view/signup.html";
-} else {
-  require_once "view/login.html";
-}
+      require_once "view/signup.html";
+  } else {
+    require_once "view/login.html";
+  }
 
 // credentials inserted
 if (isset($_POST["email"]) && isset($_POST["password"])) {

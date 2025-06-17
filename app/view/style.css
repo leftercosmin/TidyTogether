@@ -25,7 +25,7 @@ html {
 
 body {
 
-  background-image: url(../media/background.jpg);
+  background-image: url(media/background.jpg);
   background-size: cover;
   background-position: right;
   min-height: 100vh;

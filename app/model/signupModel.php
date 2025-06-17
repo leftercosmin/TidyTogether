@@ -10,7 +10,7 @@ if (isset($_SESSION[CONN])) {
 }
 
 // base cases
-if (!isset($_POST["role"]) || !isset($_POST["email"]) || !isset($_POST["password"]) || !isset($_POST["passwordAgain"])) {
+if (!isset($_POST["email"]) || !isset($_POST["password"])) {
   exit("error: can not signup missing credentials");
 }
 
@@ -19,7 +19,6 @@ $lname = $_POST["lastname"];
 $email = $_POST["email"];
 $passw = $_POST["password"];
 $pasAg = $_POST["passwordAgain"];
-$role = $_POST["role"];
 $role = $_POST["role"];
 
 // basic input validation
@@ -106,7 +105,6 @@ if (!$statement) {
   exit("error: failed to prepare INSERT statement");
 }
 
-
 $test = $statement->bind_param(
   'sssss',
   $email,
@@ -135,6 +133,3 @@ if (!$statement->close()) {
 if (!$db->close()) {
   exit("error: failed to close the database");
 }
-
-unset($_POST);
-$_POST[PAGE] = "Login";
