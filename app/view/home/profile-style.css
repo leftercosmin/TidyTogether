@@ -1,0 +1,58 @@
+:root {
+  --base-color: #386237;
+  --accent-color: #faf8eb;
+  --navbar-bg: #253d24;
+  --navbar-text: #faf8eb;
+  --navbar-hover: #e8e0ac;
+  --active-link: #faf8eb;
+}
+
+.profile-container {
+  min-width: 30em;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.profile-card {
+  background-color: #faf8eb;
+  color: #253d24;
+  font-size: 1.3rem;
+  padding: 2rem;
+  border-radius: 1rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.edit-btn {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 0.5rem 1rem;
+  background-color: #2a482a;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.report-history {
+  margin-top: 2rem;
+  background-color: #faf8eb;
+  color: #253d24;
+  font-size: 1.2rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+}
+
+.report-list {
+  list-style: none;
+  padding: 0;
+}
+
+.report-list li {
+  background-color: #2a482a;
+  color: #faf8eb;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  margin: 0.5rem 0;
+}
