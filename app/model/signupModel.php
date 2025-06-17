@@ -10,7 +10,7 @@ if (isset($_SESSION[CONN])) {
 }
 
 // base cases
-if (!isset($_POST["email"]) || !isset($_POST["password"])) {
+if (!isset($_POST["role"]) || !isset($_POST["email"]) || !isset($_POST["password"]) || !isset($_POST["passwordAgain"])) {
   exit("error: can not signup missing credentials");
 }
 
@@ -19,6 +19,7 @@ $lname = $_POST["lastname"];
 $email = $_POST["email"];
 $passw = $_POST["password"];
 $pasAg = $_POST["passwordAgain"];
+$role = $_POST["role"];
 
 // basic input validation
 if (is_null($email) || strlen($email) < 2) {
@@ -106,7 +107,7 @@ if (!$statement) {
   exit("error: failed to prepare INSERT statement");
 }
 
-$role = 'civilian'; // todo automate this
+
 $test = $statement->bind_param(
   'sssss',
   $email,
