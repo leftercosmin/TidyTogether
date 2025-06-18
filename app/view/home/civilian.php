@@ -118,12 +118,29 @@
   <div id="reportModal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
-      <h2>Report a dirty area</h2>
+      <h2>Post a dirty area</h2>
       <form id="reportForm">
 
-        <label for="location">Location description:</label>
-        <input type="text" id="location" name="location" required>
+        <!-- ZONE table -->
+        <label for="neighbourhood">Neighbourhood:</label>
+        <input type="text" id="neighbourhood" name="neighbourhood" required>
+        <label for="city">City:</label>
+        <input type="text" id="city" name="city" required>
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="country" required>
 
+        <!-- POST table -->
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" required>
+        <label for="adress">Address:</label>
+        <input type="text" id="adress" name="adress" required>
+
+        <!-- MEDIA table -->
+        <label for="photo">Photo (optional):</label>
+        <input type="file" id="photo" name="photo" accept="image/*">
+
+        <!-- TAG and MARK tables -->
+        <!-- name -->
         <label for="trashType">Type of trash:</label>
         <select id="trashType" name="trashType" required>
           <option value="">-- Select type --</option>
@@ -133,18 +150,16 @@
           <option value="metal">Metal</option>
           <option value="organic">Organic</option>
           <option value="toxic">Toxic</option>
+          <option value="other">Other</option>
         </select>
 
-        <label for="photo">Photo (optional):</label>
-        <input type="file" id="photo" name="photo" accept="image/*">
+        <!-- color -->
+        <div id="otherTrashTypeContainer" style="display: none; margin-top: 10px;">
+          <label for="otherTrashType">Please specify:</label>
+          <input type="text" id="otherTrashType" name="otherTrashType" />
+        </div>
 
-        <input type="hidden" id="reportTimestamp" name="timestamp">
-
-        <label for="details">Details:</label>
-        <textarea id="details" name="details" rows="4"
-          placeholder="Add any useful notes (size, hazard, etc.)"></textarea>
-
-        <button type="submit">Submit report</button>
+        <button type="submit">Submit post</button>
       </form>
     </div>
   </div>
