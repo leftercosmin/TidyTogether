@@ -22,18 +22,20 @@ $id = json_decode($_SESSION[CONN])->{"id"};
 if (!isset($_GET) || !isset($_GET['civilianPage'])) {
   $location = getLocation();
   $tags = getTag();
-  require_once "view/home/civilian.php";
+  require_once "view/home/civilianHomeView.php";
 } else {
-  if ("civilianReportPage" === $_GET['civilianPage']) {
+  if ("favoriteZonePage" === $_GET["civilianPage"]) {
+    require_once "view/home/civilianFavoriteView.php";
+  } elseif ("civilianReportPage" === $_GET['civilianPage']) {
     $posts = getPost($id);
-    require_once "view/home/report-history.php";
+    require_once "view/home/civilianPostsView.php";
   } elseif ("profilePage" === $_GET['civilianPage']) {
     $profile = getProfile($id);
-    require_once "view/home/profile.php";
+    require_once "view/home/profileView.php";
   } else {
     $location = getLocation();
     $tags = getTag();
-    require_once "view/home/civilian.php";
+    require_once "view/home/civilianHomeView.php";
   }
 
   unset($_GET);

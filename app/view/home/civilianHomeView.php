@@ -8,7 +8,7 @@
   <title>Home</title>
   <meta name="description" content="personal space of a regular user" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="view/home/home-style.css" />
+  <link rel="stylesheet" href="style/home.css" />
 
   <script>
     async function init() {

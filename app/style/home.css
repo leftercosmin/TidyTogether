@@ -7,24 +7,29 @@
   --active-link: #faf8eb;
 }
 
-html, body {
+html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  height: 100%;
 }
 
 body {
-  background-image: url(../media/background-tile.png);
+  background-image: url(../public/background-tile.png);
   background-repeat: repeat;
   background-size: 400px;
+  background-position: center;
+  background-attachment: fixed;
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
   font-family: Karla, sans-serif;
   color: #faf8eb;
   display: flex;
-  height: 100vh;
-  width: 100vw;
-  overflow: hidden;
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 .navbar {
@@ -121,15 +126,17 @@ body {
   position: relative;
 }
 
+/*
 .report-panel {
   flex: 1;
   min-width: 40%;
   padding: 20px;
-  background: linear-gradient(rgba(56, 56, 56, 0.128), rgba(44, 44, 44, 0.373)), url(../media/background-tile.png);
+  background: linear-gradient(rgba(56, 56, 56, 0.128), rgba(44, 44, 44, 0.373)), url(../public/background-tile.png);
   background-repeat: repeat;
   background-size: 500px;
   overflow-y: auto;
 }
+*/
 
 .map-top-bar {
   display: flex;
