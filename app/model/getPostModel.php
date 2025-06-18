@@ -13,15 +13,8 @@
  */
 function getPost(int $id): array
 {
-  $db = new mysqli(
-    getenv('DB_HOST'),
-    getenv('DB_USERNAME'),
-    getenv('DB_PASSWORD'),
-    getenv('DB_NAME'),
-    getenv('DB_PORT'),
-  );
-
-  if ($db->connect_error) {
+  $db = DatabaseConnection::get();
+  if (null === $db || $db->connect_error) {
     $db->close();
     exit("error: " . $db->connect_error);
   }
@@ -34,7 +27,6 @@ function getPost(int $id): array
   $statement->execute();
   $result = $statement->get_result();
   $statement->close();
-  $db->close();
 
   if (!$result) {
     exit("error: failed to retrieve posts");

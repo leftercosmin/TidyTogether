@@ -7,7 +7,6 @@ require_once "model/getPostModel.php";
 require_once "model/getReportModel.php";
 require_once "model/getProfileModel.php";
 
-// get session
 session_start();
 if (!isset($_SESSION[CONN])) {
   $root = getRoot();

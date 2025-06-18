@@ -40,15 +40,8 @@ if (
   exit("error: invalid password");
 }
 
-$db = new mysqli(
-  getenv('DB_HOST'),
-  getenv('DB_USERNAME'),
-  getenv('DB_PASSWORD'),
-  getenv('DB_NAME'),
-  getenv('DB_PORT'),
-);
-
-if ($db->connect_error) {
+$db = $db = DatabaseConnection::get();
+if (null === $db || $db->connect_error) {
   $db->close();
   exit("error: " . $db->connect_error);
 }
@@ -58,39 +51,33 @@ $statement =
     'SELECT email FROM User WHERE email=?'
   );
 if (!$statement) {
-  $db->close();
   exit("error: failed to prepare SELECT statement");
 }
 
 if (!$statement->bind_param('s', $email)) {
   $statement->close();
-  $db->close();
   exit("error: failed to bind SELECT parameters");
 }
 
 if (!$statement->execute()) {
   $statement->close();
-  $db->close();
   exit("error: failed to execute SELECT");
 }
 
 $result = $statement->get_result();
 if (!$result) {
   $statement->close();
-  $db->close();
   exit("error: failed to fetch result");
 }
 
 // not unique
 if ($result->num_rows > 0) {
   $statement->close();
-  $db->close();
   exit("error: email already registered");
 }
 
 $passw = password_hash($passw, PASSWORD_DEFAULT);
 if (!$passw) {
-  $db->close();
   exit("error: failed to hash password");
 }
 
@@ -107,7 +94,6 @@ $statement =
   );
 if (!$statement) {
   $db->rollback();
-  $db->close();
   exit("error: failed to prepare INSERT statement");
 }
 
@@ -134,8 +120,4 @@ if (!$db->commit()) {
 
 if (!$statement->close()) {
   exit("error: failed to close the statement");
-}
-
-if (!$db->close()) {
-  exit("error: failed to close the database");
 }

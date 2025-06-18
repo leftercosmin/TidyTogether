@@ -8,4 +8,8 @@ if (!getenv('SERVER')) {
     putenv("$key=$value");
 }
 
+require_once "util/getRoot.php";
+require_once "util/formatField.php";
+require_once "util/databaseConnection.php";
 require_once 'controller/homeController.php';
+register_shutdown_function(fn() => DatabaseConnection::close());

@@ -17,15 +17,8 @@ $passw = $_POST["password"];
 unset($_POST["email"], $_POST["password"]);
 
 // database
-$db = new mysqli(
-  getenv('DB_HOST'),
-  getenv('DB_USERNAME'),
-  getenv('DB_PASSWORD'),
-  getenv('DB_NAME'),
-  getenv('DB_PORT'),
-);
-
-if ($db->connect_error) {
+$db = $db = DatabaseConnection::get();
+if (null === $db || $db->connect_error) {
   $db->close();
   exit("error: " . $db->connect_error);
 }
@@ -38,7 +31,6 @@ $statement->bind_param('s', $email);
 $statement->execute();
 $result = $statement->get_result();
 $statement->close();
-$db->close();
 
 if (!$result || 0 == $result->num_rows) {
   exit("error: invalid credentials");

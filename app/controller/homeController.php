@@ -10,8 +10,11 @@ define("PAGE", "whatPage");
 
 session_start();
 
-if (isset($_POST["logout"])) {
-  
+if (
+  isset($_SESSION[CONN]) &&
+  isset($_POST["logout"]) && "now" === $_POST["logout"]
+) {
+
   unset($_SESSION[CONN]);
   session_destroy();
   if (ini_get("session.use_cookies")) {
