@@ -14,7 +14,7 @@
     <div class="navbar-container">
       <div class="navbar-title">TidyTogether</div>
       <div class="navbar-links">
-        <a href="?civilianPage=civilianHomePage" class="nav-link active">
+        <a href="/" class="nav-link active">
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
             <path
               d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z" />
@@ -40,14 +40,22 @@
     <section class="profile-card">
       <h2 class="username">
         <?php
-        echo $profile['fname'] . ' ' . $profile['lname']
+        echo formatField($profile['fname']) . ' '
+          . formatField($profile['lname'])
           ?>
       </h2>
       <p class="email"><?php echo $profile['email'] ?></p>
       <p class="role"><?php echo $profile['role'] ?></p>
       <p class="timeCreate"><?php echo $profile['createdAt'] ?></p>
       <p class="timeUpdate"><?php echo $profile['updatedAt'] ?></p>
-      <button class="edit-btn">Edit Profile</button>
+
+      <form method="post" action="./">
+        <input hidden name="logout" value="now" />
+        <button class="edit-btn" type="submit">
+          Logout
+        </button>
+      </form>
+
     </section>
   </main>
 </body>

@@ -10,6 +10,26 @@ define("PAGE", "whatPage");
 
 session_start();
 
+if (isset($_POST["logout"])) {
+  
+  unset($_SESSION[CONN]);
+  session_destroy();
+  if (ini_get("session.use_cookies")) {
+    $params = session_get_cookie_params();
+    setcookie(
+      session_name(),
+      '',
+      0,
+      $params["path"],
+      $params["domain"],
+      $params["secure"],
+      $params["httponly"]
+    );
+  }
+
+  unset($_POST['logout']);
+}
+
 // credentials inserted
 if (isset($_POST["email"]) && isset($_POST["password"])) {
 

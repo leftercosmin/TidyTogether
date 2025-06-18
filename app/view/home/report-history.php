@@ -14,7 +14,7 @@
     <div class="navbar-container">
       <div class="navbar-title">TidyTogether</div>
       <div class="navbar-links">
-        <a href="?civilianPage=civilianHomePage" class="nav-link active">
+        <a href="/" class="nav-link active">
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
             <path
               d="M240-200h120v-240h240v240h120v-360L480-740 240-560v360Zm-80 80v-480l320-240 320 240v480H520v-240h-80v240H160Zm320-350Z" />
@@ -42,14 +42,15 @@
       <ul class="report-list">
         <?php
         foreach ($posts as $onePost) {
+          echo "<li>";
           echo "<p>" . $onePost['id'] . "</p>";
-          echo "<p>" . $onePost['description'] . "</p>";
+          echo "<p>" . formatField($onePost['description']) . "</p>";
           echo "<p>" . $onePost['status'] . "</p>";
-          echo "<p>" . $onePost['idUser'] . "</p>";
           echo "<p>" . $onePost['idZone'] . "</p>";
           echo "<p>" . $onePost['address'] . "</p>";
           echo "<p>" . $onePost['createdAt'] . "</p>";
           echo "<p>" . $onePost['updatedAt'] . "</p>";
+          echo "</li>";
         }
         ?>
       </ul>
