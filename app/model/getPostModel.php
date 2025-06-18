@@ -10,30 +10,45 @@
     address     VARCHAR,
     createdAt   DATETIME,
     updatedAt
+  * returns string on failure
  */
-function getPost(int $id): array
+function getPost(int $id): array|string
 {
   $db = DatabaseConnection::get();
   if (null === $db || $db->connect_error) {
     $db->close();
-    exit("error: " . $db->connect_error);
+    return "error - getPost(): " . $db->connect_error;
   }
 
   $statement =
-    $db->prepare(
-      'SELECT * FROM Post WHERE idUser=?'
-    );
-  $statement->bind_param('i', $id);
-  $statement->execute();
+    $db->prepare('SELECT * FROM Post WHERE idUser=?');
+  if (!$statement) {
+    return "error - getPost(): failed to prepare SQL statement";
+  }
+
+  if (!$statement->bind_param('i', $id)) {
+    $statement->close();
+    return "error - getPost(): failed to prepare SQL statement";
+  }
+
+  if (!$statement->execute()) {
+    $statement->close();
+    return "error - getPost(): failed to execute SQL statement";
+  }
+
   $result = $statement->get_result();
   $statement->close();
 
   if (!$result) {
-    exit("error: failed to retrieve posts");
+    return "error - getPost(): failed to retrieve posts";
   }
 
   $posts = [];
   while ($row = $result->fetch_assoc()) {
+    if (false === $row) {
+      return "error - getPost(): failed to fetch posts";
+    }
+
     $posts[] = $row;
   }
 

@@ -76,6 +76,7 @@
       <div class="place-picker-container">
         <gmpx-place-picker placeholder="Enter an address"></gmpx-place-picker>
       </div>
+
       <button id="openReportBtn" class="report-btn">
         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
           <path
@@ -97,49 +98,49 @@
       <h2>Post a dirty area</h2>
       <form id="reportForm">
 
-        <!-- ZONE table -->
-        <label for="neighbourhood">Neighbourhood:</label>
-        <input type="text" id="neighbourhood" name="neighbourhood" required>
-        <label for="city">City:</label>
-        <input type="text" id="city" name="city" required>
-        <label for="country">Country:</label>
-        <input type="text" id="country" name="country" required>
-
         <!-- POST table -->
         <label for="description">Description:</label>
-        <input type="text" id="description" name="description" required>
-        <label for="adress">Address:</label>
-        <input type="text" id="adress" name="adress" required>
+        <input type="text" id="description" name="postDescription">
+        
+        <label for="address">Address:</label>
+        <input type="text" id="address" name="postAddress" required>
 
+        <!-- todo determine values from address above -->
+        <!-- ZONE table - autocompletes with the address of the user -->
+        <label for="neighbourhood">Neighbourhood:</label>
+        <input type="text" id="neighbourhood" name="postNeighbourhood" required>
+        
+        <label for="city">City:</label>
+        <input type="text" id="city" name="postCity" value="<?php echo $location["city"]; ?>" required>
+        
+        <label for="country">Country:</label>
+        <input type="text" id="country" name="postCountry" value="<?php echo $location["country"]; ?>" required>
+
+        <!-- todo return name of the file, size, source, format -->
         <!-- MEDIA table -->
         <label for="photo">Photo (optional):</label>
-        <input type="file" id="photo" name="photo" accept="image/*">
+        <input type="file" id="photo" name="postPhoto" accept="image/*">
 
         <!-- TAG and MARK tables -->
-        <!-- name -->
-        <label for="trashType">Type of trash:</label>
-        <select id="trashType" name="trashType" required>
-          <option value="">-- Select type --</option>
-          <option value="paper">Paper/Cardboard</option>
-          <option value="plastic">Plastic</option>
-          <option value="glass">Glass/Ceramic</option>
-          <option value="metal">Metal</option>
-          <option value="organic">Organic</option>
-          <option value="toxic">Toxic</option>
-          <option value="other">Other</option>
-        </select>
+        <label for="trashType">Tags:</label>
+        <select id="trashType" name="postTag" required>
 
-        <!-- color -->
-        <div id="otherTrashTypeContainer" style="display: none; margin-top: 10px;">
-          <label for="otherTrashType">Please specify:</label>
-          <input type="text" id="otherTrashType" name="otherTrashType" />
-        </div>
+          <?php
+          foreach ($tags as $tagOne) {
+            $name = htmlspecialchars($tagOne["name"]);
+            $color = htmlspecialchars($tagOne["color"]);
+
+            echo "<option style=\"background-color:$color;\" value=\"" .
+              $tagOne["name"] . "\">";
+            echo $tagOne["name"];
+            echo "</option>";
+          }
+          ?>
+        </select>
 
         <button type="submit">Submit post</button>
       </form>
     </div>
-  </div>
-
   </div>
 
   <script>
@@ -163,11 +164,6 @@
 
     document.getElementById("reportForm").onsubmit = (e) => {
       e.preventDefault();
-      console.log("Submitted:", {
-        location: e.target.location.value,
-        details: e.target.details.value,
-        photo: e.target.photo.files[0]
-      });
       modal.style.display = "none";
       alert("Thank you for your report!");
       e.target.reset();

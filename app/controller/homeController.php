@@ -27,8 +27,8 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
 
   if (isset($_POST["passwordAgain"])) {
     $statusModel = signup(
-      $_POST["firstname"],
-      $_POST["lastname"],
+      $_POST["firstname"] ?? null,
+      $_POST["lastname"] ?? null,
       $_POST["email"],
       $_POST["password"],
       $_POST["passwordAgain"],

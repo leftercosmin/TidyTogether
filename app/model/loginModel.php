@@ -8,7 +8,7 @@ function login(string $email, string $passw): string
   $db = $db = DatabaseConnection::get();
   if (null === $db || $db->connect_error) {
     $db->close();
-    return "error: " . $db->connect_error;
+    return "error - login(): " . $db->connect_error;
   }
 
   $statement =
@@ -16,29 +16,33 @@ function login(string $email, string $passw): string
       'SELECT id, password, role FROM User WHERE email=?'
     );
   if (!$statement) {
-    return "error: failed to prepare SQL statement";
+    return "error - login(): failed to prepare SQL statement";
   }
 
   if (!$statement->bind_param('s', $email)) {
     $statement->close();
-    return "error: failed to bind parameters";
+    return "error - login(): failed to bind parameters";
   }
 
   if (!$statement->execute()) {
     $statement->close();
-    return "error: failed to execute SQL statement";
+    return "error - login(): failed to execute SQL statement";
   }
   
   $result = $statement->get_result();
   $statement->close();
 
   if (!$result || 0 == $result->num_rows) {
-    return "error: invalid credentials";
+    return "error - login(): invalid credentials";
   }
 
   $row = $result->fetch_assoc();
+  if(false === $row){
+    return "error - login(): invalid row";
+  }
+
   if (!password_verify($passw, $row['password'])) {
-    return "error: can not log invalid credentials";
+    return "error - login(): can not log invalid credentials";
   }
 
   // session
