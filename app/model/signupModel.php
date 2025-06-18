@@ -1,123 +1,110 @@
-<?php // prints error status
+<?php
 
-// do not access this page manually
-if (isset($_SESSION[CONN])) {
-  header("Location: ../index.php");
-  exit();
-}
 
-// base cases
-if (!isset($_POST["email"]) || !isset($_POST["password"])) {
-  exit("error: can not signup missing credentials");
-}
+function signup(
+  string $fname,
+  string $lname,
+  string $email,
+  string $passw,
+  string $pasAg,
+  string $role
+): string {
 
-$fname = $_POST["firstname"];
-$lname = $_POST["lastname"];
-$email = $_POST["email"];
-$passw = $_POST["password"];
-$pasAg = $_POST["passwordAgain"];
-$role = $_POST["role"];
+  // basic input validation
+  if (is_null($email) || strlen($email) < 2) {
+    return "error: can not signup invalid credentials";
+  }
 
-unset(
-  $_POST["firstname"],
-  $_POST["lastname"],
-  $_POST["email"],
-  $_POST["password"],
-  $_POST["passwordAgain"],
-  $_POST["role"]
-);
+  if (
+    is_null($passw) ||
+    strlen($passw) < 4 ||
+    $passw != $pasAg
+  ) {
+    return "error: invalid password";
+  }
 
-// basic input validation
-if (is_null($email) || strlen($email) < 2) {
-  exit("error: can not signup invalid credentials");
-}
+  // database
+  $db = $db = DatabaseConnection::get();
+  if (null === $db || $db->connect_error) {
+    $db->close();
+    return "error: " . $db->connect_error;
+  }
 
-if (
-  is_null($passw) ||
-  strlen($passw) < 4 ||
-  $passw != $pasAg
-) {
-  exit("error: invalid password");
-}
+  $statement =
+    $db->prepare(
+      'SELECT email FROM User WHERE email=?'
+    );
+  if (!$statement) {
+    return "error: failed to prepare SELECT statement";
+  }
 
-$db = $db = DatabaseConnection::get();
-if (null === $db || $db->connect_error) {
-  $db->close();
-  exit("error: " . $db->connect_error);
-}
+  if (!$statement->bind_param('s', $email)) {
+    $statement->close();
+    return "error: failed to bind SELECT parameters";
+  }
 
-$statement =
-  $db->prepare(
-    'SELECT email FROM User WHERE email=?'
-  );
-if (!$statement) {
-  exit("error: failed to prepare SELECT statement");
-}
+  if (!$statement->execute()) {
+    $statement->close();
+    return "error: failed to execute SELECT";
+  }
 
-if (!$statement->bind_param('s', $email)) {
-  $statement->close();
-  exit("error: failed to bind SELECT parameters");
-}
+  $result = $statement->get_result();
+  if (!$result) {
+    $statement->close();
+    return "error: failed to fetch result";
+  }
 
-if (!$statement->execute()) {
-  $statement->close();
-  exit("error: failed to execute SELECT");
-}
+  // not unique
+  if ($result->num_rows > 0) {
+    $statement->close();
+    return "error: email already registered";
+  }
 
-$result = $statement->get_result();
-if (!$result) {
-  $statement->close();
-  exit("error: failed to fetch result");
-}
+  $passw = password_hash($passw, PASSWORD_DEFAULT);
+  if (!$passw) {
+    return "error: failed to hash password";
+  }
 
-// not unique
-if ($result->num_rows > 0) {
-  $statement->close();
-  exit("error: email already registered");
-}
+  // transaction
+  if (!$db->begin_transaction()) {
+    return "error: failed to begin transaction";
+  }
 
-$passw = password_hash($passw, PASSWORD_DEFAULT);
-if (!$passw) {
-  exit("error: failed to hash password");
-}
-
-// transaction
-if (!$db->begin_transaction()) {
-  exit("error: failed to begin transaction");
-}
-
-$statement =
-  $db->prepare(
-    'INSERT INTO
+  $statement =
+    $db->prepare(
+      'INSERT INTO
     User (email, password, fname, lname, role)
     VALUES (?, ?, ?, ?, ?)'
+    );
+  if (!$statement) {
+    $db->rollback();
+    return "error: failed to prepare INSERT statement";
+  }
+
+  $test = $statement->bind_param(
+    'sssss',
+    $email,
+    $passw,
+    $fname,
+    $lname,
+    $role
   );
-if (!$statement) {
-  $db->rollback();
-  exit("error: failed to prepare INSERT statement");
-}
 
-$test = $statement->bind_param(
-  'sssss',
-  $email,
-  $passw,
-  $fname,
-  $lname,
-  $role
-);
+  if (!$test) {
+    return "error: failed to bind to INSERT statement";
+  }
 
-if (!$test) {
-  exit("error: failed to bind to INSERT statement");
-}
+  if (!$statement->execute()) {
+    return "error: failed to execute INSERT statement";
+  }
 
-if (!$statement->execute()) {
-  exit("error: failed to execute INSERT statement");
-}
+  if (!$db->commit()) {
+    return "error: failed to commit";
+  }
 
-if (!$db->commit()) {
-  exit("error: failed to commit");
-}
+  if (!$statement->close()) {
+    return "error: failed to close the statement";
+  }
 
-if (!$statement->close()) {
-  exit("error: failed to close the statement");
+  return ""; // success
 }

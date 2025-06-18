@@ -1,5 +1,9 @@
 <?php
 
+require_once "model/loginModel.php";
+require_once "model/logoutModel.php";
+require_once "model/signupModel.php";
+
 define("USER_CIVL", "civilian");
 define("USER_SPRV", "supervisor");
 define("USER_AUTH", "authority");
@@ -12,34 +16,37 @@ session_start();
 
 if (
   isset($_SESSION[CONN]) &&
-  isset($_POST["logout"]) && "now" === $_POST["logout"]
+  isset($_POST["logout"]) &&
+  "now" === $_POST["logout"]
 ) {
-
-  unset($_SESSION[CONN]);
-  session_destroy();
-  if (ini_get("session.use_cookies")) {
-    $params = session_get_cookie_params();
-    setcookie(
-      session_name(),
-      '',
-      0,
-      $params["path"],
-      $params["domain"],
-      $params["secure"],
-      $params["httponly"]
-    );
-  }
-
-  unset($_POST['logout']);
+  logout();
 }
 
 // credentials inserted
 if (isset($_POST["email"]) && isset($_POST["password"])) {
 
   if (isset($_POST["passwordAgain"])) {
-    require_once "model/signupModel.php";
+    $statusModel = signup(
+      $_POST["firstname"],
+      $_POST["lastname"],
+      $_POST["email"],
+      $_POST["password"],
+      $_POST["passwordAgain"],
+      $_POST["role"]
+    );
+    unset(
+      $_POST["firstname"],
+      $_POST["lastname"],
+      $_POST["email"],
+      $_POST["password"],
+      $_POST["passwordAgain"],
+      $_POST["role"]
+    );
+
   } else {
-    require_once "model/loginModel.php";
+    $statusModel =
+      login($_POST["email"], $_POST["password"]);
+    unset($_POST["email"], $_POST["password"]);
   }
 }
 
@@ -66,3 +73,6 @@ if (isset($_POST[PAGE]) && $_POST[PAGE] == "Signup") {
 } else {
   require_once "view/login.html";
 }
+
+if ("" !== $statusModel)
+  writeConsole($statusModel);

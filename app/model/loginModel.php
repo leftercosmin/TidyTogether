@@ -1,55 +1,57 @@
-<?php // prints user type
+<?php
 
-// do not access this page manually
-if (isset($_SESSION[CONN])) {
-  header("Location: ../index.php");
-  exit();
-}
+/* returns error type 
+ * creates a session on success
+ */
+function login(string $email, string $passw): string
+{
+  $db = $db = DatabaseConnection::get();
+  if (null === $db || $db->connect_error) {
+    $db->close();
+    return "error: " . $db->connect_error;
+  }
 
-// base cases
-if (!isset($_POST["email"]) || !isset($_POST["password"])) {
-  exit("error: can not log missing credentials");
-}
+  $statement =
+    $db->prepare(
+      'SELECT id, password, role FROM User WHERE email=?'
+    );
+  if (!$statement) {
+    return "error: failed to prepare SQL statement";
+  }
 
-$email = $_POST["email"];
-$passw = $_POST["password"];
+  if (!$statement->bind_param('s', $email)) {
+    $statement->close();
+    return "error: failed to bind parameters";
+  }
 
-unset($_POST["email"], $_POST["password"]);
+  if (!$statement->execute()) {
+    $statement->close();
+    return "error: failed to execute SQL statement";
+  }
+  
+  $result = $statement->get_result();
+  $statement->close();
 
-// database
-$db = $db = DatabaseConnection::get();
-if (null === $db || $db->connect_error) {
-  $db->close();
-  exit("error: " . $db->connect_error);
-}
+  if (!$result || 0 == $result->num_rows) {
+    return "error: invalid credentials";
+  }
 
-$statement =
-  $db->prepare(
-    'SELECT id, password, role FROM User WHERE email=?'
+  $row = $result->fetch_assoc();
+  if (!password_verify($passw, $row['password'])) {
+    return "error: can not log invalid credentials";
+  }
+
+  // session
+  $token = json_encode(
+    ['id' => $row['id'], 'email' => $email, 'role' => $row['role']]
   );
-$statement->bind_param('s', $email);
-$statement->execute();
-$result = $statement->get_result();
-$statement->close();
 
-if (!$result || 0 == $result->num_rows) {
-  exit("error: invalid credentials");
+  session_start([
+    'cookie_path' => '/',
+    'cookie_secure' => isset($_SERVER['HTTPS']),
+    'cookie_httponly' => true
+  ]);
+
+  $_SESSION[CONN] = $token;
+  return ""; // success
 }
-
-$row = $result->fetch_assoc();
-if (!password_verify($passw, $row['password'])) {
-  exit("error: can not log invalid credentials");
-}
-
-// session
-$token = json_encode(
-  ['id' => $row['id'], 'email' => $email, 'role' => $row['role']]
-);
-
-session_destroy();
-session_start([
-  'cookie_path' => '/',
-  'cookie_secure' => isset($_SERVER['HTTPS']),
-  'cookie_httponly' => true
-]);
-$_SESSION[CONN] = $token;
