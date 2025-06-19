@@ -5,13 +5,21 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>User Profile</title>
-  <link rel="stylesheet" href="style/home.css" />
+  <link rel="stylesheet" href="style/civilianHome.css" />
   <link rel="stylesheet" href="style/profile.css" />
 </head>
 
 <body>
 
-  <?php require_once "view/components/civilianNavbar.php"; ?>
+  <?php
+    if ($profile['role'] === 'civilian') {
+        require_once "view/components/civilianNavbar.php";
+    } elseif ($profile['role'] === 'supervisor') {
+        require_once "view/components/supervisorNavbar.php";
+    } elseif ($profile['role'] === 'authority') {
+        require_once "view/components/authorityNavbar.php";
+    }
+  ?>
 
   <main class="profile-container">
     <section class="profile-card">

@@ -45,16 +45,18 @@ function login(string $email, string $passw): string
     return "error - login(): can not log invalid credentials";
   }
 
-  // session
+  // sessions
   $token = json_encode(
     ['id' => $row['id'], 'email' => $email, 'role' => $row['role']]
   );
 
-  session_start([
+  if (session_status() === PHP_SESSION_NONE) {
+    session_start([
     'cookie_path' => '/',
     'cookie_secure' => isset($_SERVER['HTTPS']),
     'cookie_httponly' => true
   ]);
+  }
 
   $_SESSION[CONN] = $token;
   return ""; // success
