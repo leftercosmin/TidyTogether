@@ -2,7 +2,7 @@
   <div class="modal-content">
     <span class="close">&times;</span>
     <h2>Post a dirty area</h2>
-    <form id="reportForm">
+    <form id="reportForm" method="POST" enctype="multipart/form-data">
 
       <!-- POST table -->
       <label for="description">Description:</label>
@@ -41,7 +41,8 @@
 
         echo "<input type=checkbox "
           . "id=\"" . $tagOne["name"] . "\" "
-          . "name=\"" . $tagOne["name"] . "\">";
+          . "name=\postTag[]\" "
+          . "value=\"" . $tagOne["name"] . "\">";
 
         echo "</div>";
       }
@@ -92,10 +93,10 @@
     }
   }
 
-  document.getElementById("reportForm").onsubmit = (e) => {
-    e.preventDefault();
-    modal.style.display = "none";
-    alert("Thank you for your report!");
-    e.target.reset();
-  };
+  // document.getElementById("reportForm").onsubmit = (e) => {
+  //   e.preventDefault();
+  //   modal.style.display = "none";
+  //   alert("Thank you for your report!");
+  //   e.target.reset();
+  // };
 </script>

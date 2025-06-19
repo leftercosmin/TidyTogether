@@ -25,15 +25,20 @@
           <p><strong>ID: </strong>
             <?php echo htmlspecialchars($post['id']); ?></p>
           <p><strong>Description: </strong>
-            <?php echo htmlspecialchars($post['description'] ?? "No description available."); ?></p>
+            <?php echo htmlspecialchars($post['description'] ?? 'N/A'); ?></p>
           <p><strong>Address: </strong>
-            <?php echo htmlspecialchars($post['address'])?> (<?php echo htmlspecialchars($post['neighbourhood']) ?>, <?php echo htmlspecialchars($post['city']) ?>, <?php echo htmlspecialchars ($post['country']) ?>)</p>
-          <p><strong>Posted by user with ID: </strong>
-            <?php echo htmlspecialchars($post['idUser']); ?></p>
+          
+            <?php echo htmlspecialchars($post['address'])?> 
+            (<?php echo htmlspecialchars($post['neighbourhood'] ?? 'N/A') ?>, 
+            <?php echo htmlspecialchars($post['city'] ?? 'N/A') ?>, 
+            <?php echo htmlspecialchars($post['country'] ?? 'N/A') ?>)
+          </p>
           <p><strong>Tag: </strong>
-            <?php echo htmlspecialchars($post['tag']); ?></p>
+            <?php echo htmlspecialchars($post['tag'] ?? 'N/A'); ?>
+          </p>
           <p><strong>Created at: </strong>
-            <?php echo htmlspecialchars($post['created_at']); ?></p>
+            <?php echo htmlspecialchars($post['created_at'] ?? 'N/A'); ?>
+          </p>
 
           <?php if (!empty($post['photo'])): ?>
             <img src="<?= $post['photo'] ?>" alt="Report Photo" style="max-width: 300px; height: auto; margin-top: 10px;" />

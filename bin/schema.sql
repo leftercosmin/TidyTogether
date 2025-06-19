@@ -43,7 +43,7 @@ CREATE TABLE LovedZone (
 CREATE TABLE Post (
   id          BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   description VARCHAR(255),
-  status      ENUM('pending', 'inProgress', 'done') NOT NULL DEFAULT 'pending',
+  status      ENUM('pending', 'inProgress', 'denied', 'done') NOT NULL DEFAULT 'pending',
   idUser      BIGINT UNSIGNED NOT NULL,
   idZone      BIGINT UNSIGNED NOT NULL,
   address     VARCHAR(255) NOT NULL,

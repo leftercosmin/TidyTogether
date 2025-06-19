@@ -21,7 +21,7 @@ $id = json_decode($_SESSION[CONN])->{"id"};
 
 // determine pages + get posts
 if (!isset($_GET['supervisorPage'])) {
-  $pendingPosts = getPendingReports($id);
+  $pendingPosts = getPendingReports();
   require_once "view/home/supervisorHomeView.php";
 } else {
   if ($_GET["supervisorPage"] === "profilePage") {
@@ -44,7 +44,7 @@ if (isset($_POST["postId"]) && isset($_POST["action"])) {
   $action = $_POST["action"];
   
   if ($action === "accept") {
-    acceptReport($postId, $id);
+    approveReport($postId, $id);
   } elseif ($action === "reject") {
     denyReport($postId, $id);
   }

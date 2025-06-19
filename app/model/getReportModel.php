@@ -1,6 +1,6 @@
 <?php
 
-function getPendingReports(int $id): array|string
+function getPendingReports(): array|string
 {    
     $db = $db = DatabaseConnection::get();
     if (null === $db || $db->connect_error) {
@@ -8,32 +8,41 @@ function getPendingReports(int $id): array|string
         return "error: " . $db->connect_error;
     }
 
-    $statement = $db->prepare('SELECT * FROM Post WHERE idUser=? AND status="pending"');
+    $sql = 'SELECT 
+                Post.*, 
+                Zone.name AS neighbourhood, 
+                Zone.city, 
+                Zone.country
+            FROM Post
+            LEFT JOIN Zone ON Post.idZone = Zone.id
+            WHERE Post.status="pending"';
+
+    $statement = $db->prepare($sql);
     if (!$statement) { 
-        return "error - getReport(): failed to prepare SQL statement";
+        return "error - getPendingReports(): failed to prepare SQL statement";
     }
 
-    if(!$statement->bind_param('i', $id)) {
-        $statement->close();
-        return "error - getReport(): failed to bind parameters";
-    }
+    // if(!$statement->bind_param('i', $id)) {
+    //     $statement->close();
+    //     return "error - getReport(): failed to bind parameters";
+    // }
 
     if(!$statement->execute()) {
         $statement->close();
-        return "error - getReport(): failed to execute SQL statement";
+        return "error - getPendingReports(): failed to execute SQL statement";
     }
 
     $result = $statement->get_result();
     $statement->close();
 
     if (!$result) {
-        return "error - getReport(): failed to retrieve reports";
+        return "error - getPendingReports(): failed to retrieve reports";
     }
 
     $reports = [];
     while ($row = $result->fetch_assoc()) {
         if (false === $row) {
-            return "error - getReport(): failed to fetch reports";
+            return "error - getPendingReports(): failed to fetch reports";
         }
 
         $reports[] = $row;
@@ -50,7 +59,7 @@ function approveReport(int $reportID) : string
         return "error: " . $db->connect_error;
     }
 
-    $statement = $db->prepare('UPDATE Report SET status="approved" WHERE id=?');
+    $statement = $db->prepare('UPDATE Post SET status="inProgress" WHERE id=?');
     if (!$statement) {
         return "error - approveReport(): failed to prepare SQL statement";
     }
@@ -77,7 +86,7 @@ function denyReport(int $reportID) : string
         return "error: " . $db->connect_error;
     }
 
-    $statement = $db->prepare('UPDATE Report SET status="denied" WHERE id=?');
+    $statement = $db->prepare('UPDATE Post SET status="denied" WHERE id=?');
     if (!$statement) {
         return "error - denyReport(): failed to prepare SQL statement";
     }
