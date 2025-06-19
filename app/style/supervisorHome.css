@@ -1,0 +1,78 @@
+:root {
+  --base-color: #386237;
+  --accent-color: #faf8eb;
+  --navbar-bg: #253d24;
+  --navbar-text: #faf8eb;
+  --navbar-hover: #e8e0ac;
+  --active-link: #faf8eb;
+}
+
+body {
+  background-image: url(../public/background-tile.png);
+  background-repeat: repeat;
+  background-size: 400px;
+  background-position: center;
+  background-attachment: fixed;
+  margin: 0;
+  padding: 0;
+  font-family: Karla, sans-serif;
+  color: var(--accent-color);
+  min-height: 100vh;
+}
+
+.page-title{
+    color: var(--base-color);
+    font-size: 2.5rem;
+}
+
+.below-title{
+    color: var(--base-text);
+    font-size: 1.2rem;
+    margin-top: 1rem;
+}
+
+.container {
+  width: 500px;
+  margin: 2rem auto;
+  background: #faf8eb;
+  color: #253d24;
+  border-radius: 1rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.13);
+  padding: 2rem;
+}
+
+.report-list {
+  list-style: none;
+  padding: 0;
+}
+
+.report-list li {
+  background: #2a482a;
+  color: #faf8eb;
+  margin-bottom: 1.2rem;
+  padding: 1.2rem 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(56,98,55,0.08);
+}
+
+form {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+form button {
+  background: var(--base-color);
+  color: var(--accent-color);
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+form button:hover {
+  background: #457145;
+}

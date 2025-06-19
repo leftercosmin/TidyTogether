@@ -9,7 +9,10 @@ require_once "model/getProfileModel.php";
 require_once "model/getTagModel.php";
 require_once "model/addPostModel.php";
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
 if (!isset($_SESSION[CONN])) {
   $root = getRoot();
   header("Location: $root");
@@ -43,6 +46,10 @@ if (!isset($_GET) || !isset($_GET['civilianPage'])) {
 
 // new post created
 if (isset($_POST["postAddress"])) {
+  $tags = $_POST["postTag"] ?? [];
+  if (is_array($tags)) {
+    $tags = implode(',', $tags); // Convert array to comma-separated string
+  }
   addPost(
     $id,
     $_POST["postDescription"] ?? null,
@@ -51,7 +58,7 @@ if (isset($_POST["postAddress"])) {
     $_POST["postCity"],
     $_POST["postCountry"],
     $_POST["postPhoto"] ?? null,
-    $_POST["postTag"]
+    $tags
   );
   unset(
     $_POST["postDescription"],

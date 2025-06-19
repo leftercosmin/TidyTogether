@@ -134,7 +134,7 @@ function addPost(
 
   if (
     !$statement->bind_param(
-      'ssss',
+      'siis',
       $description,
       $userId,
       $result["id"],
