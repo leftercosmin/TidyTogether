@@ -27,7 +27,14 @@
           <li class="report-item">
             <strong><?php echo htmlspecialchars($report['address']) ?></strong><br>
             <?php echo htmlspecialchars($report['description']) ?><br>
-            <span>Status: <?php echo htmlspecialchars($report['status']) ?></span>
+            <span>Status: 
+              <?php echo htmlspecialchars($report['status']) ?></span>
+            <?php if ($report['status'] === 'inProgress'): ?>
+              <form class="accept-task-btn" method="POST" style="margin-top:10px;">
+                <input type="hidden" name="postId" value="<?php echo htmlspecialchars($report['id']); ?>">
+                <button type="submit" name="action" value="markDone">Mark as Done</button>
+              </form>
+            <?php endif; ?>
           </li>
         <?php endforeach; ?>
       </ul>

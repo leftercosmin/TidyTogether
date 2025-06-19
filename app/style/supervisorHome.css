@@ -53,20 +53,6 @@ body {
   padding: 1.2rem 1.5rem;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(56,98,55,0.08);
-  transition: background 0.2s;
-}
-
-.report-list li:hover {
-  background: #386237;
-}
-
-.report-list img {
-  display: block;
-  margin: 1rem 0;
-  border-radius: 8px;
-  max-width: 100%;
-  height: auto;
-  box-shadow: 0 2px 8px rgba(56,98,55,0.13);
 }
 
 form {

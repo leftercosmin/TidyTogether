@@ -16,6 +16,13 @@ if (!isset($_SESSION[CONN])) {
   exit();
 }
 
+if (isset($_POST["postId"]) && isset($_POST["action"]) && $_POST["action"] === "markDone") {
+    require_once __DIR__ . '/../model/getReportModel.php';
+    markReportDone((int)$_POST["postId"]);
+    header("Location: " . $_SERVER['REQUEST_URI']);
+    exit();
+}
+
 $id = json_decode($_SESSION[CONN])->{"id"};
 
 if (!isset($_GET['authorityPage'])) {

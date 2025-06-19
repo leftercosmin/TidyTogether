@@ -16,6 +16,9 @@
   <?php require_once "view/components/supervisorNavbar.php"; ?>
     
   <div class="container">
+    <?php if (empty($pendingPosts)): ?>
+      <h2>No reports at this time.</h2>
+    <?php else: ?>
     <h1 class="page-title">Pending reports</h1>
     <p class="below-title">Here you can accept or reject pending reports.</p>
 
@@ -24,10 +27,11 @@
         <li>
           <p><strong>ID: </strong>
             <?php echo htmlspecialchars($post['id']); ?></p>
+          <p><strong>User: </strong>
+            <?php echo htmlspecialchars($post['fname'] ?? 'N/A') . ' ' . htmlspecialchars($post['lname'] ?? ''); ?></p>
           <p><strong>Description: </strong>
             <?php echo htmlspecialchars($post['description'] ?? 'N/A'); ?></p>
           <p><strong>Address: </strong>
-          
             <?php echo htmlspecialchars($post['address'])?> 
             (<?php echo htmlspecialchars($post['neighbourhood'] ?? 'N/A') ?>, 
             <?php echo htmlspecialchars($post['city'] ?? 'N/A') ?>, 
@@ -52,6 +56,7 @@
         </li>
       <?php endforeach; ?>
     </ul>
+    <?php endif; ?>
   </div>
 
 </body>

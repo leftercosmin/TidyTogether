@@ -12,20 +12,18 @@ function getPendingReports(): array|string
                 Post.*, 
                 Zone.name AS neighbourhood, 
                 Zone.city, 
-                Zone.country
+                Zone.country,
+                User.fname,
+                User.lname
             FROM Post
             LEFT JOIN Zone ON Post.idZone = Zone.id
+            LEFT JOIN User ON Post.idUser = User.id
             WHERE Post.status="pending"';
 
     $statement = $db->prepare($sql);
     if (!$statement) { 
         return "error - getPendingReports(): failed to prepare SQL statement";
     }
-
-    // if(!$statement->bind_param('i', $id)) {
-    //     $statement->close();
-    //     return "error - getReport(): failed to bind parameters";
-    // }
 
     if(!$statement->execute()) {
         $statement->close();
@@ -86,7 +84,7 @@ function denyReport(int $reportID) : string
         return "error: " . $db->connect_error;
     }
 
-    $statement = $db->prepare('UPDATE Post SET status="denied" WHERE id=?');
+    $statement = $db->prepare('DELETE FROM Post WHERE id=?');
     if (!$statement) {
         return "error - denyReport(): failed to prepare SQL statement";
     }
@@ -139,4 +137,31 @@ function getApprovedReports(): array|string
     }
 
     return $reports;
+}
+
+function markReportDone(int $reportID): string
+{
+    $db = DatabaseConnection::get();
+    if (null === $db || $db->connect_error) {
+        $db->close();
+        return "error: " . $db->connect_error;
+    }
+
+    $statement = $db->prepare('UPDATE Post SET status="done" WHERE id=?');
+    if (!$statement) {
+        return "error - markReportDone(): failed to prepare SQL statement";
+    }
+
+    if (!$statement->bind_param('i', $reportID)) {
+        $statement->close();
+        return "error - markReportDone(): failed to bind parameters";
+    }
+
+    if (!$statement->execute()) {
+        $statement->close();
+        return "error - markReportDone(): failed to execute SQL statement";
+    }
+
+    $statement->close();
+    return "Success - report marked as done";
 }
