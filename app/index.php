@@ -17,4 +17,3 @@ if (!getenv('SERVER')) {
 $statusModel = "";
 require_once 'controller/homeController.php';
 register_shutdown_function(fn() => DatabaseConnection::close());
-

@@ -20,7 +20,7 @@ function getZoneModel(
       'SELECT id FROM Zone WHERE name=? AND city=? AND country=?'
     );
   if (!$statement) {
-    return "error - getZone(): failed to prepare SQL statement";
+    return "error - getZoneModel(): failed to prepare SQL statement";
   }
 
   if (
@@ -32,19 +32,19 @@ function getZoneModel(
     )
   ) {
     $statement->close();
-    return "error - getZone(): failed to bind parameters";
+    return "error - getZoneModel(): failed to bind parameters";
   }
 
   if (!$statement->execute()) {
     $statement->close();
-    return "error - getZone(): failed to execute SQL statement";
+    return "error - getZoneModel(): failed to execute SQL statement";
   }
 
   $result = $statement->get_result();
   $statement->close();
   $row = $result->fetch_assoc();
   if (!$result || false === $row) {
-    return "error - getZone(): failed to fetch result";
+    return "error - getZoneModel(): failed to fetch result";
   }
 
   return $row;

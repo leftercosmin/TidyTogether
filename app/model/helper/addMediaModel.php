@@ -23,7 +23,7 @@ function addMediaModel(
       VALUES (?, ?, ?, ?, ?)'
       );
     if (!$statement) {
-      return "error - addMedia(): failed to prepare SQL statement";
+      return "error - addMediaModel(): failed to prepare SQL statement";
     }
 
     if (
@@ -37,12 +37,12 @@ function addMediaModel(
       )
     ) {
       $statement->close();
-      return "error - addMedia(): failed to bind parameters";
+      return "error - addMediaModel(): failed to bind parameters";
     }
 
     if (!$statement->execute()) {
       $statement->close();
-      return "error - addMedia(): failed to execute SQL statement";
+      return "error - addMediaModel(): failed to execute SQL statement";
     }
 
     $resultPost = $statement->get_result();

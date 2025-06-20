@@ -18,7 +18,7 @@ function addPostModel(
   $db = DatabaseConnection::get();
   if (null === $db || $db->connect_error) {
     $db->close();
-    return "error - addPost(): " . $db->connect_error;
+    return "error - addPostModel(): " . $db->connect_error;
   }
 
   $resultZone = getZoneModel(
@@ -44,7 +44,7 @@ function addPostModel(
       VALUES (?, ?, ?, ?)'
     );
   if (!$statement) {
-    return "error - addPost(): failed to prepare SQL statement";
+    return "error - addPostModel(): failed to prepare SQL statement";
   }
 
   if (
@@ -57,23 +57,23 @@ function addPostModel(
     )
   ) {
     $statement->close();
-    return "error - addPost(): failed to bind parameters";
+    return "error - addPostModel(): failed to bind parameters";
   }
 
   if (!$statement->execute()) {
     $statement->close();
-    return "error - addPost(): failed to execute SQL statement";
+    return "error - addPostModel(): failed to execute SQL statement";
   }
 
   $resultPost = $statement->get_result();
   $statement->close();
   if (!$resultPost) {
-    return "error - addPost(): failed to get result";
+    return "error - addPostModel(): failed to get result";
   }
 
   $row = $resultPost->fetch_assoc();
   if (false === $row) {
-    return "error - addPost(): failed to fetch result";
+    return "error - addPostModel(): failed to fetch result";
   }
 
   addMediaModel($db, $media, $row["id"]);

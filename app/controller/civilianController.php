@@ -3,11 +3,11 @@ require_once "util/getRoot.php";
 require_once "util/formatField.php";
 require_once "util/getFormat.php";
 
-require_once "model/getLocationModel.php";
+require_once "model/getLocationModelModel.php";
 require_once "model/getPostModel.php";
 require_once "model/getReportModel.php";
 require_once "model/getProfileModel.php";
-require_once "model/getTagModel.php";
+require_once "model/getTagModelModel.php";
 require_once "model/addPostModel.php";
 
 if (session_status() === PHP_SESSION_NONE) {
@@ -24,21 +24,21 @@ $id = json_decode($_SESSION[CONN])->{"id"};
 
 // determine pages
 if (!isset($_GET) || !isset($_GET['civilianPage'])) {
-  $location = getLocation();
-  $tags = getTag();
+  $location = getLocationModel();
+  $tags = getTagModel();
   require_once "view/home/civilianHomeView.php";
 } else {
   if ("favoriteZonePage" === $_GET["civilianPage"]) {
     require_once "view/home/civilianFavoriteView.php";
   } elseif ("civilianReportPage" === $_GET['civilianPage']) {
-    $posts = getPost($id);
+    $posts = getPostModel($id);
     require_once "view/home/civilianPostsView.php";
   } elseif ("profilePage" === $_GET['civilianPage']) {
-    $profile = getProfile($id);
+    $profile = getProfileModel($id);
     require_once "view/home/profileView.php";
   } else {
-    $location = getLocation();
-    $tags = getTag();
+    $location = getLocationModel();
+    $tags = getTagModel();
     require_once "view/home/civilianHomeView.php";
   }
 

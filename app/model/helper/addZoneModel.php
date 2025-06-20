@@ -20,7 +20,7 @@ function addZoneModel(
       'INSERT INTO Zone (name, city, country) VALUES (?, ?, ?)'
     );
   if (!$statement) {
-    return "error - addZone(): failed to prepare SQL statement";
+    return "error - addZoneModel(): failed to prepare SQL statement";
   }
 
   if (
@@ -32,19 +32,19 @@ function addZoneModel(
     )
   ) {
     $statement->close();
-    return "error - addZone(): failed to bind parameters";
+    return "error - addZoneModel(): failed to bind parameters";
   }
 
   if (!$statement->execute()) {
     $statement->close();
-    return "error - addZone(): failed to execute SQL statement";
+    return "error - addZoneModel(): failed to execute SQL statement";
   }
 
   $result = $statement->get_result();
   $statement->close();
   $row = $result->fetch_assoc();
   if (!$result || false === $row) {
-    return "error - addZone(): failed to fetch result";
+    return "error - addZoneModel(): failed to fetch result";
   }
 
   return $row;
