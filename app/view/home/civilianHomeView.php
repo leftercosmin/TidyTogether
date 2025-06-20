@@ -177,6 +177,13 @@
                 }
               };
             }
+
+            const favBtn = document.getElementById('save-as-fav');
+            if (favBtn) {
+              favBtn.onclick = function() {
+                
+              };
+}
             
           }, 100);
 
