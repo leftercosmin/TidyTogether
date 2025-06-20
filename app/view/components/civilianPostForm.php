@@ -25,7 +25,7 @@
       <!-- todo return name of the file, size, source, format -->
       <!-- MEDIA table -->
       <label for="photo">Photo (optional):</label>
-      <input type="file" id="photo" name="postPhoto" accept="image/jpg, image/png, image/webm, video/mp4" multiple>
+      <input type="file" id="photo" name="postPhoto[]" accept="image/jpg, image/png, image/webm, video/mp4" multiple>
 
       <!-- TAG and MARK tables -->
 

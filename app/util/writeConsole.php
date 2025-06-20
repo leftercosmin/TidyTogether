@@ -7,6 +7,8 @@ function writeConsole(string $data): bool
   $output = $data;
   if (is_array($output))
     $output = implode(',', $output);
+  $output = "\"" . $output . "\"";
+
   echo "<script>console.log($output);</script>";
   return true;
 }

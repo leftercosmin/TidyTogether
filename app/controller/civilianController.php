@@ -1,6 +1,7 @@
 <?php
 require_once "util/getRoot.php";
 require_once "util/formatField.php";
+require_once "util/getFormat.php";
 
 require_once "model/getLocationModel.php";
 require_once "model/getPostModel.php";
@@ -10,7 +11,7 @@ require_once "model/getTagModel.php";
 require_once "model/addPostModel.php";
 
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+  session_start();
 }
 
 if (!isset($_SESSION[CONN])) {
@@ -48,25 +49,71 @@ if (!isset($_GET) || !isset($_GET['civilianPage'])) {
 if (isset($_POST["postAddress"])) {
   $tags = $_POST["postTag"] ?? [];
   if (is_array($tags)) {
-    $tags = implode(',', $tags); // Convert array to comma-separated string
+    $tags = implode(',', $tags);
   }
-  addPost(
+
+  $media = [];
+  if (!empty($_FILES['postPhoto'])) {
+
+    // todo not windows compatible
+    $uploadDir = "/" . getRoot() . 'public/uploads/';
+
+    // for each file sent by the user
+    foreach ($_FILES['postPhoto']["tmp_name"] as $index => $oldPath) {
+
+      // save it to local system (server)
+      if (!is_uploaded_file($oldPath)) {
+        writeConsole("error: not a valid uploaded file: $oldPath");
+        continue;
+      }
+
+      if (!is_writable($uploadDir)) {
+        writeConsole("error: upload directory is not writable.");
+        continue;
+      }
+
+      $name = $_FILES['postPhoto']['name'][$index];
+      $size = $_FILES['postPhoto']['size'][$index];
+      $newPath = $uploadDir
+        . $id . "_"
+        . time() . "_"
+        . basename($name);
+
+      // change the path
+      if (!move_uploaded_file($oldPath, $newPath)) {
+        writeConsole("error: file uploading");
+        continue;
+      }
+
+      // writeConsole($oldPath);
+      // writeConsole($newPath);
+      $file = [];
+      $file["name"] = $name;
+      $file["size"] = $size;
+      $file["source"] = $newPath;
+      $file["format"] = getFormat($newPath);
+      $media[] = $file;
+    }
+  }
+
+  addPostModel(
     $id,
     $_POST["postDescription"] ?? null,
     $_POST["postAddress"],
     $_POST["postNeighbourhood"],
     $_POST["postCity"],
     $_POST["postCountry"],
-    $_POST["postPhoto"] ?? null,
+    $media,
     $tags
   );
+
   unset(
+    $_FILES,
     $_POST["postDescription"],
     $_POST["postAddress"],
     $_POST["postNeighbourhood"],
     $_POST["postCity"],
     $_POST["postCountry"],
-    $_POST["postPhoto"],
     $_POST["postTag"]
   );
 }

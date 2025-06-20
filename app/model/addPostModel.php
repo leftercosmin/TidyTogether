@@ -1,113 +1,17 @@
 <?php
 
-/* returns a Zone instance
- * it has the following fields:
-    id      BIGINT,
-    name    VARCHAR,
-    city    VARCHAR,
-    country VARCHAR,
-  * returns string on failure
- */
-function getZone(
-  mysqli $db,
-  string $zone,
-  string $city,
-  string $country
-): array|string {
+require_once "model/helper/getZoneModel.php";
+require_once "model/helper/addMediaModel.php";
+require_once "model/helper/addMediaModel.php";
 
-  $statement =
-    $db->prepare(
-      'SELECT id FROM Zone WHERE name=? AND city=? AND country=?'
-    );
-  if (!$statement) {
-    return "error - getZone(): failed to prepare SQL statement";
-  }
-
-  if (
-    !$statement->bind_param(
-      'sss',
-      $zone,
-      $city,
-      $country
-    )
-  ) {
-    $statement->close();
-    return "error - getZone(): failed to bind parameters";
-  }
-
-  if (!$statement->execute()) {
-    $statement->close();
-    return "error - getZone(): failed to execute SQL statement";
-  }
-
-  $result = $statement->get_result();
-  $statement->close();
-  $row = $result->fetch_assoc();
-  if (!$result || false === $row) {
-    return "error - getZone(): failed to fetch result";
-  }
-
-  return $row;
-}
-
-/* returns a Zone instance
- * it has the following fields:
-    id      BIGINT,
-    name    VARCHAR,
-    city    VARCHAR,
-    country VARCHAR,
-  * returns string on failure
- */
-function addZone(
-  mysqli $db,
-  string $zone,
-  string $city,
-  string $country
-): string {
-
-  $statement =
-    $db->prepare(
-      'INSERT INTO Zone (name, city, country) VALUES (?, ?, ?)'
-    );
-  if (!$statement) {
-    return "error - addZone(): failed to prepare SQL statement";
-  }
-
-  if (
-    !$statement->bind_param(
-      'sss',
-      $zone,
-      $city,
-      $country
-    )
-  ) {
-    $statement->close();
-    return "error - addZone(): failed to bind parameters";
-  }
-
-  if (!$statement->execute()) {
-    $statement->close();
-    return "error - addZone(): failed to execute SQL statement";
-  }
-
-  $result = $statement->get_result();
-  $statement->close();
-  $row = $result->fetch_assoc();
-  if (!$result || false === $row) {
-    return "error - addZone(): failed to fetch result";
-  }
-
-  return $row;
-}
-
-function addPost(
+function addPostModel(
   string $userId,
   string|null $description,
   string $address,
   string $zone,
   string $city,
   string $country,
-  string|null $media,
+  array $media,
   string $tags,
 ): string {
 
@@ -117,9 +21,20 @@ function addPost(
     return "error - addPost(): " . $db->connect_error;
   }
 
-  $result = getZone($db, $zone, $city, $country);
-  if (null === $result) {
-    $result = addZone($db, $zone, $city, $country);
+  $resultZone = getZoneModel(
+    $db,
+    $zone,
+    $city,
+    $country
+  );
+
+  if (null === $resultZone) {
+    $resultZone = addZoneModel(
+      $db,
+      $zone,
+      $city,
+      $country
+    );
   }
 
   // actual work
@@ -137,7 +52,7 @@ function addPost(
       'siis',
       $description,
       $userId,
-      $result["id"],
+      $resultZone["id"],
       $address
     )
   ) {
@@ -150,18 +65,18 @@ function addPost(
     return "error - addPost(): failed to execute SQL statement";
   }
 
-  $result = $statement->get_result();
+  $resultPost = $statement->get_result();
   $statement->close();
-  if (!$result) {
+  if (!$resultPost) {
     return "error - addPost(): failed to get result";
   }
 
-  $row = $result->fetch_assoc();
+  $row = $resultPost->fetch_assoc();
   if (false === $row) {
     return "error - addPost(): failed to fetch result";
   }
 
-  //addMedia();
+  addMediaModel($db, $media, $row["id"]);
   //addTags();
   return ""; // success
 }
