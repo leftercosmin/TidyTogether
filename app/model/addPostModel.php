@@ -1,8 +1,7 @@
 <?php
 
+require_once "model/helper/addZoneModel.php";
 require_once "model/helper/getZoneModel.php";
-require_once "model/helper/addMediaModel.php";
-require_once "model/helper/addMediaModel.php";
 
 function addPostModel(
   string $userId,
@@ -11,9 +10,7 @@ function addPostModel(
   string $zone,
   string $city,
   string $country,
-  array $media,
-  string $tags,
-): string {
+): int|string {
 
   $db = DatabaseConnection::get();
   if (null === $db || $db->connect_error) {
@@ -21,12 +18,17 @@ function addPostModel(
     return "error - addPostModel(): " . $db->connect_error;
   }
 
+  // zone updates
   $resultZone = getZoneModel(
     $db,
     $zone,
     $city,
     $country
   );
+
+  if (!is_null($resultZone) && is_string($resultZone)) {
+    return $resultZone;
+  }
 
   if (null === $resultZone) {
     $resultZone = addZoneModel(
@@ -35,6 +37,10 @@ function addPostModel(
       $city,
       $country
     );
+  }
+
+  if (!is_null($resultZone) && is_string($resultZone)) {
+    return $resultZone;
   }
 
   // actual work
@@ -76,7 +82,5 @@ function addPostModel(
     return "error - addPostModel(): failed to fetch result";
   }
 
-  addMediaModel($db, $media, $row["id"]);
-  //addTags();
-  return ""; // success
+  return $row["id"];
 }

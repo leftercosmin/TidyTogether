@@ -1,6 +1,7 @@
 <?php // used to load the dependencies
 
 require_once "util/alert.php";
+require_once "util/isError.php";
 require_once "util/getRoot.php";
 require_once "util/formatField.php";
 require_once "util/writeConsole.php";
@@ -15,7 +16,6 @@ if (!getenv('SERVER')) {
   }
 }
 
-$statusModel = ""; // error checking
 require_once 'controller/homeController.php';
 register_shutdown_function(fn() => DatabaseConnection::close());
 

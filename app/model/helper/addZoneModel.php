@@ -13,7 +13,7 @@ function addZoneModel(
   string $zone,
   string $city,
   string $country
-): string {
+): array|string {
 
   $statement =
     $db->prepare(

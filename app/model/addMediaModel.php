@@ -11,10 +11,15 @@
     ];
 */
 function addMediaModel(
-  mysqli $db,
   array $media,
   int $idPost,
 ): string {
+
+  $db = DatabaseConnection::get();
+  if (null === $db || $db->connect_error) {
+    $db->close();
+    return "error - addPostModel(): " . $db->connect_error;
+  }
 
   foreach ($media as $file) {
     $statement =
