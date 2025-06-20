@@ -128,24 +128,6 @@ body {
     background: var(--active-link);
 }
 
-.map-container {
-  flex: 1;
-  min-width: 60%;
-  position: relative;
-}
-
-/*
-.report-panel {
-  flex: 1;
-  min-width: 40%;
-  padding: 20px;
-  background: linear-gradient(rgba(56, 56, 56, 0.128), rgba(44, 44, 44, 0.373)), url(../public/background-tile.png);
-  background-repeat: repeat;
-  background-size: 500px;
-  overflow-y: auto;
-}
-*/
-
 .map-top-bar {
   display: flex;
   align-items: center;
@@ -162,15 +144,24 @@ body {
   border-bottom: 3px solid #1a2f18;
 }
 
+.map-container{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
 .place-picker-container {
   flex: 1;
   min-width: 0;
 }
 
-gmp-map {
-  height: calc(100% - 60px);
-  margin-top: 60px;
-  width: 100%;
+.map-button{
+  border-radius: 1000px;
+  padding: 0.85em;
+  background-color: var(--base-color);
+  color: var(--accent-color);
+  cursor: pointer;
 }
 
 form button {
@@ -196,7 +187,6 @@ form button {
     padding: 0.85em;
     background-color: var(--base-color);
     color: var(--accent-color);
-    border: 3px solid var(--base-color);
     font-weight: 600;
     cursor: pointer;
     transition: 150ms ease;

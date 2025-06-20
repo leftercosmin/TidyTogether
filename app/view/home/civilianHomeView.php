@@ -22,8 +22,8 @@
     <?php require_once "view/components/civilianNavbar.php"; ?>
 
     <div class="map-container">
-      <div class="map-top-bar" style="display: flex; align-items: center; margin-bottom: 1em; z-index: 2; position: relative;">
-        <button id="openReportBtn" class="report-btn" style="display: flex; align-items: center;">
+      <div class="map-top-bar">
+        <button id="openReportBtn" class="report-btn">
           <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3" style="margin-right: 8px;">
             <path
               d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
@@ -32,26 +32,45 @@
         </button>
       </div>
 
-      <div class="map-container" style="width: 100%;">
-      <div id="map" style="height: 500px; width: 100%;"></div>
+      <div id="map" style="height: 100%; width: 100%;"></div>
         <?php require_once "view/components/civilianPostForm.php"; ?>
       </div>
+
+      <?php require_once "view/components/civilianPostForm.php"; ?>
     </div>
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      var map = L.map('map').setView([40.749933, -73.98633], 13);
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '&copy; OpenStreetMap contributors'
-      }).addTo(map);
-      L.marker([40.749933, -73.98633]).addTo(map)
-        .bindPopup('Default location')
+  document.addEventListener("DOMContentLoaded", function () {
+    const map = L.map('map').setView([47.169488, 27.576741], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    let userMarker = null;
+
+    map.on('click', function (e) {
+      const { lat, lng } = e.latlng;
+
+      if (userMarker) {
+        map.removeLayer(userMarker);
+      }
+
+      const popupContent = `
+        <div style="display: flex; flex-direction: column; gap: 4px;">
+          <button style="border-radius: 50px; padding: 0.85em; background-color: var(--base-color); color: var(--accent-color); cursor: pointer;" onclick="('addFavorite')">Add neighborhood as favorite</button>
+          <button style="border-radius: 50px; padding: 0.85em; background-color: var(--base-color); color: var(--accent-color); cursor: pointer;" onclick="('report')">Report dirty area</button>
+          <button style="border-radius: 50px; padding: 0.85em; background-color: var(--base-color); color: var(--accent-color); cursor: pointer;" onclick="('generateReport')">Generate report</button>
+        </div>
+      `;
+
+      userMarker = L.marker([lat, lng]).addTo(map)
+        .bindPopup(popupContent)
         .openPopup();
     });
-  </script>
-
+  });
+</script>
 </body>
-
 </html>
