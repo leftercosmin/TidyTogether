@@ -33,8 +33,7 @@
       </div>
 
       <div id="map" style="height: 100%; width: 100%;"></div>
-        <?php require_once "view/components/civilianPostForm.php"; ?>
-      </div>
+    </div>
 
       <?php require_once "view/components/civilianPostForm.php"; ?>
     </div>
@@ -50,25 +49,47 @@
     }).addTo(map);
 
     let userMarker = null;
+    let fetchController = null;
+
+    map.off('click');
 
     map.on('click', function (e) {
       const { lat, lng } = e.latlng;
 
-      if (userMarker) {
+      if (userMarker && map.hasLayer(userMarker)) {
         map.removeLayer(userMarker);
       }
 
-      const popupContent = `
-        <div style="display: flex; flex-direction: column; gap: 4px;">
-          <button style="border-radius: 50px; padding: 0.85em; background-color: var(--base-color); color: var(--accent-color); cursor: pointer;" onclick="('addFavorite')">Add neighborhood as favorite</button>
-          <button style="border-radius: 50px; padding: 0.85em; background-color: var(--base-color); color: var(--accent-color); cursor: pointer;" onclick="('report')">Report dirty area</button>
-          <button style="border-radius: 50px; padding: 0.85em; background-color: var(--base-color); color: var(--accent-color); cursor: pointer;" onclick="('generateReport')">Generate report</button>
-        </div>
-      `;
+      if (fetchController) {
+        fetchController.abort();
+      }
+      fetchController = new AbortController();
 
       userMarker = L.marker([lat, lng]).addTo(map)
-        .bindPopup(popupContent)
-        .openPopup();
+      .bindPopup('<div>Loading address...</div>')
+      .openPopup();
+
+      //fetch address OpenStreetMap Nominatim
+      fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`)
+        .then(res => res.json())
+        .then(data => {
+          const neighborhood = data.address.neighbourhood || data.address.suburb || data.address.village || data.address.city || "Unknown area";
+          const city = data.address.city || data.address.town || data.address.village || "";
+          const address = data.display_name || "";
+
+          const popupContent = `
+            <div style="display: flex; flex-direction: column; gap: 6px;">
+              <button style="border-radius: 50px; padding: 0.85em; background-color: var(--base-color); color: var(--accent-color); cursor: pointer;" id="report">Report dirty area</button>
+              <button style="border-radius: 50px; padding: 0.85em; background-color: var(--base-color); color: var(--accent-color); cursor: pointer;" id="save-as-fav">Save ${neighborhood} as favorite zone</button>
+              <button style="border-radius: 50px; padding: 0.85em; background-color: var(--base-color); color: var(--accent-color); cursor: pointer;" id="gen-report">Generate report for ${neighborhood}</button>
+            </div>
+          `;
+
+          userMarker.setPopupContent(popupContent);
+          })
+        .catch(err => {
+          console.error("Reverse geocoding failed", err);
+        });
     });
   });
 </script>
