@@ -55,20 +55,19 @@ if (isset($_POST["postAddress"])) {
   $media = [];
   if (!empty($_FILES['postPhoto'])) {
 
-    // todo not windows compatible
-    $uploadDir = "/" . getRoot() . 'public/uploads/';
+    $uploadDir = getRoot() . 'public/uploads/';
 
     // for each file sent by the user
     foreach ($_FILES['postPhoto']["tmp_name"] as $index => $oldPath) {
 
       // save it to local system (server)
       if (!is_uploaded_file($oldPath)) {
-        writeConsole("error: not a valid uploaded file: $oldPath");
+        alert("warning: not a valid uploaded file: $oldPath");
         continue;
       }
 
       if (!is_writable($uploadDir)) {
-        writeConsole("error: upload directory is not writable.");
+        alert("warning: upload directory is not writable.");
         continue;
       }
 

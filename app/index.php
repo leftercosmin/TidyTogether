@@ -1,5 +1,6 @@
 <?php // used to load the dependencies
 
+require_once "util/alert.php";
 require_once "util/getRoot.php";
 require_once "util/formatField.php";
 require_once "util/writeConsole.php";
@@ -20,6 +21,6 @@ register_shutdown_function(fn() => DatabaseConnection::close());
 
 echo "<script>alert(\"fasole\");</script>";
 
-if ("" !== $statusModel) {
-  writeConsole($statusModel);
+if (is_string($statusModel) && "" !== $statusModel) {
+  alert($statusModel);
 }
