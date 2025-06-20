@@ -17,8 +17,4 @@ if (!getenv('SERVER')) {
 $statusModel = "";
 require_once 'controller/homeController.php';
 register_shutdown_function(fn() => DatabaseConnection::close());
-writeConsole("wai!\n");
-echo "__DIR__";
-echo __DIR__;
-echo "\n";
-echo "\"" . getRoot();
+
