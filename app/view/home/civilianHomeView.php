@@ -15,6 +15,7 @@
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
 </head>
 
 <body>
@@ -39,7 +40,10 @@
     </div>
   </div>
 
-  <script>
+</body>
+</html>
+
+<script>
   document.addEventListener("DOMContentLoaded", function () {
     const map = L.map('map').setView([47.169488, 27.576741], 13);
 
@@ -47,11 +51,75 @@
       maxZoom: 19,
       attribution: '&copy; OpenStreetMap contributors'
     }).addTo(map);
+    new L.Control.Geocoder().addTo(map);
+    const geocoder = new L.Control.Geocoder().addTo(map);
 
     let userMarker = null;
     let fetchController = null;
+    let currentLocation = null;
 
     map.off('click');
+
+    function handleLocation(lat, lng) {
+  if (userMarker && map.hasLayer(userMarker)) {
+    map.removeLayer(userMarker);
+  }
+
+  if (fetchController) {
+    fetchController.abort();
+  }
+  fetchController = new AbortController();
+
+  userMarker = L.marker([lat, lng]).addTo(map)
+    .bindPopup('<div>Loading address...</div>')
+    .openPopup();
+
+  fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat}&lon=${lng}`)
+    .then(res => res.json())
+    .then(data => {
+      const neighborhood = data.address.neighbourhood || data.address.suburb || data.address.village || data.address.city || "Unknown area";
+      const city = data.address.city || data.address.town || data.address.village || "";
+      const address = data.display_name || "";
+
+      currentLocation = {
+        lat: lat,
+        lng: lng,
+        address: address,
+        neighborhood: neighborhood,
+        city: city,
+        fullData: data
+      };
+
+      const popupContent = `
+        <div style="display: flex; flex-direction: column; gap: 6px;">
+          <button style="border-radius: 50px; padding: 0.85em; background-color: var(--base-color); color: var(--accent-color); cursor: pointer;" id="report">Report dirty area</button>
+          <button style="border-radius: 50px; padding: 0.85em; background-color: var(--base-color); color: var(--accent-color); cursor: pointer;" id="save-as-fav">Save ${neighborhood} as favorite zone</button>
+          <button style="border-radius: 50px; padding: 0.85em; background-color: var(--base-color); color: var(--accent-color); cursor: pointer;" id="gen-report">Generate report for ${neighborhood}</button>
+        </div>
+      `;
+
+      userMarker.setPopupContent(popupContent);
+
+      setTimeout(() => {
+        const reportBtn = document.getElementById('report');
+        if (reportBtn) {
+          reportBtn.onclick = function() {
+            const modal = document.getElementById("reportModal");
+            if (modal) {
+              document.getElementById('address').value = currentLocation.address || '';
+              document.getElementById('neighbourhood').value = currentLocation.neighborhood || '';
+              document.getElementById('city').value = currentLocation.city || '';
+              modal.style.display = "block";
+            }
+          };
+        }
+        // Add other button handlers here if needed
+      }, 100);
+    })
+    .catch(err => {
+      console.error("Reverse geocoding failed", err);
+    });
+}
 
     map.on('click', function (e) {
       const { lat, lng } = e.latlng;
@@ -77,6 +145,15 @@
           const city = data.address.city || data.address.town || data.address.village || "";
           const address = data.display_name || "";
 
+          currentLocation = {
+            lat: lat,
+            lng: lng,
+            address: address,
+            neighborhood: neighborhood,
+            city: city,
+            fullData: data
+          };
+
           const popupContent = `
             <div style="display: flex; flex-direction: column; gap: 6px;">
               <button style="border-radius: 50px; padding: 0.85em; background-color: var(--base-color); color: var(--accent-color); cursor: pointer;" id="report">Report dirty area</button>
@@ -86,6 +163,23 @@
           `;
 
           userMarker.setPopupContent(popupContent);
+
+          setTimeout(() => {
+            const reportBtn = document.getElementById('report');
+            if (reportBtn) {
+              reportBtn.onclick = function() {
+                const modal = document.getElementById("reportModal");
+                if (modal) {
+                  document.getElementById('address').value = currentLocation.address || '';
+                  document.getElementById('neighbourhood').value = currentLocation.neighborhood || '';
+                  document.getElementById('city').value = currentLocation.city || '';
+                  modal.style.display = "block";
+                }
+              };
+            }
+            
+          }, 100);
+
           })
         .catch(err => {
           console.error("Reverse geocoding failed", err);
@@ -93,5 +187,5 @@
     });
   });
 </script>
-</body>
-</html>
+
+<script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>

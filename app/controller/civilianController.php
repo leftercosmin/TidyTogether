@@ -8,6 +8,7 @@ require_once "model/getReportModel.php";
 require_once "model/getProfileModel.php";
 require_once "model/getTagModel.php";
 require_once "model/addPostModel.php";
+require_once "model/addFavoriteZone.php";
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -70,3 +71,17 @@ if (isset($_POST["postAddress"])) {
     $_POST["postTag"]
   );
 }
+
+// //save favorite zone
+// if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['favoriteZone'])) {
+//     header('Content-Type: application/json');
+//     $neighborhood = $_POST['neighborhood'] ?? null;
+//     $city = $_POST['city'] ?? null;
+//     $country = $_POST['country'] ?? null;
+//     $result = addFavoriteZone($id, $neighborhood, $city, $country);
+//     echo json_encode([
+//         'success' => $result === true,
+//         'message' => $result === true ? '' : $result
+//     ]);
+//     exit();
+// }
