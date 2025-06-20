@@ -19,8 +19,6 @@ $statusModel = ""; // error checking
 require_once 'controller/homeController.php';
 register_shutdown_function(fn() => DatabaseConnection::close());
 
-echo "<script>alert(\"fasole\");</script>";
-
 if (is_string($statusModel) && "" !== $statusModel) {
   alert($statusModel);
 }
