@@ -4,7 +4,7 @@ require_once "util/getRoot.php";
 require_once "util/formatField.php";
 require_once "util/getFormat.php";
 
-require_once "model/getLocationModelModel.php";
+require_once "model/getLocationModel.php";
 require_once "model/getPostModel.php";
 require_once "model/getReportModel.php";
 require_once "model/getProfileModel.php";
