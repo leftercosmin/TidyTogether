@@ -16,6 +16,5 @@ if (!getenv('SERVER')) {
 
 require_once 'controller/homeController.php';
 register_shutdown_function(fn() => DatabaseConnection::close());
-writeConsole(__DIR__);
 writeConsole("wai!\n");
-writeConsole("wai!\n");
+echo __DIR__;
