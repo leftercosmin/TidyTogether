@@ -12,6 +12,7 @@ function processMediaModel(int $idUser, array|null $files): array|null
     return null;
   }
 
+  $media = [];
   $uploadDir = getRoot() . 'public/uploads/';
 
   // for each file sent by the user
@@ -41,8 +42,8 @@ function processMediaModel(int $idUser, array|null $files): array|null
       continue;
     }
 
-    // writeConsole($oldPath);
-    // writeConsole($newPath);
+    writeConsole($oldPath);
+    writeConsole($newPath);
     $file = [];
     $file["name"] = $name;
     $file["size"] = $size;

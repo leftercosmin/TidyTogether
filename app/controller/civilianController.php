@@ -64,7 +64,7 @@ if (!isset($_GET) || !isset($_GET['civilianPage'])) {
 // new post created: insert post, media, tags
 if (isset($_POST["postAddress"])) {
 
-  $idPost = addPostModel(
+  /*$idPost = addPostModel(
     $id,
     $_POST["postDescription"] ?? null,
     $_POST["postAddress"],
@@ -73,9 +73,10 @@ if (isset($_POST["postAddress"])) {
     $_POST["postCountry"],
   );
   isError($idPost);
+  */
 
   $media = processMediaModel($id, $_FILES['postPhoto']);
-  addMediaModel($media, $idPost);
+  // addMediaModel($media, $idPost);
   // $tags = processTagsModel();
   //addTagsModel($tags, $idPost);
 
