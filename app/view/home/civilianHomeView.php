@@ -9,89 +9,48 @@
   <meta name="description" content="personal space of a regular user" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style/civilianHome.css" />
-
-  <script>
-    async function init() {
-      await customElements.whenDefined("gmp-map");
-
-      const map = document.querySelector("gmp-map");
-      const marker = document.querySelector("gmp-advanced-marker");
-      const placePicker = document.querySelector("gmpx-place-picker");
-      const infowindow = new google.maps.InfoWindow();
-
-      map.innerMap.setOptions({
-        mapTypeControl: false,
-      });
-
-      placePicker.addEventListener("gmpx-placechange", () => {
-        const place = placePicker.value;
-
-        if (!place.location) {
-          window.alert(
-            "No details available for input: '" + place.name + "'"
-          );
-          infowindow.close();
-          marker.position = null;
-          return;
-        }
-
-        if (place.viewport) {
-          map.innerMap.fitBounds(place.viewport);
-        } else {
-          map.center = place.location;
-          map.zoom = 17;
-        }
-
-        marker.position = place.location;
-        infowindow.setContent(
-          `<strong>${place.displayName}</strong><br>
-             <span>${place.formattedAddress}</span>
-          `
-        );
-        infowindow.open(map.innerMap, marker);
-      });
-    }
-
-    document.addEventListener("DOMContentLoaded", init);
-  </script>
-  <script type="module"
-    src="https://ajax.googleapis.com/ajax/libs/@googlemaps/extended-component-library/0.6.11/index.min.js"></script>
-
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""></script>
 </head>
 
 <body>
+  <div class="page-layout">
+    <?php require_once "view/components/civilianNavbar.php"; ?>
 
-  <?php require_once "view/components/civilianNavbar.php"; ?>
-
-  <div class="map-container">
-    <!-- using php to generate the secret key -->
-    <?php
-    echo "<gmpx-api-loader key=";
-    echo "\"" . getenv("MAP_KEY") . "\"";
-    echo "solution-channel=\"GMP_GE_mapsandplacesautocomplete_v2\">";
-    ?>
-    </gmpx-api-loader>
-
-    <div class="map-top-bar">
-      <div class="place-picker-container">
-        <gmpx-place-picker placeholder="Enter an address"></gmpx-place-picker>
+    <div class="map-container">
+      <div class="map-top-bar" style="display: flex; align-items: center; margin-bottom: 1em; z-index: 2; position: relative;">
+        <button id="openReportBtn" class="report-btn" style="display: flex; align-items: center;">
+          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3" style="margin-right: 8px;">
+            <path
+              d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
+          </svg>
+          Report a dirty area
+        </button>
       </div>
 
-      <button id="openReportBtn" class="report-btn">
-        <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
-          <path
-            d="M280-120q-33 0-56.5-23.5T200-200v-520h-40v-80h200v-40h240v40h200v80h-40v520q0 33-23.5 56.5T680-120H280Zm400-600H280v520h400v-520ZM360-280h80v-360h-80v360Zm160 0h80v-360h-80v360ZM280-720v520-520Z" />
-        </svg>
-        Report a dirty area
-      </button>
+      <div class="map-container" style="width: 100%;">
+      <div id="map" style="height: 500px; width: 100%;"></div>
+        <?php require_once "view/components/civilianPostForm.php"; ?>
+      </div>
     </div>
-
-    <gmp-map center="40.749933,-73.98633" zoom="13" map-id="DEMO_MAP_ID">
-      <gmp-advanced-marker></gmp-advanced-marker>
-    </gmp-map>
   </div>
 
-  <?php require_once "view/components/civilianPostForm.php"; ?>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var map = L.map('map').setView([40.749933, -73.98633], 13);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+      L.marker([40.749933, -73.98633]).addTo(map)
+        .bindPopup('Default location')
+        .openPopup();
+    });
+  </script>
 
 </body>
 
