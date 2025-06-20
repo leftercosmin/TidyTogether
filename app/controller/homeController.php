@@ -74,5 +74,6 @@ if (isset($_POST[PAGE]) && $_POST[PAGE] == "Signup") {
   require_once "view/login.html";
 }
 
-if ("" !== $statusModel)
+if ("" !== $statusModel) {
   writeConsole($statusModel);
+}
