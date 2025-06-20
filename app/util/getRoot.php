@@ -1,15 +1,22 @@
 <?php
+
 function getRoot(): string
 {
+  $partition = substr(__DIR__, 0, 3);
+  $isWindows = substr($partition, 0, 1) !== "/";
+  $token = $isWindows ? "\\" : "/";
+
   $path = __DIR__;
-  $file = strtok($path, "/");
-  $path = "";
+  $file = strtok($path, $token);
+
+  // assign the root directory
+  $path = $isWindows ? $partition : "/";
 
   while ($file && $file !== "app") {
-    $path .= "$file/";
-    $file = strtok("/");
+    $path .= "$file$token";
+    $file = strtok($token);
   }
 
-  $path .= "app/";
+  $path .= "app$token";
   return $path;
 }

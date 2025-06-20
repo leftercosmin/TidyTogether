@@ -22,3 +22,4 @@ sudo echo "<?php
 
 sudo rm /opt/lampp/htdocs/index.php
 sudo mv p.php /opt/lampp/htdocs/index.php
+chmod -R 777 /opt/lampp/htdocs/TidyTogether/

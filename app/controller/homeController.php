@@ -44,9 +44,14 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
     );
 
   } else {
-    $statusModel =
-      login($_POST["email"], $_POST["password"]);
-    unset($_POST["email"], $_POST["password"]);
+    $statusModel = login(
+      $_POST["email"],
+      $_POST["password"]
+    );
+    unset(
+      $_POST["email"],
+      $_POST["password"]
+    );
   }
 }
 
@@ -73,6 +78,3 @@ if (isset($_POST[PAGE]) && $_POST[PAGE] == "Signup") {
 } else {
   require_once "view/login.html";
 }
-
-if ("" !== $statusModel)
-  writeConsole($statusModel);

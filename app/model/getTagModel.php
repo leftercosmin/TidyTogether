@@ -6,7 +6,7 @@
     color ENUM
  * returns string on error
  */
-function getTag(): array|string
+function getTagModel(): array|string
 {
   $db = $db = DatabaseConnection::get();
   if (null === $db || $db->connect_error) {
@@ -16,13 +16,13 @@ function getTag(): array|string
 
   $result = $db->query('SELECT * FROM Tag');
   if (!$result) {
-    return "error - getTag(): failed to execute SQL statement";
+    return "error - getTagModel(): failed to execute SQL statement";
   }
 
   $tags = [];
   while ($row = $result->fetch_assoc()) {
     if (false === $row) {
-      return "error - getTag(): failed to fetch result";
+      return "error - getTagModel(): failed to fetch result";
     }
 
     $tags[] = $row;

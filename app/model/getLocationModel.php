@@ -45,7 +45,7 @@ function getIpAdress(): array|string
  * @param array $opt
  * @return array|string
  */
-function getLocation(): array|string
+function getLocationModel(): array|string
 {
   global $opt;
   $ipAddr = getIpAdress();
@@ -62,7 +62,7 @@ function getLocation(): array|string
 
   if ($codeHttp != 200) {
     http_response_code($codeHttp);
-    return "error - getLocation(): " . $codeHttp;
+    return "error - getLocationModel(): " . $codeHttp;
   }
 
   return json_decode($response, true);
