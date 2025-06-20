@@ -26,19 +26,32 @@ $id = json_decode($_SESSION[CONN])->{"id"};
 if (!isset($_GET) || !isset($_GET['civilianPage'])) {
   $location = getLocationModel();
   $tags = getTagModel();
+
+  // error checking
+  $statusModel = is_string($location) ? $location : "";
+  $statusModel = is_string($tags) ? $tags : "";
   require_once "view/home/civilianHomeView.php";
+
 } else {
   if ("favoriteZonePage" === $_GET["civilianPage"]) {
     require_once "view/home/civilianFavoriteView.php";
+
   } elseif ("civilianReportPage" === $_GET['civilianPage']) {
     $posts = getPostModel($id);
+    $statusModel = is_string($posts) ? $posts : "";
     require_once "view/home/civilianPostsView.php";
+
   } elseif ("profilePage" === $_GET['civilianPage']) {
     $profile = getProfileModel($id);
+    $statusModel = is_string($profile) ? $profile : "";
     require_once "view/home/profileView.php";
+
   } else {
     $location = getLocationModel();
     $tags = getTagModel();
+
+    $statusModel = is_string($location) ? $location : "";
+    $statusModel = is_string($tags) ? $tags : "";
     require_once "view/home/civilianHomeView.php";
   }
 
@@ -80,7 +93,7 @@ if (isset($_POST["postAddress"])) {
 
       // change the path
       if (!move_uploaded_file($oldPath, $newPath)) {
-        writeConsole("error: file uploading");
+        alert("error: file uploading");
         continue;
       }
 
