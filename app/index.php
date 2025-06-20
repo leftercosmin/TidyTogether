@@ -14,6 +14,12 @@ if (!getenv('SERVER')) {
   }
 }
 
-$statusModel = "";
+$statusModel = ""; // error checking
 require_once 'controller/homeController.php';
 register_shutdown_function(fn() => DatabaseConnection::close());
+
+echo "<script>alert(\"fasole\");</script>";
+
+if ("" !== $statusModel) {
+  writeConsole($statusModel);
+}
