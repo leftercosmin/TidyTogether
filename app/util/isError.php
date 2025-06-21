@@ -1,6 +1,6 @@
 <?php
 
-$statusModel = "";
+$wasErrorThrown = false;
 
 /**
  * displays the previous error
@@ -8,14 +8,10 @@ $statusModel = "";
  */
 function isError(mixed $returnedValue): bool
 {
-  global $statusModel;
-  if (is_string($statusModel) && "" !== $statusModel) {
-    alert($statusModel);
-    $statusModel = "";
-  }
-
-  if (is_string($returnedValue)) {
-    $statusModel = $returnedValue;
+  global $wasErrorThrown;
+  if (!is_null($returnedValue) && is_string($returnedValue)) {
+    alert($returnedValue);
+    $wasErrorThrown = true;
     return true;
   }
 

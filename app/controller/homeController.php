@@ -26,7 +26,7 @@ if (
 if (isset($_POST["email"]) && isset($_POST["password"])) {
 
   if (isset($_POST["passwordAgain"])) {
-    $statusModel = signup(
+    $res0 = signup(
       $_POST["firstname"] ?? null,
       $_POST["lastname"] ?? null,
       $_POST["email"],
@@ -42,9 +42,10 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
       $_POST["passwordAgain"],
       $_POST["role"]
     );
+    isError($res0);
 
   } else {
-    $statusModel = login(
+    $res1 = login(
       $_POST["email"],
       $_POST["password"]
     );
@@ -52,6 +53,7 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
       $_POST["email"],
       $_POST["password"]
     );
+    isError($res1);
   }
 }
 
