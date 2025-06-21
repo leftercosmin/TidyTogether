@@ -28,9 +28,12 @@
       <input type="file" id="photo" name="postPhoto[]" accept="image/jpg, image/png, image/webm, video/mp4" multiple>
 
       <!-- TAG and MARK tables -->
-
       <?php
+      $index = 0;
       foreach ($tags as $tagOne) {
+        if (10 === $index) {
+          break;
+        }
 
         echo "<div >";
 
@@ -41,37 +44,21 @@
 
         echo "<input type=checkbox "
           . "id=\"" . $tagOne["name"] . "\" "
-          . "name=\postTag[]\" "
-          . "value=\"" . $tagOne["name"] . "\">";
+          . "name=\postTag$index\" "
+          . "value=\""
+          . $tagOne["id"] . "-"
+          . $tagOne["name"] . "-"
+          . $tagOne["color"] . "\">";
 
         echo "</div>";
+        $index += 1;
       }
       ?>
-
-      <div id="otherTagContainer">
-        <label for="otherTag">New tag:</label>
-        <input type="text" id="otherTag" name="otherTag" />
-      </div>
 
       <button type="submit">Submit post</button>
     </form>
   </div>
 </div>
-
-<!-- add a new tag -->
-<script>
-  function handleTrashTypeChange() {
-    const select = document.getElementById('trashType');
-    const otherInputContainer = document.getElementById('otherTagContainer');
-    if (select.value === 'other') {
-      otherInputContainer.style.display = 'block';
-      document.getElementById('otherTag').required = true;
-    } else {
-      otherInputContainer.style.display = 'none';
-      document.getElementById('otherTag').required = false;
-    }
-  }
-</script>
 
 <!-- close modal -->
 <script>

@@ -18,11 +18,10 @@ function addMediaModel(
   $db = DatabaseConnection::get();
   if (null === $db || $db->connect_error) {
     $db->close();
-    return "error - addPostModel(): " . $db->connect_error;
+    return "error - addMediaModel(): " . $db->connect_error;
   }
 
   foreach ($media as $file) {
-    echo "executat\n";
 
     $statement =
       $db->prepare(

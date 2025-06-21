@@ -6,6 +6,7 @@ require_once "util/getFormat.php";
 
 require_once "model/addPostModel.php";
 require_once "model/addMediaModel.php";
+require_once "model/addMarksModel.php";
 
 require_once "model/getLocationModel.php";
 require_once "model/getPostModel.php";
@@ -42,13 +43,17 @@ if (isset($_POST["postAddress"])) {
   );
 
   $media = processMediaModel($id, $_FILES['postPhoto'] ?? null);
-  // $tags = processTagsModel();
-  // isError($tags);
+  $marks = processTagsModel(); // this directly uses $_POST and unset()
 
+  $res0 = "";
+  $res1 = "";
   if (!isError($idPost) && !isError($media)) {
-    addMediaModel((array) $media ?? [], $idPost);
-    // addTagsModel($tags, $idPost);
+    $res0 = addMediaModel((array) $media ?? [], $idPost);
+    $res1 = addMarksModel($idPost, $marks);
   }
+
+  isError($res0);
+  isError($res1);
 
   unset(
     $_FILES["postPhoto"],

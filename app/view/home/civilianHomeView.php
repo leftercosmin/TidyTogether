@@ -10,53 +10,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style/civilianHome.css" />
 
-  <script>
-    async function init() {
-      await customElements.whenDefined("gmp-map");
-
-      const map = document.querySelector("gmp-map");
-      const marker = document.querySelector("gmp-advanced-marker");
-      const placePicker = document.querySelector("gmpx-place-picker");
-      const infowindow = new google.maps.InfoWindow();
-
-      map.innerMap.setOptions({
-        mapTypeControl: false,
-      });
-
-      placePicker.addEventListener("gmpx-placechange", () => {
-        const place = placePicker.value;
-
-        if (!place.location) {
-          window.alert(
-            "No details available for input: '" + place.name + "'"
-          );
-          infowindow.close();
-          marker.position = null;
-          return;
-        }
-
-        if (place.viewport) {
-          map.innerMap.fitBounds(place.viewport);
-        } else {
-          map.center = place.location;
-          map.zoom = 17;
-        }
-
-        marker.position = place.location;
-        infowindow.setContent(
-          `<strong>${place.displayName}</strong><br>
-             <span>${place.formattedAddress}</span>
-          `
-        );
-        infowindow.open(map.innerMap, marker);
-      });
-    }
-
-    document.addEventListener("DOMContentLoaded", init);
-  </script>
-  <script type="module"
-    src="https://ajax.googleapis.com/ajax/libs/@googlemaps/extended-component-library/0.6.11/index.min.js"></script>
-
 </head>
 
 <body>
@@ -64,18 +17,8 @@
   <?php require_once "view/components/civilianNavbar.php"; ?>
 
   <div class="map-container">
-    <!-- using php to generate the secret key -->
-    <?php
-    echo "<gmpx-api-loader key=";
-    echo "\"" . getenv("MAP_KEY") . "\"";
-    echo "solution-channel=\"GMP_GE_mapsandplacesautocomplete_v2\">";
-    ?>
-    </gmpx-api-loader>
 
     <div class="map-top-bar">
-      <div class="place-picker-container">
-        <gmpx-place-picker placeholder="Enter an address"></gmpx-place-picker>
-      </div>
 
       <button id="openReportBtn" class="report-btn">
         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
