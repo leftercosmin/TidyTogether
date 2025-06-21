@@ -22,6 +22,8 @@ function addMediaModel(
   }
 
   foreach ($media as $file) {
+    echo "executat\n";
+
     $statement =
       $db->prepare(
         'INSERT INTO Media (name, size, source, format, idPost)
@@ -50,7 +52,6 @@ function addMediaModel(
       return "error - addMediaModel(): failed to execute SQL statement";
     }
 
-    $resultPost = $statement->get_result();
     $statement->close();
   }
 

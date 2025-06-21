@@ -28,7 +28,43 @@ if (!isset($_SESSION[CONN])) {
 
 $id = json_decode($_SESSION[CONN])->{"id"};
 
-// determine pages
+// backend only
+// new post created: insert post, media, tags
+if (isset($_POST["postAddress"])) {
+
+  $idPost = addPostModel(
+    $id,
+    $_POST["postDescription"] ?? null,
+    $_POST["postAddress"],
+    $_POST["postNeighbourhood"],
+    $_POST["postCity"],
+    $_POST["postCountry"],
+  );
+
+  $media = processMediaModel($id, $_FILES['postPhoto'] ?? null);
+  // $tags = processTagsModel();
+  // isError($tags);
+
+  if (!isError($idPost) && !isError($media)) {
+    addMediaModel((array) $media ?? [], $idPost);
+    // addTagsModel($tags, $idPost);
+  }
+
+  unset(
+    $_FILES["postPhoto"],
+    $_POST["postDescription"],
+    $_POST["postAddress"],
+    $_POST["postNeighbourhood"],
+    $_POST["postCity"],
+    $_POST["postCountry"],
+    $_POST["postTag"]
+  );
+
+  header("Location: /");
+  exit();
+}
+
+// frontend: determine pages
 if (!isset($_GET) || !isset($_GET['civilianPage'])) {
   $location = getLocationModel();
   $tags = getTagModel();
@@ -59,35 +95,4 @@ if (!isset($_GET) || !isset($_GET['civilianPage'])) {
   }
 
   unset($_GET);
-}
-
-// new post created: insert post, media, tags
-if (isset($_POST["postAddress"])) {
-
-  /*$idPost = addPostModel(
-    $id,
-    $_POST["postDescription"] ?? null,
-    $_POST["postAddress"],
-    $_POST["postNeighbourhood"],
-    $_POST["postCity"],
-    $_POST["postCountry"],
-  );
-  isError($idPost);
-  */
-
-  $media = processMediaModel($id, $_FILES['postPhoto']);
-  writeConsole(json_encode($media));
-  // addMediaModel($media, $idPost);
-  // $tags = processTagsModel();
-  //addTagsModel($tags, $idPost);
-
-  unset(
-    $_FILES,
-    $_POST["postDescription"],
-    $_POST["postAddress"],
-    $_POST["postNeighbourhood"],
-    $_POST["postCity"],
-    $_POST["postCountry"],
-    $_POST["postTag"]
-  );
 }

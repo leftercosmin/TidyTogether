@@ -5,10 +5,8 @@ $statusModel = "";
 /**
  * displays the previous error
  * prepares statusModel for the last call in index.php
- * @param mixed $returnedValue
- * @return void
  */
-function isError(mixed $returnedValue): void
+function isError(mixed $returnedValue): bool
 {
   global $statusModel;
   if (is_string($statusModel) && "" !== $statusModel) {
@@ -16,7 +14,10 @@ function isError(mixed $returnedValue): void
     $statusModel = "";
   }
 
-  if (is_string($returnedValue)){
+  if (is_string($returnedValue)) {
     $statusModel = $returnedValue;
+    return true;
   }
+
+  return false;
 }

@@ -1,20 +1,31 @@
 <?php
 
-/* returns a Zone instance
- * it has the following fields:
-    id      BIGINT,
-    name    VARCHAR,
-    city    VARCHAR,
-    country VARCHAR,
-  * returns string on failure
+/* returns what the id of the Zone
+ * or string on failure
  */
 function addZoneModel(
   mysqli $db,
   string $zone,
   string $city,
   string $country
-): array|string {
+): int|string {
 
+  // check existance
+  $resultZone = getZoneModel(
+    $db,
+    $zone,
+    $city,
+    $country
+  );
+
+  if (!is_null($resultZone)) {
+    if (is_string($resultZone)) {
+      return $resultZone;
+    }
+    return $resultZone["id"];
+  }
+
+  // insert
   $statement =
     $db->prepare(
       'INSERT INTO Zone (name, city, country) VALUES (?, ?, ?)'
@@ -40,12 +51,6 @@ function addZoneModel(
     return "error - addZoneModel(): failed to execute SQL statement";
   }
 
-  $result = $statement->get_result();
   $statement->close();
-  $row = $result->fetch_assoc();
-  if (!$result || false === $row) {
-    return "error - addZoneModel(): failed to fetch result";
-  }
-
-  return $row;
+  return $db->insert_id;
 }
