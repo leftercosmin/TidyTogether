@@ -6,6 +6,7 @@ require_once "util/getFormat.php";
 
 require_once "model/addPostModel.php";
 require_once "model/addMediaModel.php";
+require_once "model/addMarksModel.php";
 
 require_once "model/getLocationModel.php";
 require_once "model/getPostModel.php";
@@ -28,7 +29,47 @@ if (!isset($_SESSION[CONN])) {
 
 $id = json_decode($_SESSION[CONN])->{"id"};
 
-// determine pages
+// backend only
+// new post created: insert post, media, tags
+if (isset($_POST["postAddress"])) {
+
+  $idPost = addPostModel(
+    $id,
+    $_POST["postDescription"] ?? null,
+    $_POST["postAddress"],
+    $_POST["postNeighbourhood"],
+    $_POST["postCity"],
+    $_POST["postCountry"],
+  );
+
+  $media = processMediaModel($id, $_FILES['postPhoto'] ?? null);
+  $marks = processTagsModel(); // this directly uses $_POST and unset()
+
+  $res0 = "";
+  $res1 = "";
+  if (!isError($idPost) && !isError($media)) {
+    $res0 = addMediaModel((array) $media ?? [], $idPost);
+    $res1 = addMarksModel($idPost, $marks);
+  }
+
+  isError($res0);
+  isError($res1);
+
+  unset(
+    $_FILES["postPhoto"],
+    $_POST["postDescription"],
+    $_POST["postAddress"],
+    $_POST["postNeighbourhood"],
+    $_POST["postCity"],
+    $_POST["postCountry"],
+    $_POST["postTag"]
+  );
+
+  header("Location: /");
+  exit();
+}
+
+// frontend: determine pages
 if (!isset($_GET) || !isset($_GET['civilianPage'])) {
   $location = getLocationModel();
   $tags = getTagModel();
@@ -90,17 +131,3 @@ if (isset($_POST["postAddress"])) {
     $_POST["postTag"]
   );
 }
-
-// //save favorite zone
-// if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['favoriteZone'])) {
-//     header('Content-Type: application/json');
-//     $neighborhood = $_POST['neighborhood'] ?? null;
-//     $city = $_POST['city'] ?? null;
-//     $country = $_POST['country'] ?? null;
-//     $result = addFavoriteZone($id, $neighborhood, $city, $country);
-//     echo json_encode([
-//         'success' => $result === true,
-//         'message' => $result === true ? '' : $result
-//     ]);
-//     exit();
-// }

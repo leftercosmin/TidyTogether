@@ -1,6 +1,6 @@
 <?php
 
-/* returns a Zone instance
+/* returns a Zone instance (one or none)
  * it has the following fields:
     id      BIGINT,
     name    VARCHAR,
@@ -13,7 +13,7 @@ function getZoneModel(
   string $zone,
   string $city,
   string $country
-): array|string {
+): array|null|string {
 
   $statement =
     $db->prepare(

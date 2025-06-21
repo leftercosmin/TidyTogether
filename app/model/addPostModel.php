@@ -3,8 +3,19 @@
 require_once "model/helper/addZoneModel.php";
 require_once "model/helper/getZoneModel.php";
 
+/**
+ * Summary of addPostModel
+ * @param string $idUser
+ * @param string|null $description
+ * @param string $address
+ * @param string $zone
+ * @param string $city
+ * @param string $country
+ * @return int on success, the Post id
+ * @return string on failure, the error message
+ */
 function addPostModel(
-  string $userId,
+  string $idUser,
   string|null $description,
   string $address,
   string $zone,
@@ -18,29 +29,16 @@ function addPostModel(
     return "error - addPostModel(): " . $db->connect_error;
   }
 
-  // zone updates
-  $resultZone = getZoneModel(
+  // zone updates, be aware - conditional insertion
+  $idZone = addZoneModel(
     $db,
     $zone,
     $city,
     $country
   );
 
-  if (!is_null($resultZone) && is_string($resultZone)) {
-    return $resultZone;
-  }
-
-  if (null === $resultZone) {
-    $resultZone = addZoneModel(
-      $db,
-      $zone,
-      $city,
-      $country
-    );
-  }
-
-  if (!is_null($resultZone) && is_string($resultZone)) {
-    return $resultZone;
+  if (!is_null($idZone) && is_string($idZone)) {
+    return $idZone;
   }
 
   // actual work
@@ -57,8 +55,8 @@ function addPostModel(
     !$statement->bind_param(
       'siis',
       $description,
-      $userId,
-      $resultZone["id"],
+      $idUser,
+      $idZone,
       $address
     )
   ) {
@@ -71,16 +69,7 @@ function addPostModel(
     return "error - addPostModel(): failed to execute SQL statement";
   }
 
-  $resultPost = $statement->get_result();
   $statement->close();
-  if (!$resultPost) {
-    return "error - addPostModel(): failed to get result";
-  }
-
-  $row = $resultPost->fetch_assoc();
-  if (false === $row) {
-    return "error - addPostModel(): failed to fetch result";
-  }
-
-  return $row["id"];
+  return $db->insert_id;
+  // todo large numbers are strings ... 
 }

@@ -8,7 +8,7 @@ require_once "model/getProfileModel.php";
 
 // get session
 if (session_status() === PHP_SESSION_NONE) {
-    session_start();
+  session_start();
 }
 
 if (!isset($_SESSION[CONN])) {
@@ -40,14 +40,14 @@ if (!isset($_GET['supervisorPage'])) {
 
 //approve/deny posts
 if (isset($_POST["postId"]) && isset($_POST["action"])) {
-  $postId = $_POST["postId"];
+  $idPost = $_POST["postId"];
   $action = $_POST["action"];
-  
+
   if ($action === "accept") {
-    approveReport($postId, $id);
+    approveReport($idPost, $id);
   } elseif ($action === "reject") {
-    denyReport($postId, $id);
+    denyReport($idPost, $id);
   }
-  
+
   unset($_POST["postId"], $_POST["action"]);
 }

@@ -10,7 +10,7 @@ function getRoot(): string
   $file = strtok($path, $token);
 
   // assign the root directory
-  $path = $isWindows ? $partition : "/";
+  $path = $isWindows ? "" : "/";
 
   while ($file && $file !== "app") {
     $path .= "$file$token";

@@ -18,10 +18,11 @@ function addMediaModel(
   $db = DatabaseConnection::get();
   if (null === $db || $db->connect_error) {
     $db->close();
-    return "error - addPostModel(): " . $db->connect_error;
+    return "error - addMediaModel(): " . $db->connect_error;
   }
 
   foreach ($media as $file) {
+
     $statement =
       $db->prepare(
         'INSERT INTO Media (name, size, source, format, idPost)
@@ -50,7 +51,6 @@ function addMediaModel(
       return "error - addMediaModel(): failed to execute SQL statement";
     }
 
-    $resultPost = $statement->get_result();
     $statement->close();
   }
 

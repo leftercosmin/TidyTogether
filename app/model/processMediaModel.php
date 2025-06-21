@@ -4,28 +4,31 @@
  * replace $files with $files
  * @param int $idUser
  * @param array $files
- * @return array<array>|null
+ * @return array<array>|null|string
+ * @return string on error
  */
-function processMediaModel(int $idUser, array|null $files): array|null
+function processMediaModel(int $idUser, array|null $files): array|null|string
 {
   if (is_null($files) || empty($files)) {
     return null;
   }
 
   $media = [];
-  $uploadDir = getRoot() . 'public/uploads/';
+
+  $isWindows = substr(__DIR__, 0, 1) !== "/";
+  $separator = $isWindows ? "\\" : "/";
+  $uploadDir = getRoot() . "public$separator" . "uploads$separator";
+
+  if (!is_writable($uploadDir)) {
+    return "error - processMediaModel(): directory not writable.";
+  }
 
   // for each file sent by the user
+  // save it to local system (server)
   foreach ($files["tmp_name"] as $index => $oldPath) {
 
-    // save it to local system (server)
     if (!is_uploaded_file($oldPath)) {
-      alert("warning: not a valid uploaded file: $oldPath");
-      continue;
-    }
-
-    if (!is_writable($uploadDir)) {
-      alert("warning: upload directory is not writable.");
+      alert("warning - processMediaModel(): $oldPath ignored");
       continue;
     }
 
@@ -38,12 +41,10 @@ function processMediaModel(int $idUser, array|null $files): array|null
 
     // change the path
     if (!move_uploaded_file($oldPath, $newPath)) {
-      alert("error: file uploading");
+      alert("warning - processMediaModel(): file ignored - failed to move");
       continue;
     }
 
-    writeConsole($oldPath);
-    writeConsole($newPath);
     $file = [];
     $file["name"] = $name;
     $file["size"] = $size;
