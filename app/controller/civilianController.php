@@ -63,9 +63,6 @@ if (isset($_POST["postAddress"])) {
     $_POST["postCity"],
     $_POST["postCountry"],
   );
-
-  header("Location: /");
-  exit();
 }
 
 // frontend: determine pages
