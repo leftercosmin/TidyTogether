@@ -44,7 +44,7 @@
 
         echo "<input type=checkbox "
           . "id=\"" . $tagOne["name"] . "\" "
-          . "name=\postTag$index\" "
+          . "name=\"postTag$index\""
           . "value=\""
           . $tagOne["id"] . "-"
           . $tagOne["name"] . "-"

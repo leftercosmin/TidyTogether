@@ -9,7 +9,8 @@
  */
 function processMediaModel(int $idUser, array|null $files): array|null|string
 {
-  if (is_null($files) || empty($files)) {
+  // 4 means no files here uploaded
+  if (is_null($files) || 4 === $files["error"][0]) {
     return null;
   }
 

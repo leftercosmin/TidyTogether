@@ -62,11 +62,15 @@ if (isset($_POST["postAddress"])) {
     $_POST["postNeighbourhood"],
     $_POST["postCity"],
     $_POST["postCountry"],
-    $_POST["postTag"]
   );
 
-  header("Location: /");
-  exit();
+  // fetch everything
+  if (!$wasErrorThrown) {
+    sleep(5);
+    header("Location: /");
+    exit();
+  }
+
 }
 
 // frontend: determine pages
