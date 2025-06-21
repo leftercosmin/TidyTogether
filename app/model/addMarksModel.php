@@ -20,7 +20,7 @@ function addMarksModel(int $idPost, array $marks): string
 
     if (
       !$statement->bind_param(
-        'ss',
+        'ii',
         $tag["id"],
         $idPost
       )
