@@ -1,8 +1,13 @@
 @echo off
 
+set "partition=C:"
+if not "%~1"=="" (
+    set "partition=%~1"
+)
+
 set "name=TidyTogether"
 set "source=..\%name%"
-set "destination=C:\xampp\htdocs\%name%"
+set "destination=%partition%\xampp\htdocs\%name%"
 
 if exist "%destination%" (
     rmdir /s /q "%destination%"
@@ -21,5 +26,5 @@ echo $uri .= $_SERVER['HTTP_HOST'];>> p.php
 echo header('Location: ' . $uri . '/%name%');>> p.php
 echo exit;>> p.php
 
-del "C:\xampp\htdocs\index.php"
-move p.php "C:\xampp\htdocs\index.php"
+del "%partition%\xampp\htdocs\index.php"
+move p.php "%partition%\xampp\htdocs\index.php"
