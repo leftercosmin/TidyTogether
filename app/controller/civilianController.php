@@ -76,6 +76,7 @@ if (isset($_POST["postAddress"])) {
   */
 
   $media = processMediaModel($id, $_FILES['postPhoto']);
+  writeConsole(json_encode($media));
   // addMediaModel($media, $idPost);
   // $tags = processTagsModel();
   //addTagsModel($tags, $idPost);
