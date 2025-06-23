@@ -53,19 +53,16 @@ fetch('/TidyTogether/app/controller/civilianController.php?getFavorites=1')
 
 const dropdownBtn = document.getElementById('zonesDropdownBtn');
 const dropdownContent = document.getElementById('zonesDropdownContent');
-
-// Toggle dropdown on button click
 dropdownBtn.addEventListener('click', function (e) {
   e.stopPropagation();
   dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
 });
 
-// Hide dropdown when clicking outside
 document.addEventListener('click', function () {
   dropdownContent.style.display = 'none';
 });
 
-// Prevent dropdown from closing when clicking inside
+//stops from closing
 dropdownContent.addEventListener('click', function(e) {
   e.stopPropagation();
 });

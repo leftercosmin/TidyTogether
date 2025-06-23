@@ -122,7 +122,6 @@
             const favBtn = document.getElementById('save-as-fav');
             if (favBtn) {
             favBtn.onclick = function() {
-              // Disable button immediately to prevent double-clicks
               favBtn.disabled = true;
               favBtn.textContent = "Saving...";
               
@@ -143,18 +142,18 @@
               .then(data => {
                 if (data.success) {
                   favBtn.textContent = "Saved!";
-                  favBtn.style.backgroundColor = "#4CAF50"; // Green color for success
+                  favBtn.style.backgroundColor = "#4CAF50";
                 } else {
                   favBtn.textContent = "Failed - Try Again";
                   favBtn.disabled = false;
-                  favBtn.style.backgroundColor = "#f44336"; // Red color for error
+                  favBtn.style.backgroundColor = "#f44336";
                 }
               })
               .catch(error => {
                 console.error('Error saving favorite:', error);
                 favBtn.textContent = "Network Error - Try Again";
                 favBtn.disabled = false;
-                favBtn.style.backgroundColor = "#f44336"; // Red color for error
+                favBtn.style.backgroundColor = "#f44336";
               });
             };
             }
@@ -174,7 +173,6 @@
       console.log("Panning to:", panLat, panLng, panLabel);
       map.setView([parseFloat(panLat), parseFloat(panLng)], 16);
       
-      // Now handleLocation is defined, so we can use it
       handleLocation(parseFloat(panLat), parseFloat(panLng));
       
       localStorage.removeItem('panToLat');

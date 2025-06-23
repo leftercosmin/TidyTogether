@@ -45,16 +45,14 @@ if (!$sessionData || !isset($sessionData->id)) {
 $id = $sessionData->id;
 
 if (isset($_GET['fromFavorites'])) {
-    $tags = getTagModel(); // Make sure $tags is available for the form
-    
-    // Include home view with the map
+    $tags = getTagModel();
     header("Location: /TidyTogether/");
     exit();
 }
 
 if (isset($_GET['getFavorites'])) {
     require_once __DIR__ . '/../model/getFavoriteZones.php';
-    $favorites = getFavoriteZones($id); // $id is the logged-in user's id from session
+    $favorites = getFavoriteZones($id);
     header('Content-Type: application/json');
     echo json_encode($favorites);
     exit();

@@ -3,17 +3,16 @@
 require_once __DIR__ . '/../util/databaseConnection.php';
 
 function getZoneReportStats($interval = 'WEEK') {
-    // Validate interval parameter
     $validIntervals = ['DAY', 'WEEK', 'MONTH', 'YEAR'];
     if (!in_array($interval, $validIntervals)) {
-        $interval = 'WEEK'; // Default to week if invalid
+        $interval = 'WEEK'; //invalid -> default to week
     }
     
     $db = DatabaseConnection::get();
     if (!$db || $db->connect_error) {
-        return []; // Return empty array on connection error
+        return []; 
     }
-    
+
     $sql = "SELECT
               Zone.id,
               Zone.name AS neighborhood,
@@ -29,21 +28,20 @@ function getZoneReportStats($interval = 'WEEK') {
             
     $result = $db->query($sql);
     if (!$result) {
-        return []; // Return empty array on query error
+        return [];
     }
     
     $data = [];
     while ($row = $result->fetch_assoc()) {
-        // Only include zones with reports
         if ($row['total_reports'] > 0) {
-            $data[] = $row;
+            $data[] = $row
         }
     }
     
     return $data;
 }
 
-// Helper function to generate CSV data
+//CSV helper
 function generateReportCSV($data) {
     $output = "Neighborhood,City,Country,Total Reports,Completed Reports,Completion Percentage\n";
     
@@ -60,7 +58,7 @@ function generateReportCSV($data) {
     return $output;
 }
 
-// Helper function to generate PDF HTML
+//PDF helper
 function generateReportHTML($data, $interval) {
     $intervalText = [
         'DAY' => 'Last 24 Hours',
@@ -98,7 +96,7 @@ function generateReportHTML($data, $interval) {
         </thead>
         <tbody>';
     
-    // Mark the top 20% as dirty and bottom 20% as clean
+    //highlights for dirty and clean zones
     $numRows = count($data);
     $dirtyThreshold = max(1, floor($numRows * 0.2));
     $cleanThreshold = max(1, floor($numRows * 0.8));
