@@ -1,4 +1,5 @@
 <?php
+require_once __DIR__ . '/../util/databaseConnection.php';
 
 /* returns an array of instances consisting of:
     id    BIGINT

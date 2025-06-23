@@ -12,14 +12,14 @@
 <body>
 
   <?php
-    if ($profile['role'] === 'civilian') {
-        require_once "view/components/civilianNavbar.php";
-    } elseif ($profile['role'] === 'supervisor') {
-        require_once "view/components/supervisorNavbar.php";
-    } elseif ($profile['role'] === 'authority') {
-        require_once "view/components/authorityNavbar.php";
-    }
-  ?>
+  if ($profile['role'] === 'civilian') {
+      require_once __DIR__ . '/../components/civilianNavbar.php';
+  } elseif ($profile['role'] === 'supervisor') {
+      require_once __DIR__ . '/../components/supervisorNavbar.php';
+  } elseif ($profile['role'] === 'authority') {
+      require_once __DIR__ . '/../components/authorityNavbar.php';
+  }
+?>
 
   <main class="profile-container">
     <section class="profile-card">

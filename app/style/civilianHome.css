@@ -288,3 +288,28 @@ form button {
   z-index: 1;
   position: relative;
 }
+
+.nav-link.dropdown {
+  cursor: pointer;
+  position: relative;
+  display: inline-block;
+  padding: 0.5em 1em;
+}
+
+.arrow {
+  margin-left: 0.5em;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background: #fff;
+  min-width: 180px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  z-index: 100;
+  right: 0;
+}
+
+.nav-link.dropdown.open .dropdown-content {
+  display: block;
+}

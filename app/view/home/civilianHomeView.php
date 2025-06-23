@@ -8,7 +8,7 @@
   <title>Home</title>
   <meta name="description" content="personal space of a regular user" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="style/civilianHome.css" />
+  <link rel="stylesheet" href="/TidyTogether/app/style/civilianHome.css">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
     crossorigin=""/>
@@ -21,7 +21,7 @@
 
 <body>
   <div class="page-layout">
-    <?php require_once "view/components/civilianNavbar.php"; ?>
+    <?php require_once __DIR__ . '/../components/civilianNavbar.php'; ?>
 
     <div class="map-container">
       <div class="map-top-bar">
@@ -38,7 +38,7 @@
       <div id="map" style="height: 100%; width: 100%;"></div>
     </div>
 
-      <?php require_once "view/components/civilianPostForm.php"; ?>
+      <?php require_once __DIR__ . "/../components/civilianPostForm.php"; ?>
     </div>
   </div>
 
@@ -47,14 +47,12 @@
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
-    const map = L.map('map').setView([47.169488, 27.576741], 13);
+    const map = L.map('map').setView([47.169488, 27.576741], 16);
+     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; OpenStreetMap contributors'
+  }).addTo(map);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      maxZoom: 19,
-      attribution: '&copy; OpenStreetMap contributors'
-    }).addTo(map);
-
-    const geocoderControl = new L.Control.Geocoder({
+  const geocoderControl = new L.Control.Geocoder({
       defaultMarkGeocode: false,
       placeholder: "Search for a place or address..."
     }).addTo(map);
@@ -63,7 +61,7 @@
     let fetchController = null;
     let currentLocation = null;
 
-    map.off('click');
+    //map.off('click');
 
     function handleLocation(lat, lng) {
       if (userMarker && map.hasLayer(userMarker)) {
@@ -83,6 +81,7 @@
         .then(res => res.json())
         .then(data => {
           const neighborhood = data.address.neighbourhood || data.address.suburb || data.address.village || data.address.city || "Unknown area";
+          const country = data.address.country || "Unknown Country";
           const city = data.address.city || data.address.town || data.address.village || "";
           const address = data.display_name || "";
 
@@ -92,6 +91,7 @@
             address: address,
             neighborhood: neighborhood,
             city: city,
+            country: country,
             fullData: data
           };
 
@@ -121,28 +121,42 @@
 
             const favBtn = document.getElementById('save-as-fav');
             if (favBtn) {
-              favBtn.onclick = function() {
-                const formData = new FormData();
-                formData.append('favoriteZone', '1');
-                formData.append('neighborhood', currentLocation.neighborhood);
-                formData.append('city', currentLocation.city);
-                formData.append('country', currentLocation.fullData.address.country || '');
+            favBtn.onclick = function() {
+              // Disable button immediately to prevent double-clicks
+              favBtn.disabled = true;
+              favBtn.textContent = "Saving...";
+              
+              const formData = new FormData();
+              formData.append('favoriteZone', '1');
+              formData.append('lat', currentLocation.lat);
+              formData.append('lng', currentLocation.lng);
+              formData.append('neighborhood', currentLocation.neighborhood);
+              formData.append('city', currentLocation.city);
+              formData.append('country', currentLocation.fullData.address.country || '');
+              formData.append('address', currentLocation.address);
 
-                fetch('../controller/civilianController.php', {
-                  method: 'POST',
-                  body: formData
-                })
-                .then(res => res.json())
-                .then(data => {
-                  if (data.success) {
-                    favBtn.textContent = "Saved!";
-                    favBtn.disabled = true;
-                  } else {
-                    alert("Failed to save favorite.");
-                  }
-                })
-                .catch(() => alert("Network error while saving favorite."));
-              };
+              fetch('/TidyTogether/app/controller/civilianController.php', {
+                method: 'POST',
+                body: formData
+              })
+              .then(res => res.json())
+              .then(data => {
+                if (data.success) {
+                  favBtn.textContent = "Saved!";
+                  favBtn.style.backgroundColor = "#4CAF50"; // Green color for success
+                } else {
+                  favBtn.textContent = "Failed - Try Again";
+                  favBtn.disabled = false;
+                  favBtn.style.backgroundColor = "#f44336"; // Red color for error
+                }
+              })
+              .catch(error => {
+                console.error('Error saving favorite:', error);
+                favBtn.textContent = "Network Error - Try Again";
+                favBtn.disabled = false;
+                favBtn.style.backgroundColor = "#f44336"; // Red color for error
+              });
+            };
             }
   
           }, 100);
@@ -150,6 +164,22 @@
         .catch(err => {
           console.error("Reverse geocoding failed", err);
         });
+    }
+
+    const panLat = localStorage.getItem('panToLat');
+    const panLng = localStorage.getItem('panToLng');
+    const panLabel = localStorage.getItem('panToLabel');
+
+    if (panLat && panLng) {
+      console.log("Panning to:", panLat, panLng, panLabel);
+      map.setView([parseFloat(panLat), parseFloat(panLng)], 16);
+      
+      // Now handleLocation is defined, so we can use it
+      handleLocation(parseFloat(panLat), parseFloat(panLng));
+      
+      localStorage.removeItem('panToLat');
+      localStorage.removeItem('panToLng');
+      localStorage.removeItem('panToLabel');
     }
 
     map.on('click', function (e) {

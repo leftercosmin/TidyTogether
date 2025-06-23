@@ -1,40 +1,86 @@
 <?php
 
-require_once "util/getRoot.php";
-require_once "util/formatField.php";
-require_once "util/getFormat.php";
+require_once __DIR__ . '/../util/databaseConnection.php';
+require_once __DIR__ . '/../util/getRoot.php';
+require_once __DIR__ . '/../util/formatField.php';
+require_once __DIR__ . '/../util/getFormat.php';
+require_once __DIR__ . '/../util/isError.php';
 
-require_once "model/addPostModel.php";
-require_once "model/addMediaModel.php";
-require_once "model/addMarksModel.php";
+require_once __DIR__ . '/../model/addPostModel.php';
+require_once __DIR__ . '/../model/addMediaModel.php';
+require_once __DIR__ . '/../model/addMarksModel.php';
 
-require_once "model/getLocationModel.php";
-require_once "model/getPostModel.php";
-require_once "model/getReportModel.php";
-require_once "model/getProfileModel.php";
-require_once "model/getTagModel.php";
+require_once __DIR__ . '/../model/getLocationModel.php';
+require_once __DIR__ . '/../model/getPostModel.php';
+require_once __DIR__ . '/../model/getReportModel.php';
+require_once __DIR__ . '/../model/getProfileModel.php';
+require_once __DIR__ . '/../model/getTagModel.php';
 
-require_once "model/processMediaModel.php";
-require_once "model/processTagsModel.php";
+require_once __DIR__ . '/../model/processMediaModel.php';
+require_once __DIR__ . '/../model/processTagsModel.php';
+
+if (!getenv('DB_HOST')) {
+    require_once __DIR__ . '/../../vendor/autoload.php';
+    $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
+    $dotenv->load();
+}
 
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
 
-if (!isset($_SESSION[CONN])) {
+if (!isset($_SESSION['userSession'])) {
   $root = getRoot();
   header("Location: $root");
   exit();
 }
 
-$id = json_decode($_SESSION[CONN])->{"id"};
+$sessionData = json_decode($_SESSION['userSession']);
+if (!$sessionData || !isset($sessionData->id)) {
+  $root = getRoot();
+  header("Location: $root");
+  exit();
+}
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['favoriteZone'])) {
-    header('Content-Type: application/json');
-    echo json_encode(['success' => true, 'post' => $_POST]);
+$id = $sessionData->id;
+
+if (isset($_GET['fromFavorites'])) {
+    $tags = getTagModel(); // Make sure $tags is available for the form
+    
+    // Include home view with the map
+    header("Location: /TidyTogether/");
     exit();
 }
 
+if (isset($_GET['getFavorites'])) {
+    require_once __DIR__ . '/../model/getFavoriteZones.php';
+    $favorites = getFavoriteZones($id); // $id is the logged-in user's id from session
+    header('Content-Type: application/json');
+    echo json_encode($favorites);
+    exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['favoriteZone'])) {
+    require_once __DIR__ . '/../model/addFavoriteZone.php';
+    $userId = $id;
+    $lat = $_POST['lat'] ?? null;
+    $lng = $_POST['lng'] ?? null;
+    $neighborhood = $_POST['neighborhood'] ?? '';
+    $city = $_POST['city'] ?? '';
+    $country = $_POST['country'] ?? '';
+    $address = $_POST['address'] ?? '';
+
+    // Save to DB
+    $result = addFavoriteZone($userId, $neighborhood, $city, $country, $lat, $lng);
+
+    header('Content-Type: application/json');
+    if ($result === true) {
+        echo json_encode(['success' => true, 'message' => 'Favorite zone saved successfully']);
+    } else {
+        echo json_encode(['success' => false, 'message' => $result]);
+    }
+    exit();
+}
 // backend only
 // new post created: insert post, media, tags
 if (isset($_POST["postAddress"])) {
@@ -85,23 +131,26 @@ if (!isset($_GET) || !isset($_GET['civilianPage'])) {
   $tags = getTagModel();
   isError($location);
   isError($tags);
-  require_once "view/home/civilianHomeView.php";
+  require_once __DIR__ . '/../view/home/civilianHomeView.php';
 
 } else {
   if ("favoriteZonePage" === $_GET["civilianPage"]) {
-    require_once "view/home/civilianFavoriteView.php";
+    require_once __DIR__ . '/../view/home/civilianFavoriteView.php';
 
   } elseif ("civilianReportPage" === $_GET['civilianPage']) {
     $posts = getPostModel($id);
     isError($posts);
-    require_once "view/home/civilianPostsView.php";
+    require_once __DIR__ . '/../view/home/civilianPostsView.php';
 
   } elseif ("profilePage" === $_GET['civilianPage']) {
     $profile = getProfileModel($id);
     isError($profile);
-    require_once "view/home/profileView.php";
+    require_once __DIR__ . '/../view/home/profileView.php';
 
-  } else {
+  } elseif ("zoneReportPage" === $_GET['civilianPage']) {
+    require_once __DIR__ . '/../view/home/zoneReportView.php';
+  }
+  else{
     $location = getLocationModel();
     $tags = getTagModel();
     isError($location);
