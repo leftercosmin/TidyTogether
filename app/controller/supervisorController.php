@@ -25,7 +25,7 @@ if (!isset($_GET['supervisorPage'])) {
   require_once "view/home/supervisorHomeView.php";
 } else {
   if ($_GET["supervisorPage"] === "profilePage") {
-    $profile = getProfile($id);
+    $profile = getProfileModel($id);
     require_once "view/home/profileView.php";
   }
   // elseif ("approvedPostsPage" === $_GET['supervisorPage']) {

@@ -29,6 +29,12 @@ if (!isset($_SESSION[CONN])) {
 
 $id = json_decode($_SESSION[CONN])->{"id"};
 
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['favoriteZone'])) {
+    header('Content-Type: application/json');
+    echo json_encode(['success' => true, 'post' => $_POST]);
+    exit();
+}
+
 // backend only
 // new post created: insert post, media, tags
 if (isset($_POST["postAddress"])) {
@@ -104,34 +110,4 @@ if (!isset($_GET) || !isset($_GET['civilianPage'])) {
   }
 
   unset($_GET);
-}
-
-// new post created: insert post, media, tags
-if (isset($_POST["postAddress"])) {
-
-  /*$idPost = addPostModel(
-    $id,
-    $_POST["postDescription"] ?? null,
-    $_POST["postAddress"],
-    $_POST["postNeighbourhood"],
-    $_POST["postCity"],
-    $_POST["postCountry"],
-  );
-  isError($idPost);
-  */
-
-  $media = processMediaModel($id, $_FILES['postPhoto']);
-  // addMediaModel($media, $idPost);
-  // $tags = processTagsModel();
-  //addTagsModel($tags, $idPost);
-
-  unset(
-    $_FILES,
-    $_POST["postDescription"],
-    $_POST["postAddress"],
-    $_POST["postNeighbourhood"],
-    $_POST["postCity"],
-    $_POST["postCountry"],
-    $_POST["postTag"]
-  );
 }

@@ -7,6 +7,11 @@
   --active-link: #faf8eb;
 }
 
+html, body, .page-layout, .map-container {
+  height: 100%;
+  min-height: 100%;
+}
+
 html {
   margin: 0;
   padding: 0;
@@ -274,4 +279,12 @@ form button {
 .checkbox {
   display: flex;
   flex-direction: row;
+}
+
+#map {
+  height: 100%;
+  min-height: 400px; /* fallback for small screens */
+  width: 100%;
+  z-index: 1;
+  position: relative;
 }
