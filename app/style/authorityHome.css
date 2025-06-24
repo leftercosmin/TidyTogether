@@ -1,25 +1,3 @@
-:root {
-  --base-color: #386237;
-  --accent-color: #faf8eb;
-  --navbar-bg: #253d24;
-  --navbar-text: #faf8eb;
-  --navbar-hover: #e8e0ac;
-  --active-link: #faf8eb;
-}
-
-body {
-  background-image: url(../public/background-tile.png);
-  background-repeat: repeat;
-  background-size: 400px;
-  background-position: center;
-  background-attachment: fixed;
-  margin: 0;
-  padding: 0;
-  font-family: Karla, sans-serif;
-  color: var(--accent-color);
-  min-height: 100vh;
-}
-
 h1 {
   color: var(--base-color);
   margin-top: 1rem;

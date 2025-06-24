@@ -11,8 +11,6 @@
       <label for="address">Address:</label>
       <input type="text" id="address" name="postAddress" required>
 
-      <!-- todo determine values from address above using services -->
-      <!-- ZONE table - autocompletes with the address of the user -->
       <label for="neighbourhood">Neighbourhood:</label>
       <input type="text" id="neighbourhood" name="postNeighbourhood" required>
 
@@ -21,39 +19,41 @@
 
       <label for="country">Country:</label>
       <input type="text" id="country" name="postCountry" value="<?php echo $location["country"]; ?>" required>
-
-      <!-- todo return name of the file, size, source, format -->
-      <!-- MEDIA table -->
+  
       <label for="photo">Photo (optional):</label>
       <input type="file" id="photo" name="postPhoto[]" accept="image/jpg, image/png, image/webm, video/mp4" multiple>
 
-      <!-- TAG and MARK tables -->
-      <?php
-      $index = 0;
-      foreach ($tags as $tagOne) {
-        if (10 === $index) {
-          break;
-        }
+      <div class="form-group">
+        <label for="tags">Tags:</label>
+        <p>Choose the tags that best describe the dirty area.</p>
+      <div class="tag-container">
+          <?php
+          $index = 0;
+          foreach ($tags as $tagOne) {
+            if (10 === $index) {
+              break;
+            }
 
-        echo "<div >";
-
-        echo "<label for=\"" . $tagOne["name"] . "\">"
-          . $tagOne["name"]
-
-          . "</label>";
-
-        echo "<input type=checkbox "
-          . "id=\"" . $tagOne["name"] . "\" "
-          . "name=\"postTag$index\""
-          . "value=\""
-          . $tagOne["id"] . "-"
-          . $tagOne["name"] . "-"
-          . $tagOne["color"] . "\">";
-
-        echo "</div>";
-        $index += 1;
-      }
-      ?>
+            // Modified tag styling while keeping your logic intact
+            echo "<label class=\"tag-option\">";
+            
+            echo "<input type=checkbox "
+              . "id=\"" . $tagOne["name"] . "\" "
+              . "name=\"postTag$index\""
+              . "value=\""
+              . $tagOne["id"] . "-"
+              . $tagOne["name"] . "-"
+              . $tagOne["color"] . "\">";
+              
+            echo $tagOne["name"];
+            
+            echo "</label>";
+            
+            $index += 1;
+          }
+          ?>
+        </div>
+        </div>
 
       <button type="submit">Submit post</button>
     </form>
@@ -62,28 +62,37 @@
 
 <!-- close modal -->
 <script>
-  const modal = document.getElementById("reportModal");
-  const openBtn = document.getElementById("openReportBtn");
-  const closeBtn = document.querySelector(".close");
-
-  openBtn.onclick = () => {
-    modal.style.display = "block";
-  }
-
-  closeBtn.onclick = () => {
-    modal.style.display = "none";
-  }
-
-  window.onclick = (event) => {
-    if (event.target === modal) {
-      modal.style.display = "none";
+  document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById("reportModal");
+    const openBtn = document.getElementById("openReportBtn");
+    const closeBtn = document.querySelector(".close");
+    
+    // Open modal function with scroll lock
+    function openModal() {
+      modal.style.display = "block";
+      document.body.style.overflow = 'hidden'; // Prevent body scrolling
     }
-  }
-
-  // document.getElementById("reportForm").onsubmit = (e) => {
-  //   e.preventDefault();
-  //   modal.style.display = "none";
-  //   alert("Thank you for your report!");
-  //   e.target.reset();
-  // };
+    
+    // Close modal function with scroll restore
+    function closeModal() {
+      modal.style.display = "none";
+      document.body.style.overflow = 'auto'; // Re-enable body scrolling
+    }
+    
+    // Event listeners
+    if (openBtn) {
+      openBtn.onclick = openModal;
+    }
+    
+    if (closeBtn) {
+      closeBtn.onclick = closeModal;
+    }
+    
+    // Close when clicking outside modal content
+    window.onclick = (event) => {
+      if (event.target === modal) {
+        closeModal();
+      }
+    }
+  });
 </script>

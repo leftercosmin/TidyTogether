@@ -34,7 +34,7 @@ function getZoneReportStats($interval = 'WEEK') {
     $data = [];
     while ($row = $result->fetch_assoc()) {
         if ($row['total_reports'] > 0) {
-            $data[] = $row
+            $data[] = $row;
         }
     }
     

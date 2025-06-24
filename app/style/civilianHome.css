@@ -1,155 +1,62 @@
-:root {
-  --base-color: #386237;
-  --accent-color: #faf8eb;
-  --navbar-bg: #253d24;
-  --navbar-text: #faf8eb;
-  --navbar-hover: #e8e0ac;
-  --active-link: #faf8eb;
+.content-wrapper {
+  margin-left: 250px;
+  flex: 1;
+  padding: 1rem;
 }
 
-html, body, .page-layout, .map-container {
-  height: 100%;
-  min-height: 100%;
-}
-
-html {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  height: 100%;
-}
-
-body {
-  background-image: url(../public/background-tile.png);
-  background-repeat: repeat;
-  background-size: 400px;
-  background-position: center;
-  background-attachment: fixed;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Karla, sans-serif;
-  color: #faf8eb;
-  display: flex;
-  min-height: 100vh;
-  width: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
-}
-
-.page-layout{
+.page-layout {
   display: flex;
   flex-direction: row;
-  width: 100%;
+  width: calc(100% - 285px);
+  margin-left: 285px;
   height: 100vh;
   overflow: hidden;
 }
 
-.navbar {
-  background: rgba(0, 0, 0, 0.23);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(2.8px);
-  -webkit-backdrop-filter: blur(2.1px);
-  color: var(--navbar-text);
-  padding: 0;
-  width: max(20%, 300px);
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-  position: relative;
-  z-index: 1000;
-  border-right: 3px solid #1a2f18
-}
-
-.navbar-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
-}
-
-.navbar-title {
-    font-size: 2.4rem;
-    color: var(--navbar-text);
-    font-weight: bold;
-    margin-bottom: 0;
-    width: 100%;
-    padding: 1.3rem 0;
-    text-align: center;
-    background: linear-gradient(135deg, #1c2f1c, #457145);
-    border-bottom: 3px solid #1a2f18;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-    position: relative;
-}
-
-.navbar-links {
-    display: flex;
-    font-size: 1.7rem;
-    flex-direction: column;
-    gap: 0;
-    width: 100%;
-}
-
-.nav-link {
-    color: var(--navbar-text);
-    text-decoration: none;
-    padding: 1.2rem 1.5rem;
-    transition: all 0.3s ease;
+.map-top-bar {
+    background-color: var(--offwhite1);
     display: flex;
     align-items: center;
-    gap: 0.8rem;
-    position: relative;
-    background: transparent;
-}
-
-.nav-link::before {
-    content: '';
-    position: absolute;
-    left: 0;
+    justify-content: space-between;
+    padding: 0.8rem 1rem;
+    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.1);
     top: 0;
-    bottom: 0;
-    width: 4px;
-    background: transparent;
-    transition: background 0.3s ease;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    height: 5.55em;
+    box-sizing: border-box;
+    border-bottom: 5px solid var(--green);
 }
 
-.nav-link:hover {
-  color: var(--navbar-hover);
-}
-
-.nav-link.active {
-    color: var(--active-link);
-    background: rgba(250, 248, 235, 0.08);
+.topbar-button{
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1.2em;
+    margin: 10px;
+    border: 2px solid var(--green);
+    border-radius: 20px;
+    padding: 0.85em;
+    background-color: var(--offwhite2);
+    color: var(--green);
     font-weight: 600;
-    padding-left: 2rem;
+    cursor: pointer;
+    transition: 150ms ease;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
 }
 
-.nav-link.active::before {
-    background: var(--active-link);
+.topbar-button svg{
+  fill: var(--green) !important;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
 }
 
-.map-top-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.8rem 1rem; /* Match navbar padding */
-  background: #fff;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  height: 5.55em;
-  box-sizing: border-box;
-  border-bottom: 3px solid #1a2f18;
-}
-
-.map-container{
+.map-container {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -180,23 +87,7 @@ form button {
   cursor: pointer;
   transition: 150ms ease;
 }
-
-.report-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 8px;
-    font-size: 1em;
-    margin: 10px;
-    border-radius: 1000px;
-    padding: 0.85em;
-    background-color: var(--base-color);
-    color: var(--accent-color);
-    font-weight: 600;
-    cursor: pointer;
-    transition: 150ms ease;
-}
-
+/* Modal container - prevent body scrolling */
 .modal {
   display: none;
   position: fixed;
@@ -205,85 +96,148 @@ form button {
   top: 0;
   width: 100%;
   height: 100%;
-  overflow: auto;
-  background-color: rgba(0,0,0,0.6);
+  overflow: hidden; /* Changed from auto to hidden */
+  background-color: transparent;
+  pointer-events: auto;
 }
 
+/* Make the modal content fixed height with scrolling */
 .modal-content {
   font-family: Karla, sans-serif;
   background-color: #2a482a;
-  margin: 10% auto;
-  padding: 2rem;
+  margin: 5% auto;
+  padding: 2.5rem;
   border: 2px solid #1f351f;
-  width: 90%;
-  max-width: 500px;
+  width: 550px;
+  max-width: 90%;
+  max-height: 75vh; /* Limit height to 80% of viewport */
   border-radius: 10px;
   position: relative;
+  color: var(--offwhite2);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  text-align: left;
+  overflow-y: auto; /* Allow vertical scrolling inside the modal */
+
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  display: flex;
+  flex-direction: column;
+  margin-top: 7em;
 }
 
-.close {
-  color: #172817;
-  font-size: 28px;
-  font-weight: bold;
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  cursor: pointer;
+.modal-content::-webkit-scrollbar {
+  display: none;
 }
 
+/* Make form take all available space */
 .modal-content form {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: .8rem;
+  flex: 1;
+  overflow-y: visible;
+  padding-bottom:20px; /* Allow form to scroll */
 }
 
-.modal-content input,
-.modal-content select,
-.modal-content textarea {
-  background-color: #faf8eb;
-  color: #333;
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-top: 5px;
-  width: 100%;
-  box-sizing: border-box;
-  border-radius: 5px;
-  font-family: inherit;
-}
-
-.modal-content select,
-.modal-content input[type="file"] {
-  height: 40px;
-}
-
-.modal-content input[type="file"] {
-  padding: 8px;
-  background-color: #faf8eb;
-  color: #333;
-  border: 1px solid #ccc;
+/* Fix the close button so it doesn't scroll with content */
+.modal-content .close {
+  position: sticky;
+  top: 0;
+  right: 0;
+  align-self: flex-end;
+  font-size: 1.8rem;
+  color: var(--offwhite2);
   cursor: pointer;
+  z-index: 10;
+  background-color: #2a482a;
+  padding: 0 0.5rem;
+  margin: -1.5rem -1.5rem 0 0;
 }
 
-.modal-content button {
-  margin-top: 15px;
-  background-color: var(--base-color);
-  color: white;
-  border: 2px solid #faf8eb;
-  padding: 10px;
-  width: 100%;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-.checkbox {
+/* Improved form elements */
+.modal-content form {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: .8rem;
 }
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+/* Tags section */
+.tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.tag-option {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255,255,255,0.1);
+  padding: 0.5rem 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.tag-option:hover {
+  background-color: rgba(255,255,255,0.2);
+}
+
+.tag-option input[type="checkbox"] {
+  margin-right: 0.5rem;
+  width: auto;
+}
+
+/* Button styling */
+.modal-content button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 1em;
+    margin: 10px;
+    border: 2px solid var(--green);
+    border-radius: 20px;
+    padding: 0.85em;
+    background-color: var(--offwhite2);
+    color: var(--green);
+    font-weight: 600;
+    cursor: pointer;
+    transition: 150ms ease;
+    flex-wrap: nowrap;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+}
+
+.modal-content button:hover {
+  background-color: #38633b;
+}
+
+.modal-content input[type="text"], .modal-content input[type="email"], .modal-content input[type="password"], .modal-content textarea, .modal-content select {
+    width: 100%;
+    padding: 12px 0;
+    font-size: .7rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--offwhite2);
+    border-radius: 5px;
+    margin-bottom: 0.5rem;
+}
+
 
 #map {
   height: 100%;
-  min-height: 400px; /* fallback for small screens */
+  min-height: 400px;
   width: 100%;
   z-index: 1;
   position: relative;
@@ -297,19 +251,81 @@ form button {
 }
 
 .arrow {
-  margin-left: 0.5em;
+  margin-left: -.6em;
 }
 
 .dropdown-content {
   display: none;
   position: absolute;
-  background: #fff;
-  min-width: 180px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  z-index: 100;
-  right: 0;
+  top: 100%;
+  left: 0;
+  z-index: 200;
+  background-color: var(--offwhite1);
+  min-width: 200px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  margin-top: 5px;
+  overflow: hidden;
 }
 
 .nav-link.dropdown.open .dropdown-content {
   display: block;
+}
+
+.topbar-left {
+  display: flex;
+  gap: 10px;
+}
+
+.topbar-dropdown {
+  position: relative;
+}
+
+.topbar-dropdown-content {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: var(--offwhite1);
+  min-width: 200px;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+  border-radius: 8px;
+  z-index: 100;
+  overflow: hidden;
+  margin-top: 5px;
+  display: none;
+}
+
+.topbar-dropdown-content button {
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #000;
+  font-size: 1rem;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.topbar-dropdown-content button:hover {
+  background-color: var(--offwhite2);
+  color: var(--green);
+}
+
+.dropdown-content button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 10px 15px;
+  border: none;
+  background: none;
+  color: #333;
+  font-size: 1rem;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.dropdown-content button:hover {
+  background-color: var(--offwhite2);
+  color: var(--green);
 }
