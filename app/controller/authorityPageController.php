@@ -5,7 +5,6 @@ function authorityFallbackPage(int $id): void
   require_once "view/home/authorityHomeView.php";
 
   $city = getMainCity($id);
-  isError($city);
   $approvedReports = getReportModel("inProgress", $city);
   isError($approvedReports);
 

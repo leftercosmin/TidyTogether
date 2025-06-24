@@ -3,7 +3,6 @@
 function supervisorFallbackPage(int $id): void
 {
   $city = getMainCity($id);
-  isError($city);
   $pendingPosts = getReportModel("pending", $city);
   isError($pendingPosts);
 
