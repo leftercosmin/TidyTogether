@@ -1,0 +1,96 @@
+body {
+    background-color: var(--green);
+}
+
+.report-container {
+    margin-left: 250px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.report-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 600px;
+}
+
+.report-item {
+    background-color: var(--offwhite1);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-left: 4px solid var(--green);
+}
+
+.report-item h3 {
+    margin-top: 0;
+    color: var(--green);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+/* Changed from grid to column layout */
+.report-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.report-detail-row {
+    display: flex;
+    margin-bottom: 0.5rem;
+}
+
+.report-label {
+    font-weight: 600;
+    color: #555;
+    width: 120px; /* Fixed width for labels */
+    flex-shrink: 0;
+}
+
+.report-value {
+    flex: 1;
+}
+
+.report-status {
+    display: inline-block;
+    padding: 0.3rem 0.7rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+.status-pending {
+    background-color: #FFF3CD;
+    color: #856404;
+}
+
+.status-approved {
+    background-color: #D4EDDA;
+    color: #155724;
+}
+
+.status-rejected {
+    background-color: #F8D7DA;
+    color: #721C24;
+}
+
+.status-completed {
+    background-color: #D1ECF1;
+    color: #0C5460;
+}
+
+.page-title {
+font-size: 2.5em;
+margin-bottom: 2rem;
+margin-left: 2rem;
+color: var(--offwhite1);
+align-self: center;
+}

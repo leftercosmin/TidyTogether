@@ -1,0 +1,25 @@
+@import url("https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --offwhite1: #FFFAF4;
+  --offwhite2: #F8EFE0;
+  --green: #017852;
+  --yellow: #FFAC25;
+  --red: #E62C20;
+  --gray: #8F8F8F;
+}
+
+html {
+  font-family: Karla, sans-serif;
+  font-size: 13pt;
+  color: var(--base-color);
+  text-align: center;
+  height: 100%;
+  min-height: 100%;
+}

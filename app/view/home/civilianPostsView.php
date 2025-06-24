@@ -4,35 +4,67 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>User Posts</title>
-  <link rel="stylesheet" href="style/civilianHome.css" />
-  <link rel="stylesheet" href="style/profile.css" />
+  <title>Report History</title>
+  <link rel="stylesheet" href="/TidyTogether/app/style/globals.css">
+  <link rel="stylesheet" href="/TidyTogether/app/style/navbar.css">
+  <link rel="stylesheet" href="/TidyTogether/app/style/civilianHome.css">
+  <link rel="stylesheet" href="/TidyTogether/app/style/reportHistory.css">
 </head>
 
 <body>
+  <?php require_once __DIR__ . '/../components/civilianNavbar.php'; ?>
 
-  <?php require_once "view/components/civilianNavbar.php"; ?>
-
-  <main class="profile-container">
-    <section class="report-history">
-      <h2>Your past reports</h2>
-      <ul class="report-list">
-        <?php
-        foreach ($posts as $onePost) {
-          echo "<li>";
-          echo "<p>" . $onePost['id'] . "</p>";
-          echo "<p>" . formatField($onePost['description']) . "</p>";
-          echo "<p>" . $onePost['status'] . "</p>";
-          echo "<p>" . $onePost['idZone'] . "</p>";
-          echo "<p>" . $onePost['address'] . "</p>";
-          echo "<p>" . $onePost['createdAt'] . "</p>";
-          echo "<p>" . $onePost['updatedAt'] . "</p>";
-          echo "</li>";
-        }
-        ?>
-      </ul>
-    </section>
-  </main>
+  <div class="report-container">
+    <h1 class="page-title">Your Report History</h1>
+    
+    <?php if (empty($posts)): ?>
+      <p>You haven't submitted any reports yet.</p>
+    <?php else: ?>
+      <div class="report-list">
+        <?php foreach ($posts as $onePost): ?>
+          <div class="report-item">
+            <h3>Report #<?php echo $onePost['id']; ?></h3>
+            
+            <div class="report-details">
+              <div class="report-detail-row">
+                <span class="report-label">Status:</span> 
+                <span class="report-value">
+                  <span class="report-status status-<?php echo strtolower($onePost['status']); ?>">
+                    <?php echo $onePost['status']; ?>
+                  </span>
+                </span>
+              </div>
+              
+              <div class="report-detail-row">
+                <span class="report-label">Description:</span>
+                <span class="report-value"><?php echo formatField($onePost['description']); ?></span>
+              </div>
+              
+              <div class="report-detail-row">
+                <span class="report-label">Address:</span>
+                <span class="report-value"><?php echo $onePost['address']; ?></span>
+              </div>
+              
+              <div class="report-detail-row">
+                <span class="report-label">Zone ID:</span>
+                <span class="report-value"><?php echo $onePost['idZone']; ?></span>
+              </div>
+              
+              <div class="report-detail-row">
+                <span class="report-label">Created:</span>
+                <span class="report-value"><?php echo $onePost['createdAt']; ?></span>
+              </div>
+              
+              <div class="report-detail-row">
+                <span class="report-label">Last Updated:</span>
+                <span class="report-value"><?php echo $onePost['updatedAt']; ?></span>
+              </div>
+            </div>
+          </div>
+        <?php endforeach; ?>
+      </div>
+    <?php endif; ?>
+  </div>
 </body>
 
 </html>

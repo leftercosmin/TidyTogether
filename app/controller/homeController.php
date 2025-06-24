@@ -1,8 +1,8 @@
 <?php
 
-require_once "model/loginModel.php";
-require_once "model/logoutModel.php";
-require_once "model/signupModel.php";
+require_once __DIR__ . '/../model/loginModel.php';
+require_once __DIR__ . '/../model/logoutModel.php';
+require_once __DIR__ . '/../model/signupModel.php';
 
 define("USER_CIVL", "civilian");
 define("USER_SPRV", "supervisor");
@@ -62,11 +62,11 @@ if (isset($_SESSION[CONN])) {
 
   $role = json_decode($_SESSION[CONN])->{"role"};
   if (USER_CIVL === $role) {
-    require_once "controller/civilianController.php";
+    require_once __DIR__ . '/civilianController.php';
   } elseif (USER_SPRV === $role) {
-    require_once "controller/supervisorController.php";
+    require_once __DIR__ . '/supervisorController.php';
   } elseif (USER_AUTH === $role) {
-    require_once "controller/authorityController.php";
+    require_once __DIR__ . '/authorityController.php';
   } else {
     exit("error: invalid role cookie");
   }
@@ -76,7 +76,7 @@ if (isset($_SESSION[CONN])) {
 
 // session not set && page switcher
 if (isset($_POST[PAGE]) && $_POST[PAGE] == "Signup") {
-  require_once "view/signup.html";
+  require_once __DIR__ . '/../view/signup.html';
 } else {
-  require_once "view/login.html";
+  require_once __DIR__ . '/../view/login.html';
 }

@@ -32,6 +32,8 @@ CREATE TABLE Zone (
 CREATE TABLE LovedZone (
   idUser BIGINT UNSIGNED,
   idZone BIGINT UNSIGNED,
+  lat DOUBLE,
+  lng DOUBLE,
   
   PRIMARY KEY (idUser, idZone),
   INDEX (idUser),

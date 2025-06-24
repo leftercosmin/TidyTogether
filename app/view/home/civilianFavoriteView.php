@@ -12,10 +12,7 @@
 </head>
 
 <body>
-
   <?php require_once "view/components/civilianNavbar.php"; ?>
-
-
 </body>
 
 </html>
