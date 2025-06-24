@@ -1,6 +1,6 @@
 <?php
 
-function fallbackPage(): void
+function civilianFallbackPage(): void
 {
   $location = getLocationModel();
   $tags = getTagModel();
@@ -9,10 +9,10 @@ function fallbackPage(): void
   require_once "view/home/civilianHomeView.php";
 }
 
-function printPage(int $id): void
+function civilianPrintPage(int $id): void
 {
   if (!isset($_GET) || !isset($_GET['civilianPage'])) {
-    fallbackPage();
+    civilianFallbackPage();
     return;
   }
 
@@ -26,12 +26,17 @@ function printPage(int $id): void
   } elseif ("profilePage" === $_GET['civilianPage']) {
     $profile = getProfileModel($id);
     isError($profile);
-    require_once "view/home/profileView.php";
+    require_once "view/profileView.php";
+
+  } elseif ("editProfilePage" === $_GET['civilianPage']) {
+    $profile = getProfileModel($id);
+    isError($profile);
+    require_once "view/profileEditView.php";
 
   } elseif ("zoneReportPage" === $_GET['civilianPage']) {
     require_once "view/home/zoneReportView.php";
 
   } else {
-    fallbackPage();
+    civilianFallbackPage();
   }
 }

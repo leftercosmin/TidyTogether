@@ -24,7 +24,7 @@ function approveReport(int $reportID): string
     }
 
     $statement->close();
-    return "Success - report approved";
+    return ""; // success
 }
 
 function denyReport(int $reportID): string
@@ -51,7 +51,7 @@ function denyReport(int $reportID): string
     }
 
     $statement->close();
-    return "Success - report denied";
+    return ""; // success
 }
 
 function markReportDone(int $reportID): string
@@ -78,5 +78,5 @@ function markReportDone(int $reportID): string
     }
 
     $statement->close();
-    return "Success - report marked as done";
+    return ""; // success
 }

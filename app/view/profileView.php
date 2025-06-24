@@ -11,13 +11,14 @@
 </head>
 
 <body class="profile-body">
+
   <?php
   if ($profile['role'] === 'civilian') {
-    require_once __DIR__ . '/../components/civilianNavbar.php';
+    require_once 'components/civilianNavbar.php';
   } elseif ($profile['role'] === 'supervisor') {
-    require_once __DIR__ . '/../components/supervisorNavbar.php';
+    require_once 'components/supervisorNavbar.php';
   } elseif ($profile['role'] === 'authority') {
-    require_once __DIR__ . '/../components/authorityNavbar.php';
+    require_once 'components/authorityNavbar.php';
   }
   ?>
 
@@ -65,6 +66,16 @@
           Logout
         </button>
       </form>
+
+      <?php
+      echo "<a "
+        . "class=\"edit-btn\" "
+        . "href=\"?" . $profile["role"] . "Page" . "=editProfilePage\" "
+        . ">";
+      echo "Edit your Profile";
+      echo "</a>";
+      ?>
+
     </section>
   </main>
 </body>

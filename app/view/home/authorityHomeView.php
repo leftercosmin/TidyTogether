@@ -14,11 +14,12 @@
 </head>
 
 <body>
-  <?php require_once __DIR__ . '/../components/authorityNavbar.php'; ?>
-  
+
+  <?php require_once 'components/authorityNavbar.php'; ?>
+
   <div class="report-container">
     <h1 class="page-title">Approved Reports</h1>
-    
+
     <?php if (empty($approvedReports)): ?>
       <p class="empty-message">No approved reports at this time.</p>
     <?php else: ?>
@@ -26,39 +27,74 @@
         <?php foreach ($approvedReports as $report): ?>
           <div class="report-item">
             <h3>Report #<?php echo htmlspecialchars($report['id']); ?></h3>
-            
+
             <div class="report-details">
               <div class="report-detail-row">
-                <span class="report-label">Status:</span> 
+                <span class="report-label">Status:</span>
                 <span class="report-value">
                   <span class="report-status status-<?php echo strtolower(str_replace(' ', '', $report['status'])); ?>">
                     <?php echo htmlspecialchars($report['status']); ?>
                   </span>
                 </span>
               </div>
-              
+
               <div class="report-detail-row">
                 <span class="report-label">Address:</span>
                 <span class="report-value"><?php echo htmlspecialchars($report['address']); ?></span>
               </div>
-              
+
               <div class="report-detail-row">
                 <span class="report-label">Description:</span>
                 <span class="report-value"><?php echo htmlspecialchars($report['description']); ?></span>
               </div>
-              
+
               <?php if (!empty($report['zone_name'])): ?>
-              <div class="report-detail-row">
-                <span class="report-label">Zone:</span>
-                <span class="report-value"><?php echo htmlspecialchars($report['zone_name'] ?? 'N/A'); ?></span>
-              </div>
+                <div class="report-detail-row">
+                  <span class="report-label">Zone:</span>
+                  <span class="report-value"><?php echo htmlspecialchars($report['zone_name'] ?? 'N/A'); ?></span>
+                </div>
               <?php endif; ?>
-              
+
+              <!-- MEDIA -->
+              <div class="report-detail-row">
+                <span class="report-label">Media:</span>
+                <div class="report-media">
+                  <?php
+                  $idPost = $post["id"];
+                  $media = $mediaSupervisor[$idPost];
+                  foreach ($media as $photo) {
+                    echo "<img "
+                      . "class=\"report-photo\""
+                      . "src=\"" . $photo["source"] . "\" "
+                      . "alt=\"" . $photo["name"] . "\" "
+                      . "/>";
+                  }
+                  ?>
+                </div>
+              </div>
+
+              <!-- MARKS -->
+              <div class="report-detail-row">
+                <span class="report-label">Marks:</span>
+                <span class="report-value">
+                  <?php
+                  $idPost = $post["id"];
+                  $marks = $marksSupervisor[$idPost];
+                  foreach ($marks as $tag) {
+                    echo "<p "
+                      . "class=\"report-dadada\">"
+                      . $tag["name"]
+                      . "</p>";
+                  }
+                  ?>
+                </span>
+              </div>
+
               <div class="report-detail-row">
                 <span class="report-label">Submitted:</span>
                 <span class="report-value"><?php echo htmlspecialchars($report['createdAt'] ?? 'N/A'); ?></span>
               </div>
-              
+
               <?php if ($report['status'] === 'inProgress' || $report['status'] === 'approved'): ?>
                 <form method="POST">
                   <input type="hidden" name="postId" value="<?php echo htmlspecialchars($report['id']); ?>">
@@ -74,4 +110,5 @@
     <?php endif; ?>
   </div>
 </body>
+
 </html>
