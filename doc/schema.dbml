@@ -16,6 +16,8 @@ TABLE User {
 }
 
 TABLE LovedZone {
+  lat DOUBLE
+  lng DOUBLE
   idUser INTEGER [ref: > User.id]
   idZone INTEGER [ref: > Zone.id]
 

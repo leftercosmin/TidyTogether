@@ -54,7 +54,7 @@ try {
     } catch (Exception $e) {
         throw new Exception("Error fetching report data: " . $e->getMessage());
     }
-s
+
     ob_end_clean();
     header('Content-Type: application/json');
     echo json_encode($data);
