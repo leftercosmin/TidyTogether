@@ -18,9 +18,10 @@ html {
 }
 
 .title-text{
-  color: var(--accent-color);
+  color: #F8EFE0;
   font-size: 2.5em;
   margin: .3em;
+  margin-bottom: 1em;
 }
 
 body {

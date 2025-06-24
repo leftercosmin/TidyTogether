@@ -30,7 +30,7 @@ if (!isset($_GET['authorityPage'])) {
   require_once "view/home/authorityHomeView.php";
 } else {
   if ($_GET["authorityPage"] === "profilePage") {
-    $profile = getProfile($id);
+    $profile = getProfileModel($id);
     require_once "view/home/profileView.php";
   } else {
     $approvedReports = getApprovedReports();

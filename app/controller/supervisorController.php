@@ -1,10 +1,10 @@
 <?php
 require_once __DIR__ . '/../model/getReportModel.php';
-require_once "util/getRoot.php";
-require_once "util/formatField.php";
+require_once __DIR__ . '/../util/getRoot.php';
+require_once __DIR__ . '/../util/formatField.php';
 
-require_once "model/getReportModel.php";
-require_once "model/getProfileModel.php";
+require_once __DIR__ . '/../model/getReportModel.php';
+require_once __DIR__ . '/../model/getProfileModel.php';
 
 // get session
 if (session_status() === PHP_SESSION_NONE) {
@@ -25,7 +25,7 @@ if (!isset($_GET['supervisorPage'])) {
   require_once "view/home/supervisorHomeView.php";
 } else {
   if ($_GET["supervisorPage"] === "profilePage") {
-    $profile = getProfile($id);
+    $profile = getProfileModel($id);
     require_once "view/home/profileView.php";
   }
   // elseif ("approvedPostsPage" === $_GET['supervisorPage']) {
