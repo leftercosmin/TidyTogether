@@ -7,61 +7,10 @@
   <title>Authority Dashboard</title>
   <meta name="description" content="Authority dashboard for managing approved reports">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/TidyTogether/app/style/globals.css">
-  <link rel="stylesheet" href="/TidyTogether/app/style/navbar.css">
-  <link rel="stylesheet" href="/TidyTogether/app/style/reportHistory.css">
-  <style>
-    body {
-      background-color: var(--green);
-    }
-    
-    .mark-done-btn {
-      background-color: var(--green);
-      color: white;
-      border: none;
-      padding: 0.6rem 1.2rem;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background-color 0.2s;
-      margin-top: 1rem;
-    }
-    
-    .mark-done-btn:hover {
-      opacity: 0.9;
-    }
-    
-    .status-approved {
-      background-color: #D4EDDA;
-      color: #155724;
-    }
-    
-    .status-inprogress {
-      background-color: #FFF3CD;
-      color: #856404;
-    }
-    
-    .status-done {
-      background-color: #D1ECF1;
-      color: #0C5460;
-    }
-    
-    .report-status {
-      display: inline-block;
-      padding: 0.3rem 0.7rem;
-      border-radius: 20px;
-      font-size: 0.9rem;
-      font-weight: 600;
-    }
-    
-    .empty-message {
-      color: var(--offwhite1);
-      text-align: center;
-      font-size: 1.2rem;
-      margin-top: 2rem;
-    }
-  </style>
+  <link rel="stylesheet" href="style/globals.css">
+  <link rel="stylesheet" href="style/navbar.css">
+  <link rel="stylesheet" href="style/reportHistory.css">
+  <link rel="stylesheet" href="style/authorityHome.css">
 </head>
 
 <body>

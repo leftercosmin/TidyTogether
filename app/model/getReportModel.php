@@ -1,11 +1,13 @@
 <?php
 
-function getPendingReports(): array|string
-{    
-    $db = $db = DatabaseConnection::get();
+require_once "model/helper/getMainCityModel.php";
+
+function getPendingReports(int $id): array|string
+{
+    $db = DatabaseConnection::get();
     if (null === $db || $db->connect_error) {
         $db->close();
-        return "error: " . $db->connect_error;
+        return "error - getPendingReports(): " . $db->connect_error;
     }
 
     $sql = 'SELECT 
@@ -18,14 +20,27 @@ function getPendingReports(): array|string
             FROM Post
             LEFT JOIN Zone ON Post.idZone = Zone.id
             LEFT JOIN User ON Post.idUser = User.id
-            WHERE Post.status="pending"';
+            LEFT JOIN Media ON Post.id = Media.idPost
+            WHERE Post.status="pending"
+            AND Zone.city=?';
 
     $statement = $db->prepare($sql);
-    if (!$statement) { 
+    if (!$statement) {
         return "error - getPendingReports(): failed to prepare SQL statement";
     }
 
-    if(!$statement->execute()) {
+    $city = getMainCity($id, $db);
+    if (str_starts_with($city, "error")) {
+        $statement->close();
+        return "error - getPendingReports(): failed to get main city";
+    }
+
+    if (!$statement->bind_param('s', $city)) {
+        $statement->close();
+        return "error - getPendingReports(): failed to bind parameters";
+    }
+
+    if (!$statement->execute()) {
         $statement->close();
         return "error - getPendingReports(): failed to execute SQL statement";
     }
@@ -49,68 +64,14 @@ function getPendingReports(): array|string
     return $reports;
 }
 
-function approveReport(int $reportID) : string
-{
-    $db = DatabaseConnection::get();
-    if (null === $db || $db->connect_error) {
-        $db->close();
-        return "error: " . $db->connect_error;
-    }
-
-    $statement = $db->prepare('UPDATE Post SET status="inProgress" WHERE id=?');
-    if (!$statement) {
-        return "error - approveReport(): failed to prepare SQL statement";
-    }
-
-    if (!$statement->bind_param('i', $reportID)) {
-        $statement->close();
-        return "error - approveReport(): failed to bind parameters";
-    }
-
-    if (!$statement->execute()) {
-        $statement->close();
-        return "error - approveReport(): failed to execute SQL statement";
-    }
-
-    $statement->close();
-    return "Success - report approved";
-}
-
-function denyReport(int $reportID) : string
-{
-    $db = DatabaseConnection::get();
-    if (null === $db || $db->connect_error) {
-        $db->close();
-        return "error: " . $db->connect_error;
-    }
-
-    $statement = $db->prepare('DELETE FROM Post WHERE id=?');
-    if (!$statement) {
-        return "error - denyReport(): failed to prepare SQL statement";
-    }
-
-    if (!$statement->bind_param('i', $reportID)) {
-        $statement->close();
-        return "error - denyReport(): failed to bind parameters";
-    }
-
-    if (!$statement->execute()) {
-        $statement->close();
-        return "error - denyReport(): failed to execute SQL statement";
-    }
-
-    $statement->close();
-    return "Success - report denied";
-}
-
 function getApprovedReports(): array|string
 {
     $db = DatabaseConnection::get();
     if (null === $db || $db->connect_error) {
         $db->close();
-        return "error: " . $db->connect_error;
+        return "error - getApprovedReports(): " . $db->connect_error;
     }
-    
+
     $statement = $db->prepare('SELECT * FROM Post WHERE status="inProgress"');
     if (!$statement) {
         return "error - getApprovedReports(): failed to prepare SQL statement";
@@ -137,31 +98,4 @@ function getApprovedReports(): array|string
     }
 
     return $reports;
-}
-
-function markReportDone(int $reportID): string
-{
-    $db = DatabaseConnection::get();
-    if (null === $db || $db->connect_error) {
-        $db->close();
-        return "error: " . $db->connect_error;
-    }
-
-    $statement = $db->prepare('UPDATE Post SET status="done" WHERE id=?');
-    if (!$statement) {
-        return "error - markReportDone(): failed to prepare SQL statement";
-    }
-
-    if (!$statement->bind_param('i', $reportID)) {
-        $statement->close();
-        return "error - markReportDone(): failed to bind parameters";
-    }
-
-    if (!$statement->execute()) {
-        $statement->close();
-        return "error - markReportDone(): failed to execute SQL statement";
-    }
-
-    $statement->close();
-    return "Success - report marked as done";
 }

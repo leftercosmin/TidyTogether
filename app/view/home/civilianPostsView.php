@@ -5,10 +5,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Report History</title>
-  <link rel="stylesheet" href="/TidyTogether/app/style/globals.css">
-  <link rel="stylesheet" href="/TidyTogether/app/style/navbar.css">
-  <link rel="stylesheet" href="/TidyTogether/app/style/civilianHome.css">
-  <link rel="stylesheet" href="/TidyTogether/app/style/reportHistory.css">
+  <link rel="stylesheet" href="style/globals.css">
+  <link rel="stylesheet" href="style/navbar.css">
+  <link rel="stylesheet" href="style/civilianHome.css">
+  <link rel="stylesheet" href="style/reportHistory.css">
 </head>
 
 <body>

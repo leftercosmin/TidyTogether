@@ -18,7 +18,3 @@ if (!getenv('SERVER')) {
 
 require_once 'controller/homeController.php';
 register_shutdown_function(fn() => DatabaseConnection::close());
-
-if (is_string($statusModel) && "" !== $statusModel) {
-  alert($statusModel);
-}

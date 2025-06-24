@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# call it to locally deploy your solution with all the updates
+# call it to locally deploy the solution with all the updates
 
 name="TidyTogether"
 source="."

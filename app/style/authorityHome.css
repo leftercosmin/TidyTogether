@@ -1,68 +1,92 @@
+.mark-done-btn {
+    background-color: var(--green);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 1rem;
+}
+
+.mark-done-btn:hover {
+    opacity: 0.9;
+}
+
+.empty-message {
+    color: var(--offwhite1);
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 2rem;
+}
+
 h1 {
-  color: var(--base-color);
-  margin-top: 1rem;
-  text-align: center;
+    color: var(--base-color);
+    margin-top: 1rem;
+    text-align: center;
 }
 
 .container {
-  width: 500px;
-  margin: 2rem auto;
-  background: #faf8eb;
-  color: #253d24;
-  border-radius: 1rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.13);
-  padding: 2rem;
+    width: 500px;
+    margin: 2rem auto;
+    background: #faf8eb;
+    color: #253d24;
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.13);
+    padding: 2rem;
 }
 
 .report-list {
-  list-style: none;
-  padding: 0;
+    list-style: none;
+    padding: 0;
 }
 
 .report-item {
-  background: #2a482a;
-  color: #faf8eb;
-  margin-bottom: 1.2rem;
-  padding: 1.2rem 1.5rem;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(56,98,55,0.08);
-  transition: background 0.2s;
+    background: #2a482a;
+    color: #faf8eb;
+    margin-bottom: 1.2rem;
+    padding: 1.2rem 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(56, 98, 55, 0.08);
+    transition: background 0.2s;
 }
 
 .report-item:hover {
-  background: #386237;
+    background: #386237;
 }
 
 .report-item strong {
-  font-size: 1.1em;
-  color: #e8e0ac;
+    font-size: 1.1em;
+    color: #e8e0ac;
 }
 
 .report-item span {
-  display: block;
-  margin-top: 0.5rem;
-  font-size: 0.98em;
-  color: #e8e0ac;
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 0.98em;
+    color: #e8e0ac;
 }
 
 .accept-task-btn {
-  display: flex;
-  gap: 1rem;
-  margin-top: 1rem;
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
 }
 
 .accept-task-btn button {
-  background: var(--base-color);
-  color: var(--accent-color);
-  border: none;
-  border-radius: 6px;
-  padding: 0.5rem 1.5rem;
-  font-size: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: background 0.2s;
+    background: var(--base-color);
+    color: var(--accent-color);
+    border: none;
+    border-radius: 6px;
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.2s;
 }
 
 .accept-task-btn button:hover {
-  background: #457145;
+    background: #457145;
 }

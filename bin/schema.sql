@@ -15,6 +15,7 @@ CREATE TABLE User (
   id        BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   email     VARCHAR(255) UNIQUE NOT NULL,
   password  VARCHAR(255) NOT NULL,
+  mainCity  VARCHAR(255),
   fname     VARCHAR(255),
   lname     VARCHAR(255),
   role      ENUM('civilian', 'supervisor', 'authority') NOT NULL,

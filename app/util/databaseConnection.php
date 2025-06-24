@@ -11,15 +11,16 @@ final class DatabaseConnection
     }
 
     self::$endpoint = new mysqli(
-      $_ENV['DB_HOST'],
-      $_ENV['DB_USERNAME'],
-      $_ENV['DB_PASSWORD'],
-      $_ENV['DB_NAME'],
-      $_ENV['DB_PORT']
+      getenv('DB_HOST'),
+      getenv('DB_USERNAME'),
+      getenv('DB_PASSWORD'),
+      getenv('DB_NAME'),
+      getenv('DB_PORT'),
     );
 
     if (self::$endpoint->connect_error) {
-      exit("db error: " . self::$endpoint->connect_error);
+      alert("error: " . self::$endpoint->connect_error);
+      exit();
     }
 
     return self::$endpoint;

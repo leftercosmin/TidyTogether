@@ -46,15 +46,19 @@ try {
         }
     }
 
-    $data = getZoneReportStats($interval);
-    if (!is_array($data)) {
-        throw new Exception("Invalid data format returned from model");
+    try {
+        $data = getZoneReportStats($interval);
+        if (!is_array($data)) {
+            throw new Exception("Invalid data format returned from model");
+        }
+  
+        if (empty($data)) {
+            $data = [];
+        }
+    } catch (Exception $e) {
+        throw new Exception("Error fetching report data: " . $e->getMessage());
     }
 
-    if (empty($data)) {
-        $data = [];
-    }
-    
     ob_end_clean();
     header('Content-Type: application/json');
     echo json_encode($data);

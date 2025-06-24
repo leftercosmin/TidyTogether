@@ -1,3 +1,7 @@
+body {
+  background-color: var(--green);
+}
+
 body.profile-body {
   background-color: var(--green);
 }
@@ -16,7 +20,7 @@ body.profile-body {
   padding: 2rem;
   width: 100%;
   max-width: 500px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-left: 4px solid var(--green);
 }
 
@@ -87,4 +91,4 @@ body.profile-body {
   margin-left: 2rem;
   color: var(--offwhite1);
   align-self: center;
-  }
+}
