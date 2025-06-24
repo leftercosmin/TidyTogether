@@ -2,6 +2,9 @@
 
 ob_start();
 
+ini_set('display_errors', 0);
+error_reporting(E_ALL);
+
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../model/zoneReportModel.php';
 
@@ -11,15 +14,15 @@ try {
         $dotenv->load();
     }
 
-    //get the interval parameter / month is default
     $interval = isset($_GET['interval']) ? strtoupper($_GET['interval']) : 'MONTH';
     $validIntervals = ['DAY', 'WEEK', 'MONTH', 'YEAR'];
     if (!in_array($interval, $validIntervals)) {
         $interval = 'MONTH';
     }
 
-    //check the requested format and generate appropriate response
     if (isset($_GET['format'])) {
+        ob_end_clean();
+        
         switch ($_GET['format']) {
             case 'csv':
                 header('Content-Type: text/csv');
@@ -32,12 +35,13 @@ try {
                 ob_end_clean();
                 require_once __DIR__ . '/../../vendor/autoload.php';
                 $mpdf = new \Mpdf\Mpdf();
+                
+                $data = getZoneReportStats($interval);
                 $mpdf->WriteHTML(generateReportHTML($data, $interval));
                 $mpdf->Output('zone_report.pdf', 'D');
                 exit;
                 
             default:
-                // If not recognized default to JSON
                 break;
         }
     }

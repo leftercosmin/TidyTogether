@@ -57,9 +57,9 @@
 .map-container {
   margin-left: 285px;
   flex: 1;
-  height: 100%;
+  height: 100vh;
   transition: margin-left 0.3s ease;
-  width: auto;
+  width: calc(100% - 270px);
 }
 
 .place-picker-container {
