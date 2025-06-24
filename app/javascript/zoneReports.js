@@ -2,7 +2,13 @@ let barChart = null;
 let currentInterval = 'MONTH';
 
 document.addEventListener('DOMContentLoaded', function() {
-  loadReportData('MONTH');
+  console.log('zoneReports.js loaded');
+  try {
+    loadReportData('MONTH');
+    console.log('Initial data load requested');
+  } catch (error) {
+    console.error('Error loading initial data:', error);
+  }
 });
 
 function changeInterval(interval) {
@@ -24,14 +30,30 @@ function updateDownloadLinks() {
 }
 
 function loadReportData(interval) {
+  console.log('Loading data for interval:', interval);
+
+  document.getElementById('reportsBarChart').innerHTML = '<div style="text-align:center;padding:20px;">Loading data...</div>';
+  document.querySelector('#zoneReportTable tbody').innerHTML = '<tr><td colspan="6">Loading...</td></tr>';
+  
   fetch(`/TidyTogether/app/controller/zoneReportController.php?interval=${interval}`)
     .then(response => {
       if (!response.ok) {
-        throw new Error('Network response was not ok');
+        throw new Error('Network response was not ok: ' + response.status);
       }
+      
+      // Check if the response is JSON
+      const contentType = response.headers.get('content-type');
+      if (!contentType || !contentType.includes('application/json')) {
+        // If not JSON, get the text to show the actual error
+        return response.text().then(text => {
+          throw new Error('Server returned non-JSON response: ' + text.substring(0, 150) + '...');
+        });
+      }
+      
       return response.json();
     })
     .then(data => {
+      console.log('Data received:', data);
       if (data && data.length > 0) {
         renderBarChart(data);
         renderTable(data);
@@ -42,12 +64,13 @@ function loadReportData(interval) {
       updateDownloadLinks();
     })
     .catch(err => {
+      console.error('Error in fetch:', err);
       document.getElementById('reportsBarChart').innerHTML = 
         `<div style="padding:20px;text-align:center;color:#721c24;background:#f8d7da;border-radius:5px;">
-          Error loading data
+          Error loading data: ${err.message}
         </div>`;
       document.querySelector('#zoneReportTable tbody').innerHTML = 
-        `<tr><td colspan="6">Error loading data</td></tr>`;
+        `<tr><td colspan="6">Error loading data: ${err.message}</td></tr>`;
     });
 }
 

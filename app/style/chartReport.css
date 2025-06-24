@@ -152,6 +152,11 @@ body {
     padding: 1rem;
   }
   
+  .content-wrapper {
+    width: 100%;
+    max-width: 100%;
+  }
+  
   .controls {
     flex-direction: column;
     gap: 15px;
@@ -167,5 +172,19 @@ body {
     display: flex;
     width: 100%;
     justify-content: center;
+  }
+  
+  .data-table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+  }
+  
+  .chart-box {
+    height: auto;
+  }
+  
+  #reportsBarChart {
+    height: 250px !important;
   }
 }

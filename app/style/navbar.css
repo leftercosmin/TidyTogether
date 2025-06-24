@@ -1,7 +1,7 @@
 .navbar {
   background-color: var(--offwhite1);
   padding: 1rem;
-  width: 250px;
+  width: 290px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   height: 100vh;
   position: fixed;
@@ -118,4 +118,17 @@
 main {
   margin-left: 250px;
   padding: 20px;
+}
+
+/* Make sure mobile styling still works properly */
+@media screen and (max-width: 768px) {
+  .navbar {
+    width: 250px;
+    left: -250px;
+    transition: left 0.3s ease;
+  }
+  
+  .navbar.open {
+    left: 0;
+  }
 }
