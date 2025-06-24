@@ -30,6 +30,12 @@ function authorityPrintPage(int $id): void
     $profile = getProfileModel(id: $id);
     isError($profile);
     require_once "view/profileView.php";
+
+  } elseif ("editProfilePage" === $_GET['authorityPage']) {
+    $profile = getProfileModel($id);
+    isError($profile);
+    require_once "view/profileEditView.php";
+
   } else {
     authorityFallbackPage($id);
   }

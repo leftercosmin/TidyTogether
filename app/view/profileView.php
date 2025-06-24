@@ -11,6 +11,7 @@
 </head>
 
 <body class="profile-body">
+
   <?php
   if ($profile['role'] === 'civilian') {
     require_once 'components/civilianNavbar.php';
@@ -66,17 +67,14 @@
         </button>
       </form>
 
-      <form method="post" action="./">
-        <input type="hidden" name="edit" value="now" />
-        <?php
-        echo "<button "
-          . "class=\"edit-btn\" "
-          . "type=\"sumbit\""
-          . ">";
-        echo "Edit your Profile";
-        echo "</button>";
-        ?>
-      </form>
+      <?php
+      echo "<a "
+        . "class=\"edit-btn\" "
+        . "href=\"?" . $profile["role"] . "Page" . "=editProfilePage\" "
+        . ">";
+      echo "Edit your Profile";
+      echo "</a>";
+      ?>
 
     </section>
   </main>

@@ -28,6 +28,11 @@ function civilianPrintPage(int $id): void
     isError($profile);
     require_once "view/profileView.php";
 
+  } elseif ("editProfilePage" === $_GET['civilianPage']) {
+    $profile = getProfileModel($id);
+    isError($profile);
+    require_once "view/profileEditView.php";
+
   } elseif ("zoneReportPage" === $_GET['civilianPage']) {
     require_once "view/home/zoneReportView.php";
 

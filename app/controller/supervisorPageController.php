@@ -28,6 +28,12 @@ function supervisorPrintPage(int $id): void
     $profile = getProfileModel($id);
     isError($profile);
     require_once "view/profileView.php";
+
+  } elseif ("editProfilePage" === $_GET['supervisorPage']) {
+    $profile = getProfileModel($id);
+    isError($profile);
+    require_once "view/profileEditView.php";
+
   } else {
     supervisorFallbackPage($id);
   }
