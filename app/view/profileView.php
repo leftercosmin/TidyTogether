@@ -65,6 +65,19 @@
           Logout
         </button>
       </form>
+
+      <form method="post" action="./">
+        <input type="hidden" name="edit" value="now" />
+        <?php
+        echo "<button "
+          . "class=\"edit-btn\" "
+          . "type=\"sumbit\""
+          . ">";
+        echo "Edit your Profile";
+        echo "</button>";
+        ?>
+      </form>
+
     </section>
   </main>
 </body>

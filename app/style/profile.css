@@ -85,6 +85,24 @@ body.profile-body {
   background-color: #015c3f;
 }
 
+.edit-btn {
+  background-color: var(--green);
+  color: white;
+  border: none;
+  padding: 0.85em 2em;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.edit-btn:hover {
+  background-color: #015c3f;
+}
+
 .page-title {
   font-size: 2.5em;
   margin-bottom: 2rem;
