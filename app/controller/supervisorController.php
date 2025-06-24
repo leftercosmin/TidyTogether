@@ -1,10 +1,9 @@
 <?php
-require_once __DIR__ . '/../model/getReportModel.php';
-require_once __DIR__ . '/../util/getRoot.php';
-require_once __DIR__ . '/../util/formatField.php';
+require_once "util/getRoot.php";
+require_once "util/formatField.php";
 
-require_once __DIR__ . '/../model/getReportModel.php';
-require_once __DIR__ . '/../model/getProfileModel.php';
+require_once "model/getReportModel.php";
+require_once "model/getProfileModel.php";
 
 // get session
 if (session_status() === PHP_SESSION_NONE) {
