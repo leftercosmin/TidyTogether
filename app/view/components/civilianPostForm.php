@@ -1,7 +1,7 @@
 <div id="reportModal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
-    <h2>Post a dirty area</h2>
+    <h2>Report a dirty area</h2>
     <form id="reportForm" method="POST" enctype="multipart/form-data">
 
       <!-- POST table -->
