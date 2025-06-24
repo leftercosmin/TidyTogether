@@ -24,9 +24,9 @@ function changeInterval(interval) {
 
 function updateDownloadLinks() {
   document.getElementById('csv-link').href = 
-    `/TidyTogether/app/controller/zoneReportController.php?interval=${currentInterval}&format=csv`;
+    `controller/zoneReportController.php?interval=${currentInterval}&format=csv`;
   document.getElementById('pdf-link').href = 
-    `/TidyTogether/app/controller/zoneReportController.php?interval=${currentInterval}&format=pdf`;
+    `controller/zoneReportController.php?interval=${currentInterval}&format=pdf`;
 }
 
 function loadReportData(interval) {
@@ -35,7 +35,7 @@ function loadReportData(interval) {
   document.getElementById('reportsBarChart').innerHTML = '<div style="text-align:center;padding:20px;">Loading data...</div>';
   document.querySelector('#zoneReportTable tbody').innerHTML = '<tr><td colspan="6">Loading...</td></tr>';
   
-  fetch(`/TidyTogether/app/controller/zoneReportController.php?interval=${interval}`)
+  fetch(`controller/zoneReportController.php?interval=${interval}`)
     .then(response => {
       if (!response.ok) {
         throw new Error('Network response was not ok: ' + response.status);

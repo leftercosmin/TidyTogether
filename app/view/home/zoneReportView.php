@@ -77,7 +77,7 @@
   </div>
 
   <!-- Include both scripts for the report -->
-  <script src="/TidyTogether/app/javascript/zoneReports.js"></script>
-  <script src="/TidyTogether/app/javascript/navbarCollapse.js"></script>
+  <script src="javascript/zoneReports.js"></script>
+  <script src="javascript/navbarCollapse.js"></script>
 </body>
 </html>

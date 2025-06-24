@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
               formData.append('country', currentLocation.fullData.address.country || '');
               formData.append('address', currentLocation.address);
 
-              fetch('/TidyTogether/app/controller/civilianController.php', {
+              fetch('controller/civilianController.php', {
                 method: 'POST',
                 body: formData
               })

@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-  fetch('/TidyTogether/app/controller/civilianController.php?getFavorites=1')
+  fetch('controller/civilianController.php?getFavorites=1')
     .then(res => res.json())
     .then(favorites => {
       const dropdown = document.getElementById('zonesDropdownContent');
@@ -38,5 +38,5 @@ window.selectFavoriteZone = function(lat, lng, neighborhood, city) {
   localStorage.setItem('panToLat', lat);
   localStorage.setItem('panToLng', lng);
   localStorage.setItem('panToLabel', `${neighborhood}, ${city}`);
-  window.location.href = '/TidyTogether/app/controller/civilianController.php?fromFavorites=1';
+  window.location.href = 'controller/civilianController.php?fromFavorites=1';
 };
