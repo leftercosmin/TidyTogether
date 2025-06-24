@@ -13,11 +13,11 @@
 <body class="profile-body">
   <?php
   if ($profile['role'] === 'civilian') {
-    require_once __DIR__ . '/../components/civilianNavbar.php';
+    require_once 'components/civilianNavbar.php';
   } elseif ($profile['role'] === 'supervisor') {
-    require_once __DIR__ . '/../components/supervisorNavbar.php';
+    require_once 'components/supervisorNavbar.php';
   } elseif ($profile['role'] === 'authority') {
-    require_once __DIR__ . '/../components/authorityNavbar.php';
+    require_once 'components/authorityNavbar.php';
   }
   ?>
 

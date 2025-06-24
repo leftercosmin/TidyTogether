@@ -26,7 +26,7 @@ function civilianPrintPage(int $id): void
   } elseif ("profilePage" === $_GET['civilianPage']) {
     $profile = getProfileModel($id);
     isError($profile);
-    require_once "view/home/profileView.php";
+    require_once "view/profileView.php";
 
   } elseif ("zoneReportPage" === $_GET['civilianPage']) {
     require_once "view/home/zoneReportView.php";

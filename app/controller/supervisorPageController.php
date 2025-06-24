@@ -27,7 +27,7 @@ function supervisorPrintPage(int $id): void
   if ("profilePage" === $_GET["supervisorPage"]) {
     $profile = getProfileModel($id);
     isError($profile);
-    require_once "view/home/profileView.php";
+    require_once "view/profileView.php";
   } else {
     supervisorFallbackPage($id);
   }

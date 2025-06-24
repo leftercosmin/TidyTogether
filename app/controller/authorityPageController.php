@@ -29,7 +29,7 @@ function authorityPrintPage(int $id): void
   if ("profilePage" === $_GET["authorityPage"]) {
     $profile = getProfileModel(id: $id);
     isError($profile);
-    require_once "view/home/profileView.php";
+    require_once "view/profileView.php";
   } else {
     authorityFallbackPage($id);
   }
