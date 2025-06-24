@@ -5,7 +5,7 @@
  */
 function login(string $email, string $passw): string
 {
-  $db = $db = DatabaseConnection::get();
+  $db = DatabaseConnection::get();
   if (null === $db || $db->connect_error) {
     $db->close();
     return "error - login(): " . $db->connect_error;

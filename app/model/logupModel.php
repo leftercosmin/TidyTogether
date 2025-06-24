@@ -24,7 +24,7 @@ function signup(
   }
 
   // database
-  $db = $db = DatabaseConnection::get();
+  $db = DatabaseConnection::get();
   if (null === $db || $db->connect_error) {
     $db->close();
     return "error - signup(): " . $db->connect_error;

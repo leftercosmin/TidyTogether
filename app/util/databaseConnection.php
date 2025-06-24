@@ -19,7 +19,8 @@ final class DatabaseConnection
     );
 
     if (self::$endpoint->connect_error) {
-      exit("db error: " . self::$endpoint->connect_error);
+      alert("error: " . self::$endpoint->connect_error);
+      exit();
     }
 
     return self::$endpoint;

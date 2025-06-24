@@ -15,6 +15,7 @@ require_once "model/getProfileModel.php";
 require_once "model/getTagModel.php";
 
 require_once "model/processMediaModel.php";
+require_once "model/processReportModel.php";
 require_once "model/processTagsModel.php";
 
 require_once "controller/civilianPageController.php";

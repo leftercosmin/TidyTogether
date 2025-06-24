@@ -36,6 +36,12 @@
         </div>
 
         <div class="profile-detail-row">
+          <span class="profile-label">Main City:</span>
+          <span class="profile-value">
+            <?php echo $profile['mainCity'] ?? "N/A"; ?></span>
+        </div>
+
+        <div class="profile-detail-row">
           <span class="profile-label">Role:</span>
           <span class="profile-value">
             <span class="role-badge"><?php echo $profile['role']; ?></span>

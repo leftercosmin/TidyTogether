@@ -8,10 +8,10 @@
  */
 function getTagModel(): array|string
 {
-  $db = $db = DatabaseConnection::get();
+  $db = DatabaseConnection::get();
   if (null === $db || $db->connect_error) {
     $db->close();
-    return "error: " . $db->connect_error;
+    return "error - getTagModel(): " . $db->connect_error;
   }
 
   $result = $db->query('SELECT * FROM Tag');

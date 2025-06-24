@@ -4,6 +4,7 @@ require_once "util/formatField.php";
 
 require_once "model/getReportModel.php";
 require_once "model/getProfileModel.php";
+require_once "model/processReportModel.php";
 
 // get session
 if (session_status() === PHP_SESSION_NONE) {
@@ -20,7 +21,7 @@ $id = json_decode($_SESSION[CONN])->{"id"};
 
 // determine pages + get posts
 if (!isset($_GET['supervisorPage'])) {
-  $pendingPosts = getPendingReports();
+  $pendingPosts = getPendingReports($id);
   require_once "view/home/supervisorHomeView.php";
 } else {
   if ($_GET["supervisorPage"] === "profilePage") {

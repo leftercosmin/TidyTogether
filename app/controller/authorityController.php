@@ -5,6 +5,8 @@ require_once "util/formatField.php";
 require_once "model/getReportModel.php";
 require_once "model/getProfileModel.php";
 
+require_once "model/processReportModel.php";
+
 // get session
 if (session_status() === PHP_SESSION_NONE) {
     session_start();

@@ -8,6 +8,7 @@ TABLE User {
   id INTEGER PK
   email STRING UNIQUE
   password STRING // obviously hashed
+  mainCity STRING
   fname STRING
   lname STRING
   role UserRole

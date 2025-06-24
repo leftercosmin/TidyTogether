@@ -2,7 +2,7 @@
 
 require_once "model/loginModel.php";
 require_once "model/logoutModel.php";
-require_once "model/signupModel.php";
+require_once "model/logupModel.php";
 
 define("USER_CIVL", "civilian");
 define("USER_SPRV", "supervisor");
@@ -68,7 +68,7 @@ if (isset($_SESSION[CONN])) {
   } elseif (USER_AUTH === $role) {
     require_once "controller/authorityController.php";
   } else {
-    exit("error: invalid role cookie");
+    alert("error: invalid role cookie");
   }
 
   exit();
