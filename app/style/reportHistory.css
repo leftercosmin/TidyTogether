@@ -23,7 +23,7 @@ body {
     border-radius: 8px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-left: 4px solid var(--green);
 }
 
@@ -51,7 +51,8 @@ body {
 .report-label {
     font-weight: 600;
     color: #555;
-    width: 120px; /* Fixed width for labels */
+    width: 120px;
+    /* Fixed width for labels */
     flex-shrink: 0;
 }
 
@@ -72,6 +73,17 @@ body {
     color: #856404;
 }
 
+
+.status-inprogress {
+    background-color: #FFF3CD;
+    color: #856404;
+}
+
+.status-done {
+    background-color: #D1ECF1;
+    color: #0C5460;
+}
+
 .status-approved {
     background-color: #D4EDDA;
     color: #155724;
@@ -88,9 +100,9 @@ body {
 }
 
 .page-title {
-font-size: 2.5em;
-margin-bottom: 2rem;
-margin-left: 2rem;
-color: var(--offwhite1);
-align-self: center;
+    font-size: 2.5em;
+    margin-bottom: 2rem;
+    margin-left: 2rem;
+    color: var(--offwhite1);
+    align-self: center;
 }
