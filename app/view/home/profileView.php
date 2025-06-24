@@ -5,9 +5,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>User Profile</title>
-  <link rel="stylesheet" href="/TidyTogether/app/style/globals.css">
-  <link rel="stylesheet" href="/TidyTogether/app/style/navbar.css">
-  <link rel="stylesheet" href="/TidyTogether/app/style/profile.css">
+  <link rel="stylesheet" href="style/globals.css">
+  <link rel="stylesheet" href="style/navbar.css">
+  <link rel="stylesheet" href="style/profile.css">
   
   <style>
     body {

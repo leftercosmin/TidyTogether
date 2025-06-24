@@ -7,9 +7,9 @@
   <title>Supervisor Dashboard</title>
   <meta name="description" content="Supervisor dashboard for approving/rejecting reports">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="/TidyTogether/app/style/globals.css">
-  <link rel="stylesheet" href="/TidyTogether/app/style/navbar.css">
-  <link rel="stylesheet" href="/TidyTogether/app/style/reportHistory.css">
+  <link rel="stylesheet" href="style/globals.css">
+  <link rel="stylesheet" href="style/navbar.css">
+  <link rel="stylesheet" href="style/reportHistory.css">
   <style>
     .report-actions {
       display: flex;
