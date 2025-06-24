@@ -35,6 +35,7 @@
                 </span>
               </div>
 
+              <!-- MEDIA -->
               <div class="report-detail-row">
                 <span class="report-label">Media:</span>
                 <div class="report-media">
@@ -43,6 +44,7 @@
                   $media = $mediaSupervisor[$idPost];
                   foreach ($media as $photo) {
                     echo "<img "
+                      . "class=\"report-photo\""
                       . "src=\"" . $photo["source"] . "\" "
                       . "alt=\"" . $photo["name"] . "\" "
                       . "/>";
@@ -75,15 +77,6 @@
                 <span class="report-label">Created:</span>
                 <span class="report-value"><?php echo htmlspecialchars($post['created_at'] ?? 'N/A'); ?></span>
               </div>
-
-              <?php if (!empty($post['photo'])): ?>
-                <div class="report-detail-row">
-                  <span class="report-label">Photo:</span>
-                  <span class="report-value">
-                    <img src="<?= $post['photo'] ?>" alt="Report Photo" class="report-photo" />
-                  </span>
-                </div>
-              <?php endif; ?>
 
               <form method="POST" class="report-actions">
                 <input type="hidden" name="postId" value="<?= $post['id'] ?>">

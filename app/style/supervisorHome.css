@@ -89,12 +89,18 @@ form button:hover {
     opacity: 0.9;
 }
 
+.report-media {
+    display: grid;
+    justify-content: center;
+}
+
 .report-photo {
     width: 100%;
-    max-width: 300px;
+    max-width: 3rem;
     border-radius: 4px;
-    margin-top: 0.5rem;
-    display: block;
+}
+
+.report-item {
 }
 
 .report-item p {
