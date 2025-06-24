@@ -9,9 +9,11 @@ function authorityFallbackPage(int $id): void
   isError($approvedReports);
 
   $mediaAuthority = [];
+  $marksAuthority = [];
   foreach ($approvedReports as $post) {
     $idPost = $post["id"];
     $mediaAuthority[$idPost] = getMediaModel($idPost);
+    $marksAuthority[$idPost] = getMarkModel($idPost);
   }
 
   require_once "view/home/authorityHomeView.php";

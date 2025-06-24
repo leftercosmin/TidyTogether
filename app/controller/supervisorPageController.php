@@ -7,9 +7,11 @@ function supervisorFallbackPage(int $id): void
   isError($pendingPosts);
 
   $mediaSupervisor = [];
+  $marksSupervisor = [];
   foreach ($pendingPosts as $post) {
     $idPost = $post["id"];
     $mediaSupervisor[$idPost] = getMediaModel($idPost);
+    $marksSupervisor[$idPost] = getMarkModel($idPost);
   }
 
   require_once "view/home/supervisorHomeView.php";

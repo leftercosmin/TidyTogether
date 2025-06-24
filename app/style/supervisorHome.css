@@ -90,7 +90,7 @@ form button:hover {
 }
 
 .report-media {
-    display: grid;
+    display: flex;
     justify-content: center;
 }
 
@@ -98,6 +98,7 @@ form button:hover {
     width: 100%;
     max-width: 3rem;
     border-radius: 4px;
+    margin: 0.2rem;
 }
 
 .report-item {

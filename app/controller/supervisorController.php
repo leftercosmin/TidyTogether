@@ -1,4 +1,5 @@
 <?php
+
 require_once "util/getRoot.php";
 require_once "util/formatField.php";
 
@@ -7,6 +8,7 @@ require_once "model/helper/getMainCityModel.php";
 require_once "model/getReportModel.php";
 require_once "model/getProfileModel.php";
 require_once "model/getMediaModel.php";
+require_once "model/getMarkModel.php";
 require_once "model/processReportModel.php";
 
 require_once "controller/supervisorPageController.php";

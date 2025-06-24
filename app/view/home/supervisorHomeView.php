@@ -68,14 +68,26 @@
                 </span>
               </div>
 
+              <!-- MARKS -->
               <div class="report-detail-row">
-                <span class="report-label">Tag:</span>
-                <span class="report-value"><?php echo htmlspecialchars($post['tag'] ?? 'N/A'); ?></span>
+                <span class="report-label">Marks:</span>
+                <span class="report-value">
+                  <?php
+                  $idPost = $post["id"];
+                  $marks = $marksSupervisor[$idPost];
+                  foreach ($marks as $tag) {
+                    echo "<p "
+                      . "class=\"report-dadada\">"
+                      . $tag["name"]
+                      . "</p>";
+                  }
+                  ?>
+                </span>
               </div>
 
               <div class="report-detail-row">
-                <span class="report-label">Created:</span>
-                <span class="report-value"><?php echo htmlspecialchars($post['created_at'] ?? 'N/A'); ?></span>
+                <span class="report-label">Created At:</span>
+                <span class="report-value"><?php echo htmlspecialchars($post['createdAt'] ?? 'N/A'); ?></span>
               </div>
 
               <form method="POST" class="report-actions">
