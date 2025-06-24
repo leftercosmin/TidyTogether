@@ -36,6 +36,22 @@
               </div>
 
               <div class="report-detail-row">
+                <span class="report-label">Media:</span>
+                <div class="report-media">
+                  <?php
+                  $idPost = $post["id"];
+                  $media = $mediaSupervisor[$idPost];
+                  foreach ($media as $photo) {
+                    echo "<img "
+                      . "src=\"" . $photo["source"] . "\" "
+                      . "alt=\"" . $photo["name"] . "\" "
+                      . "/>";
+                  }
+                  ?>
+                </div>
+              </div>
+
+              <div class="report-detail-row">
                 <span class="report-label">Description:</span>
                 <span class="report-value"><?php echo htmlspecialchars($post['description'] ?? 'N/A'); ?></span>
               </div>

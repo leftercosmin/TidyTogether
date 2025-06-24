@@ -20,6 +20,7 @@ require_once "model/processTagsModel.php";
 
 require_once "controller/civilianPageController.php";
 
+// get session
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
@@ -33,6 +34,7 @@ if (!isset($_SESSION[CONN]) || !$sessionData || !isset($sessionData->id)) {
 
 $id = $sessionData->id;
 
+//? what is this section? todo find out
 if (isset($_GET['fromFavorites'])) {
   $tags = getTagModel();
   header("Location: /TidyTogether/");
@@ -68,8 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['favoriteZone'])) {
   }
   exit();
 }
-// backend only
-// new post created: insert post, media, tags
+
+// backend - new post created: insert post, media, tags
 if (isset($_POST["postAddress"])) {
 
   $idPost = addPostModel(
@@ -112,5 +114,5 @@ if (isset($_POST["postAddress"])) {
 
 }
 
-// frontend: determine pages
-printPage($id);
+// frontend pages
+civilianPrintPage($id);
