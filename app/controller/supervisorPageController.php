@@ -3,10 +3,12 @@
 function supervisorFallbackPage(int $id): void
 {
   $city = getMainCity($id);
+  isError($city);
   $pendingPosts = getReportModel("pending", $city);
-  
+  isError($pendingPosts);
+
   $mediaSupervisor = [];
-  foreach($pendingPosts as $post){
+  foreach ($pendingPosts as $post) {
     $idPost = $post["id"];
     $mediaSupervisor[$idPost] = getMediaModel($idPost);
   }
@@ -23,6 +25,7 @@ function supervisorPrintPage(int $id): void
 
   if ("profilePage" === $_GET["supervisorPage"]) {
     $profile = getProfileModel($id);
+    isError($profile);
     require_once "view/home/profileView.php";
   } else {
     supervisorFallbackPage($id);

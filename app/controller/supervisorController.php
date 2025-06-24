@@ -30,9 +30,13 @@ if (isset($_POST["postId"]) && isset($_POST["action"])) {
   $action = $_POST["action"];
 
   if ($action === "accept") {
-    approveReport($idPost);
+    isError(
+      approveReport($idPost)
+    );
   } elseif ($action === "reject") {
-    denyReport($idPost);
+    isError(
+      denyReport($idPost)
+    );
   }
 
   unset($_POST["postId"], $_POST["action"]);

@@ -7,6 +7,8 @@ require_once "model/getProfileModel.php";
 
 require_once "model/processReportModel.php";
 
+require_once "controller/authorityPageController.php";
+
 // get session
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
@@ -18,30 +20,18 @@ if (!isset($_SESSION[CONN])) {
   exit();
 }
 
-if (isset($_POST["postId"]) && isset($_POST["action"]) && $_POST["action"] === "markDone") {
-  require_once __DIR__ . '/../model/getReportModel.php';
-  markReportDone((int) $_POST["postId"]);
-  header("Location: " . $_SERVER['REQUEST_URI']);
+$id = json_decode($_SESSION[CONN])->{"id"};
+
+// backend operation
+if (isset($_POST["postId"]) && isset($_POST["action"])) {
+  if ($_POST["action"] === "markDone") {
+    markReportDone($_POST["postId"]);
+  }
+
+  $root = getRoot();
+  header("Location: " . $root);
   exit();
 }
 
-$id = json_decode($_SESSION[CONN])->{"id"};
-
-if (!isset($_GET['authorityPage'])) {
-  $city = getMainCity($id);
-  $approvedReports = getReportModel("inProgress", $city);
-  require_once "view/home/authorityHomeView.php";
-
-} else {
-  if ($_GET["authorityPage"] === "profilePage") {
-    $profile = getProfileModel($id);
-    require_once "view/home/profileView.php";
-    
-  } else {
-    $city = getMainCity($id);
-    $approvedReports = getReportModel("inProgress", $city);
-    require_once "view/home/authorityHomeView.php";
-  }
-
-  unset($_GET);
-}
+// frontend pages
+authorityPrintPage($id);

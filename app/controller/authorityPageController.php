@@ -1,0 +1,35 @@
+<?php
+
+function authorityFallbackPage(int $id): void
+{
+  require_once "view/home/authorityHomeView.php";
+
+  $city = getMainCity($id);
+  isError($city);
+  $approvedReports = getReportModel("inProgress", $city);
+  isError($approvedReports);
+
+  $mediaAuthority = [];
+  foreach ($approvedReports as $post) {
+    $idPost = $post["id"];
+    $mediaAuthority[$idPost] = getMediaModel($idPost);
+  }
+
+  require_once "view/home/authorityHomeView.php";
+}
+
+function authorityPrintPage(int $id): void
+{
+  if (!isset($_GET) || !isset($_GET['authorityPage'])) {
+    authorityFallbackPage($id);
+    return;
+  }
+
+  if ("profilePage" === $_GET["authorityPage"]) {
+    $profile = getProfileModel(id: $id);
+    isError($profile);
+    require_once "view/home/profileView.php";
+  } else {
+    authorityFallbackPage($id);
+  }
+}
