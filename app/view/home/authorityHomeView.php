@@ -10,7 +10,7 @@
   <link rel="stylesheet" href="style/globals.css">
   <link rel="stylesheet" href="style/navbar.css">
   <link rel="stylesheet" href="style/reportHistory.css">
-  <link rel="stylesheet" href="./style/authorityHome.css">
+  <link rel="stylesheet" href="style/authorityHome.css">
 </head>
 
 <body>
