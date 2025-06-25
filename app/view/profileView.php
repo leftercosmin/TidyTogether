@@ -65,7 +65,7 @@
         . "class=\"edit-btn\" "
         . "href=\"?" . $profile["role"] . "Page" . "=editProfilePage\" "
         . ">";
-      echo "Edit your Profile";
+      echo "Edit Profile";
       echo "</a>";
       ?>
 
