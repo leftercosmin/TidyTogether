@@ -66,13 +66,6 @@
                     echo "<img "
                       . "class=\"report-photo\" "
                       . "src=\""
-                      . "public/background-tile.png" . "\" "
-                      //. getSourcePhoto($photo["source"]) . "\" "
-                      . "alt=\"" . $photo["name"] . "\" "
-                      . "/>";
-                    echo "<img "
-                      . "class=\"report-photo\" "
-                      . "src=\""
                       . getSourcePhoto($photo["source"]) . "\" "
                       . "alt=\"" . $photo["name"] . "\" "
                       . "/>";
