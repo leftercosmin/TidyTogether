@@ -14,5 +14,6 @@ function alert(string $data): bool
   $output = "\"" . $output . "\"";
 
   echo "<script>alert($output);</script>";
+  sleep(2);
   return true;
 }

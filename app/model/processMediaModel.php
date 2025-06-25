@@ -46,12 +46,25 @@ function processMediaModel(int $idUser, array|null $files): array|null|string
       continue;
     }
 
+    $format = getFormat($newPath);
+    if (in_array($format, ["jpg", "png", "mp4", "webm"])) {
+      alert("warning - processMediaModel(): file ignored - wrong format");
+      continue;
+    }
+
     $file = [];
     $file["name"] = $name;
     $file["size"] = $size;
     $file["source"] = $newPath;
-    $file["format"] = getFormat($newPath);
+    $file["format"] = $format;
     $media[] = $file;
+  }
+
+  exec("ls app/public/uploads", $os);
+
+  $size = count($os);
+  for ($i = 0; $i < $size; $i++) {
+    alert($os[$i] . "\n");
   }
 
   return $media;
