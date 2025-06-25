@@ -152,6 +152,7 @@ body {
 .chart-content {
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
   gap: 2rem;
   height: calc(100% - 3rem);
   align-items: stretch;
@@ -231,7 +232,7 @@ body {
 #zonePieChart {
   width: 100% !important;
   height: 350px !important;
-  max-width: 350px !important;
+  max-width: 400px !important;
 }
 
 .chart-box h3 {
@@ -304,6 +305,8 @@ body {
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  margin-top: 2rem;
+  display: none;
 }
 
 .stats-grid {
@@ -700,4 +703,8 @@ body {
   .chart-stat-value {
     font-size: 0.8rem;
   }
+}
+
+#chart-title {
+  margin-bottom: 1.5em;
 }
