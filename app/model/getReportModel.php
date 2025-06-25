@@ -25,8 +25,12 @@
   ...
  ]
  */
-function getReportModel(string $status, string $city): array|string
+function getReportModel(string $status, string|null $city): array|string
 {
+    if (null === $city) {
+        return [];
+    }
+
     if (str_starts_with($city, "error")) {
         return "error - getReports(): failed to get main city";
     }
