@@ -103,9 +103,22 @@ document.addEventListener("DOMContentLoaded", function () {
                 console.error('Error saving favorite:', error);
                 favBtn.textContent = "Network Error - Try Again";
                 favBtn.disabled = false;
-                favBtn.style.backgroundColor = "#f44336";
-              });
+                favBtn.style.backgroundColor = "#f44336";              });
             };
+          }
+
+          const genReportBtn = document.getElementById('gen-report');
+          if (genReportBtn) {
+            console.log('Generate report button found:', genReportBtn);
+            genReportBtn.onclick = function() {
+              console.log('Generate report button clicked!');
+              console.log('Current location:', currentLocation);
+                const reportUrl = `?civilianPage=neighborhoodReportPage&neighborhood=${encodeURIComponent(currentLocation.neighborhood)}&city=${encodeURIComponent(currentLocation.city)}&country=${encodeURIComponent(currentLocation.country)}`;
+              console.log('Navigating to:', reportUrl);
+              window.location.href = reportUrl;
+            };
+          } else {
+            console.log('Generate report button NOT found');
           }
         }, 100);
       })

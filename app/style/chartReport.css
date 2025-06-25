@@ -5,7 +5,7 @@ body {
 }
 
 .report-container {
-  margin-left: 250px; /* Keep this for navbar space */
+  margin-left: 250px;
   padding: 2rem;
   display: flex;
   flex-direction: column;
@@ -14,15 +14,20 @@ body {
 }
 
 .content-wrapper {
+  margin-left: 500px;
   width: 100%;
-  max-width: 900px; /* Fixed consistent width for all elements */
+  max-width: 900px;
+  margin-right: 100px;
 }
 
 .report-heading {
-  color: var(--offwhite1);
-  margin-bottom: 1.5rem;
-  width: 100%;
-  text-align: left;
+  border-radius: 20px;
+  padding: 1rem;
+  background: var(--offwhite1);
+  font-size: 2.5em;
+  margin-bottom: 2rem;
+  color: var(--green);
+  align-self: center;
 }
 
 .controls {
@@ -70,12 +75,88 @@ body {
 
 .chart-box {
   width: 100%;
-  height: 400px;
+  height: 500px;
   background: var(--offwhite1);
   padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-content {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  height: calc(100% - 3rem);
+  align-items: stretch;
+}
+
+.stats-sidebar {
+  flex: 0 0 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  justify-content: space-evenly;
+  padding: 1rem 0;
+}
+
+.chart-wrapper {
+  margin-top: 0.5em;
+  flex: 1;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 300px;
+}
+
+.chart-stat-item {
+  text-align: left;
+  padding: 0.25rem 0;
+  background: none;
+  border: none;
+}
+
+.chart-stat-item h4 {
+  margin: 0;
+  color: var(--green);
+  font-size: 0.9rem;
+  text-transform: none;
+  letter-spacing: normal;
+  font-weight: 500;
+}
+
+.chart-stat-value {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin: 0.1rem 0 0 0;
+  color: var(--green);
+}
+
+.chart-stat-value.completed {
+  color: var(--green);
+}
+
+.chart-stat-value.pending {
+  color: var(--green);
+}
+
+.chart-stat-value.in-progress {
+  color: var(--green);
+}
+
+.chart-stat-value.completion-high {
+  color: var(--green);
+}
+
+.chart-stat-value.completion-medium {
+  color: var(--green);
+}
+
+.chart-stat-value.completion-low {
+  color: var(--green);
 }
 
 #reportsBarChart {
@@ -83,9 +164,16 @@ body {
   height: 350px !important;
 }
 
+#zonePieChart {
+  width: 100% !important;
+  height: 350px !important;
+  max-width: 350px !important;
+}
+
 .chart-box h3 {
   color: var(--green);
-  margin-top: 0;
+  margin: 0 0 1rem 0;
+  flex-shrink: 0;
 }
 
 .data-table {
@@ -146,45 +234,379 @@ body {
     font-weight: 500;
 }
 
-@media screen and (max-width: 768px) {
+.stats-summary {
+  width: 100%;
+  background: var(--offwhite1);
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  background: #f8f9fa;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-item h4 {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-item .stat-value {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0.5rem 0;
+  color: #333;
+}
+
+.stat-value.completed {
+  color: #4CAF50;
+}
+
+.stat-value.pending {
+  color: #FFC107;
+}
+
+.stat-value.in-progress {
+  color: #2196F3;
+}
+
+.stat-value.completion-high {
+  color: #4CAF50;
+}
+
+.stat-value.completion-medium {
+  color: #FFC107;
+}
+
+.stat-value.completion-low {
+  color: #f44336;
+}
+
+@media screen and (max-width: 1080px) {
   .report-container {
     margin-left: 0;
     padding: 1rem;
+    max-width: 100%;
   }
   
   .content-wrapper {
-    width: 100%;
+    width: 70%;
     max-width: 100%;
+    margin-right: 0;
   }
   
   .controls {
     flex-direction: column;
-    gap: 15px;
+    gap: 1em;
+    padding: 0.8rem 1rem;
   }
   
   .interval-selector {
     display: flex;
     width: 100%;
     justify-content: center;
+    flex-wrap: wrap;
   }
   
   .download-options {
     display: flex;
     width: 100%;
     justify-content: center;
+    gap: 0.5rem;
   }
   
   .data-table {
-    display: block;
     width: 100%;
     overflow-x: auto;
+  }
+  .chart-box {
+    height: auto;
+    min-height: 300px;
+  }
+
+  .chart-content {
+    flex-direction: column;
+    gap: 1rem;
+    height: auto;
+    align-items: center;
+  }
+
+  .stats-sidebar {
+    flex: none;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 0.5rem;
+    padding: 0.5rem 0;
+  }
+
+  .chart-wrapper {
+    width: 100%;
+    height: 250px;
+    max-height: none;
+    margin-top: 0;
+  }
+
+  .chart-stat-item {
+    flex: 1;
+    min-width: 70px;
+    padding: 0.2rem 0;
+    text-align: left;
+  }
+
+  .chart-stat-item h4 {
+    font-size: 0.7rem;
+    color: var(--green);
+    font-weight: 500;
+    text-transform: none;
+  }
+
+  .chart-stat-value {
+    font-size: 1rem;
+    color: var(--green);
+  }
+    #reportsBarChart {
+    height: 250px !important;
+  }
+
+  #zonePieChart {
+    height: 250px !important;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.5rem;
+  }
+
+  .stat-item .stat-value {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .report-container {
+    margin-left: 0 !important;
+    width: 100% !important;
+    padding: 0.5rem;
+    box-sizing: border-box;
+  }
+  
+  .content-wrapper {
+    width: 100%;
+    max-width: 100%;
+    margin-right: 0;
+    padding: 0;
+  }
+  
+  .report-heading {
+    font-size: 1.8em;
+    margin-bottom: 1rem;
+    padding: 0.8rem;
+    text-align: center;
+  }
+  
+  .controls {
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .interval-selector {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.3rem;
+  }
+  
+  .interval-selector button {
+    padding: 6px 12px;
+    margin-right: 0;
+    font-size: 0.8rem;
+  }
+  
+  .download-options {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  .download-options a {
+    padding: 6px 12px;
+    font-size: 0.8rem;
+    margin-left: 0;
   }
   
   .chart-box {
     height: auto;
+    min-height: 250px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .chart-content {
+    flex-direction: column;
+    gap: 1rem;
+    height: auto;
+  }
+  
+  .stats-sidebar {
+    flex: none;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 0.3rem;
+    padding: 0.5rem 0;
+  }
+  
+  .chart-wrapper {
+    width: 100%;
+    height: 200px;
+    max-height: none;
+    margin-top: 0;
+  }
+  
+  .chart-stat-item {
+    flex: 1;
+    min-width: 60px;
+    padding: 0.2rem 0;
+    text-align: left;
+  }
+  
+  .chart-stat-item h4 {
+    font-size: 0.6rem;
+    line-height: 1.2;
+    color: var(--green);
+    font-weight: 500;
+    text-transform: none;
+  }
+  
+  .chart-stat-value {
+    font-size: 0.9rem;
+    color: var(--green);
   }
   
   #reportsBarChart {
-    height: 250px !important;
+    height: 200px !important;
+  }
+  
+  #zonePieChart {
+    height: 200px !important;
+    max-width: 250px !important;
+  }
+  
+  .stats-summary {
+    padding: 1rem;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.3rem;
+    padding: 0.5rem;
+  }
+  
+  .stat-item .stat-value {
+    font-size: 1.2rem;
+  }
+  
+  .stat-item h4 {
+    font-size: 0.7rem;
+  }
+  
+  .data-table {
+    font-size: 0.8rem;
+  }
+  
+  .data-table th, .data-table td {
+    padding: 8px 4px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .report-container {
+    padding: 0.25rem;
+  }
+  
+  .report-heading {
+    font-size: 1.4em;
+    padding: 0.5rem;
+  }
+  
+  .controls {
+    padding: 0.3rem;
+  }
+  
+  .interval-selector button {
+    padding: 4px 8px;
+    font-size: 0.7rem;
+  }
+  
+  .download-options a {
+    padding: 4px 8px;
+    font-size: 0.7rem;
+  }
+  
+  .chart-box {
+    padding: 0.5rem;
+  }
+  
+  .chart-wrapper {
+    height: 180px;
+    margin-top: 0;
+  }
+  
+  .chart-stat-item {
+    min-width: 50px;
+    padding: 0.1rem 0;
+    text-align: left;
+  }
+  
+  .chart-stat-item h4 {
+    font-size: 0.5rem;
+    color: var(--green);
+    font-weight: 500;
+    text-transform: none;
+  }
+  
+  .chart-stat-value {
+    font-size: 0.8rem;
+    color: var(--green);
+  }
+  
+  #reportsBarChart {
+    height: 180px !important;
+  }
+  
+  #zonePieChart {
+    height: 180px !important;
+    max-width: 200px !important;
+  }
+  
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+  
+  .stat-item .stat-value {
+    font-size: 1rem;
+  }
+  
+  .data-table {
+    font-size: 0.7rem;
+  }
+  
+  .data-table th, .data-table td {
+    padding: 6px 2px;
   }
 }

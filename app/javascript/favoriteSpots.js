@@ -48,7 +48,6 @@ window.selectFavoriteZone = function(lat, lng, neighborhood, city) {
 };
 
 window.deleteFavoriteZone = function(zoneId, neighborhood, city, buttonElement) {
-  // Disable the button and show loading state
   buttonElement.disabled = true;
   buttonElement.textContent = '...';
 
@@ -63,11 +62,9 @@ window.deleteFavoriteZone = function(zoneId, neighborhood, city, buttonElement) 
   .then(res => res.json())
   .then(data => {
     if (data.success) {
-      // Remove the entire row from the dropdown
       const row = buttonElement.parentElement;
       row.remove();
       
-      // Check if there are any favorites left
       const dropdown = document.getElementById('zonesDropdownContent');
       if (dropdown.children.length === 0) {
         dropdown.innerHTML = "<div style='padding:0.5em;color:#888;'>No saved zones</div>";

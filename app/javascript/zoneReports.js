@@ -41,10 +41,9 @@ function loadReportData(interval) {
         throw new Error('Network response was not ok: ' + response.status);
       }
       
-      // Check if the response is JSON
+      //check if the response is json
       const contentType = response.headers.get('content-type');
       if (!contentType || !contentType.includes('application/json')) {
-        // If not JSON, get the text to show the actual error
         return response.text().then(text => {
           throw new Error('Server returned non-JSON response: ' + text.substring(0, 150) + '...');
         });
