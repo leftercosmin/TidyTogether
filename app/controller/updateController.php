@@ -21,6 +21,10 @@ $fname = $_POST["editfirstname"] ?? null;
 $lname = $_POST["editlastname"] ?? null;
 $mcity = $_POST["editmaincity"] ?? null;
 
+$fname = "" === $fname ? null : $fname;
+$lname = "" === $lname ? null : $lname;
+$mcity = "" === $mcity ? null : $mcity;
+
 isError(
   processEditModel($id, $fname, $lname, $mcity)
 );
