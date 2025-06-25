@@ -53,7 +53,8 @@
                   foreach ($media as $photo) {
                     echo "<img "
                       . "class=\"report-photo\""
-                      . "src=\"" . $photo["source"] . "\" "
+                      . "src=\""
+                      . getSourcePhoto($photo["source"]) . "\" "
                       . "alt=\"" . $photo["name"] . "\" "
                       . "/>";
                   }
@@ -98,7 +99,7 @@
                 <span class="report-value"><?php echo htmlspecialchars($post['createdAt'] ?? 'N/A'); ?></span>
               </div>
 
-              <form method="POST" class="report-actions">
+              <form method="post" class="report-actions">
                 <input type="hidden" name="postId" value="<?= $post['id'] ?>">
                 <button type="submit" name="action" value="accept" class="btn">Accept</button>
                 <button type="submit" name="action" value="reject" class="btn btn-reject">Reject</button>

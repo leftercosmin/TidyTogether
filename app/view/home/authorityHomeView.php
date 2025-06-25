@@ -22,7 +22,7 @@
 
   <div class="overlay" id="overlay"></div>
 
-  <?php require_once 'components/authorityNavbar.php'; ?>
+  <?php require_once 'view/components/authorityNavbar.php'; ?>
 
   <div class="report-container">
     <h1 class="page-title">Approved Reports</h1>
@@ -67,15 +67,17 @@
                 <span class="report-label">Media:</span>
                 <div class="report-media">
                   <?php
-                  $idPost = $post["id"];
-                  $media = $mediaSupervisor[$idPost];
+                  $idPost = $report["id"];
+                  $media = $mediaAuthority[$idPost];
                   foreach ($media as $photo) {
                     echo "<img "
-                      . "class=\"report-photo\""
-                      . "src=\"" . $photo["source"] . "\" "
+                      . "class=\"report-photo\" "
+                      . "src=\""
+                      . getSourcePhoto($photo["source"]) . "\" "
                       . "alt=\"" . $photo["name"] . "\" "
                       . "/>";
                   }
+                  // . "public/background-tile.png" . "\" " // for tests
                   ?>
                 </div>
               </div>
@@ -85,11 +87,11 @@
                 <span class="report-label">Marks:</span>
                 <span class="report-value">
                   <?php
-                  $idPost = $post["id"];
-                  $marks = $marksSupervisor[$idPost];
+                  $idPost = $report["id"];
+                  $marks = $marksAuthority[$idPost];
                   foreach ($marks as $tag) {
                     echo "<p "
-                      . "class=\"report-dadada\">"
+                      . "class=\"report-dadada\">" //todo
                       . $tag["name"]
                       . "</p>";
                   }
@@ -102,14 +104,13 @@
                 <span class="report-value"><?php echo htmlspecialchars($report['createdAt'] ?? 'N/A'); ?></span>
               </div>
 
-              <?php if ($report['status'] === 'inProgress' || $report['status'] === 'approved'): ?>
-                <form method="POST">
-                  <input type="hidden" name="postId" value="<?php echo htmlspecialchars($report['id']); ?>">
-                  <button type="submit" name="action" value="markDone" class="mark-done-btn">
-                    Mark as Done
-                  </button>
-                </form>
-              <?php endif; ?>
+              <form method="post" action="./">
+                <input type="hidden" name="postId" value="<?php echo htmlspecialchars($report['id']); ?>">
+                <button type="submit" name="action" value="markDone" class="mark-done-btn">
+                  Mark as Done
+                </button>
+              </form>
+
             </div>
           </div>
         <?php endforeach; ?>

@@ -68,8 +68,7 @@ body.profile-body {
 }
 
 .edit-btn {
-  font: unset;
-  all: unset;
+  text-decoration: none;
   background-color: var(--green);
   color: white;
   border: none;
@@ -87,7 +86,7 @@ body.profile-body {
 }
 
 .logout-btn {
-  font: unset;
+  text-decoration: none;
   background-color: var(--green);
   color: white;
   border: none;

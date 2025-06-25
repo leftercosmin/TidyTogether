@@ -31,10 +31,6 @@ if (isset($_POST["postId"]) && isset($_POST["action"])) {
   if ($_POST["action"] === "markDone") {
     markReportDone($_POST["postId"]);
   }
-
-  $root = getRoot();
-  header("Location: " . $root);
-  exit();
 }
 
 // frontend pages

@@ -46,13 +46,21 @@ function processMediaModel(int $idUser, array|null $files): array|null|string
       continue;
     }
 
+    $format = getFormat($newPath);
+    if (!in_array($format, ["jpg", "png", "mp4", "webm"])) {
+      alert("warning - processMediaModel(): file ignored - wrong format");
+      continue;
+    }
+
     $file = [];
     $file["name"] = $name;
     $file["size"] = $size;
     $file["source"] = $newPath;
-    $file["format"] = getFormat($newPath);
+    $file["format"] = $format;
     $media[] = $file;
   }
 
+  // debugging purposes
+  // printFiles("public/uploads");
   return $media;
 }
