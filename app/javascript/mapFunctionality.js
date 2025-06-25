@@ -84,7 +84,7 @@ document.addEventListener("DOMContentLoaded", function () {
               formData.append('country', currentLocation.fullData.address.country || '');
               formData.append('address', currentLocation.address);
 
-              fetch('controller/civilianController.php', {
+              fetch('model/favoriteZoneHandler.php', {
                 method: 'POST',
                 body: formData
               })

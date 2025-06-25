@@ -1,7 +1,7 @@
 <?php
 
-require_once "model/helper/addZoneModel.php";
-require_once "model/helper/getZoneModel.php";
+require_once __DIR__ . "/helper/addZoneModel.php";
+require_once __DIR__ . "/helper/getZoneModel.php";
 
 /**
  * Summary of addPostModel
