@@ -6,6 +6,8 @@ require_once "util/getRoot.php";
 require_once "util/formatField.php";
 require_once "util/writeConsole.php";
 require_once "util/databaseConnection.php";
+require_once "util/printFiles.php";
+require_once "util/getSourcePhoto.php";
 
 if (!getenv('SERVER')) {
   require_once __DIR__ . '/../vendor/autoload.php';

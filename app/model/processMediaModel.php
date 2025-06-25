@@ -60,12 +60,7 @@ function processMediaModel(int $idUser, array|null $files): array|null|string
     $media[] = $file;
   }
 
-  exec("ls public/uploads", $os);
-
-  $size = count($os);
-  for ($i = 0; $i < $size; $i++) {
-    alert($os[$i] . "\n");
-  }
+  printFiles("public/uploads");
 
   return $media;
 }

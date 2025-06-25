@@ -45,7 +45,8 @@
                   foreach ($media as $photo) {
                     echo "<img "
                       . "class=\"report-photo\""
-                      . "src=\"" . $photo["source"] . "\" "
+                      . "src=\""
+                      . getSourcePhoto($photo["source"]) . "\" "
                       . "alt=\"" . $photo["name"] . "\" "
                       . "/>";
                   }
