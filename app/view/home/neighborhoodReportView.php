@@ -123,6 +123,7 @@
         data: chartData,
         options: {
           responsive: true,
+          maintainAspectRatio: false,
           plugins: {
             legend: {
               position: 'bottom',
@@ -142,6 +143,14 @@
                   return `${context.label}: ${value} (${percentage}%)`;
                 }
               }
+            }
+          },
+          layout: {
+            padding: {
+              top: 10,
+              bottom: 10,
+              left: 10,
+              right: 10
             }
           }
         }
@@ -220,6 +229,13 @@
     setActiveButton(currentInterval);
     updateDownloadLinks();
     loadZoneData();
+
+    // Handle window resize to ensure chart responsiveness
+    window.addEventListener('resize', function() {
+      if (chart) {
+        chart.resize();
+      }
+    });
   </script>
 </body>
 </html>
