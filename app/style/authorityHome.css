@@ -93,14 +93,12 @@ h1 {
 
 .report-media {
   display: flex;
-  flex-direction: row;
   justify-content: center;
 }
 
 .report-photo {
-  max-width: 0.3rem;
+  width: 100%;
+  max-width: 3rem;
   border-radius: 4px;
   margin: 0.2rem;
-  width: 1%;
-  height: 1%;
 }
