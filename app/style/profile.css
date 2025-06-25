@@ -62,31 +62,13 @@ body.profile-body {
   border-radius: 20px;
   font-size: 0.9rem;
   font-weight: 600;
-  background-color: #D4EDDA;
+  background-color: #d4edda;
   color: #155724;
   text-transform: capitalize;
 }
 
-.logout-btn {
-  background-color: var(--green);
-  color: white;
-  border: none;
-  padding: 0.85em 2em;
-  border-radius: 50px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.2s;
-  margin-top: 1rem;
-  width: 100%;
-}
-
-.logout-btn:hover {
-  background-color: #015c3f;
-}
-
 .edit-btn {
-  font:unset;
+  font: unset;
   all: unset;
   background-color: var(--green);
   color: white;
@@ -97,11 +79,29 @@ body.profile-body {
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.2s;
-  margin-top: 3rem;
   width: 100%;
 }
 
 .edit-btn:hover {
+  background-color: #015c3f;
+}
+
+.logout-btn {
+  font: unset;
+  background-color: var(--green);
+  color: white;
+  border: none;
+  padding: 0.85em 2em;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.logout-btn:hover {
   background-color: #015c3f;
 }
 

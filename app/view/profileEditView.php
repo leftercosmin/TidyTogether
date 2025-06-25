@@ -27,14 +27,22 @@
     <h1 class="page-title">Edit your Profile</h1>
 
     <form method="post" action="./" class="profile-card">
+
       <label for="editfname">Your First Name:</label>
-      <label for="editlname">Your Last Name:</label>
-      <label for="editmcity">Your city:</label>
       <input type="text" id="editfname" name="editfirstname">
+      <br />
+
+      <label for="editlname">Your Last Name:</label>
       <input type="text" id="editlname" name="editlastname">
+      <br />
+
+      <label for="editmcity">Your city:</label>
       <input type="text" id="editmcity" name="editmaincity">
+      <br />
+
       <a href="./">Cancel</a>
       <button type="submit">Save</a>
+
     </form>
 
   </main>

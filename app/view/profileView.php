@@ -60,13 +60,6 @@
         </div>
       </div>
 
-      <form method="post" action="./">
-        <input type="hidden" name="logout" value="now" />
-        <button class="logout-btn" type="submit">
-          Logout
-        </button>
-      </form>
-
       <?php
       echo "<a "
         . "class=\"edit-btn\" "
@@ -75,6 +68,13 @@
       echo "Edit your Profile";
       echo "</a>";
       ?>
+
+      <form method="post" action="./">
+        <input type="hidden" name="logout" value="now" />
+        <button class="logout-btn" type="submit">
+          Logout
+        </button>
+      </form>
 
     </section>
   </main>
