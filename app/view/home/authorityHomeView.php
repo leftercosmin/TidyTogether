@@ -61,7 +61,7 @@
                 <div class="report-media">
                   <?php
                   $idPost = $post["id"];
-                  $media = $mediaSupervisor[$idPost];
+                  $media = $mediaAuthority[$idPost];
                   foreach ($media as $photo) {
                     echo "<img "
                       . "class=\"report-photo\""
@@ -79,7 +79,7 @@
                 <span class="report-value">
                   <?php
                   $idPost = $post["id"];
-                  $marks = $marksSupervisor[$idPost];
+                  $marks = $marksAuthority[$idPost];
                   foreach ($marks as $tag) {
                     echo "<p "
                       . "class=\"report-dadada\">"
