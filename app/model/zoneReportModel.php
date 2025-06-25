@@ -2,15 +2,25 @@
 
 require_once __DIR__ . '/../util/databaseConnection.php';
 
-function getZoneReportStats($interval = 'WEEK') {
-    $validIntervals = ['DAY', 'WEEK', 'MONTH', 'YEAR'];
+function getZoneReportStats($interval = 'WEEK', $city = '') {
+    $validIntervals = ['DAY', 'WEEK', 'MONTH'];
     if (!in_array($interval, $validIntervals)) {
-        $interval = 'WEEK'; //invalid -> default to week
+        $interval = 'WEEK';
     }
     
     $db = DatabaseConnection::get();
     if (!$db || $db->connect_error) {
         return []; 
+    }
+
+    $cityCondition = '';
+    $params = [];
+    $types = '';
+
+    if (!empty($city)) {
+        $cityCondition = 'WHERE Zone.city LIKE ?';
+        $params[] = '%' . $city . '%';
+        $types = 's';
     }
 
     $sql = "SELECT
@@ -23,19 +33,29 @@ function getZoneReportStats($interval = 'WEEK') {
             FROM Zone
             LEFT JOIN Post ON Post.idZone = Zone.id
               AND Post.createdAt >= DATE_SUB(NOW(), INTERVAL 1 $interval)
+            $cityCondition
             GROUP BY Zone.id, Zone.name, Zone.city, Zone.country
             ORDER BY total_reports DESC";
-            
-    $result = $db->query($sql);
+
+    if (!empty($params)) {
+        $stmt = $db->prepare($sql);
+        if (!$stmt) {
+            return [];
+        }
+        $stmt->bind_param($types, ...$params);
+        $stmt->execute();
+        $result = $stmt->get_result();
+    } else {
+        $result = $db->query($sql);
+    }
+    
     if (!$result) {
         return [];
     }
     
     $data = [];
     while ($row = $result->fetch_assoc()) {
-        if ($row['total_reports'] > 0) {
-            $data[] = $row;
-        }
+        $data[] = $row;
     }
     
     return $data;
@@ -45,12 +65,22 @@ function getZoneReportStats($interval = 'WEEK') {
 function generateReportCSV($data) {
     $output = "Neighborhood,City,Country,Total Reports,Completed Reports,Completion Percentage\n";
     
+    if (empty($data)) {
+        $output .= "No data available for the selected period\n";
+        return $output;
+    }
+    
     foreach ($data as $row) {
         $completionPercentage = $row['total_reports'] > 0 
             ? round(($row['completed_reports'] / $row['total_reports']) * 100) 
             : 0;
+        
+        // Escape commas and quotes in CSV data
+        $neighborhood = '"' . str_replace('"', '""', $row['neighborhood']) . '"';
+        $city = '"' . str_replace('"', '""', $row['city']) . '"';
+        $country = '"' . str_replace('"', '""', $row['country']) . '"';
             
-        $output .= "{$row['neighborhood']},{$row['city']},{$row['country']}," .
+        $output .= "{$neighborhood},{$city},{$country}," .
                   "{$row['total_reports']},{$row['completed_reports']}," .
                   "{$completionPercentage}%\n";
     }
@@ -59,7 +89,7 @@ function generateReportCSV($data) {
 }
 
 //PDF helper
-function generateReportHTML($data, $interval) {
+function generateReportHTML($data, $interval, $city = '') {
     $intervalText = [
         'DAY' => 'Last 24 Hours',
         'WEEK' => 'Last Week',
@@ -68,6 +98,7 @@ function generateReportHTML($data, $interval) {
     ];
     
     $title = isset($intervalText[$interval]) ? $intervalText[$interval] : 'Custom Period';
+    $cityText = !empty($city) ? " for City: " . htmlspecialchars($city) : "";
     
     $html = '<style>
         body { font-family: Arial, sans-serif; }
@@ -80,7 +111,7 @@ function generateReportHTML($data, $interval) {
     </style>';
     
     $html .= "<h1>Zone Cleanliness Report</h1>";
-    $html .= "<h2>Period: {$title}</h2>";
+    $html .= "<h2>Period: {$title}{$cityText}</h2>";
     $html .= "<p>Generated on: " . date('F j, Y, g:i a') . "</p>";
     
     $html .= '<table>
@@ -96,31 +127,40 @@ function generateReportHTML($data, $interval) {
         </thead>
         <tbody>';
     
-    //highlights for dirty and clean zones
-    $numRows = count($data);
-    $dirtyThreshold = max(1, floor($numRows * 0.2));
-    $cleanThreshold = max(1, floor($numRows * 0.8));
-    
-    foreach ($data as $index => $row) {
-        $completionPercentage = $row['total_reports'] > 0 
-            ? round(($row['completed_reports'] / $row['total_reports']) * 100) 
-            : 0;
-            
-        $rowClass = '';
-        if ($index < $dirtyThreshold) {
-            $rowClass = 'dirty';
-        } else if ($index >= $cleanThreshold) {
-            $rowClass = 'clean';
-        }
+    if (empty($data)) {
+        $html .= '<tr><td colspan="6" style="text-align: center; font-style: italic;">No data available for the selected period</td></tr>';
+    } else {
+        //highlights for dirty and clean zones
+        $numRows = count($data);
+        $dirtyThreshold = max(1, floor($numRows * 0.2));
+        $cleanThreshold = max(1, floor($numRows * 0.8));
         
-        $html .= "<tr class=\"{$rowClass}\">
-            <td>{$row['neighborhood']}</td>
-            <td>{$row['city']}</td>
-            <td>{$row['country']}</td>
-            <td>{$row['total_reports']}</td>
-            <td>{$row['completed_reports']}</td>
-            <td>{$completionPercentage}%</td>
-        </tr>";
+        foreach ($data as $index => $row) {
+            $completionPercentage = $row['total_reports'] > 0 
+                ? round(($row['completed_reports'] / $row['total_reports']) * 100) 
+                : 0;
+                
+            $rowClass = '';
+            if ($index < $dirtyThreshold) {
+                $rowClass = 'dirty';
+            } else if ($index >= $cleanThreshold) {
+                $rowClass = 'clean';
+            }
+            
+            // Escape HTML entities
+            $neighborhood = htmlspecialchars($row['neighborhood']);
+            $city = htmlspecialchars($row['city']);
+            $country = htmlspecialchars($row['country']);
+            
+            $html .= "<tr class=\"{$rowClass}\">
+                <td>{$neighborhood}</td>
+                <td>{$city}</td>
+                <td>{$country}</td>
+                <td>{$row['total_reports']}</td>
+                <td>{$row['completed_reports']}</td>
+                <td>{$completionPercentage}%</td>
+            </tr>";
+        }
     }
     
     $html .= '</tbody></table>';

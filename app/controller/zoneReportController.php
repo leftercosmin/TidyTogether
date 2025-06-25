@@ -2,9 +2,6 @@
 
 ob_start();
 
-ini_set('display_errors', 0);
-error_reporting(E_ALL);
-
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../model/zoneReportModel.php';
 require_once __DIR__ . '/../util/databaseConnection.php';
@@ -20,9 +17,17 @@ try {
     }
 
     $interval = isset($_GET['interval']) ? strtoupper($_GET['interval']) : 'MONTH';
-    $validIntervals = ['DAY', 'WEEK', 'MONTH', 'YEAR'];
+    $validIntervals = ['DAY', 'WEEK', 'MONTH'];
     if (!in_array($interval, $validIntervals)) {
         $interval = 'MONTH';
+    }
+
+    $city = isset($_GET['city']) ? trim($_GET['city']) : '';
+
+    // Fetch data
+    $data = getZoneReportStats($interval, $city);
+    if (!is_array($data)) {
+        $data = [];
     }
 
     if (isset($_GET['format'])) {
@@ -31,39 +36,28 @@ try {
         switch ($_GET['format']) {
             case 'csv':
                 header('Content-Type: text/csv');
-                header('Content-Disposition: attachment; filename="zone_report.csv"');
-                ob_end_clean();
+                $filename = 'zone_report_' . $interval . ($city ? '_' . preg_replace('/[^a-zA-Z0-9]/', '', $city) : '') . '.csv';
+                header('Content-Disposition: attachment; filename="' . $filename . '"');
                 echo generateReportCSV($data);
                 exit;
                 
             case 'pdf':
-                ob_end_clean();
                 require_once __DIR__ . '/../../vendor/autoload.php';
                 $mpdf = new \Mpdf\Mpdf();
-                
-                $data = getZoneReportStats($interval);
-                $mpdf->WriteHTML(generateReportHTML($data, $interval));
-                $mpdf->Output('zone_report.pdf', 'D');
+                $htmlData = generateReportHTML($data, $interval, $city);
+                $mpdf->WriteHTML($htmlData);
+                $filename = 'zone_report_' . $interval . ($city ? '_' . preg_replace('/[^a-zA-Z0-9]/', '', $city) : '') . '.pdf';
+                $mpdf->Output($filename, 'D');
                 exit;
                 
             default:
-                break;
+                header('HTTP/1.1 400 Bad Request');
+                echo "Invalid format requested";
+                exit;
         }
     }
 
-    try {
-        $data = getZoneReportStats($interval);
-        if (!is_array($data)) {
-            throw new Exception("Invalid data format returned from model");
-        }
-  
-        if (empty($data)) {
-            $data = [];
-        }
-    } catch (Exception $e) {
-        throw new Exception("Error fetching report data: " . $e->getMessage());
-    }
-
+    // For JSON response (regular AJAX calls)
     ob_end_clean();
     header('Content-Type: application/json');
     echo json_encode($data);
@@ -71,11 +65,14 @@ try {
 } catch (Exception $e) {
     ob_end_clean();
     
-    header('Content-Type: application/json');
-    echo json_encode([
-        'error' => true,
-        'message' => $e->getMessage()
-    ]);
+    if (isset($_GET['format'])) {
+        header('HTTP/1.1 500 Internal Server Error');
+        header('Content-Type: text/html');
+        echo "<html><body><h1>Report Generation Error</h1><p>Unable to generate report</p></body></html>";
+    } else {
+        header('Content-Type: application/json');
+        echo json_encode(['error' => true, 'message' => 'Unable to load data']);
+    }
 }
 
 exit;

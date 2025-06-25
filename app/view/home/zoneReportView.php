@@ -11,14 +11,12 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <!-- Add mobile menu toggle button -->
   <button class="menu-toggle" id="menuToggle">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
       <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
     </svg>
   </button>
 
-  <!-- Add overlay for mobile menu -->
   <div class="overlay" id="overlay"></div>
   
   <?php require_once __DIR__ . '/../components/civilianNavbar.php'; ?>
@@ -28,20 +26,31 @@
       <h1 class="report-heading">Zone Cleanliness Reports</h1>
 
       <div class="controls">
-        <div class="interval-selector">
-          <button id="day-btn" onclick="changeInterval('DAY')">Last 24 Hours</button>
-          <button id="week-btn" onclick="changeInterval('WEEK')">Last Week</button>
-          <button id="month-btn" class="active" onclick="changeInterval('MONTH')">Last Month</button>
+        <div class="control-row">
+          <div class="city-filter">
+            <label for="city-input">Filter by City:</label>
+            <input type="text" id="city-input" placeholder="Enter city name (leave empty for all cities)" />
+            <button id="apply-filter-btn" onclick="applyCityFilter()">Apply Filter</button>
+            <button id="clear-filter-btn" onclick="clearCityFilter()">Show All Cities</button>
+          </div>
         </div>
         
-        <div class="download-options">
-          <a id="csv-link" href="#" target="_blank">Download CSV</a>
-          <a id="pdf-link" href="#" target="_blank">Download PDF</a>
+        <div class="control-row">
+          <div class="interval-selector">
+            <button id="day-btn" onclick="changeInterval('DAY')">Last 24 Hours</button>
+            <button id="week-btn" onclick="changeInterval('WEEK')">Last Week</button>
+            <button id="month-btn" class="active" onclick="changeInterval('MONTH')">Last Month</button>
+          </div>
+          
+          <div class="download-options">
+            <a id="csv-link" href="#" target="_blank">Download CSV</a>
+            <a id="pdf-link" href="#" target="_blank">Download PDF</a>
+          </div>
         </div>
       </div>
       
       <div class="chart-box">
-        <h3>Reports by Zone</h3>
+        <h3 id="chart-title">Reports by Zone</h3>
         <canvas id="reportsBarChart"></canvas>
       </div>
       

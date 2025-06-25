@@ -34,16 +34,16 @@
           <a id="pdf-link" href="#" target="_blank">Download PDF</a>
         </div>
       </div>        <div class="chart-box">
-        <h3 id="chart-title" style="margin-bottom: 1.5em;">Report Status Distribution</h3>
-        <div class="chart-content" style="display: flex; flex-direction: row; justify-content: space-evenly;">
-          <div class="stats-sidebar" id="chart-stats" style="display: flex; flex-direction: column; justify-content: space-evenly;">
+        <h3 id="chart-title">Report Status Distribution</h3>
+        <div class="chart-content">
+          <div class="stats-sidebar" id="chart-stats">
           </div>
           <div class="chart-wrapper">
             <canvas id="zonePieChart"></canvas>
           </div>
         </div>
       </div>
-        <div class="stats-summary" id="stats-summary" style="margin-top: 2rem; display: none;">
+        <div class="stats-summary" id="stats-summary">
       </div>
     </div>
   </div>
@@ -123,6 +123,7 @@
         data: chartData,
         options: {
           responsive: true,
+          maintainAspectRatio: false,
           plugins: {
             legend: {
               position: 'bottom',
@@ -142,6 +143,14 @@
                   return `${context.label}: ${value} (${percentage}%)`;
                 }
               }
+            }
+          },
+          layout: {
+            padding: {
+              top: 10,
+              bottom: 10,
+              left: 10,
+              right: 10
             }
           }
         }
@@ -220,6 +229,13 @@
     setActiveButton(currentInterval);
     updateDownloadLinks();
     loadZoneData();
+
+    // Handle window resize to ensure chart responsiveness
+    window.addEventListener('resize', function() {
+      if (chart) {
+        chart.resize();
+      }
+    });
   </script>
 </body>
 </html>
