@@ -73,11 +73,11 @@
                     echo "<img "
                       . "class=\"report-photo\" "
                       . "src=\""
-                      // . "public/background-tile.png" . "\" " // for tests
                       . getSourcePhoto($photo["source"]) . "\" "
                       . "alt=\"" . $photo["name"] . "\" "
                       . "/>";
                   }
+                  // . "public/background-tile.png" . "\" " // for tests
                   ?>
                 </div>
               </div>
