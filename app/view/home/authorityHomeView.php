@@ -15,7 +15,7 @@
 
 <body>
 
-  <?php require_once 'components/authorityNavbar.php'; ?>
+  <?php require_once 'view/components/authorityNavbar.php'; ?>
 
   <div class="report-container">
     <h1 class="page-title">Approved Reports</h1>

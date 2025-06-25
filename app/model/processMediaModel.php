@@ -60,7 +60,7 @@ function processMediaModel(int $idUser, array|null $files): array|null|string
     $media[] = $file;
   }
 
-  printFiles("public/uploads");
-
+  // debugging purposes
+  // printFiles("public/uploads");
   return $media;
 }
