@@ -47,7 +47,7 @@ function processMediaModel(int $idUser, array|null $files): array|null|string
     }
 
     $format = getFormat($newPath);
-    if (in_array($format, ["jpg", "png", "mp4", "webm"])) {
+    if (!in_array($format, ["jpg", "png", "mp4", "webm"])) {
       alert("warning - processMediaModel(): file ignored - wrong format");
       continue;
     }
