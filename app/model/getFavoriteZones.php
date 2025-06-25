@@ -3,10 +3,8 @@ require_once __DIR__ . '/../util/databaseConnection.php';
 
 function getFavoriteZones($userId) {
     $db = DatabaseConnection::get();
-    if (!$db || $db->connect_error) return [];
-
-    $stmt = $db->prepare(
-        "SELECT z.name AS neighborhood, z.city, z.country, lz.lat, lz.lng
+    if (!$db || $db->connect_error) return [];    $stmt = $db->prepare(
+        "SELECT z.id AS idZone, z.name AS neighborhood, z.city, z.country, lz.lat, lz.lng
          FROM LovedZone lz
          JOIN Zone z ON lz.idZone = z.id
          WHERE lz.idUser = ?"

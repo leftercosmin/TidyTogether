@@ -7,11 +7,16 @@ error_reporting(E_ALL);
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../model/zoneReportModel.php';
+require_once __DIR__ . '/../util/databaseConnection.php';
 
 try {
+    // Load environment variables if not already loaded
     if (!getenv('DB_HOST')) {
         $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
         $dotenv->load();
+        foreach ($_ENV as $key => $value) {
+            putenv("$key=$value");
+        }
     }
 
     $interval = isset($_GET['interval']) ? strtoupper($_GET['interval']) : 'MONTH';

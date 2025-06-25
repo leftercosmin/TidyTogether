@@ -105,9 +105,36 @@ body.profile-body {
 }
 
 .page-title {
-  font-size: 2.5em;
-  margin-bottom: 2rem;
-  margin-left: 2rem;
-  color: var(--offwhite1);
-  align-self: center;
+    border-radius: 20px;
+    padding: 1rem;
+    background: var(--offwhite1);
+    font-size: 2.5em;
+    margin-bottom: 2rem;
+    color: var(--green);
+    align-self: center;
+}
+
+@media screen and (max-width: 768px) {
+  .profile-container {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .profile-card {
+    margin: 0;
+    padding: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .page-title {
+    font-size: 2em;
+    margin-left: 0;
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
 }

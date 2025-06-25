@@ -1,24 +1,32 @@
 <?php
 
-require_once "util/getRoot.php";
-require_once "util/formatField.php";
-require_once "util/getFormat.php";
+// Define constants if not already defined (for standalone requests)
+if (!defined('CONN')) {
+    define("CONN", "userSession");
+}
 
-require_once "model/addPostModel.php";
-require_once "model/addMediaModel.php";
-require_once "model/addMarksModel.php";
+require_once __DIR__ . "/../util/getRoot.php";
+require_once __DIR__ . "/../util/formatField.php";
+require_once __DIR__ . "/../util/getFormat.php";
+require_once __DIR__ . "/../util/isError.php";
+require_once __DIR__ . "/../util/alert.php";
+require_once __DIR__ . "/../util/databaseConnection.php";
 
-require_once "model/getLocationModel.php";
-require_once "model/getPostModel.php";
-require_once "model/getReportModel.php";
-require_once "model/getProfileModel.php";
-require_once "model/getTagModel.php";
+require_once __DIR__ . "/../model/addPostModel.php";
+require_once __DIR__ . "/../model/addMediaModel.php";
+require_once __DIR__ . "/../model/addMarksModel.php";
 
-require_once "model/processMediaModel.php";
-require_once "model/processReportModel.php";
-require_once "model/processTagsModel.php";
+require_once __DIR__ . "/../model/getLocationModel.php";
+require_once __DIR__ . "/../model/getPostModel.php";
+require_once __DIR__ . "/../model/getReportModel.php";
+require_once __DIR__ . "/../model/getProfileModel.php";
+require_once __DIR__ . "/../model/getTagModel.php";
 
-require_once "controller/civilianPageController.php";
+require_once __DIR__ . "/../model/processMediaModel.php";
+require_once __DIR__ . "/../model/processReportModel.php";
+require_once __DIR__ . "/../model/processTagsModel.php";
+
+require_once __DIR__ . "/civilianPageController.php";
 
 // get session
 if (session_status() === PHP_SESSION_NONE) {
@@ -33,43 +41,6 @@ if (!isset($_SESSION[CONN]) || !$sessionData || !isset($sessionData->id)) {
 }
 
 $id = $sessionData->id;
-
-//? what is this section? todo find out
-if (isset($_GET['fromFavorites'])) {
-  $tags = getTagModel();
-  header("Location: /TidyTogether/");
-  exit();
-}
-
-if (isset($_GET['getFavorites'])) {
-  require_once __DIR__ . '/../model/getFavoriteZones.php';
-  $favorites = getFavoriteZones($id);
-  header('Content-Type: application/json');
-  echo json_encode($favorites);
-  exit();
-}
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['favoriteZone'])) {
-  require_once __DIR__ . '/../model/addFavoriteZone.php';
-  $userId = $id;
-  $lat = $_POST['lat'] ?? null;
-  $lng = $_POST['lng'] ?? null;
-  $neighborhood = $_POST['neighborhood'] ?? '';
-  $city = $_POST['city'] ?? '';
-  $country = $_POST['country'] ?? '';
-  $address = $_POST['address'] ?? '';
-
-  // Save to DB
-  $result = addFavoriteZone($userId, $neighborhood, $city, $country, $lat, $lng);
-
-  header('Content-Type: application/json');
-  if ($result === true) {
-    echo json_encode(['success' => true, 'message' => 'Favorite zone saved successfully']);
-  } else {
-    echo json_encode(['success' => false, 'message' => $result]);
-  }
-  exit();
-}
 
 // backend - new post created: insert post, media, tags
 if (isset($_POST["postAddress"])) {

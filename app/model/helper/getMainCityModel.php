@@ -33,5 +33,10 @@ function getMainCityModel(int $id): string|null
   }
 
   $arr = $result->fetch_assoc();
+
+  if($arr === null || !isset($arr['mainCity']) || $arr['mainCity'] === null) {
+    return "";
+  }
+
   return $arr['mainCity'];
 }

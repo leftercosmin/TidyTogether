@@ -1,5 +1,8 @@
 body {
-    background-color: var(--green);
+    background-image: url('../public/background-tile.jpg'), linear-gradient(rgba(1, 120, 82, 0.9), rgba(1, 120, 82, 0.9));
+    background-repeat: repeat, no-repeat;
+    background-size: 300px 300px, cover;
+    background-attachment: fixed, fixed;
 }
 
 .report-container {
@@ -22,7 +25,7 @@ body {
     background-color: var(--offwhite1);
     border-radius: 8px;
     padding: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin: 1.5rem;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-left: 4px solid var(--green);
 }
@@ -100,9 +103,69 @@ body {
 }
 
 .page-title {
+    border-radius: 20px;
+    padding: 1rem;
+    background: var(--offwhite1);
     font-size: 2.5em;
     margin-bottom: 2rem;
-    margin-left: 2rem;
-    color: var(--offwhite1);
+    /* margin-left: 2rem; */
+    color: var(--green);
     align-self: center;
+}
+
+@media screen and (max-width: 768px) {
+    .report-container {
+        margin-left: 0;
+        margin-right: 0;
+        padding: 1rem;
+        min-height: 100vh;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .page-title {
+        font-size: 2em;
+        margin-left: 0;
+        margin-bottom: 1.5rem;
+        text-align: center;
+    }
+    
+    .report-list {
+        max-width: 100%;
+        padding: 0 1rem;
+    }
+    
+    .report-item {
+        margin-bottom: 1rem;
+        padding: 1rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .page-title {
+        font-size: 1.5em;
+        margin-bottom: 1rem;
+    }
+    
+    .report-item {
+        padding: 0.75rem;
+        margin: 0;
+        margin-bottom: 1em;
+    }
+    
+    .report-item h3 {
+        font-size: 1.1em;
+        margin-bottom: 0.75rem;
+    }
+    
+    .report-detail-row {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 0.5rem;
+    }
+    
+    .report-label {
+        margin-bottom: 0.25rem;
+        font-weight: 600;
+    }
 }
