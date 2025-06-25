@@ -1,0 +1,76 @@
+name: Shared - Continuous Integration for common tasks
+
+on:
+  workflow_call:
+
+jobs:
+  checks:
+    strategy:
+      matrix:
+        include:
+          - php-versions: "8.1"
+          - php-versions: "8.2"
+          - php-versions: "8.3"
+          - php-versions: "8.4"
+            stable: true
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+
+      - name: ⚙️ Setup PHP, with composer and extensions
+        uses: ./.github/workflows/actions/setup-php
+        with:
+          php-version: ${{ matrix.php-versions }}
+
+      - name: ♻️ Tools cache
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        with:
+          path: tools/cache
+          key: ${{ runner.os }}-tools-${{ matrix.php-versions }}-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-tools-
+
+      - name: 👕 Lint
+        if: matrix.stable
+        run: composer php-cs-fixer -- --format=checkstyle | tools/vendor/bin/cs2pr
+        env:
+          # FIXME: Remove this when PHP CS Fixer will support PHP 8.4
+          PHP_CS_FIXER_IGNORE_ENV: ${{ matrix.php-versions == '8.4' && '1' || '' }}
+
+      - name: 🔬 Rector
+        id: rector
+        if: matrix.stable
+        run: composer rector
+
+      - name: 🔬 Static analysis
+        if: matrix.stable
+        run: composer phpstan -- --error-format=github
+
+      - name: ♻️ Tests cache
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        with:
+          path: tests/.phpunit.result.cache
+          key: ${{ runner.os }}-tests-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-tests-
+
+      - name: ♻️ Fixtures cache
+        uses: actions/cache@5a3ec84eff668545956fd18022155c47e93e2684 # v4.2.3
+        with:
+          path: .cache
+          key: fixture-cache-${{ hashFiles('composer.lock') }}
+          restore-keys: fixture-cache-
+
+      - name: 🗂️ Load fixtures
+        run: composer test:load-fixtures
+
+      - name: 🧪 Test
+        run: composer test:ci
+
+      - name: 📊 Upload coverage results to Codecov
+        if: matrix.stable
+        uses: codecov/codecov-action@18283e04ce6e62d37312384ff67231eb8fd56d24 # v5.4.3
+        with:
+          files: ./build/logs/clover.xml

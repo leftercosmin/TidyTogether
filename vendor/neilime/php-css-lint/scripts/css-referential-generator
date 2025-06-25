@@ -1,0 +1,115 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__ . '/../vendor/autoload.php';
+
+function saveReferentialData(string $className, array $referential): void
+{
+    $datasetClass = new ReflectionClass($className);
+    $datasetFile = $datasetClass->getFileName();
+
+    $referentialString = var_export($referential, true);
+    $referentialString = str_replace('array (', '[', $referentialString);
+    $referentialString = str_replace(')', ']', $referentialString);
+
+    $datasetFileContent = file_get_contents($datasetFile);
+    $datasetFileContent = preg_replace(
+        '/public static array \$referential = \[.*?\];/s',
+        'public static array $referential = ' . $referentialString . ';',
+        $datasetFileContent
+    );
+
+    file_put_contents($datasetFile, $datasetFileContent);
+}
+
+$cssPropertiesFile = __DIR__ . '/../tests/fixtures/css-properties.json';
+$cssProperties = json_decode(file_get_contents($cssPropertiesFile), true);
+
+$standardsProperties = [];
+$nonStandardsProperties = [];
+foreach ($cssProperties as $atRuleName => $property) {
+    $isStandard = $property['standard'] ?? false;
+    if ($isStandard) {
+        $standardsProperties[$atRuleName] = true;
+    } else {
+        $nonStandardsProperties[$atRuleName] = true;
+    }
+}
+
+// Add missing non-standard properties
+$missingNonStandardsProperties = [
+    '-webkit-overflow-scrolling',
+    '-webkit-margin-end',
+    '-moz-osx-font-smoothing',
+];
+foreach ($missingNonStandardsProperties as $atRuleName) {
+    if (isset($standardsProperties[$atRuleName]) || isset($nonStandardsProperties[$atRuleName])) {
+        throw new Exception("Property $atRuleName already exists in either standards or non-standards properties.");
+    }
+    $nonStandardsProperties[$atRuleName] = true;
+}
+
+ksort($standardsProperties);
+saveReferentialData(CssLint\Referential\Standard\PropertiesReferential::class, $standardsProperties);
+ksort($nonStandardsProperties);
+saveReferentialData(CssLint\Referential\NonStandard\PropertiesReferential::class, $nonStandardsProperties);
+
+$cssAtRulesFile = __DIR__ . '/../tests/fixtures/css-at-rules.json';
+$cssAtRules = json_decode(file_get_contents($cssAtRulesFile), true);
+$standardsAtRules = [];
+$nonStandardsAtRules = [];
+
+foreach ($cssAtRules as $atRuleName => $atRule) {
+    $isStandard = $atRule['standard'] ?? false;
+    if ($isStandard) {
+        $standardsAtRules[$atRuleName] = true;
+    } else {
+        $nonStandardsAtRules[$atRuleName] = true;
+    }
+}
+
+// Add missing non-standard at-rules
+$missingNonStandardsAtRules = [
+    'theme',
+    'tailwind'
+];
+
+foreach ($missingNonStandardsAtRules as $atRuleName) {
+    if (isset($standardsAtRules[$atRuleName]) || isset($nonStandardsAtRules[$atRuleName])) {
+        throw new Exception("At-rules $atRuleName already exists in either standards or non-standards at-rules.");
+    }
+    $nonStandardsAtRules[$atRuleName] = true;
+}
+
+ksort($standardsAtRules);
+saveReferentialData(CssLint\Referential\Standard\AtRulesReferential::class, $standardsAtRules);
+ksort($nonStandardsAtRules);
+saveReferentialData(CssLint\Referential\NonStandard\AtRulesReferential::class, $nonStandardsAtRules);
+
+$cssAtRulesPropertiesFile = __DIR__ . '/../tests/fixtures/css-at-rules-properties.json';
+$cssAtRulesProperties = json_decode(file_get_contents($cssAtRulesPropertiesFile), true);
+$standardsAtRulesProperties = [];
+$nonStandardsAtRulesProperties = [];
+
+foreach ($cssAtRulesProperties as $atRuleName => $atRule) {
+    foreach ($atRule as $propertyName => $property) {
+        $isStandard = $property['standard'] ?? false;
+        if ($isStandard) {
+            $standardsAtRulesProperties[$atRuleName][$propertyName] = true;
+        } else {
+            $nonStandardsAtRulesProperties[$atRuleName][$propertyName] = true;
+        }
+    }
+}
+
+ksort($standardsAtRulesProperties);
+foreach ($standardsAtRulesProperties as $atRuleName => $properties) {
+    ksort($standardsAtRulesProperties[$atRuleName]);
+}
+saveReferentialData(CssLint\Referential\Standard\AtRulesPropertiesReferential::class, $standardsAtRulesProperties);
+
+ksort($nonStandardsAtRulesProperties);
+foreach ($nonStandardsAtRulesProperties as $atRuleName => $properties) {
+    ksort($nonStandardsAtRulesProperties[$atRuleName]);
+}
+saveReferentialData(CssLint\Referential\NonStandard\AtRulesPropertiesReferential::class, $nonStandardsAtRulesProperties);
