@@ -123,6 +123,20 @@
         <input required type="password" name="passwordAgain" id="confirm-password" placeholder="Confirm password" />
       </div>
 
+
+      <div class="input-block" id="secret-discret">
+        <div class="label-header">
+          <label for="secret-input">
+            <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
+              <path
+                d="M240-80q-33 0-56.5-23.5T160-160v-400q0-33 23.5-56.5T240-640h40v-80q0-83 58.5-141.5T480-920q83 0 141.5 58.5T680-720v80h40q33 0 56.5 23.5T800-560v400q0 33-23.5 56.5T720-80H240Zm240-200q33 0 56.5-23.5T560-360q0-33-23.5-56.5T480-440q-33 0-56.5 23.5T400-360q0 33 23.5 56.5T480-280ZM360-640h240v-80q0-50-35-85t-85-35q-50 0-85 35t-35 85v80Z" />
+            </svg>
+            One-time secret key
+          </label>
+        </div>
+        <input type="password" name="secret" id="secret-input" />
+      </div>
+
       <button type="submit">Sign Up</button>
     </form>
 
@@ -131,6 +145,8 @@
     </form>
 
   </div>
+
+  <script src="javascript/signupSecret.js"></script>
 </body>
 
 </html>

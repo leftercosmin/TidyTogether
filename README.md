@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="doc/logo.png" alt="logo" width="200" height="auto" />
+  <img src="doc/tidytogether-logo.png" alt="logo" width="200" height="auto" />
   <h1>TidyTogether</h1>
   
   <p>
@@ -51,15 +51,10 @@
   - [Environment Variables](#key-environment-variables)
 - [Getting Started](#toolbox-getting-started)
   - [Prerequisites](#bangbang-prerequisites)
-  - [Installation](#gear-installation)
-  - [Running Tests](#test_tube-running-tests)
   - [Run Locally](#running-run-locally)
   - [Deployment](#triangular_flag_on_post-deployment)
-- [Usage](#eyes-usage)
 - [Roadmap](#compass-roadmap)
 - [Contributing](#wave-contributing)
-  - [Code of Conduct](#scroll-code-of-conduct)
-- [FAQ](#grey_question-faq)
 - [License](#warning-license)
 - [Contact](#handshake-contact)
 - [Acknowledgements](#gem-acknowledgements)
@@ -68,13 +63,13 @@
 
 ### :camera: Screenshots
 
-<div style="display: grid; grid-template-columns: repeat(2, 1fr); justify-content: center; gap: 10px;"> 
-<img src="doc/ss/Screenshot from 2025-06-26 08-58-16.png" alt="screenshot" width="600" height="400" />
-<img src="doc/ss/Screenshot from 2025-06-26 08-58-33.png" alt="screenshot" width="600" height="400" />
-<img src="doc/ss/Screenshot from 2025-06-26 08-58-44.png" alt="screenshot" width="600" height="400" />
-<img src="doc/ss/Screenshot from 2025-06-26 08-58-50.png" alt="screenshot" width="600" height="400" />
-<img src="doc/ss/Screenshot from 2025-06-26 08-58-56.png" alt="screenshot" width="600" height="400" />
-<img src="doc/ss/Screenshot from 2025-06-26 08-59-04.png" alt="screenshot" width="600" height="400" />
+<div style="display: grid; grid-template-columns: 1fr 1fr; justify-content: center; gap: 20px;"> 
+<img src="doc/ss/Screenshot from 2025-06-26 08-58-16.png" alt="screenshot" width="480" height="300" />
+<img src="doc/ss/Screenshot from 2025-06-26 08-58-33.png" alt="screenshot" width="480" height="300" />
+<img src="doc/ss/Screenshot from 2025-06-26 08-58-44.png" alt="screenshot" width="480" height="300" />
+<img src="doc/ss/Screenshot from 2025-06-26 08-58-50.png" alt="screenshot" width="480" height="300" />
+<img src="doc/ss/Screenshot from 2025-06-26 08-58-56.png" alt="screenshot" width="480" height="300" />
+<img src="doc/ss/Screenshot from 2025-06-26 08-59-04.png" alt="screenshot" width="480" height="300" />
 </div>
 
 ### :space_invader: Tech Stack
