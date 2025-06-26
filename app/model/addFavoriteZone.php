@@ -1,15 +1,15 @@
 <?php
-require_once __DIR__ . '/../util/databaseConnection.php';
 
-function addFavoriteZone($userId, $neighborhood, $city, $country, $lat, $lng) {
+function addFavoriteZone($userId, $neighborhood, $city, $country, $lat, $lng)
+{
     try {
         $db = DatabaseConnection::get();
-        
+
         // Validate input
         if (empty($userId) || empty($lat) || empty($lng)) {
             return "Missing required data";
         }
-        
+
         // Use default values if neighborhood or city are empty
         if (empty($neighborhood)) {
             $neighborhood = "Unknown Area";
@@ -20,7 +20,7 @@ function addFavoriteZone($userId, $neighborhood, $city, $country, $lat, $lng) {
         if (empty($country)) {
             $country = "Unknown Country";
         }
-        
+
         // Check if zone exists
         $stmt = $db->prepare("SELECT id FROM Zone WHERE name=? AND city=? AND country=?");
         $stmt->bind_param("sss", $neighborhood, $city, $country);
@@ -45,7 +45,7 @@ function addFavoriteZone($userId, $neighborhood, $city, $country, $lat, $lng) {
         $stmt->bind_param("ii", $userId, $zoneId);
         $stmt->execute();
         $existing = $stmt->get_result()->fetch_assoc();
-        
+
         if ($existing) {
             return "Zone already saved as favorite";
         }
@@ -53,13 +53,13 @@ function addFavoriteZone($userId, $neighborhood, $city, $country, $lat, $lng) {
         // Insert into LovedZone with coordinates
         $stmt = $db->prepare("INSERT INTO LovedZone (idUser, idZone, lat, lng) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("iidd", $userId, $zoneId, $lat, $lng);
-        
+
         if (!$stmt->execute()) {
             return "Failed to save favorite zone: " . $stmt->error;
         }
-        
+
         return true;
-        
+
     } catch (Exception $e) {
         return "Database error: " . $e->getMessage();
     }

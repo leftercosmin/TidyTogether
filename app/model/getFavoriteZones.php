@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__ . '/../util/databaseConnection.php';
 
 function getFavoriteZones($userId) {
     $db = DatabaseConnection::get();

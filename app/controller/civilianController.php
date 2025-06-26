@@ -5,28 +5,28 @@ if (!defined('CONN')) {
     define("CONN", "userSession");
 }
 
-require_once __DIR__ . "/../util/getRoot.php";
-require_once __DIR__ . "/../util/formatField.php";
-require_once __DIR__ . "/../util/getFormat.php";
-require_once __DIR__ . "/../util/isError.php";
-require_once __DIR__ . "/../util/alert.php";
-require_once __DIR__ . "/../util/databaseConnection.php";
+require_once "util/getRoot.php";
+require_once "util/formatField.php";
+require_once "util/getFormat.php";
+require_once "util/isError.php";
+require_once "util/alert.php";
+require_once "util/databaseConnection.php";
 
-require_once __DIR__ . "/../model/addPostModel.php";
-require_once __DIR__ . "/../model/addMediaModel.php";
-require_once __DIR__ . "/../model/addMarksModel.php";
+require_once "model/addPostModel.php";
+require_once "model/addMediaModel.php";
+require_once "model/addMarksModel.php";
 
-require_once __DIR__ . "/../model/getLocationModel.php";
-require_once __DIR__ . "/../model/getPostModel.php";
-require_once __DIR__ . "/../model/getReportModel.php";
-require_once __DIR__ . "/../model/getProfileModel.php";
-require_once __DIR__ . "/../model/getTagModel.php";
+require_once "model/getLocationModel.php";
+require_once "model/getPostModel.php";
+require_once "model/getReportModel.php";
+require_once "model/getProfileModel.php";
+require_once "model/getTagModel.php";
 
-require_once __DIR__ . "/../model/processMediaModel.php";
-require_once __DIR__ . "/../model/processReportModel.php";
-require_once __DIR__ . "/../model/processTagsModel.php";
+require_once "model/processMediaModel.php";
+require_once "model/processReportModel.php";
+require_once "model/processTagsModel.php";
 
-require_once __DIR__ . "/civilianPageController.php";
+require_once "controller/civilianPageController.php";
 
 // get session
 if (session_status() === PHP_SESSION_NONE) {

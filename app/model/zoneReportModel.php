@@ -1,7 +1,5 @@
 <?php
 
-require_once __DIR__ . '/../util/databaseConnection.php';
-
 function getZoneReportStats($interval = 'WEEK', $city = '') {
     $validIntervals = ['DAY', 'WEEK', 'MONTH'];
     if (!in_array($interval, $validIntervals)) {
