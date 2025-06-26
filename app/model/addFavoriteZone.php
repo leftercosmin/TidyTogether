@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__ . '/../util/databaseConnection.php';
 
-function addFavoriteZone($userId, $neighborhood, $city, $country, $lat, $lng) {
+function addFavoriteZone($userId, $neighborhood, $city, $country, $lat, $lng)
+{
     try {
         $db = DatabaseConnection::get();
         if (empty($userId) || empty($lat) || empty($lng)) {
@@ -41,7 +41,7 @@ function addFavoriteZone($userId, $neighborhood, $city, $country, $lat, $lng) {
         $stmt->bind_param("ii", $userId, $zoneId);
         $stmt->execute();
         $existing = $stmt->get_result()->fetch_assoc();
-        
+
         if ($existing) {
             return "Zone already saved as favorite";
         }
@@ -49,13 +49,13 @@ function addFavoriteZone($userId, $neighborhood, $city, $country, $lat, $lng) {
         //insert into loved zone
         $stmt = $db->prepare("INSERT INTO LovedZone (idUser, idZone, lat, lng) VALUES (?, ?, ?, ?)");
         $stmt->bind_param("iidd", $userId, $zoneId, $lat, $lng);
-        
+
         if (!$stmt->execute()) {
             return "Failed to save favorite zone: " . $stmt->error;
         }
-        
+
         return true;
-        
+
     } catch (Exception $e) {
         return "Database error: " . $e->getMessage();
     }

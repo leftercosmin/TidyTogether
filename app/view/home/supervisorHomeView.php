@@ -22,7 +22,7 @@
 
   <div class="overlay" id="overlay"></div>
 
-  <?php require_once __DIR__ . '/../components/supervisorNavbar.php'; ?>
+  <?php require_once 'view/components/supervisorNavbar.php'; ?>
 
   <div class="report-container">
     <h1 class="page-title">Pending Reports</h1>

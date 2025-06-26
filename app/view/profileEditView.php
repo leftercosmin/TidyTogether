@@ -22,11 +22,11 @@
 
   <?php
   if ($profile['role'] === 'civilian') {
-    require_once 'components/civilianNavbar.php';
+    require_once 'view/components/civilianNavbar.php';
   } elseif ($profile['role'] === 'supervisor') {
-    require_once 'components/supervisorNavbar.php';
+    require_once 'view/components/supervisorNavbar.php';
   } elseif ($profile['role'] === 'authority') {
-    require_once 'components/authorityNavbar.php';
+    require_once 'view/components/authorityNavbar.php';
   }
   ?>
 
