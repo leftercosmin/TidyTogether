@@ -7,7 +7,7 @@ require_once __DIR__ . '/../model/zoneReportModel.php';
 require_once __DIR__ . '/../util/databaseConnection.php';
 
 try {
-    // Load environment variables if not already loaded
+    //load environment variables if not already loaded
     if (!getenv('DB_HOST')) {
         $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/../../');
         $dotenv->load();
@@ -24,7 +24,7 @@ try {
 
     $city = isset($_GET['city']) ? trim($_GET['city']) : '';
 
-    // Fetch data
+    //fetch data
     $data = getZoneReportStats($interval, $city);
     if (!is_array($data)) {
         $data = [];
@@ -57,7 +57,7 @@ try {
         }
     }
 
-    // For JSON response (regular AJAX calls)
+    //for json response
     ob_end_clean();
     header('Content-Type: application/json');
     echo json_encode($data);

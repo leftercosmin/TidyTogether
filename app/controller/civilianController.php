@@ -1,6 +1,6 @@
 <?php
 
-// Define constants if not already defined (for standalone requests)
+//define constants if not already defined (for standalone requests)
 if (!defined('CONN')) {
     define("CONN", "userSession");
 }

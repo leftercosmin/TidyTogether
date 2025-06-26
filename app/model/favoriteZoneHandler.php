@@ -1,11 +1,10 @@
 <?php
 
-// Define constants if not already defined (for standalone AJAX requests)
+//define this if not 
 if (!defined('CONN')) {
     define("CONN", "userSession");
 }
 
-// Load environment variables if not already loaded (for standalone AJAX requests)
 if (!getenv('DB_HOST')) {
     require_once __DIR__ . '/../../vendor/autoload.php';
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../..");
@@ -21,12 +20,10 @@ require_once __DIR__ . "/getFavoriteZones.php";
 require_once __DIR__ . "/deleteFavoriteZone.php";
 require_once __DIR__ . "/getTagModel.php";
 
-// Start session if not already started
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Check if user is authenticated
 $sessionData = json_decode($_SESSION[CONN] ?? '');
 if (!isset($_SESSION[CONN]) || !$sessionData || !isset($sessionData->id)) {
     http_response_code(401);
@@ -37,7 +34,6 @@ if (!isset($_SESSION[CONN]) || !$sessionData || !isset($sessionData->id)) {
 
 $userId = $sessionData->id;
 
-// Handle different operations
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['fromFavorites'])) {
     $tags = getTagModel();
     header("Location: /");
@@ -45,7 +41,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['fromFavorites'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['getFavorites'])) {
-    // Get user's favorite zones
     $favorites = getFavoriteZones($userId);
     header('Content-Type: application/json');
     echo json_encode($favorites);
@@ -53,7 +48,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['getFavorites'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['favoriteZone'])) {
-    // Add new favorite zone
     $lat = $_POST['lat'] ?? null;
     $lng = $_POST['lng'] ?? null;
     $neighborhood = $_POST['neighborhood'] ?? '';
@@ -61,7 +55,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['favoriteZone'])) {
     $country = $_POST['country'] ?? '';
     $address = $_POST['address'] ?? '';
 
-    // Save to DB
     $result = addFavoriteZone($userId, $neighborhood, $city, $country, $lat, $lng);
 
     header('Content-Type: application/json');
@@ -74,7 +67,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['favoriteZone'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteFavorite'])) {
-    // Delete favorite zone
     $zoneId = $_POST['zoneId'] ?? null;
     
     if (!$zoneId) {
@@ -82,9 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteFavorite'])) {
         echo json_encode(['success' => false, 'message' => 'Zone ID is required']);
         exit();
     }
-
-    // Debug: Log the values being used
-    error_log("Delete attempt - User ID: $userId, Zone ID: $zoneId");
 
     $result = deleteFavoriteZone($userId, $zoneId);
 
@@ -97,7 +86,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteFavorite'])) {
     exit();
 }
 
-// If we reach here, it's an invalid request
-http_response_code(400);
-header('Content-Type: application/json');
-echo json_encode(['success' => false, 'message' => 'Invalid request']);
+// http_response_code(400);
+// header('Content-Type: application/json');
+// echo json_encode(['success' => false, 'message' => 'Invalid request']);

@@ -17,7 +17,7 @@
   </button>
 
   <div class="overlay" id="overlay"></div>
-  <?php require_once 'view/components/civilianNavbar.php'; ?>
+  <?php require_once __DIR__ . '/../components/civilianNavbar.php'; ?>
   <div class="report-container">
     <div class="content-wrapper">
       <h1 class="report-heading" id="zone-title">Neighborhood Report</h1>
@@ -50,7 +50,7 @@
 
   <script src="javascript/navbarCollapse.js"></script>
   <script>
-    // Get URL parameters
+    //URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     const neighborhood = urlParams.get('neighborhood');
     const city = urlParams.get('city');
@@ -230,7 +230,7 @@
     updateDownloadLinks();
     loadZoneData();
 
-    // Handle window resize to ensure chart responsiveness
+    //ensure chart responsiveness
     window.addEventListener('resize', function() {
       if (chart) {
         chart.resize();
