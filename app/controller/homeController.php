@@ -32,7 +32,8 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
       $_POST["email"],
       $_POST["password"],
       $_POST["passwordAgain"],
-      $_POST["role"]
+      $_POST["role"],
+      $_POST["secret"] ?? null,
     );
     unset(
       $_POST["firstname"],
@@ -40,7 +41,8 @@ if (isset($_POST["email"]) && isset($_POST["password"])) {
       $_POST["email"],
       $_POST["password"],
       $_POST["passwordAgain"],
-      $_POST["role"]
+      $_POST["role"],
+      $_POST["secret"]
     );
     isError($res0);
 
@@ -77,7 +79,7 @@ if (isset($_SESSION[CONN])) {
 
 // session not set && page switcher
 if (isset($_POST[PAGE]) && $_POST[PAGE] == "Signup") {
-  require_once "view/signup.html";
+  require_once "view/logup.php";
 } else {
-  require_once "view/login.html";
+  require_once "view/login.php";
 }
