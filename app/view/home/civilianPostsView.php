@@ -20,7 +20,7 @@
 
   <div class="overlay" id="overlay"></div>
 
-  <?php require_once 'components/civilianNavbar.php'; ?>
+  <?php require_once 'view/components/civilianNavbar.php'; ?>
 
   <div class="report-container">
     <h1 class="page-title">Your Report History</h1>

@@ -40,7 +40,7 @@ $userId = $sessionData->id;
 // Handle different operations
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['fromFavorites'])) {
     $tags = getTagModel();
-    header("Location: /TidyTogether/");
+    header("Location: /");
     exit();
 }
 
