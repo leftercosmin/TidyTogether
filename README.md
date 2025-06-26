@@ -90,49 +90,72 @@
 
 - XAMPP
 
-<details>
-  <summary>Client</summary>
-  <ul>
-    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
-    <li><a href="https://nextjs.org/">Next.js</a></li>
-    <li><a href="https://reactjs.org/">React.js</a></li>
-    <li><a href="https://tailwindcss.com/">TailwindCSS</a></li>
-  </ul>
-</details>
+<h4>Client:</h4>
 
-<details>
-  <summary>Server</summary>
-  <ul>
-    <li><a href="https://www.typescriptlang.org/">Typescript</a></li>
-    <li><a href="https://expressjs.com/">Express.js</a></li>
-    <li><a href="https://go.dev/">Golang</a></li>
-    <li><a href="https://nestjs.com/">Nest.js</a></li>
-    <li><a href="https://socket.io/">SocketIO</a></li>
-    <li><a href="https://www.prisma.io/">Prisma</a></li>    
-    <li><a href="https://www.apollographql.com/">Apollo</a></li>
-    <li><a href="https://graphql.org/">GraphQL</a></li>
-  </ul>
-</details>
+<ul>
 
-<details>
-<summary>Database</summary>
-  <ul>
-    <li><a href="https://www.mysql.com/">MySQL</a></li>
-    <li><a href="https://www.postgresql.org/">PostgreSQL</a></li>
-    <li><a href="https://redis.io/">Redis</a></li>
-    <li><a href="https://neo4j.com/">Neo4j</a></li>
-    <li><a href="https://www.mongodb.com/">MongoDB</a></li>
-  </ul>
-</details>
+<li>
 
-<details>
-<summary>DevOps</summary>
-  <ul>
-    <li><a href="https://www.docker.com/">Docker</a></li>
-    <li><a href="https://www.jenkins.io/">Jenkins</a></li>
-    <li><a href="https://circleci.com/">CircleCLI</a></li>
-  </ul>
-</details>
+![HTML5](https://img.shields.io/badge/html5-017852.svg?style=for-the-badge&logo=html5&logoColor=000)
+
+</li>
+<li>
+
+![CSS3](https://img.shields.io/badge/css3-017852.svg?style=for-the-badge&logo=css&logoColor=000)
+
+</li>
+<li>
+
+[![JavaScript](https://img.shields.io/badge/JavaScript-017852?style=for-the-badge&logo=javascript&logoColor=000)](#)
+
+</li>
+
+</ul>
+
+<h4>Server:</h4>
+
+<ul>
+<li>
+
+![PHP](https://img.shields.io/badge/php-F8EFE0.svg?style=for-the-badge&logo=php&logoColor=000)
+
+</li>
+<li>
+
+![Bash](https://img.shields.io/badge/bash_script-F8EFE0.svg?style=for-the-badge&logo=gnu-bash&logoColor=000)
+
+</li>
+<li>
+
+![PowerShell](https://img.shields.io/badge/PowerShell-F8EFE0.svg?style=for-the-badge&logo=powershell&logoColor=000)
+
+</li>
+</ul>
+
+<h4>Database:</h4>
+
+<ul>
+<li>
+
+![MySQL](https://img.shields.io/badge/mysql-E62C20.svg?style=for-the-badge&logo=mysql&logoColor=000)
+
+</li>
+</ul>
+
+<h4>DevOps:</h4>
+  
+<ul>
+<li>
+
+[![Docker](https://img.shields.io/badge/Docker-FFAC25?style=for-the-badge&logo=docker&logoColor=000)](#)
+
+</li>
+<li>
+
+[![WebAssembly](https://img.shields.io/badge/WebAssembly-FFAC25?style=for-the-badge&logo=webassembly&logoColor=000)](#)
+
+</li>
+</ul>
 
 <!-- Features -->
 
@@ -150,20 +173,16 @@
 
 | Color           | Hex                                                              |
 | --------------- | ---------------------------------------------------------------- |
-| Primary Color   | ![#222831](https://via.placeholder.com/10/222831?text=+) #222831 |
-| Secondary Color | ![#393E46](https://via.placeholder.com/10/393E46?text=+) #393E46 |
-| Accent Color    | ![#00ADB5](https://via.placeholder.com/10/00ADB5?text=+) #00ADB5 |
-| Text Color      | ![#EEEEEE](https://via.placeholder.com/10/EEEEEE?text=+) #EEEEEE |
+| Primary Color   | ![#017852](https://via.placeholder.com/10/017852?text=+) #017852 |
+| Secondary Color | ![#F8EFE0](https://via.placeholder.com/10/F8EFE0?text=+) #F8EFE0 |
+| Accent Color    | ![#E62C20](https://via.placeholder.com/10/E62C20?text=+) #E62C20 |
+| Text Color      | ![#FFAC25](https://via.placeholder.com/10/FFAC25?text=+) #FFAC25 |
 
 <!-- Env Variables -->
 
 ### :key: Environment Variables
 
-To run this project, you will need to add the following environment variables to your .env file
-
-`API_KEY`
-
-`ANOTHER_API_KEY`
+To run this project, you will need to add the following [variables](.env.example) to your .env file
 
 <!-- Getting Started -->
 
@@ -176,16 +195,15 @@ To run this project, you will need to add the following environment variables to
 - [documentation](https://docs.google.com/document/d/1-aHo15U2-sPB9klRUCRxpozfseOrwraKnAo_gaaENro/edit?tab=t.0)
 - [database](https://appdb-dyh6iv7f0wnm.adminer.wasmer.app/?server=db.be-mons1.bengt.wasmernet.com%3A3306&username=edd1c866799d80002ba7aff986fa&db=TidyTogether&dbid=appdb_KwGIWtwaUVoe&magiclogin=wott_43Z3T2ZQK34DMBOLDR56TXOAZWYZI2VX)
 
-This project uses Yarn as package manager
+This project uses Composer as package manager
 
-- [mpdf](https://github.com/vlucas/phpdotenv)
+- [php-css-lint](https://github.com/neilime/php-css-lint)
 - [phpdotenv](https://github.com/vlucas/phpdotenv)
+- [mpdf](https://github.com/mpdf/phpdotenv)
 
 ```bash
- npm install --global yarn
+npm install --global yarn
 ```
-
-<!-- Installation -->
 
 ### :gear: Installation
 
@@ -196,29 +214,15 @@ Install my-project with npm
   cd my-project
 ```
 
-<!-- Running Tests -->
+### :test_tube: Running Linter
 
-### :test_tube: Running Tests
-
-To run tests, run the following command
+To run the Css Linter, run the following command
 
 ```bash
   yarn test test
 ```
 
-<!-- Run Locally -->
-
 ### :running: Run Locally
-
-## Build
-
-Both Linux and Windows compatible
-
-```sh
-./bin/build.sh
-./bin/startServer.sh
-./bin/startServer.sh reset
-```
 
 Clone the project
 
@@ -229,7 +233,7 @@ Clone the project
 Go to the project directory
 
 ```bash
-  cd my-project
+  cd TidyTogether
 ```
 
 Install dependencies
@@ -240,21 +244,22 @@ Install dependencies
 
 Start the server
 
-```bash
-  yarn start
-```
+Both Linux and Windows compatible
 
-<!-- Deployment -->
+```sh
+./bin/build.sh
+./bin/startServer.sh
+./bin/startServer.sh reset
+```
 
 ### :triangular_flag_on_post: Deployment
 
-To deploy this project run
+To deploy this project, configure it according to:
 
-```bash
-  yarn deploy
-```
-
-<!-- Usage -->
+- [workflow](.github/workflows/ci.yml)
+- [yaml](app.yaml)
+- [toml](wasmer.toml)
+- all the source code must be inside of the [app](./app/index.php) directory
 
 ## :eyes: Usage
 
@@ -272,10 +277,16 @@ function App() {
 
 ## :compass: Roadmap
 
-- [x] Todo 1
-- [ ] Todo 2
+- [x] README
+- [x] C4 diagrams
+- [ ] System Requirments
+- [ ] Checklist
+- [ ] video
 
-<!-- Contributing -->
+- [ ] favorite zone press
+- [ ] load map based on mainCity
+- [ ] download pdf
+- [ ] paths
 
 ## :wave: Contributing
 
@@ -285,51 +296,24 @@ function App() {
 
 Contributions are always welcome!
 
-See `contributing.md` for ways to get started.
-
-<!-- Code of Conduct -->
-
-### :scroll: Code of Conduct
-
-Please read the [Code of Conduct](https://github.com/leftercosmin/TidyTogether/blob/master/CODE_OF_CONDUCT.md)
-
-<!-- FAQ -->
-
-## :grey_question: FAQ
-
-- Question 1
-
-  - Answer 1
-
-- Question 2
-
-  - Answer 2
-
-<!-- License -->
-
 ## :warning: License
 
-Distributed under the no License. See LICENSE.txt for more information.
-
-<!-- Contact -->
+Distributed under the MIT License. See [this](./LICENSE) for more information.
 
 ## :handshake: Contact
 
-- Lefter Cosmin
-- Braha Petru
-
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-
-Project Link: [https://github.com/leftercosmin/TidyTogether](https://github.com/leftercosmin/TidyTogether)
+- Lefter Cosmin: - [@twitter_handle](https://twitter.com/twitter_handle) - lefcos40@gmail.com
+- Braha Petru: - [@linkedin](https://twitter.com/twitter_handle) - petrubraha@gmail.com
+- Project Link: [https://github.com/leftercosmin/TidyTogether](https://github.com/leftercosmin/TidyTogether)
 
 <!-- Acknowledgments -->
 
 ## :gem: Acknowledgements
 
-Use this section to mention useful resources and libraries that you have used in your projects.
+Useful resources and libraries that you have used in your projects:
 
 - [Shields.io](https://shields.io/)
 - [Awesome README](https://github.com/matiassingers/awesome-readme)
 - [Emoji Cheat Sheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md#travel--places)
 - [Readme Template](https://github.com/othneildrew/Best-README-Template)
-- [@leftercosmin](https://github.com/leftercosmin)
+- [@Louis3797](https://github.com/Louis3797)
