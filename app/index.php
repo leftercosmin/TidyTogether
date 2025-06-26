@@ -10,8 +10,8 @@ require_once "util/printFiles.php";
 require_once "util/getSourcePhoto.php";
 
 if (!getenv('SERVER')) {
-  require_once __DIR__ . '/../vendor/autoload.php';
-  $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/..");
+  require_once '../vendor/autoload.php';
+  $dotenv = Dotenv\Dotenv::createImmutable("../");
   $dotenv->load();
   foreach ($_ENV as $key => $value) {
     putenv("$key=$value");

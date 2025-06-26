@@ -1,23 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">  <title>Neighborhood Report - TidyTogether</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Neighborhood Report - TidyTogether</title>
   <link rel="stylesheet" href="style/chartReport.css">
   <link rel="stylesheet" href="style/globals.css">
   <link rel="stylesheet" href="style/navbar.css">
   <link rel="stylesheet" href="style/civilianHome.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
+
 <body>
   <button class="menu-toggle" id="menuToggle">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white">
-      <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/>
+      <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
     </svg>
   </button>
 
   <div class="overlay" id="overlay"></div>
-  <?php require_once __DIR__ . '/../components/civilianNavbar.php'; ?>
+
+  <?php require_once 'view/components/civilianNavbar.php'; ?>
+
   <div class="report-container">
     <div class="content-wrapper">
       <h1 class="report-heading" id="zone-title">Neighborhood Report</h1>
@@ -28,12 +33,13 @@
           <button id="week-btn" onclick="changeInterval('WEEK')">Last Week</button>
           <button id="month-btn" class="active" onclick="changeInterval('MONTH')">Last Month</button>
         </div>
-        
+
         <div class="download-options">
           <a id="csv-link" href="#" target="_blank">Download CSV</a>
           <a id="pdf-link" href="#" target="_blank">Download PDF</a>
         </div>
-      </div>        <div class="chart-box">
+      </div>
+      <div class="chart-box">
         <h3 id="chart-title">Report Status Distribution</h3>
         <div class="chart-content">
           <div class="stats-sidebar" id="chart-stats">
@@ -43,7 +49,7 @@
           </div>
         </div>
       </div>
-        <div class="stats-summary" id="stats-summary">
+      <div class="stats-summary" id="stats-summary">
       </div>
     </div>
   </div>
@@ -81,7 +87,7 @@
 
     function loadZoneData() {
       const url = `controller/neighborhoodReportController.php?neighborhood=${encodeURIComponent(neighborhood)}&city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&interval=${currentInterval}`;
-      
+
       fetch(url)
         .then(response => response.json())
         .then(data => {
@@ -89,7 +95,7 @@
             console.error('Error:', data.message);
             return;
           }
-            updateChart(data);
+          updateChart(data);
           updateChartStats(data);
         })
         .catch(error => {
@@ -99,7 +105,7 @@
 
     function updateChart(data) {
       const ctx = document.getElementById('zonePieChart').getContext('2d');
-      
+
       if (chart) {
         chart.destroy();
       }
@@ -136,7 +142,7 @@
             },
             tooltip: {
               callbacks: {
-                label: function(context) {
+                label: function (context) {
                   const total = data.total_reports;
                   const value = context.parsed;
                   const percentage = total > 0 ? ((value / total) * 100).toFixed(1) : 0;
@@ -154,15 +160,16 @@
             }
           }
         }
-      });    }
+      });
+    }
 
     function updateChartStats(data) {
-      const completionRate = data.total_reports > 0 
+      const completionRate = data.total_reports > 0
         ? ((data.completed_reports / data.total_reports) * 100).toFixed(1)
         : 0;
 
-      const completionClass = completionRate >= 70 ? 'completion-high' : 
-                             completionRate >= 40 ? 'completion-medium' : 'completion-low';
+      const completionClass = completionRate >= 70 ? 'completion-high' :
+        completionRate >= 40 ? 'completion-medium' : 'completion-low';
 
       const statsHtml = `
         <div class="chart-stat-item">
@@ -186,17 +193,17 @@
           <p class="chart-stat-value ${completionClass}">${completionRate}%</p>
         </div>
       `;
-      
+
       document.getElementById('chart-stats').innerHTML = statsHtml;
     }
 
     function updateStats(data) {
-      const completionRate = data.total_reports > 0 
+      const completionRate = data.total_reports > 0
         ? ((data.completed_reports / data.total_reports) * 100).toFixed(1)
         : 0;
 
-      const completionClass = completionRate >= 70 ? 'completion-high' : 
-                             completionRate >= 40 ? 'completion-medium' : 'completion-low';
+      const completionClass = completionRate >= 70 ? 'completion-high' :
+        completionRate >= 40 ? 'completion-medium' : 'completion-low';
 
       const statsHtml = `
         <div class="stats-grid">
@@ -222,7 +229,7 @@
           </div>
         </div>
       `;
-      
+
       document.getElementById('stats-summary').innerHTML = statsHtml;
     }
 
@@ -231,11 +238,12 @@
     loadZoneData();
 
     //ensure chart responsiveness
-    window.addEventListener('resize', function() {
+    window.addEventListener('resize', function () {
       if (chart) {
         chart.resize();
       }
     });
   </script>
 </body>
+
 </html>
