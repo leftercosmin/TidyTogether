@@ -7,7 +7,6 @@
     A web application to manage information related to the collection, sorting, and recycling of gargabe
   </p>
 
-<!-- Badges -->
 <p>
   <a href="https://github.com/leftercosmin/TidyTogether/graphs/contributors">
     <img src="https://img.shields.io/github/contributors/leftercosmin/TidyTogether" alt="contributors" />
@@ -42,8 +41,6 @@
 
 <br />
 
-<!-- Table of Contents -->
-
 # :notebook_with_decorative_cover: Table of Contents
 
 - [About the Project](#star2-about-the-project)
@@ -67,11 +64,7 @@
 - [Contact](#handshake-contact)
 - [Acknowledgements](#gem-acknowledgements)
 
-<!-- About the Project -->
-
 ## :star2: About the Project
-
-<!-- Screenshots -->
 
 ### :camera: Screenshots
 
@@ -83,8 +76,6 @@
 <img src="doc/ss/Screenshot from 2025-06-26 08-58-56.png" alt="screenshot" width="600" height="400" />
 <img src="doc/ss/Screenshot from 2025-06-26 08-59-04.png" alt="screenshot" width="600" height="400" />
 </div>
-
-<!-- TechStack -->
 
 ### :space_invader: Tech Stack
 
@@ -157,8 +148,6 @@
 </li>
 </ul>
 
-<!-- Features -->
-
 ### :dart: Features
 
 - three different perspectives
@@ -166,8 +155,6 @@
 - map geolocation
 - favorite zones
 - media storage
-
-<!-- Color Reference -->
 
 ### :art: Color Reference
 
@@ -178,17 +165,11 @@
 | Accent Color    | ![#E62C20](https://via.placeholder.com/10/E62C20?text=+) #E62C20 |
 | Text Color      | ![#FFAC25](https://via.placeholder.com/10/FFAC25?text=+) #FFAC25 |
 
-<!-- Env Variables -->
-
 ### :key: Environment Variables
 
 To run this project, you will need to add the following [variables](.env.example) to your .env file
 
-<!-- Getting Started -->
-
 ## :toolbox: Getting Started
-
-<!-- Prerequisites -->
 
 ### :bangbang: Prerequisites
 
@@ -201,25 +182,14 @@ This project uses Composer as package manager
 - [phpdotenv](https://github.com/vlucas/phpdotenv)
 - [mpdf](https://github.com/mpdf/phpdotenv)
 
-```bash
-npm install --global yarn
-```
-
-### :gear: Installation
-
-Install my-project with npm
-
-```bash
-  yarn install my-project
-  cd my-project
-```
-
 ### :test_tube: Running Linter
 
 To run the Css Linter, run the following command
 
 ```bash
-  yarn test test
+  php vendor/bin/php-css-lint app/style/path-to-file.css
+  php vendor/bin/php-css-lint app/style/civilianHome.css
+  php vendor/bin/php-css-lint app/style/globals.css
 ```
 
 ### :running: Run Locally
@@ -239,12 +209,10 @@ Go to the project directory
 Install dependencies
 
 ```bash
-  yarn install
+  composer install
 ```
 
-Start the server
-
-Both Linux and Windows compatible
+Start the server with these scripts: Both Linux and Windows compatible
 
 ```sh
 ./bin/build.sh
@@ -260,20 +228,6 @@ To deploy this project, configure it according to:
 - [yaml](app.yaml)
 - [toml](wasmer.toml)
 - all the source code must be inside of the [app](./app/index.php) directory
-
-## :eyes: Usage
-
-Use this space to tell a little more about your project and how it can be used. Show additional screenshots, code samples, demos or link to other resources.
-
-```javascript
-import Component from "my-project";
-
-function App() {
-  return <Component />;
-}
-```
-
-<!-- Roadmap -->
 
 ## :compass: Roadmap
 
@@ -302,8 +256,8 @@ Distributed under the MIT License. See [this](./LICENSE) for more information.
 
 ## :handshake: Contact
 
-- Lefter Cosmin: - [@twitter_handle](https://twitter.com/twitter_handle) - lefcos40@gmail.com
-- Braha Petru: - [@linkedin](https://twitter.com/twitter_handle) - petrubraha@gmail.com
+- Lefter Cosmin: - [@linkedin](https://www.linkedin.com/in/petru-braha/) - lefcos30@gmail.com
+- Braha Petru: - [@linkedin](https://www.linkedin.com/in/petru-braha/) - petrubraha@gmail.com
 - Project Link: [https://github.com/leftercosmin/TidyTogether](https://github.com/leftercosmin/TidyTogether)
 
 <!-- Acknowledgments -->
