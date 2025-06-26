@@ -32,7 +32,7 @@
 <h4>
     <a href="https://github.com/leftercosmin/TidyTogether/">View Demo</a>
   <span> · </span>
-    <a href="https://github.com/leftercosmin/TidyTogether">Documentation</a>
+    <a href="https://github.com/leftercosmin/TidyTogether/">Documentation</a>
   <span> · </span>
     <a href="https://github.com/leftercosmin/TidyTogether/issues/">Report Bug</a>
   <span> · </span>
@@ -75,8 +75,13 @@
 
 ### :camera: Screenshots
 
-<div align="center"> 
-  <img src="https://placehold.co/600x400?text=Your+Screenshot+here" alt="screenshot" />
+<div style="display: grid; grid-template-columns: repeat(2, 1fr); justify-content: center; gap: 10px;"> 
+<img src="doc/ss/Screenshot from 2025-06-26 08-58-16.png" alt="screenshot" width="600" height="400" />
+<img src="doc/ss/Screenshot from 2025-06-26 08-58-33.png" alt="screenshot" width="600" height="400" />
+<img src="doc/ss/Screenshot from 2025-06-26 08-58-44.png" alt="screenshot" width="600" height="400" />
+<img src="doc/ss/Screenshot from 2025-06-26 08-58-50.png" alt="screenshot" width="600" height="400" />
+<img src="doc/ss/Screenshot from 2025-06-26 08-58-56.png" alt="screenshot" width="600" height="400" />
+<img src="doc/ss/Screenshot from 2025-06-26 08-59-04.png" alt="screenshot" width="600" height="400" />
 </div>
 
 <!-- TechStack -->
