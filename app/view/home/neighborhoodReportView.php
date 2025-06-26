@@ -17,7 +17,7 @@
   </button>
 
   <div class="overlay" id="overlay"></div>
-  <?php require_once 'view/components/civilianNavbar.php'; ?>
+  <?php require_once __DIR__ . '/../components/civilianNavbar.php'; ?>
   <div class="report-container">
     <div class="content-wrapper">
       <h1 class="report-heading" id="zone-title">Neighborhood Report</h1>
