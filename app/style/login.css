@@ -21,7 +21,6 @@ html {
   color: #F8EFE0;
   font-size: 2.5em;
   margin: .3em;
-  margin-bottom: 1em;
 }
 
 body {
@@ -111,7 +110,7 @@ form input:focus {
 }
 
 form button {
-  font-size: 1em;
+  font-size: 0.8em;
   margin-top: 10px;
   border-radius: 1000px;
   padding: 0.85em 4em;
@@ -229,7 +228,7 @@ p {
 }
 
 .input-block {
-  min-height: 80px;
+  min-height: 30px;
 }
 
 @media (max-width: 768px) {

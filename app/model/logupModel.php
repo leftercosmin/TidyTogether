@@ -1,5 +1,6 @@
 <?php
 
+require_once "model/helper/addSecretModel.php";
 
 function signup(
   string|null $fname,
@@ -7,7 +8,8 @@ function signup(
   string $email,
   string $passw,
   string $pasAg,
-  string $role
+  string $role,
+  string|null $secret
 ): string {
 
   // basic input validation
@@ -21,6 +23,12 @@ function signup(
     $passw != $pasAg
   ) {
     return "error - signup(): invalid password";
+  }
+
+  // secret verifications
+  $check = addSecretModel($role, $email, $secret);
+  if ("" !== $check) {
+    return $check;
   }
 
   // database
