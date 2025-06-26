@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', function() {
-  fetch('model/favoriteZoneHandler.php?getFavorites=1')
+  fetch('?getFavorites=1')
     .then(res => res.json())
     .then(favorites => {
       const dropdown = document.getElementById('zonesDropdownContent');

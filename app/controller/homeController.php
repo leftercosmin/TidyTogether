@@ -63,6 +63,7 @@ if (isset($_SESSION[CONN])) {
   require_once "controller/updateController.php";
   $role = json_decode($_SESSION[CONN])->{"role"};
   if (USER_CIVL === $role) {
+    require_once "controller/civilianFavoriteController.php";
     require_once "controller/civilianController.php";
   } elseif (USER_SPRV === $role) {
     require_once "controller/supervisorController.php";

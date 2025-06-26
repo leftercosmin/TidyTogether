@@ -16,9 +16,7 @@ function civilianPrintPage(int $id): void
     return;
   }
 
-  if ("favoriteZonePage" === $_GET["civilianPage"]) {
-    require_once "view/home/civilianFavoriteView.php";
-  } elseif ("civilianReportPage" === $_GET['civilianPage']) {
+  if ("civilianReportPage" === $_GET['civilianPage']) {
     $posts = getPostModel($id);
     isError($posts);
     require_once "view/home/civilianPostsView.php";
