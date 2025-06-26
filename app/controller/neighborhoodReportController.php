@@ -144,43 +144,4 @@ function generateZoneReportCSV($data, $neighborhood, $city, $interval) {
     return $output;
 }
 
-// function generateZoneReportHTML($data, $neighborhood, $city, $interval) {
-//     $completionRate = $data['total_reports'] > 0 
-//         ? round(($data['completed_reports'] / $data['total_reports']) * 100, 2) 
-//         : 0;
-        
-//     return "
-//     <h1>Zone Report: $neighborhood, $city</h1>
-//     <p>Time Period: Last $interval</p>
-//     <p>Generated: " . date('Y-m-d H:i:s') . "</p>
-    
-//     <table border='1' style='border-collapse: collapse; width: 100%;'>
-//         <tr>
-//             <th>Status</th>
-//             <th>Count</th>
-//         </tr>
-//         <tr>
-//             <td>Total Reports</td>
-//             <td>{$data['total_reports']}</td>
-//         </tr>
-//         <tr>
-//             <td>Completed</td>
-//             <td>{$data['completed_reports']}</td>
-//         </tr>
-//         <tr>
-//             <td>Pending</td>
-//             <td>{$data['pending_reports']}</td>
-//         </tr>
-//         <tr>
-//             <td>In Progress</td>
-//             <td>{$data['in_progress_reports']}</td>
-//         </tr>
-//         <tr>
-//             <td><strong>Completion Rate</strong></td>
-//             <td><strong>{$completionRate}%</strong></td>
-//         </tr>
-//     </table>
-//     ";
-// }
-
 exit;

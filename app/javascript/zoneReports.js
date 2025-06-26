@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function() {
   console.log('zoneReports.js loaded');
   loadReportData('MONTH');
   
-  // Add Enter key support for city input
   document.getElementById('city-input').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
       applyCityFilter();
@@ -95,10 +94,10 @@ function loadReportData(interval, city = '') {
 }
 
 function renderBarChart(data) {
-  // Sort data by total reports descending
+  //sort by total reports in descending
   const sortedData = [...data].sort((a, b) => b.total_reports - a.total_reports);
   
-  // Take top 10 zones for readability
+  //top 10 zone
   const topZones = sortedData.slice(0, 10);
   
   const labels = topZones.map(row => row.neighborhood);
@@ -149,10 +148,9 @@ function renderBarChart(data) {
 }
 
 function renderTable(data) {
-  // Sort by total reports in descending order
   const sortedData = [...data].sort((a, b) => b.total_reports - a.total_reports);
   
-  // Calculate completion percentage and identify cleanest/dirtiest areas
+  // cleanest/dirtiest areas
   const enhancedData = sortedData.map(zone => {
     const total = Number(zone.total_reports);
     const completed = Number(zone.completed_reports);
@@ -164,7 +162,7 @@ function renderTable(data) {
     };
   });
   
-  // Mark the top 20% as dirty and bottom 20% as clean (if we have enough data)
+  //top 20% dirty, bottom 20% clean
   const numRows = enhancedData.length;
   const dirtyThreshold = Math.max(1, Math.floor(numRows * 0.2));
   const cleanThreshold = Math.max(1, Math.floor(numRows * 0.8));
