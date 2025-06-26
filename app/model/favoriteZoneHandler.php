@@ -5,6 +5,9 @@ if (!defined('CONN')) {
     define("CONN", "userSession");
 }
 
+// load environment variables if not already loaded
+// formatEnv();
+
 if (!getenv('DB_HOST')) {
     require_once __DIR__ . '/../../vendor/autoload.php';
     $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . "/../..");
@@ -14,6 +17,13 @@ if (!getenv('DB_HOST')) {
     }
 }
 
+/*
+require_once "util/databaseConnection.php";
+require_once "model/addFavoriteZone.php";
+require_once "model/getFavoriteZones.php";
+require_once "model/deleteFavoriteZone.php";
+require_once "model/getTagModel.php";
+ */
 require_once __DIR__ . "/../util/databaseConnection.php";
 require_once __DIR__ . "/addFavoriteZone.php";
 require_once __DIR__ . "/getFavoriteZones.php";
@@ -68,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['favoriteZone'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['deleteFavorite'])) {
     $zoneId = $_POST['zoneId'] ?? null;
-    
+
     if (!$zoneId) {
         header('Content-Type: application/json');
         echo json_encode(['success' => false, 'message' => 'Zone ID is required']);
