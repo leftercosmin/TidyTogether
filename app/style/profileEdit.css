@@ -39,10 +39,12 @@ body.profile-body {
 }
 
 .page-title {
+  border-radius: 20px;
+  padding: 1rem;
+  background: var(--offwhite1);
   font-size: 2.5em;
   margin-bottom: 2rem;
-  margin-left: 2rem;
-  color: var(--offwhite1);
+  color: var(--green);
   align-self: center;
 }
 
@@ -54,20 +56,20 @@ body.profile-body {
   padding: 5px 12px;
   border-radius: 8px 8px 0 0;
   background-color: var(--green);
-  color: var(--accent-color);
+  color: #f8efe0;
   font-weight: 600;
 }
 
 .label-header svg {
   height: 1em;
   width: 1em;
-  fill: var(--accent-color);
+  fill: #f8efe0;
   vertical-align: middle;
 }
 
 form input {
   box-sizing: border-box;
-  background-color: #86ffb8;
+  background-color: #8ebca6;
   flex-grow: 1;
   min-width: 0;
   height: 45px;

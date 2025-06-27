@@ -153,12 +153,15 @@
 
 ### :art: Color Reference
 
-| Color           | Hex                                                              |
-| --------------- | ---------------------------------------------------------------- |
-| Primary Color   | ![#017852](https://via.placeholder.com/10/017852?text=+) #017852 |
-| Secondary Color | ![#F8EFE0](https://via.placeholder.com/10/F8EFE0?text=+) #F8EFE0 |
-| Accent Color    | ![#E62C20](https://via.placeholder.com/10/E62C20?text=+) #E62C20 |
-| Text Color      | ![#FFAC25](https://via.placeholder.com/10/FFAC25?text=+) #FFAC25 |
+| Color                                               | Hex     |
+| --------------------------------------------------- | ------- |
+| <span style="color: #017852">Primary Color</span>   | #017852 |
+| <span style="color: #8ebca6">Secondary Color</span> | #8ebca6 |
+| <span style="color: #F8EFE0">Accent Color</span>    | #F8EFE0 |
+| <span style="color: #E62C20">Status Color</span>    | #E62C20 |
+| <span style="color: #FFAC25">Status Color</span>    | #FFAC25 |
+| <span style="color: #0C5460">Status Color</span>    | #0C5460 |
+| <span style="color: #000000">Text Color</span>      | #000000 |
 
 ### :key: Environment Variables
 
