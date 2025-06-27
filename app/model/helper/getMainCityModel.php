@@ -1,6 +1,6 @@
 <?php
 
-function getMainCityModel(int $id): string|null
+function getMainCityModel(int $id): string
 {
   $db = DatabaseConnection::get();
   if (null === $db || $db->connect_error) {
@@ -33,8 +33,11 @@ function getMainCityModel(int $id): string|null
   }
 
   $arr = $result->fetch_assoc();
+  if (false === $arr) {
+    return "error - getMainCityModel(): failed to retrieve arr";
+  }
 
-  if($arr === null || !isset($arr['mainCity']) || $arr['mainCity'] === null) {
+  if ($arr === null || !isset($arr['mainCity']) || $arr['mainCity'] === null) {
     return "";
   }
 

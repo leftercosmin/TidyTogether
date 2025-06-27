@@ -37,10 +37,10 @@ $opt = [
    ... - might return multiple instances
  ]
  */
-function processLocationModel(string|null $city): array|string
+function processLocationModel(string $city): array|string
 {
-  if (is_null($city) || "" === $city) {
-    return "";
+  if ("" === $city) {
+    return [];
   }
 
   global $opt;

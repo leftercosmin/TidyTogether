@@ -25,9 +25,9 @@
   ...
  ]
  */
-function getReportModel(string $status, string|null $city): array|string
+function getReportModel(string $status, string $city): array|string
 {
-    if (null === $city) {
+    if ("" === $city) {
         return [];
     }
 
