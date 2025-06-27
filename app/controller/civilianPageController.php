@@ -1,8 +1,11 @@
 <?php
 
-function civilianFallbackPage(): void
+require_once "model/helper/getMainCityModel.php";
+
+function civilianFallbackPage(int $id): void
 {
   $location = getLocationModel();
+  $mainCity = getMainCityModel($id);
   $tags = getTagModel();
   isError($location);
   isError($tags);
@@ -12,7 +15,7 @@ function civilianFallbackPage(): void
 function civilianPrintPage(int $id): void
 {
   if (!isset($_GET) || !isset($_GET['civilianPage'])) {
-    civilianFallbackPage();
+    civilianFallbackPage($id);
     return;
   }
 
@@ -48,6 +51,6 @@ function civilianPrintPage(int $id): void
     require_once "view/home/neighborhoodReportView.php";
 
   } else {
-    civilianFallbackPage();
+    civilianFallbackPage($id);
   }
 }
