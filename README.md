@@ -74,74 +74,21 @@
 
 ### :space_invader: Tech Stack
 
-- XAMPP
+- Client:
 
-<h4>Client:</h4>
+  [![HTML5](https://img.shields.io/badge/html5-017852.svg?style=for-the-badge&logo=html5&logoColor=000)](./app/view/home/authorityHomeView.php)
+  [![CSS3](https://img.shields.io/badge/css3-017852.svg?style=for-the-badge&logo=css&logoColor=000)](./app/style/profile.css)
+  [![JavaScript](https://img.shields.io/badge/JavaScript-017852?style=for-the-badge&logo=javascript&logoColor=000)](./app/javascript/mapFunctionality.js)
 
-<ul>
+- Server (Xampp):
 
-<li>
+  [![PHP](https://img.shields.io/badge/php-8ebca6.svg?style=for-the-badge&logo=php&logoColor=000)](./app/controller/civilianController.php)
+  [![Bash](https://img.shields.io/badge/bash_script-8ebca6.svg?style=for-the-badge&logo=gnu-bash&logoColor=000)](./bin/build.sh)
+  [![PowerShell](https://img.shields.io/badge/PowerShell-8ebca6.svg?style=for-the-badge&logo=ps&logoColor=000)](./bin/build.cmd)
 
-![HTML5](https://img.shields.io/badge/html5-017852.svg?style=for-the-badge&logo=html5&logoColor=000)
+- Database:
 
-</li>
-<li>
-
-![CSS3](https://img.shields.io/badge/css3-017852.svg?style=for-the-badge&logo=css&logoColor=000)
-
-</li>
-<li>
-
-[![JavaScript](https://img.shields.io/badge/JavaScript-017852?style=for-the-badge&logo=javascript&logoColor=000)](#)
-
-</li>
-
-</ul>
-
-<h4>Server:</h4>
-
-<ul>
-<li>
-
-![PHP](https://img.shields.io/badge/php-F8EFE0.svg?style=for-the-badge&logo=php&logoColor=000)
-
-</li>
-<li>
-
-![Bash](https://img.shields.io/badge/bash_script-F8EFE0.svg?style=for-the-badge&logo=gnu-bash&logoColor=000)
-
-</li>
-<li>
-
-![PowerShell](https://img.shields.io/badge/PowerShell-F8EFE0.svg?style=for-the-badge&logo=powershell&logoColor=000)
-
-</li>
-</ul>
-
-<h4>Database:</h4>
-
-<ul>
-<li>
-
-![MySQL](https://img.shields.io/badge/mysql-E62C20.svg?style=for-the-badge&logo=mysql&logoColor=000)
-
-</li>
-</ul>
-
-<h4>DevOps:</h4>
-  
-<ul>
-<li>
-
-[![Docker](https://img.shields.io/badge/Docker-FFAC25?style=for-the-badge&logo=docker&logoColor=000)](#)
-
-</li>
-<li>
-
-[![WebAssembly](https://img.shields.io/badge/WebAssembly-FFAC25?style=for-the-badge&logo=webassembly&logoColor=000)](#)
-
-</li>
-</ul>
+  [![MySQL](https://img.shields.io/badge/mysql-F8EFE0.svg?style=for-the-badge&logo=mysql&logoColor=000)](./bin/resetSchema.sh)
 
 ### :dart: Features
 
