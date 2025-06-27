@@ -24,7 +24,10 @@ function authorityPrintPage(int $id): void
     return;
   }
 
-  if ("profilePage" === $_GET["authorityPage"]) {
+  if ("areaPage" === $_GET["authorityPage"]) {
+    require_once "view/home/authorityAreaView.php";
+
+  } elseif ("profilePage" === $_GET["authorityPage"]) {
     $profile = getProfileModel(id: $id);
     isError($profile);
     require_once "view/profileView.php";

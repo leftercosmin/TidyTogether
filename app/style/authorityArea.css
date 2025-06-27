@@ -1,0 +1,226 @@
+body {
+    background-image: url('../public/background-tile.jpg'), linear-gradient(rgba(1, 120, 82, 0.9), rgba(1, 120, 82, 0.9));
+    background-repeat: repeat, no-repeat;
+    background-size: 300px 300px, cover;
+    background-attachment: fixed, fixed;
+    margin: 0;
+    padding: 0;
+    font-family: Karla, sans-serif;
+    min-height: 100vh;
+}
+
+.report-container {
+    margin-left: 250px;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.page-title {
+    color: var(--green);
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.empty-message {
+  color: var(--offwhite1);
+  text-align: center;
+  font-size: 1.2rem;
+  margin-top: 2rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 2rem;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.report-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    max-width: 800px;
+}
+
+.report-item {
+    background-color: var(--offwhite1);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-left: 4px solid var(--green);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.report-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+.report-item h3 {
+    margin-top: 0;
+    color: var(--green);
+    font-size: 1.4rem;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 2px solid #eee;
+    font-weight: 700;
+}
+
+.report-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.report-detail-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.report-label {
+    font-weight: 600;
+    color: #555;
+    width: 130px;
+    flex-shrink: 0;
+    margin-right: 0.5rem;
+}
+
+.report-value {
+    flex: 1;
+    color: #333;
+    line-height: 1.4;
+}
+
+.report-status {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.mark-done-btn {
+    text-decoration: none;
+    background-color: var(--green);
+    color: white;
+    border: none;
+    padding: 0.85em 2em;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+}
+
+.report-media {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.report-photo {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #ddd;
+    transition: transform 0.2s ease;
+    cursor: pointer;
+}
+
+.report-dadada {
+    display: inline-block;
+    background-color: var(--green);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin: 0.2rem 0.3rem 0.2rem 0;
+    border: none;
+}
+
+form {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+@media print {
+    .report-container {
+        margin-left: 0;
+        padding: 1rem;
+    }
+    
+    .mark-done-btn {
+        display: none;
+    }
+    
+    .report-item {
+        page-break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .report-container {
+        margin-left: 0;
+        padding: 1rem;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .report-list {
+        max-width: 100%;
+    }
+    
+    .report-item {
+        margin: 1rem 0;
+        padding: 1rem;
+    }
+    
+    .report-detail-row {
+        flex-direction: column;
+        gap: 0.2rem;
+    }
+    
+    .report-label {
+        width: auto;
+        margin-bottom: 0.2rem;
+        font-size: 0.9rem;
+    }
+    
+    .report-photo {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .page-title {
+        font-size: 1.5rem;
+    }
+    
+    .report-item h3 {
+        font-size: 1.2rem;
+    }
+    
+    .mark-done-btn {
+        width: 100%;
+        padding: 1rem;
+        font-size: 1rem;
+    }
+}
