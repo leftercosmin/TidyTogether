@@ -10,6 +10,8 @@ require_once "model/getProfileModel.php";
 require_once "model/getMediaModel.php";
 require_once "model/getMarkModel.php";
 require_once "model/processReportModel.php";
+require_once "model/processReportModel.php";
+require_once "model/processLocationModel.php";
 
 require_once "controller/authorityPageController.php";
 
