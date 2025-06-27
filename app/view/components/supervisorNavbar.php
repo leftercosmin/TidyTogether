@@ -1,5 +1,5 @@
 <?php
-  $currentPage = $_GET['civilianPage'] ?? '';
+  $currentPage = $_GET['supervisorPage'] ?? '';
   $isHomePage = empty($currentPage) || $currentPage === 'home';
 ?>
 
