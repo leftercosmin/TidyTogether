@@ -37,10 +37,7 @@
 
       <div class="label-header">
         <label for="editfname">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
-            <path
-              d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Z" />
-          </svg>
+          <?php require 'view/components/svg/identifierSvg.php'; ?>
           Your First Name:
         </label>
       </div>
@@ -49,10 +46,7 @@
 
       <div class="label-header">
         <label for="editlname">
-          <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3">
-            <path
-              d="M480-480q-66 0-113-47t-47-113q0-66 47-113t113-47q66 0 113 47t47 113q0 66-47 113t-113 47ZM160-160v-112q0-34 17.5-62.5T224-378q62-31 126-46.5T480-440q66 0 130 15.5T736-378q29 15 46.5 43.5T800-272v112H160Z" />
-          </svg>
+          <?php require 'view/components/svg/identifierSvg.php'; ?>
           Your Last Name:
         </label>
       </div>
@@ -61,11 +55,7 @@
 
       <div class="label-header">
         <label for="editmcity">
-          <svg fill="#000000" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 24 24" xml:space="preserve">
-            <path d="M12,2C8.1,2,5,5.1,5,9c0,6,7,13,7,13s7-7.1,7-13C19,5.1,15.9,2,12,2z M12,11.5c-1.4,0-2.5-1.1-2.5-2.5s1.1-2.5,2.5-2.5
-  s2.5,1.1,2.5,2.5S13.4,11.5,12,11.5z" />
-          </svg>
+          <?php require 'view/components/svg/zoneSvg.php'; ?>
           Your city:
         </label>
       </div>
