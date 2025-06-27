@@ -64,6 +64,10 @@
 
 </html>
 
+<script>
+    const initialLat = <?= json_encode($position['lat']) ?>;
+    const initialLon = <?= json_encode($position['lon']) ?>;
+</script>
 <script src="javascript/mapFunctionality.js"></script>
 <script src="javascript/navbarCollapse.js"></script>
 <script src="javascript/favoriteSpots.js"></script>

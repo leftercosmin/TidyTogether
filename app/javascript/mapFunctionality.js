@@ -1,5 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const map = L.map('map').setView([47.169488, 27.576741], 16);
+  const map = L.map('map')
+    .setView([initialLat, initialLon], 12);
+
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
@@ -58,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(() => {
           const reportBtn = document.getElementById('report');
           if (reportBtn) {
-            reportBtn.onclick = function() {
+            reportBtn.onclick = function () {
               const modal = document.getElementById("reportModal");
               if (modal) {
                 document.getElementById('address').value = currentLocation.address || '';
@@ -71,10 +73,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
           const favBtn = document.getElementById('save-as-fav');
           if (favBtn) {
-            favBtn.onclick = function() {
+            favBtn.onclick = function () {
               favBtn.disabled = true;
               favBtn.textContent = "Saving...";
-              
+
               const formData = new FormData();
               formData.append('favoriteZone', '1');
               formData.append('lat', currentLocation.lat);
@@ -88,32 +90,33 @@ document.addEventListener("DOMContentLoaded", function () {
                 method: 'POST',
                 body: formData
               })
-              .then(res => res.json())
-              .then(data => {
-                if (data.success) {
-                  favBtn.textContent = "Saved!";
-                  favBtn.style.backgroundColor = "#4CAF50";
-                } else {
-                  favBtn.textContent = "Failed - Try Again";
+                .then(res => res.json())
+                .then(data => {
+                  if (data.success) {
+                    favBtn.textContent = "Saved!";
+                    favBtn.style.backgroundColor = "#4CAF50";
+                  } else {
+                    favBtn.textContent = "Failed - Try Again";
+                    favBtn.disabled = false;
+                    favBtn.style.backgroundColor = "#f44336";
+                  }
+                })
+                .catch(error => {
+                  console.error('Error saving favorite:', error);
+                  favBtn.textContent = "Network Error - Try Again";
                   favBtn.disabled = false;
                   favBtn.style.backgroundColor = "#f44336";
-                }
-              })
-              .catch(error => {
-                console.error('Error saving favorite:', error);
-                favBtn.textContent = "Network Error - Try Again";
-                favBtn.disabled = false;
-                favBtn.style.backgroundColor = "#f44336";              });
+                });
             };
           }
 
           const genReportBtn = document.getElementById('gen-report');
           if (genReportBtn) {
             console.log('Generate report button found:', genReportBtn);
-            genReportBtn.onclick = function() {
+            genReportBtn.onclick = function () {
               console.log('Generate report button clicked!');
               console.log('Current location:', currentLocation);
-                const reportUrl = `?civilianPage=neighborhoodReportPage&neighborhood=${encodeURIComponent(currentLocation.neighborhood)}&city=${encodeURIComponent(currentLocation.city)}&country=${encodeURIComponent(currentLocation.country)}`;
+              const reportUrl = `?civilianPage=neighborhoodReportPage&neighborhood=${encodeURIComponent(currentLocation.neighborhood)}&city=${encodeURIComponent(currentLocation.city)}&country=${encodeURIComponent(currentLocation.country)}`;
               console.log('Navigating to:', reportUrl);
               window.location.href = reportUrl;
             };
@@ -135,9 +138,9 @@ document.addEventListener("DOMContentLoaded", function () {
   if (panLat && panLng) {
     console.log("Panning to:", panLat, panLng, panLabel);
     map.setView([parseFloat(panLat), parseFloat(panLng)], 16);
-    
+
     handleLocation(parseFloat(panLat), parseFloat(panLng));
-    
+
     localStorage.removeItem('panToLat');
     localStorage.removeItem('panToLng');
     localStorage.removeItem('panToLabel');
@@ -150,15 +153,15 @@ document.addEventListener("DOMContentLoaded", function () {
     handleLocation(lat, lng);
   });
 
-  geocoderControl.on('markgeocode', function(e) {
+  geocoderControl.on('markgeocode', function (e) {
     const latlng = e.geocode.center;
     map.setView(latlng, 16);
     handleLocation(latlng.lat, latlng.lng);
   });
 
-  document.getElementById('locateMeBtn').onclick = function() {
+  document.getElementById('locateMeBtn').onclick = function () {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(pos) {
+      navigator.geolocation.getCurrentPosition(function (pos) {
         map.setView([pos.coords.latitude, pos.coords.longitude], 16);
         handleLocation(pos.coords.latitude, pos.coords.longitude);
       });

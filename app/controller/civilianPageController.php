@@ -1,14 +1,21 @@
 <?php
 
 require_once "model/helper/getMainCityModel.php";
+require_once "model/processLocationModel.php";
 
 function civilianFallbackPage(int $id): void
 {
-  $location = getLocationModel();
-  $mainCity = getMainCityModel($id);
   $tags = getTagModel();
-  isError($location);
+  $location = getLocationModel();
+
+  $mainCity = getMainCityModel($id);
+  $position = processLocationModel($mainCity);
+
   isError($tags);
+  isError($location);
+  isError($position);
+
+  // position will be used to start the map in the mainCity
   require_once "view/home/civilianHomeView.php";
 }
 
