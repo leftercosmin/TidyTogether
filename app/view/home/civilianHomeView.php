@@ -64,6 +64,17 @@
 
 </html>
 
+<script>
+  // Romanie Iasi
+  const fallbackLat = 47.159811;
+  const fallbackLon = 27.587201;
+
+  const userCityLat = <?= json_encode($position['lat'] ?? "") ?>;
+  const userCityLon = <?= json_encode($position['lon'] ?? "") ?>;
+
+  const initialLat = userCityLat == "" ? fallbackLat : userCityLat;
+  const initialLon = userCityLon == "" ? fallbackLon : userCityLon;
+</script>
 <script src="javascript/mapFunctionality.js"></script>
 <script src="javascript/navbarCollapse.js"></script>
 <script src="javascript/favoriteSpots.js"></script>

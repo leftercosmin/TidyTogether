@@ -6,7 +6,7 @@ function getSecretModel(
 ): array|string {
 
   if ("civilian" === $role) {
-    if (!is_null($secret)) {
+    if ("" !== $secret) {
       return "error - getSecretModel(): civilian inserted secret";
     }
 
