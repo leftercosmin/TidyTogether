@@ -94,3 +94,4 @@
 </script>
 <script src="javascript/authorityMapFunctionality.js"></script>
 <script src="javascript/navbarCollapse.js"></script>
+<script src="javascript/postedAreas.js"></script>
