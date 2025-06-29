@@ -43,7 +43,6 @@ try {
                 exit;
 
             case 'pdf':
-                require_once __DIR__ . '/../../vendor/autoload.php';
                 $mpdf = new \Mpdf\Mpdf();
                 $htmlData = generateReportHTML($data, $interval, $city);
                 $mpdf->WriteHTML($htmlData);

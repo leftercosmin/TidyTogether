@@ -14,10 +14,10 @@ body {
 }
 
 .content-wrapper {
-  margin-left: 500px;
-  width: 100%;
-  max-width: 900px;
-  margin-right: 100px;
+  margin-left: 300px;
+  width: calc(100% - 350px);
+  max-width: 1000px;
+  margin-right: 50px;
 }
 
 .report-heading {
@@ -32,13 +32,16 @@ body {
 
 .controls {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   gap: 1rem;
   margin-bottom: 20px;
   background-color: rgba(255, 255, 255, 0.1);
   padding: 1rem 1.5rem;
   border-radius: 8px;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .control-row {
@@ -123,6 +126,7 @@ body {
 }
 
 .download-options a {
+  margin-top: .3rem;
   margin-left: 10px;
   padding: 8px 16px;
   background: var(--offwhite1);
@@ -139,7 +143,7 @@ body {
 
 .chart-box {
   width: 100%;
-  height: 500px;
+  min-height: 600px;
   background: var(--offwhite1);
   padding: 1.5rem;
   border-radius: 8px;
@@ -152,9 +156,10 @@ body {
 .chart-content {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-between;
   gap: 2rem;
-  height: calc(100% - 3rem);
+  flex: 1;
+  min-height: 500px;
   align-items: stretch;
 }
 
@@ -170,11 +175,11 @@ body {
 .chart-wrapper {
   margin-top: 0.5em;
   flex: 1;
-  height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  max-height: 300px;
+  min-height: 400px;
+  position: relative;
 }
 
 .chart-stat-item {
@@ -227,12 +232,6 @@ body {
 #reportsBarChart {
   width: 100% !important;
   height: 350px !important;
-}
-
-#zonePieChart {
-  width: 100% !important;
-  height: 350px !important;
-  max-width: 400px !important;
 }
 
 .chart-box h3 {
@@ -369,7 +368,8 @@ body {
   }
   
   .content-wrapper {
-    width: 70%;
+    margin-left: 0;
+    width: 100%;
     max-width: 100%;
     margin-right: 0;
   }
@@ -399,14 +399,14 @@ body {
     overflow-x: auto;
   }
   .chart-box {
-    height: auto;
-    min-height: 300px;
+    min-height: 500px;
+    padding: 1rem;
   }
 
   .chart-content {
     flex-direction: column;
-    gap: 1rem;
-    height: auto;
+    gap: 1.5rem;
+    min-height: 450px;
     align-items: center;
   }
 
@@ -416,14 +416,13 @@ body {
     flex-direction: row;
     justify-content: space-around;
     gap: 0.5rem;
-    padding: 0.5rem 0;
+    padding: 1rem 0;
     order: 1;
   }
 
   .chart-wrapper {
     width: 100%;
-    height: 300px;
-    max-height: none;
+    min-height: 350px;
     margin-top: 1rem;
     display: flex;
     align-items: center;

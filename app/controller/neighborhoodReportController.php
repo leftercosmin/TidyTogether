@@ -148,4 +148,76 @@ function generateZoneReportCSV($data, $neighborhood, $city, $interval)
     return $output;
 }
 
+function generateZoneReportHTML($data, $neighborhood, $city, $interval) {
+    $intervalText = [
+        'DAY' => 'Last 24 Hours',
+        'WEEK' => 'Last Week',
+        'MONTH' => 'Last Month'
+    ];
+    
+    $title = isset($intervalText[$interval]) ? $intervalText[$interval] : 'Custom Period';
+    
+    $html = '<style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1, h2 { color: #333; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #f2f2f2; font-weight: bold; }
+        .stats-row { background-color: #f9f9f9; }
+        .header-info { margin-bottom: 20px; }
+        .completion-rate { font-size: 1.2em; font-weight: bold; color: #017852; }
+    </style>';
+    
+    $html .= "<h1>Zone Cleanliness Report</h1>";
+    $html .= "<div class='header-info'>";
+    $html .= "<h2>Zone: " . htmlspecialchars($neighborhood) . ", " . htmlspecialchars($city) . "</h2>";
+    $html .= "<p><strong>Period:</strong> {$title}</p>";
+    $html .= "</div>";
+    
+    $html .= '<table>
+        <thead>
+            <tr>
+                <th>Status</th>
+                <th>Count</th>
+            </tr>
+        </thead>
+        <tbody>';
+    
+    $html .= "<tr class='stats-row'>
+        <td><strong>Total Reports</strong></td>
+        <td>{$data['total_reports']}</td>
+    </tr>";
+    
+    $html .= "<tr>
+        <td>Completed</td>
+        <td>{$data['completed_reports']}</td>
+    </tr>";
+    
+    $html .= "<tr>
+        <td>Pending</td>
+        <td>{$data['pending_reports']}</td>
+    </tr>";
+    
+    $html .= "<tr>
+        <td>In Progress</td>
+        <td>{$data['in_progress_reports']}</td>
+    </tr>";
+    
+    if ($data['total_reports'] > 0) {
+        $completionRate = round(($data['completed_reports'] / $data['total_reports']) * 100, 2);
+        $html .= "<tr class='stats-row'>
+            <td><strong>Completion Rate</strong></td>
+            <td class='completion-rate'>{$completionRate}%</td>
+        </tr>";
+    }
+    
+    $html .= '</tbody></table>';
+    
+    if ($data['total_reports'] == 0) {
+        $html .= "<p style='margin-top: 20px; font-style: italic; color: #666;'>No reports found for this zone in the selected time period.</p>";
+    }
+    
+    return $html;
+}
+
 exit;
