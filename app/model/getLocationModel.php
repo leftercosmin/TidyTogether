@@ -1,4 +1,5 @@
 <?php
+
 define("URL_IP", "https://api.ipify.org/?format=json");
 define("URL_GEO", "http://ip-api.com/json/");
 

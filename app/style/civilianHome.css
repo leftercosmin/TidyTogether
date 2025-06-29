@@ -223,10 +223,6 @@ form button {
     justify-content: center;
 }
 
-.modal-content button:hover {
-  background-color: #38633b;
-}
-
 .modal-content input[type="text"], .modal-content input[type="email"], .modal-content input[type="password"], .modal-content textarea, .modal-content select {
     width: 100%;
     padding: 12px 0;

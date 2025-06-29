@@ -2,14 +2,14 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Civilian Dashboard</title>
-  <meta name="description" content="personal space of a regular user" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Recycling Area</title>
+  <meta name="description" content="Authority dashboard for managing approved reports">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="style/globals.css">
   <link rel="stylesheet" href="style/navbar.css">
-  <link rel="stylesheet" href="style/civilianHome.css">
+  <link rel="stylesheet" href="style/authorityArea.css">
 
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
@@ -30,19 +30,14 @@
 
   <div class="page-layout">
 
-    <?php require_once "view/components/civilianNavbar.php"; ?>
+    <?php require_once 'view/components/authorityNavbar.php'; ?>
 
     <div class="map-container">
       <div class="map-top-bar">
-        <button id="openReportBtn" class="topbar-button">
-          <?php require 'view/components/svg/dirtySvg.php'; ?>
-          Report a dirty area
-        </button>
-
         <div class="topbar-dropdown">
           <button id="zonesDropdownBtn" class="topbar-button">
             <?php require 'view/components/svg/savedSvg.php'; ?>
-            Saved zones
+            Posted areas
           </button>
           <div id="zonesDropdownContent" class="dropdown-content">
             <div style="padding:0.5em;color:#888;">Loading...</div>
@@ -57,9 +52,10 @@
 
       <div id="map"></div>
     </div>
-
-    <?php require_once "view/components/civilianPostForm.php"; ?>
   </div>
+
+  <?php require_once 'view/components/authorityRecyclingForm.php'; ?>
+
 </body>
 
 </html>
@@ -71,10 +67,18 @@
 
   const userCityLat = <?= json_encode($position['lat'] ?? "") ?>;
   const userCityLon = <?= json_encode($position['lon'] ?? "") ?>;
+  const userCityName = <?= json_encode($mainCity ?? "Unknown City") ?>;
 
-  const initialLat = userCityLat == "" ? fallbackLat : userCityLat;
-  const initialLon = userCityLon == "" ? fallbackLon : userCityLon;
+  const initialLat = userCityLat == "" ? fallbackLat : parseFloat(userCityLat);
+  const initialLon = userCityLon == "" ? fallbackLon : parseFloat(userCityLon);
+
+  const cityBounds = <?= json_encode($position['bounds'] ?? null) ?>;
+  
+  console.log('Authority Area Setup:', {
+    userCity: userCityName,
+    coordinates: [initialLat, initialLon],
+    bounds: cityBounds
+  });
 </script>
-<script src="javascript/mapFunctionality.js"></script>
+<script src="javascript/authorityMapFunctionality.js"></script>
 <script src="javascript/navbarCollapse.js"></script>
-<script src="javascript/favoriteSpots.js"></script>

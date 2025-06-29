@@ -55,5 +55,6 @@ INSERT INTO Tag (name, color) VALUES ('ceramic', 'orange');
 INSERT INTO Tag (name, color) VALUES ('plastic', 'red');
 INSERT INTO Tag (name, color) VALUES ('metal', 'blue');
 INSERT INTO Tag (name, color) VALUES ('toxic', 'purple');
+INSERT INTO Tag (name, color) VALUES ('cloth', 'red');
 
 COMMIT;

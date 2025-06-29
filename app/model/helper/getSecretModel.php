@@ -6,16 +6,20 @@ function getSecretModel(
 ): array|string {
 
   if ("civilian" === $role) {
-    if (!is_null($secret)) {
+    if ("" !== $secret) {
       return "error - getSecretModel(): civilian inserted secret";
     }
 
     return ""; // all good mate
   }
 
-  // it's guranteed: role=supervisor/authority - secret must be valid
+  // // TESTING
+  // return "";
+  
+  // ORIGINAL
+  //it's guranteed: role=supervisor/authority - secret must be valid
   if (is_null($secret) || "" === $secret) {
-    return "error - getSecretModel(): null secret";
+  return "error - getSecretModel(): null secret";
   }
 
   $db = DatabaseConnection::get();
