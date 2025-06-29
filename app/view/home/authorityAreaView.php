@@ -53,10 +53,12 @@
       <div id="map"></div>
     </div>
   </div>
+
+  <?php require_once 'view/components/authorityRecyclingForm.php'; ?>
+
 </body>
 
 </html>
-
 
 <script>
   // Romanie Iasi
@@ -65,10 +67,18 @@
 
   const userCityLat = <?= json_encode($position['lat'] ?? "") ?>;
   const userCityLon = <?= json_encode($position['lon'] ?? "") ?>;
+  const userCityName = <?= json_encode($mainCity ?? "Unknown City") ?>;
 
-  const initialLat = userCityLat == "" ? fallbackLat : userCityLat;
-  const initialLon = userCityLon == "" ? fallbackLon : userCityLon;
+  const initialLat = userCityLat == "" ? fallbackLat : parseFloat(userCityLat);
+  const initialLon = userCityLon == "" ? fallbackLon : parseFloat(userCityLon);
+
+  const cityBounds = <?= json_encode($position['bounds'] ?? null) ?>;
+  
+  console.log('Authority Area Setup:', {
+    userCity: userCityName,
+    coordinates: [initialLat, initialLon],
+    bounds: cityBounds
+  });
 </script>
-<script src="javascript/mapFunctionality.js"></script>
+<script src="javascript/authorityMapFunctionality.js"></script>
 <script src="javascript/navbarCollapse.js"></script>
-<script src="javascript/favoriteSpots.js"></script>

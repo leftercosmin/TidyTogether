@@ -27,6 +27,8 @@ function authorityPrintPage(int $id): void
   if ("areaPage" === $_GET["authorityPage"]) {
     $mainCity = getMainCityModel($id);
     $position = processLocationModel($mainCity);
+    $tags = getTagModel();
+    isError($tags);
     require_once "view/home/authorityAreaView.php";
 
   } elseif ("profilePage" === $_GET["authorityPage"]) {

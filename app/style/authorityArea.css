@@ -151,8 +151,6 @@ body {
 
 form {
     margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid #eee;
 }
 
 @media print {
@@ -678,4 +676,22 @@ form button {
     .map-top-bar {
         min-height: 35px;
     }
+}
+
+.city-info-control {
+    z-index: 1000;
+    font-family: inherit;
+}
+
+.city-info-control div {
+    font-size: 14px;
+    line-height: 1.4;
+    max-width: 200px;
+}
+
+.leaflet-popup-content button {
+    border: none;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
 }

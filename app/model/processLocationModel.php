@@ -64,5 +64,16 @@ function processLocationModel(string $city): array|string
   $ret = [];
   $ret["lat"] = $data[0]["lat"];
   $ret["lon"] = $data[0]["lon"];
+  
+  if (isset($data[0]["boundingbox"])) {
+    $ret["boundingbox"] = $data[0]["boundingbox"];
+    $ret["bounds"] = [
+      "south" => (float)$data[0]["boundingbox"][0], //lat minima
+      "north" => (float)$data[0]["boundingbox"][1], //lat maxima
+      "west" => (float)$data[0]["boundingbox"][2], //long minima
+      "east" => (float)$data[0]["boundingbox"][3] //long maxima
+    ];
+  }
+  
   return $ret;
 }
