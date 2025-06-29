@@ -13,14 +13,14 @@ function getSecretModel(
     return ""; // all good mate
   }
 
-  // TESTING
-  return "";
+  // // TESTING
+  // return "";
   
   // ORIGINAL
-  // it's guranteed: role=supervisor/authority - secret must be valid
-  // if (is_null($secret) || "" === $secret) {
-  //   return "error - getSecretModel(): null secret";
-  // }
+  //it's guranteed: role=supervisor/authority - secret must be valid
+  if (is_null($secret) || "" === $secret) {
+  return "error - getSecretModel(): null secret";
+  }
 
   $db = DatabaseConnection::get();
   if (null === $db || $db->connect_error) {
