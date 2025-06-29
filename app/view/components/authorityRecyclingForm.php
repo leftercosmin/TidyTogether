@@ -50,11 +50,6 @@
     const closeBtn = recyclingModal.querySelector(".close");
 
     window.openRecyclingModal = function (location) {
-      if (location) {
-        //document.getElementById('address').value = location.address || '';
-        //document.getElementById('neighbourhood').value = location.neighborhood || '';
-        //document.getElementById('city').value = location.city || '';
-      }
       recyclingModal.style.display = "block";
       document.body.style.overflow = 'hidden';
     }
