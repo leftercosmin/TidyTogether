@@ -87,13 +87,12 @@ document.addEventListener("DOMContentLoaded", function () {
           const addRecyclingBtn = document.getElementById('add-recycling-area');
           if (addRecyclingBtn) {
             addRecyclingBtn.onclick = function() {
-              window.currentRecyclingLocation = currentLocation
+              window.currentRecyclingLocation = currentLocation;
               
               const modal = document.getElementById("recyclingModal");
               if (modal) {
-                document.getElementById('address').value = currentLocation.address || '';
-                document.getElementById('neighbourhood').value = currentLocation.neighborhood || '';
-                document.getElementById('city').value = currentLocation.city || '';
+                //document.getElementById('hiddenLat').value = currentLocation.address || '';
+                //document.getElementById('hiddenLon').value = currentLocation.address || '';
                 modal.style.display = "block";
               }
             };
