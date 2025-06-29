@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
   const map = L.map('map').setView([initialLat, initialLon], 16);
-  
+
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
       [cityBounds.south, cityBounds.west],
       [cityBounds.north, cityBounds.east]
     );
-    
+
     map.setMaxBounds(bounds);
     map.fitBounds(bounds);
     const boundaryRectangle = L.rectangle(bounds, {
@@ -33,8 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
   function handleLocation(lat, lng) {
 
     if (typeof cityBounds !== 'undefined' && cityBounds) {
-      if (lat < cityBounds.south || lat > cityBounds.north || 
-          lng < cityBounds.west || lng > cityBounds.east) {
+      if (lat < cityBounds.south || lat > cityBounds.north ||
+        lng < cityBounds.west || lng > cityBounds.east) {
         alert("You can only add recycling areas in the city you operate in.");
         return;
       }
@@ -73,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         const street = data.address.road || data.address.street || "";
         const shortAddress = street ? `${street}, ${neighborhood}` : neighborhood;
-        
+
         const popupContent = `
           <div style="display: flex; flex-direction: column; gap: 6px;">
             <div style="font-weight: bold; margin-bottom: 8px;">${shortAddress}</div>
@@ -86,14 +86,13 @@ document.addEventListener("DOMContentLoaded", function () {
         setTimeout(() => {
           const addRecyclingBtn = document.getElementById('add-recycling-area');
           if (addRecyclingBtn) {
-            addRecyclingBtn.onclick = function() {
-              window.currentRecyclingLocation = currentLocation
-              
+            addRecyclingBtn.onclick = function () {
+              window.currentRecyclingLocation = currentLocation;
+
               const modal = document.getElementById("recyclingModal");
               if (modal) {
-                document.getElementById('address').value = currentLocation.address || '';
-                document.getElementById('neighbourhood').value = currentLocation.neighborhood || '';
-                document.getElementById('city').value = currentLocation.city || '';
+                document.getElementById('hiddenLat').value = currentLocation.lat ?? 'error';
+                document.getElementById('hiddenLon').value = currentLocation.lng ?? 'error';
                 modal.style.display = "block";
               }
             };
@@ -112,30 +111,30 @@ document.addEventListener("DOMContentLoaded", function () {
     handleLocation(lat, lng);
   });
 
-  geocoderControl.on('markgeocode', function(e) {
+  geocoderControl.on('markgeocode', function (e) {
     const latlng = e.geocode.center;
-    
+
     map.setView(latlng, 16);
     handleLocation(latlng.lat, latlng.lng);
   });
 
-  document.getElementById('locateMeBtn').onclick = function() {
+  document.getElementById('locateMeBtn').onclick = function () {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(pos) {
+      navigator.geolocation.getCurrentPosition(function (pos) {
         const userLat = pos.coords.latitude;
         const userLng = pos.coords.longitude;
-        
+
         if (typeof cityBounds !== 'undefined' && cityBounds) {
-          if (userLat < cityBounds.south || userLat > cityBounds.north || 
-              userLng < cityBounds.west || userLng > cityBounds.east) {
+          if (userLat < cityBounds.south || userLat > cityBounds.north ||
+            userLng < cityBounds.west || userLng > cityBounds.east) {
             map.setView([initialLat, initialLon], 16);
             return;
           }
         }
-        
+
         map.setView([userLat, userLng], 16);
         handleLocation(userLat, userLng);
-      }, function(error) {
+      }, function (error) {
         alert("Unable to get your location. Showing city center instead.");
         map.setView([initialLat, initialLon], 16);
       });
@@ -145,8 +144,8 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   if (typeof userCityName !== 'undefined' && userCityName) {
-    const cityInfoControl = L.control({position: 'topright'});
-    cityInfoControl.onAdd = function(map) {
+    const cityInfoControl = L.control({ position: 'topright' });
+    cityInfoControl.onAdd = function (map) {
       const div = L.DomUtil.create('div', 'city-info-control');
       div.innerHTML = `
         <div style="background: white; padding: 10px; border-radius: 5px; box-shadow: 0 2px 4px rgba(0,0,0,0.2);">

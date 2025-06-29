@@ -33,24 +33,36 @@
     <?php require_once 'view/components/authorityNavbar.php'; ?>
 
     <div class="map-container">
-      <div class="map-top-bar">
-        <div class="topbar-dropdown">
-          <button id="zonesDropdownBtn" class="topbar-button">
-            <?php require 'view/components/svg/savedSvg.php'; ?>
-            Posted areas
-          </button>
-          <div id="zonesDropdownContent" class="dropdown-content">
-            <div style="padding:0.5em;color:#888;">Loading...</div>
+
+      <!-- only if the mainCity is set -->
+      <?php if ("" === $mainCity ?? ""): ?>
+        <div class="map-top-bar">
+          <a href="?authorityPage=profilePage" class="topbar-button">
+            Please set your main city in the profile section
+          </a>
+        </div>
+      <?php else: ?>
+
+        <div class="map-top-bar">
+          <div class="topbar-dropdown">
+            <button id="zonesDropdownBtn" class="topbar-button">
+              <?php require 'view/components/svg/savedSvg.php'; ?>
+              Posted areas
+            </button>
+            <div id="zonesDropdownContent" class="dropdown-content">
+              <div style="padding:0.5em;color:#888;">Loading...</div>
+            </div>
           </div>
+
+          <button id="locateMeBtn" class="topbar-button">
+            <?php require 'view/components/svg/zoneSvg.php'; ?>
+            My Location
+          </button>
         </div>
 
-        <button id="locateMeBtn" class="topbar-button">
-          <?php require 'view/components/svg/zoneSvg.php'; ?>
-          My Location
-        </button>
-      </div>
+        <div id="map"></div>
 
-      <div id="map"></div>
+      <?php endif; ?>
     </div>
   </div>
 
@@ -73,7 +85,7 @@
   const initialLon = userCityLon == "" ? fallbackLon : parseFloat(userCityLon);
 
   const cityBounds = <?= json_encode($position['bounds'] ?? null) ?>;
-  
+
   console.log('Authority Area Setup:', {
     userCity: userCityName,
     coordinates: [initialLat, initialLon],

@@ -70,6 +70,9 @@ function addPostModel(
   }
 
   $statement->close();
+
+  if (is_string($db->insert_id)) {
+    alert("warning - addPostModel(): id is string");
+  }
   return $db->insert_id;
-  // todo large numbers are strings ... 
 }
