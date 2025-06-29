@@ -6,6 +6,7 @@
     <form id="recyclingForm" method="POST" enctype="multipart/form-data" action="./">
 
       <!-- javascript/authorityMapFunctionality.js sets the values -->
+      <input id="hiddenAdd" type="hidden" name="recyclingAdd" value="" />
       <input id="hiddenLat" type="hidden" name="recyclingLat" value="" />
       <input id="hiddenLon" type="hidden" name="recyclingLon" value="" />
 

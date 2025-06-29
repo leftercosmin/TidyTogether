@@ -1,21 +1,21 @@
 document.addEventListener('DOMContentLoaded', function() {
-  fetch('model/favoriteZoneHandler.php?getFavorites=1')
+  fetch('?fetch=true&getAreas=true')
     .then(res => res.json())
-    .then(favorites => {
+    .then(areas => {
       const dropdown = document.getElementById('zonesDropdownContent');
       if (!dropdown) return;
       
-      if (!favorites.length) {
+      if (!areas.length) {
         dropdown.innerHTML = "<div style='padding:0.5em;color:#888;'>No posted areas</div>";
         return;
       }
-      dropdown.innerHTML = favorites.map(fav =>
+      dropdown.innerHTML = areas.map(area =>
         `<div style="display: flex; align-items: center; padding: 0.25em;">
-          <button type="button" style="flex: 1; text-align: left; border: none; background: none; padding: 0.5em; cursor: pointer;" onclick="selectFavoriteZone(${fav.lat}, ${fav.lng}, '${fav.neighborhood.replace(/'/g, "\\'")}', '${fav.city.replace(/'/g, "\\'")}')" onmouseover="this.style.backgroundColor='#f0f0f0'" onmouseout="this.style.backgroundColor='transparent'">
-            ${fav.neighborhood}, ${fav.city}
+          <button type="button" style="flex: 1; text-align: left; border: none; background: none; padding: 0.5em; cursor: pointer;" onclick="selectFavoriteZone(${area.lat}, ${area.lng}, '${area.neighborhood.replace(/'/g, "\\'")}', '${area.city.replace(/'/g, "\\'")}')" onmouseover="this.style.backgroundColor='#f0f0f0'" onmouseout="this.style.backgroundColor='transparent'">
+            ${area.neighborhood}, ${area.city}
           </button>        
             
-          <button type="button" style="width: 2rem; background:#017852; color: #F8EFE0; border: none; padding: 0.25em 0.5em; margin-left: 0.5em; border-radius: 3px; cursor: pointer; font-size: 0.8em;" onclick="deleteFavoriteZone(${fav.idZone}, '${fav.neighborhood.replace(/'/g, "\\'")}', '${fav.city.replace(/'/g, "\\'")}', this)" title="Delete this posted area">
+          <button type="button" style="width: 2rem; background:#017852; color: #F8EFE0; border: none; padding: 0.25em 0.5em; margin-left: 0.5em; border-radius: 3px; cursor: pointer; font-size: 0.8em;" onclick="deleteFavoriteZone(${area.idZone}, '${area.neighborhood.replace(/'/g, "\\'")}', '${area.city.replace(/'/g, "\\'")}', this)" title="Delete this posted area">
             X
           </button>
         </div>`

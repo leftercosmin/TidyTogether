@@ -49,7 +49,7 @@ if (isset($_POST["recyclingLat"])) {
     getCoordinateModel($_POST["recyclingLat"], $_POST["recyclingLon"]);
   if (-1 === $idCoordinate) {
     $idCoordinate =
-      addCoordinateModel($_POST["recyclingLat"], $_POST["recyclingLon"]);
+      addCoordinateModel($_POST["recyclingAdd"], $_POST["recyclingLat"], $_POST["recyclingLon"]);
   }
 
   if (isError($idCoordinate)) {

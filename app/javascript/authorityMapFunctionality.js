@@ -91,6 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
               const modal = document.getElementById("recyclingModal");
               if (modal) {
+                document.getElementById('hiddenAdd').value = currentLocation.address ?? 'error';
                 document.getElementById('hiddenLat').value = currentLocation.lat ?? 'error';
                 document.getElementById('hiddenLon').value = currentLocation.lng ?? 'error';
                 modal.style.display = "block";

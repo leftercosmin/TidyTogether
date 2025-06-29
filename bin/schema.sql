@@ -101,8 +101,9 @@ CREATE TABLE Mark (
 -- authority tables
 CREATE TABLE Coordinate (
   id        BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-  lat       DOUBLE,
-  lng       DOUBLE,
+  address   VARCHAR(255),
+  lat       DOUBLE NOT NULL,
+  lng       DOUBLE NOT NULL,
   createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
 
   INDEX (lat),

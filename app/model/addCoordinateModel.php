@@ -1,7 +1,11 @@
 <?php
 
-function addCoordinateModel(float $lat, float $lon): int|string
-{
+function addCoordinateModel(
+  string|null $address,
+  float $lat,
+  float $lon
+): int|string {
+
   $db = DatabaseConnection::get();
   if (null === $db || $db->connect_error) {
     $db->close();
@@ -10,8 +14,8 @@ function addCoordinateModel(float $lat, float $lon): int|string
 
   $statement =
     $db->prepare(
-      'INSERT INTO Coordinate (lat, lng)
-      VALUES (?, ?)'
+      'INSERT INTO Coordinate (address, lat, lng)
+      VALUES (?, ?, ?)'
     );
   if (!$statement) {
     return "error - addCoordinateModel(): failed to prepare SQL statement";
@@ -19,7 +23,8 @@ function addCoordinateModel(float $lat, float $lon): int|string
 
   if (
     !$statement->bind_param(
-      'dd',
+      'sdd',
+      $address,
       $lat,
       $lon
     )
