@@ -2,22 +2,30 @@
 
 require_once "model/getAreasModel.php";
 
+if (!defined('CONN')) {
+  define("CONN", "userSession");
+}
+
 // get session
 if (session_status() === PHP_SESSION_NONE) {
   session_start();
 }
 
-$sessionData = json_decode($_SESSION[CONN]);
-if (!isset($_SESSION[CONN]) || !$sessionData || !isset($sessionData->id)) {
-  $root = getRoot();
-  header("Location: $root");
+if (!isset($_SESSION[CONN])) {
+  http_response_code(405);
+  header('Content-Type: application/json');
+  echo json_encode(['success' => false, 'message' => 'User not authenticated']);
   exit();
 }
 
-$id = $sessionData->id;
+$id = json_decode($_SESSION[CONN])->{"id"};
 
 if (isset($_GET["getAreas"])) {
   $spots = getAreasModel($id);
   echo json_encode($spots);
+  exit();
+}
+
+if (isset($_GET["deleteArea"])) {
   exit();
 }

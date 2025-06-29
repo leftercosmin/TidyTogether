@@ -1,30 +1,51 @@
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
   fetch('?fetch=true&getAreas=true')
     .then(res => res.json())
     .then(areas => {
+
       const dropdown = document.getElementById('zonesDropdownContent');
       if (!dropdown) return;
-      
-      if (!areas.length) {
-        dropdown.innerHTML = "<div style='padding:0.5em;color:#888;'>No posted areas</div>";
+
+      let temp = "<div style='padding:0.5em;color:#888;'>No posted areas</div>";
+      let html = "";
+
+      if ("{}" === JSON.stringify(areas)) {
+        dropdown.innerHTML = temp;
         return;
       }
-      dropdown.innerHTML = areas.map(area =>
-        `<div style="display: flex; align-items: center; padding: 0.25em;">
-          <button type="button" style="flex: 1; text-align: left; border: none; background: none; padding: 0.5em; cursor: pointer;" onclick="selectFavoriteZone(${area.lat}, ${area.lng}, '${area.neighborhood.replace(/'/g, "\\'")}', '${area.city.replace(/'/g, "\\'")}')" onmouseover="this.style.backgroundColor='#f0f0f0'" onmouseout="this.style.backgroundColor='transparent'">
-            ${area.neighborhood}, ${area.city}
-          </button>        
-            
-          <button type="button" style="width: 2rem; background:#017852; color: #F8EFE0; border: none; padding: 0.25em 0.5em; margin-left: 0.5em; border-radius: 3px; cursor: pointer; font-size: 0.8em;" onclick="deleteFavoriteZone(${area.idZone}, '${area.neighborhood.replace(/'/g, "\\'")}', '${area.city.replace(/'/g, "\\'")}', this)" title="Delete this posted area">
-            X
-          </button>
-        </div>`
-      ).join('');
+
+        console.log(JSON.stringify(areas));
+      for (const userId in areas) {
+        const coords = areas[userId];
+
+        for (const coordId in coords) {
+          const area = coords[coordId];
+          html += `
+      <div style="display: flex; align-items: center; padding: 0.25em;">
+        <button type="button" style="flex: 1; text-align: left; border: none; background: none; padding: 0.5em; cursor: pointer;" 
+          onclick="selectPostedArea(${area.lat}, ${area.lon}, ${area.address})"
+          onmouseover="this.style.backgroundColor='#f0f0f0'"
+          onmouseout="this.style.backgroundColor='transparent'">
+          ${area.address}
+        </button>
+
+        <button type="button" style="width: 2rem; background:#017852; color: #F8EFE0; border: none; padding: 0.25em 0.5em; margin-left: 0.5em; border-radius: 3px; cursor: pointer; font-size: 0.8em;" 
+          onclick="deletePostedArea(${coordId}, this)" 
+          title="Delete this posted area">
+          X
+        </button>
+      </div>
+    `;
+        }
+      }
+
+      if ("" === html) html = temp;
+      dropdown.innerHTML = html;
     });
 
   const dropdownBtn = document.getElementById('zonesDropdownBtn');
   const dropdownContent = document.getElementById('zonesDropdownContent');
-  
+
   dropdownBtn.addEventListener('click', function (e) {
     e.stopPropagation();
     dropdownContent.style.display = (dropdownContent.style.display === 'block') ? 'none' : 'block';
@@ -35,19 +56,19 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 
   //stops from closing
-  dropdownContent.addEventListener('click', function(e) {
+  dropdownContent.addEventListener('click', function (e) {
     e.stopPropagation();
   });
 });
 
-window.selectFavoriteZone = function(lat, lng, neighborhood, city) {
+window.selectPostedArea = function (lat, lng, address) {
   localStorage.setItem('panToLat', lat);
   localStorage.setItem('panToLng', lng);
-  localStorage.setItem('panToLabel', `${neighborhood}, ${city}`);
-  window.location.href = 'model/favoriteZoneHandler.php?fromFavorites=1';
+  localStorage.setItem('panToLabel', address);
+  L.map('map').setView([lat, lng], 12);
 };
 
-window.deleteFavoriteZone = function(zoneId, neighborhood, city, buttonElement) {
+window.deletePostedArea = function (zoneId, buttonElement) {
   buttonElement.disabled = true;
   buttonElement.textContent = '...';
 
@@ -55,30 +76,30 @@ window.deleteFavoriteZone = function(zoneId, neighborhood, city, buttonElement) 
   formData.append('deleteFavorite', '1');
   formData.append('zoneId', zoneId);
 
-  fetch('model/favoriteZoneHandler.php', {
+  fetch('?fetch=true&deleteArea=true', {
     method: 'POST',
     body: formData
   })
-  .then(res => res.json())
-  .then(data => {
-    if (data.success) {
-      const row = buttonElement.parentElement;
-      row.remove();
-      
-      const dropdown = document.getElementById('zonesDropdownContent');
-      if (dropdown.children.length === 0) {
-        dropdown.innerHTML = "<div style='padding:0.5em;color:#888;'>No areas posted</div>";
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) {
+        const row = buttonElement.parentElement;
+        row.remove();
+
+        const dropdown = document.getElementById('zonesDropdownContent');
+        if (dropdown.children.length === 0) {
+          dropdown.innerHTML = "<div style='padding:0.5em;color:#888;'>No areas posted</div>";
+        }
+      } else {
+        alert('Failed to delete posted area: ' + data.message);
+        buttonElement.disabled = false;
+        buttonElement.textContent = '✕';
       }
-    } else {
-      alert('Failed to delete posted area: ' + data.message);
+    })
+    .catch(error => {
+      console.error('Error deleting favorite:', error);
+      alert('Network error occurred while deleting the posted area.');
       buttonElement.disabled = false;
       buttonElement.textContent = '✕';
-    }
-  })
-  .catch(error => {
-    console.error('Error deleting favorite:', error);
-    alert('Network error occurred while deleting the posted area.');
-    buttonElement.disabled = false;
-    buttonElement.textContent = '✕';
-  });
+    });
 };

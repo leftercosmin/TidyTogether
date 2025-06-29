@@ -40,7 +40,7 @@ function getAreasModel(int|null $userId): array|string
     FROM RecyclingArea
     JOIN Tag ON RecyclingArea.idTag = Tag.id
     JOIN Coordinate ON RecyclingArea.idCoordinate = Coordinate.id
-      GROUP BY idUser, idCoordinate, idTag;";
+      GROUP BY idUser, idCoordinate, idTag";
   if (!is_null($userId)) {
     $sql .= " HAVING idUser = ?";
   }
@@ -79,11 +79,11 @@ function getAreasModel(int|null $userId): array|string
     $coord = $row["idCoordinate"];
 
     $tag = [];
-    $tag["id"] = $row["idTag"]; 
-    $tag["name"] = $row["name"]; 
-    $tag["color"] = $row["color"]; 
-    
-    $posts[$human][$coord]["tag"] = $tag;
+    $tag["id"] = $row["idTag"];
+    $tag["name"] = $row["name"];
+    $tag["color"] = $row["color"];
+
+    $posts[$human][$coord]["tag"][] = $tag;
     $posts[$human][$coord]["lat"] = $row["lat"];
     $posts[$human][$coord]["lon"] = $row["lng"];
     $posts[$human][$coord]["address"] = $row["address"];
