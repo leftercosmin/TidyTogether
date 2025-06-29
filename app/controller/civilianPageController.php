@@ -17,7 +17,6 @@ function civilianFallbackPage(int $id): void
   if (str_starts_with($mainCity, "error")) {
     isError($mainCity);
   }
-  // position will be used to start the map in the mainCity
   require_once "view/home/civilianHomeView.php";
 }
 
@@ -46,6 +45,10 @@ function civilianPrintPage(int $id): void
     require_once "view/profileEditView.php";
 
   } elseif ("zoneReportPage" === $_GET['civilianPage']) {
+    $mainCity = getMainCityModel($id);
+    if (str_starts_with($mainCity, "error")) {
+      $mainCity = "";
+    }
     require_once "view/home/zoneReportView.php";
 
   } elseif ("neighborhoodReportPage" === $_GET['civilianPage']) {
