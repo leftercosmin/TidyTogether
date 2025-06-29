@@ -86,82 +86,81 @@ function generateReportCSV($data) {
     return $output;
 }
 
-// //PDF helper
-// function generateReportHTML($data, $interval, $city = '') {
-//     $intervalText = [
-//         'DAY' => 'Last 24 Hours',
-//         'WEEK' => 'Last Week',
-//         'MONTH' => 'Last Month',
-//         'YEAR' => 'Last Year'
-//     ];
+//PDF helper
+function generateReportHTML($data, $interval, $city = '') {
+    $intervalText = [
+        'DAY' => 'Last 24 Hours',
+        'WEEK' => 'Last Week',
+        'MONTH' => 'Last Month',
+        'YEAR' => 'Last Year'
+    ];
     
-//     $title = isset($intervalText[$interval]) ? $intervalText[$interval] : 'Custom Period';
-//     $cityText = !empty($city) ? " for City: " . htmlspecialchars($city) : "";
+    $title = isset($intervalText[$interval]) ? $intervalText[$interval] : 'Custom Period';
+    $cityText = !empty($city) ? " for City: " . htmlspecialchars($city) : "";
     
-//     $html = '<style>
-//         body { font-family: Arial, sans-serif; }
-//         h1, h2 { color: #333; }
-//         table { border-collapse: collapse; width: 100%; margin-top: 20px; }
-//         th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
-//         th { background-color: #f2f2f2; }
-//         tr.dirty { background-color: rgba(255,0,0,0.1); }
-//         tr.clean { background-color: rgba(0,255,0,0.1); }
-//     </style>';
+    $html = '<style>
+        body { font-family: Arial, sans-serif; }
+        h1, h2 { color: #333; }
+        table { border-collapse: collapse; width: 100%; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        tr.dirty { background-color: rgba(255,0,0,0.1); }
+        tr.clean { background-color: rgba(0,255,0,0.1); }
+    </style>';
     
-//     $html .= "<h1>Zone Cleanliness Report</h1>";
-//     $html .= "<h2>Period: {$title}{$cityText}</h2>";
-//     $html .= "<p>Generated on: " . date('F j, Y, g:i a') . "</p>";
+    $html .= "<h1>Zone Cleanliness Report</h1>";
+    $html .= "<h2>Period: {$title}{$cityText}</h2>";
     
-//     $html .= '<table>
-//         <thead>
-//             <tr>
-//                 <th>Neighborhood</th>
-//                 <th>City</th>
-//                 <th>Country</th>
-//                 <th>Total Reports</th>
-//                 <th>Completed</th>
-//                 <th>Completion %</th>
-//             </tr>
-//         </thead>
-//         <tbody>';
+    $html .= '<table>
+        <thead>
+            <tr>
+                <th>Neighborhood</th>
+                <th>City</th>
+                <th>Country</th>
+                <th>Total Reports</th>
+                <th>Completed</th>
+                <th>Completion %</th>
+            </tr>
+        </thead>
+        <tbody>';
     
-//     if (empty($data)) {
-//         $html .= '<tr><td colspan="6" style="text-align: center; font-style: italic;">No data available for the selected period</td></tr>';
-//     } else {
-//         //highlights for dirty and clean zones
-//         $numRows = count($data);
-//         $dirtyThreshold = max(1, floor($numRows * 0.2));
-//         $cleanThreshold = max(1, floor($numRows * 0.8));
+    if (empty($data)) {
+        $html .= '<tr><td colspan="6" style="text-align: center; font-style: italic;">No data available for the selected period</td></tr>';
+    } else {
+        //highlights for dirty and clean zones
+        $numRows = count($data);
+        $dirtyThreshold = max(1, floor($numRows * 0.2));
+        $cleanThreshold = max(1, floor($numRows * 0.8));
         
-//         foreach ($data as $index => $row) {
-//             $completionPercentage = $row['total_reports'] > 0 
-//                 ? round(($row['completed_reports'] / $row['total_reports']) * 100) 
-//                 : 0;
+        foreach ($data as $index => $row) {
+            $completionPercentage = $row['total_reports'] > 0 
+                ? round(($row['completed_reports'] / $row['total_reports']) * 100) 
+                : 0;
                 
-//             $rowClass = '';
-//             if ($index < $dirtyThreshold) {
-//                 $rowClass = 'dirty';
-//             } else if ($index >= $cleanThreshold) {
-//                 $rowClass = 'clean';
-//             }
+            $rowClass = '';
+            if ($index < $dirtyThreshold) {
+                $rowClass = 'dirty';
+            } else if ($index >= $cleanThreshold) {
+                $rowClass = 'clean';
+            }
             
-//             // Escape HTML entities
-//             $neighborhood = htmlspecialchars($row['neighborhood']);
-//             $city = htmlspecialchars($row['city']);
-//             $country = htmlspecialchars($row['country']);
+            // Escape HTML entities
+            $neighborhood = htmlspecialchars($row['neighborhood']);
+            $city = htmlspecialchars($row['city']);
+            $country = htmlspecialchars($row['country']);
             
-//             $html .= "<tr class=\"{$rowClass}\">
-//                 <td>{$neighborhood}</td>
-//                 <td>{$city}</td>
-//                 <td>{$country}</td>
-//                 <td>{$row['total_reports']}</td>
-//                 <td>{$row['completed_reports']}</td>
-//                 <td>{$completionPercentage}%</td>
-//             </tr>";
-//         }
-//     }
+            $html .= "<tr class=\"{$rowClass}\">
+                <td>{$neighborhood}</td>
+                <td>{$city}</td>
+                <td>{$country}</td>
+                <td>{$row['total_reports']}</td>
+                <td>{$row['completed_reports']}</td>
+                <td>{$completionPercentage}%</td>
+            </tr>";
+        }
+    }
     
-//     $html .= '</tbody></table>';
+    $html .= '</tbody></table>';
     
-//     return $html;
-// }
+    return $html;
+}
