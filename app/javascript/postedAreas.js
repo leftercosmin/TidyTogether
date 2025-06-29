@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', function () {
         return;
       }
 
-        console.log(JSON.stringify(areas));
       for (const userId in areas) {
         const coords = areas[userId];
 
@@ -30,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
         </button>
 
         <button type="button" style="width: 2rem; background:#017852; color: #F8EFE0; border: none; padding: 0.25em 0.5em; margin-left: 0.5em; border-radius: 3px; cursor: pointer; font-size: 0.8em;" 
-          onclick="deletePostedArea(${coordId}, this)" 
+          onclick="deletePostedArea(${coordId}, this)"
           title="Delete this posted area">
           X
         </button>
@@ -68,13 +67,13 @@ window.selectPostedArea = function (lat, lng, address) {
   L.map('map').setView([lat, lng], 12);
 };
 
-window.deletePostedArea = function (zoneId, buttonElement) {
+window.deletePostedArea = function (coordId, buttonElement) {
+  let temp = "<div style='padding:0.5em;color:#888;'>No posted areas</div>";
   buttonElement.disabled = true;
   buttonElement.textContent = '...';
 
   const formData = new FormData();
-  formData.append('deleteFavorite', '1');
-  formData.append('zoneId', zoneId);
+  formData.append('deleteAreaId', coordId);
 
   fetch('?fetch=true&deleteArea=true', {
     method: 'POST',
@@ -82,20 +81,25 @@ window.deletePostedArea = function (zoneId, buttonElement) {
   })
     .then(res => res.json())
     .then(data => {
+
+      console.log(data);
       if (data.success) {
         const row = buttonElement.parentElement;
         row.remove();
 
         const dropdown = document.getElementById('zonesDropdownContent');
         if (dropdown.children.length === 0) {
-          dropdown.innerHTML = "<div style='padding:0.5em;color:#888;'>No areas posted</div>";
+          dropdown.innerHTML = temp;
         }
-      } else {
+      }
+
+      else {
         alert('Failed to delete posted area: ' + data.message);
         buttonElement.disabled = false;
         buttonElement.textContent = '✕';
       }
     })
+
     .catch(error => {
       console.error('Error deleting favorite:', error);
       alert('Network error occurred while deleting the posted area.');

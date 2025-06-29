@@ -1,6 +1,7 @@
 <?php
 
 require_once "model/getAreasModel.php";
+require_once "model/deleteAreaModel.php";
 
 if (!defined('CONN')) {
   define("CONN", "userSession");
@@ -27,5 +28,7 @@ if (isset($_GET["getAreas"])) {
 }
 
 if (isset($_GET["deleteArea"])) {
+  $res = deleteAreaModel($_POST["deleteAreaId"]);
+  echo json_encode(['success' => !isError($res), 'message' => $res]);
   exit();
 }

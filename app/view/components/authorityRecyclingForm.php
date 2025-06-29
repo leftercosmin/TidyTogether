@@ -3,7 +3,7 @@
     <span class="close">&times;</span>
     <h2>Add Recycling Area</h2>
 
-    <form id="recyclingForm" method="POST" enctype="multipart/form-data" action="./">
+    <form id="recyclingForm" method="POST" enctype="multipart/form-data" action="?authorityPage=areaPage">
 
       <!-- javascript/authorityMapFunctionality.js sets the values -->
       <input id="hiddenAdd" type="hidden" name="recyclingAdd" value="" />
