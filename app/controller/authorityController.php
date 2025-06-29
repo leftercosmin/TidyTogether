@@ -42,7 +42,7 @@ if (isset($_POST["postId"]) && isset($_POST["action"])) {
 }
 
 // added a new RecyclingArea
-if (isset($_POST["recyclingName"])) {
+if (isset($_POST["recyclingLat"])) {
 
   $tags = processTagsAreaModel();
   $idCoordinate =

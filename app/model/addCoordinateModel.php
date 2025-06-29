@@ -10,7 +10,7 @@ function addCoordinateModel(float $lat, float $lon): int|string
 
   $statement =
     $db->prepare(
-      'INSERT INTO Coordinate (lat, lon)
+      'INSERT INTO Coordinate (lat, lng)
       VALUES (?, ?)'
     );
   if (!$statement) {
@@ -35,7 +35,7 @@ function addCoordinateModel(float $lat, float $lon): int|string
 
   $statement->close();
 
-  if (is_string($$db->insert_id)) {
+  if (is_string($db->insert_id)) {
     alert("warning - addCoordinateModel(): id is string");
   }
   return $db->insert_id;

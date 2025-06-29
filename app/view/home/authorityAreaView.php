@@ -37,7 +37,7 @@
       <!-- only if the mainCity is set -->
       <?php if ("" === $mainCity ?? ""): ?>
         <div class="map-top-bar">
-          <a href="?authorityPage=profilePage\ " class="topbar-button">
+          <a href="?authorityPage=profilePage" class="topbar-button">
             Please set your main city in the profile section
           </a>
         </div>

@@ -102,7 +102,7 @@ CREATE TABLE Mark (
 CREATE TABLE Coordinate (
   id        BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   lat       DOUBLE,
-  lng       DOUBLE
+  lng       DOUBLE,
   createdAt DATETIME DEFAULT CURRENT_TIMESTAMP,
 
   INDEX (lat),
