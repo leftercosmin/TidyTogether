@@ -25,7 +25,7 @@
     <div class="content-wrapper">
       <h1 class="report-heading" id="zone-title">Neighborhood Report</h1>
 
-      <div class="controls">
+      <div class="controls-neighborhood">
         <div class="interval-selector">
           <button id="day-btn" onclick="changeInterval('DAY')">Last 24 Hours</button>
           <button id="week-btn" onclick="changeInterval('WEEK')">Last Week</button>

@@ -1,9 +1,3 @@
-.content-wrapper {
-  margin-left: 250px;
-  flex: 1;
-  padding: 1rem;
-}
-
 .page-layout {
   display: flex;
   width: 100%;

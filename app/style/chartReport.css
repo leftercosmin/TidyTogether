@@ -2,22 +2,28 @@ body {
   background-color: var(--green);
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 .report-container {
   margin-left: 250px;
-  padding: 2rem;
+  padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 1200px;
+  width: calc(100% - 250px);
+  max-width: calc(100% - 250px);
+  box-sizing: border-box;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
 .content-wrapper {
-  margin-left: 300px;
-  width: calc(100% - 350px);
-  max-width: 1000px;
-  margin-right: 50px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  padding: 0 1rem;
 }
 
 .report-heading {
@@ -30,7 +36,21 @@ body {
   align-self: center;
 }
 
-.controls {
+.controls-city {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 20px;
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.controls-neighborhood{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -48,6 +68,9 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .city-filter {
@@ -55,12 +78,15 @@ body {
   align-items: center;
   gap: 10px;
   flex-wrap: wrap;
+  flex: 1;
+  min-width: 0;
 }
 
 .city-filter label {
   color: var(--offwhite1);
   font-weight: 600;
   white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .city-filter input {
@@ -71,6 +97,8 @@ body {
   color: var(--green);
   font-size: 14px;
   min-width: 200px;
+  flex: 1;
+  max-width: 300px;
 }
 
 .city-filter input::placeholder {
@@ -106,17 +134,20 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .interval-selector button {
   padding: 8px 16px;
-  margin-right: 10px;
   cursor: pointer;
   border: none;
-  background: rgba(255, 255, 255, 0.2);
+  background: var(--green);
   color: var(--offwhite1);
   border-radius: 20px;
   transition: background-color 0.2s;
+  white-space: nowrap;
+  font-size: 14px;
 }
 
 .interval-selector button.active {
@@ -125,9 +156,16 @@ body {
   font-weight: 600;
 }
 
+.download-options {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
 .download-options a {
-  margin-top: .3rem;
-  margin-left: 10px;
+  margin: 0;
   padding: 8px 16px;
   background: var(--offwhite1);
   color: var(--green);
@@ -135,10 +173,8 @@ body {
   border-radius: 20px;
   font-weight: 600;
   transition: opacity 0.2s;
-}
-
-.download-options a:hover {
-  opacity: 0.9;
+  white-space: nowrap;
+  font-size: 14px;
 }
 
 .chart-box {
@@ -151,6 +187,7 @@ body {
   margin-bottom: 30px;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
 }
 
 .chart-content {
@@ -231,8 +268,15 @@ body {
 
 #reportsBarChart {
   width: 100% !important;
-  height: 350px !important;
+  height: 600px !important;
 }
+
+#zonePieChart {
+    height: 450px !important;
+    width: 450px !important;
+    display: block !important;
+    visibility: visible !important;
+  }
 
 .chart-box h3 {
   color: var(--green);
@@ -248,6 +292,7 @@ body {
   border-radius: 8px;
   overflow: hidden;
   box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-sizing: border-box;
 }
 
 .data-table th, .data-table td {
@@ -298,175 +343,47 @@ body {
     font-weight: 500;
 }
 
-.stats-summary {
-  width: 100%;
-  background: var(--offwhite1);
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  margin-top: 2rem;
-  display: none;
+@media screen and (max-width: 1600px){
+  .download-options {
+    gap: 5px;
+  }
+
+  .interval-selector{
+    gap: 5px;
+  }
+  
+  .city-filter input {
+    min-width: 150px;
+  }
 }
 
-.stats-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
-  background: #f8f9fa;
-  padding: 1rem;
-  border-radius: 8px;
-}
-
-.stat-item {
-  text-align: center;
-}
-
-.stat-item h4 {
-  margin: 0;
-  color: #666;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.stat-item .stat-value {
-  font-size: 2rem;
-  font-weight: bold;
-  margin: 0.5rem 0;
-  color: #333;
-}
-
-.stat-value.completed {
-  color: #4CAF50;
-}
-
-.stat-value.pending {
-  color: #FFC107;
-}
-
-.stat-value.in-progress {
-  color: #2196F3;
-}
-
-.stat-value.completion-high {
-  color: #4CAF50;
-}
-
-.stat-value.completion-medium {
-  color: #FFC107;
-}
-
-.stat-value.completion-low {
-  color: #f44336;
-}
-
-@media screen and (max-width: 1080px) {
+@media screen and (max-width: 1200px) {
   .report-container {
-    margin-left: 0;
+    margin-left: 250px;
     padding: 1rem;
-    max-width: 100%;
+    width: calc(100% - 250px);
+    max-width: calc(100% - 250px);
   }
   
   .content-wrapper {
-    margin-left: 0;
-    width: 100%;
-    max-width: 100%;
-    margin-right: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 auto !important;
+    padding: 0 1em 0 3em;
   }
   
-  .controls {
+  .controls-city .control-row {
     flex-direction: column;
-    gap: 1em;
-    padding: 0.8rem 1rem;
+    align-items: stretch;
+    gap: 1rem;
   }
   
-  .interval-selector {
-    display: flex;
-    width: 100%;
+  .city-filter {
     justify-content: center;
-    flex-wrap: wrap;
   }
   
-  .download-options {
-    display: flex;
-    width: 100%;
+  .interval-selector, .download-options {
     justify-content: center;
-    gap: 0.5rem;
-  }
-  
-  .data-table {
-    width: 100%;
-    overflow-x: auto;
-  }
-  .chart-box {
-    min-height: 500px;
-    padding: 1rem;
-  }
-
-  .chart-content {
-    flex-direction: column;
-    gap: 1.5rem;
-    min-height: 450px;
-    align-items: center;
-  }
-
-  .stats-sidebar {
-    flex: none;
-    width: 100%;
-    flex-direction: row;
-    justify-content: space-around;
-    gap: 0.5rem;
-    padding: 1rem 0;
-    order: 1;
-  }
-
-  .chart-wrapper {
-    width: 100%;
-    min-height: 350px;
-    margin-top: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    order: 2;
-  }
-
-  .chart-stat-item {
-    flex: 1;
-    min-width: 70px;
-    padding: 0.2rem 0;
-    text-align: center;
-  }
-
-  .chart-stat-item h4 {
-    font-size: 0.7rem;
-    color: var(--green);
-    font-weight: 500;
-    text-transform: none;
-  }
-
-  .chart-stat-value {
-    font-size: 1rem;
-    color: var(--green);
-  }
-    #reportsBarChart {
-    height: 250px !important;
-  }
-
-  #zonePieChart {
-    height: 250px !important;
-    width: 250px !important;
-    max-width: 100%;
-    display: block !important;
-    visibility: visible !important;
-  }
-
-  .stats-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 0.5rem;
-  }
-
-  .stat-item .stat-value {
-    font-size: 1.5rem;
   }
 }
 
@@ -474,15 +391,16 @@ body {
   .report-container {
     margin-left: 0 !important;
     width: 100% !important;
-    padding: 0.5rem;
+    padding: 0.25rem;
     box-sizing: border-box;
+    max-width: 100%;
   }
   
   .content-wrapper {
     width: 100%;
     max-width: 100%;
-    margin-right: 0;
-    padding: 0;
+    margin: 0;
+    padding: 0 0.25rem;
   }
   
   .report-heading {
@@ -490,13 +408,46 @@ body {
     margin-bottom: 1rem;
     padding: 0.8rem;
     text-align: center;
+    width: 100%;
+    box-sizing: border-box;
   }
   
-  .controls {
+  .controls-city {
     flex-direction: column;
     gap: 0.8rem;
     padding: 0.5rem;
     margin-bottom: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .controls-city .control-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.8rem;
+  }
+  
+  .city-filter {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  
+  .city-filter label {
+    text-align: center;
+  }
+  
+  .city-filter input {
+    width: 100%;
+    min-width: auto;
+    max-width: none;
+    box-sizing: border-box;
+  }
+  
+  .city-filter button {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
   }
   
   .interval-selector {
@@ -507,30 +458,39 @@ body {
   }
   
   .interval-selector button {
-    padding: 6px 12px;
-    margin-right: 0;
+    padding: 8px 12px;
     font-size: 0.8rem;
+    flex: 1;
+    min-width: 80px;
+    box-sizing: border-box;
   }
   
   .download-options {
     display: flex;
     justify-content: center;
     gap: 0.5rem;
+    flex-wrap: wrap;
   }
   
   .download-options a {
-    padding: 6px 12px;
+    padding: 8px 12px;
     font-size: 0.8rem;
-    margin-left: 0;
+    flex: 1;
+    text-align: center;
+    min-width: 100px;
+    box-sizing: border-box;
   }
   
   .chart-box {
     height: auto;
-    min-height: 250px;
-    padding: 1rem;
+    min-height: 300px;
+    padding: 0.5rem;
     margin-bottom: 1rem;
+    width: 100%;
+    box-sizing: border-box;
   }
-    .chart-content {
+  
+  .chart-content {
     flex-direction: column;
     gap: 1rem;
     height: auto;
@@ -578,7 +538,7 @@ body {
   }
   
   #reportsBarChart {
-    height: 200px !important;
+    height: 250px !important;
   }
   
   #zonePieChart {
@@ -589,93 +549,131 @@ body {
     visibility: visible !important;
   }
   
-  .stats-summary {
-    padding: 1rem;
-  }
-  
-  .stats-grid {
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-    gap: 0.3rem;
-    padding: 0.5rem;
-  }
-  
-  .stat-item .stat-value {
-    font-size: 1.2rem;
-  }
-  
-  .stat-item h4 {
-    font-size: 0.7rem;
-  }
-  
   .data-table {
     font-size: 0.8rem;
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
   }
   
   .data-table th, .data-table td {
     padding: 8px 4px;
+    min-width: 80px;
+  }
+  
+  .legend {
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 15px;
+  }
+  
+  .legend-item {
+    justify-content: center;
   }
 }
 
 @media screen and (max-width: 480px) {
   .report-container {
-    padding: 0.25rem;
+    padding: 0.125rem;
+    margin: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .content-wrapper {
+    width: 100%;
+    margin: 0;
+    padding: 0 0.125rem;
+    box-sizing: border-box;
   }
   
   .report-heading {
     font-size: 1.4em;
-    padding: 0.5rem;
+    padding: 0.4rem;
+    margin-bottom: 0.6rem;
+    width: 100%;
+    box-sizing: border-box;
   }
   
-  .controls {
-    padding: 0.3rem;
+  .controls-city {
+    padding: 0.25rem;
+    gap: 0.5rem;
+    margin-bottom: 0.6rem;
+    width: 100%;
+    box-sizing: border-box;
   }
   
-  .control-row {
+  .controls-city .control-row {
     flex-direction: column;
     align-items: stretch;
-    gap: 1rem;
+    gap: 0.5rem;
   }
   
   .city-filter {
     flex-direction: column;
     align-items: stretch;
-    gap: 8px;
+    gap: 0.3rem;
   }
   
   .city-filter input {
-    min-width: auto;
     width: 100%;
+    padding: 10px;
+    font-size: 16px; /* Prevents zoom on iOS */
+    box-sizing: border-box;
   }
   
   .city-filter button {
     width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    box-sizing: border-box;
   }
   
   .interval-selector {
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: column;
+    gap: 0.25rem;
+    width: 100%;
+  }
+  
+  .interval-selector button {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    box-sizing: border-box;
   }
   
   .download-options {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0.25rem;
+    width: 100%;
   }
   
   .download-options a {
     text-align: center;
-    margin-left: 0;
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    box-sizing: border-box;
   }
   
   .chart-box {
-    padding: 0.5rem;
-    min-height: 200px;
+    padding: 0.25rem;
+    min-height: 220px;
+    margin-bottom: 0.6rem;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   .chart-wrapper {
     height: 200px;
     width: 100%;
-    padding: 0.5rem;
+    padding: 0.3rem;
+  }
+
+  #reportsBarChart {
+    height: 180px !important;
   }
 
   #zonePieChart {
@@ -687,20 +685,45 @@ body {
   .stats-sidebar {
     flex-wrap: wrap;
     gap: 0.2rem;
+    padding: 0.3rem 0;
   }
 
   .chart-stat-item {
     min-width: 45%;
     text-align: center;
-    padding: 0.3rem;
+    padding: 0.2rem;
   }
 
   .chart-stat-item h4 {
-    font-size: 0.6rem;
+    font-size: 0.55rem;
   }
 
   .chart-stat-value {
     font-size: 0.8rem;
+  }
+  
+  .data-table {
+    font-size: 0.7rem;
+  }
+  
+  .data-table th, .data-table td {
+    padding: 6px 2px;
+    min-width: 60px;
+  }
+  
+  .legend {
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+  
+  .legend-text {
+    font-size: 0.8rem;
+  }
+  
+  .legend-color {
+    width: 16px;
+    height: 16px;
   }
 }
 

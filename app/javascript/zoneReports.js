@@ -4,7 +4,21 @@ let currentCity = '';
 
 document.addEventListener('DOMContentLoaded', function() {
   console.log('zoneReports.js loaded');
-  loadReportData('MONTH');
+  if (typeof userMainCity !== 'undefined' && userMainCity && userMainCity.trim() !== '') {
+    currentCity = userMainCity.trim();
+    const cityInput = document.getElementById('city-input');
+    cityInput.value = currentCity;
+    cityInput.placeholder = `Default: ${currentCity} (your main city)`;
+    updateChartTitle();
+    loadReportData('MONTH', currentCity);
+  } else {
+    document.getElementById('reportsBarChart').innerHTML = 
+      '<div style="text-align:center;padding:20px;color:#856404;background:#fff3cd;border-radius:5px;">Please enter a city name to view reports, or set your main city in your profile.</div>';
+    document.querySelector('#zoneReportTable tbody').innerHTML = 
+      '<tr><td colspan="6">Please enter a city name to filter reports</td></tr>';
+  }
+  
+  updateDownloadLinks();
   
   document.getElementById('city-input').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
@@ -26,15 +40,19 @@ function changeInterval(interval) {
 
 function applyCityFilter() {
   const cityInput = document.getElementById('city-input');
-  currentCity = cityInput.value.trim();
-  updateChartTitle();
-  loadReportData(currentInterval, currentCity);
-  updateDownloadLinks();
-}
-
-function clearCityFilter() {
-  document.getElementById('city-input').value = '';
-  currentCity = '';
+  const newCity = cityInput.value.trim();
+  
+  if (!newCity) {
+    alert('Please enter a city name to filter reports.');
+    if (typeof userMainCity !== 'undefined' && userMainCity && userMainCity.trim() !== '') {
+      cityInput.value = userMainCity.trim();
+    } else {
+      cityInput.value = currentCity;
+    }
+    return;
+  }
+  
+  currentCity = newCity;
   updateChartTitle();
   loadReportData(currentInterval, currentCity);
   updateDownloadLinks();
@@ -45,7 +63,7 @@ function updateChartTitle() {
   if (currentCity) {
     chartTitle.textContent = `Reports by Zone in ${currentCity}`;
   } else {
-    chartTitle.textContent = 'Reports by Zone';
+    chartTitle.textContent = 'Zone Reports - Please Select a City';
   }
 }
 
@@ -94,10 +112,7 @@ function loadReportData(interval, city = '') {
 }
 
 function renderBarChart(data) {
-  //sort by total reports in descending
   const sortedData = [...data].sort((a, b) => b.total_reports - a.total_reports);
-  
-  //top 10 zone
   const topZones = sortedData.slice(0, 10);
   
   const labels = topZones.map(row => row.neighborhood);
@@ -118,16 +133,12 @@ function renderBarChart(data) {
         {
           label: 'Total Reports',
           data: totalReports,
-          backgroundColor: 'rgba(255, 99, 132, 0.7)',
-          borderColor: 'rgb(255, 99, 132)',
-          borderWidth: 1
+          backgroundColor: '#73a942',
         },
         {
           label: 'Completed',
           data: completedReports,
-          backgroundColor: 'rgba(75, 192, 192, 0.7)',
-          borderColor: 'rgb(75, 192, 192)',
-          borderWidth: 1
+          backgroundColor: '#29bf12',
         }
       ]
     },
@@ -162,17 +173,15 @@ function renderTable(data) {
     };
   });
   
-  //top 20% dirty, bottom 20% clean
-  const numRows = enhancedData.length;
-  const dirtyThreshold = Math.max(1, Math.floor(numRows * 0.2));
-  const cleanThreshold = Math.max(1, Math.floor(numRows * 0.8));
-  
   let html = '';
-  enhancedData.forEach((zone, index) => {
+  enhancedData.forEach((zone) => {
     let rowClass = '';
-    if (index < dirtyThreshold) {
+    // <30% completion = red
+    if (zone.completionPercentage < 30) {
       rowClass = 'dirty';
-    } else if (index >= cleanThreshold) {
+    }
+    // >80% completion = green
+    else if (zone.completionPercentage > 80) {
       rowClass = 'clean';
     }
     

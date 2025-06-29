@@ -25,13 +25,12 @@
     <div class="content-wrapper">
       <h1 class="report-heading">Zone Cleanliness Reports</h1>
 
-      <div class="controls">
+      <div class="controls-city">
         <div class="control-row">
           <div class="city-filter">
             <label for="city-input">Filter by City:</label>
-            <input type="text" id="city-input" placeholder="Enter city name (leave empty for all cities)" />
+            <input type="text" id="city-input" placeholder="Enter city name" />
             <button id="apply-filter-btn" onclick="applyCityFilter()">Apply Filter</button>
-            <button id="clear-filter-btn" onclick="clearCityFilter()">Show All Cities</button>
           </div>
         </div>
 
@@ -79,13 +78,15 @@
           </tr>
         </thead>
         <tbody>
-          <!-- data is inserted here -->
+         
         </tbody>
       </table>
     </div>
   </div>
 
-  <!-- Include both scripts for the report -->
+  <script>
+    const userMainCity = <?php echo json_encode(isset($mainCity) ? $mainCity : ''); ?>;
+  </script>
   <script src="javascript/zoneReports.js"></script>
   <script src="javascript/navbarCollapse.js"></script>
 </body>
