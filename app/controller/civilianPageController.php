@@ -2,11 +2,13 @@
 
 require_once "model/helper/getMainCityModel.php";
 require_once "model/processLocationModel.php";
+require_once "model/getAreasModel.php";
 
 function civilianFallbackPage(int $id): void
 {
   $tags = getTagModel();
   $location = getLocationModel();
+  $recyclingAreas = getAreasModel(null);
 
   $mainCity = getMainCityModel($id);
   $position = processLocationModel($mainCity);
@@ -16,6 +18,9 @@ function civilianFallbackPage(int $id): void
   isError($position);
   if (str_starts_with($mainCity, "error")) {
     isError($mainCity);
+  }
+  if (is_string($recyclingAreas) && str_starts_with($recyclingAreas, "error")) {
+    $recyclingAreas = [];
   }
   require_once "view/home/civilianHomeView.php";
 }

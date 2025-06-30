@@ -470,3 +470,49 @@ form button {
     min-height: 35px;
   }
 }
+
+.recycling-marker {
+  cursor: pointer;
+}
+
+.leaflet-popup-content {
+  margin: 8px 12px;
+  line-height: 1.4;
+}
+
+.leaflet-popup-content h4 {
+  margin: 0 0 8px 0;
+}
+
+.leaflet-popup-content ul {
+  margin: 4px 0;
+  padding-left: 16px;
+}
+
+.leaflet-popup-content li {
+  margin-bottom: 4px;
+  list-style: none;
+}
+
+.legend {
+  line-height: 18px;
+  color: #555;
+  background: white;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  border-radius: 5px;
+  padding: 8px 10px;
+  font-size: 12px;
+  font-family: Arial, sans-serif;
+}
+
+.legend i {
+  width: 16px;
+  height: 16px;
+  float: left;
+  margin-right: 8px;
+  margin-top: 1px;
+  opacity: 0.8;
+  border-radius: 3px;
+  border: 1px solid rgba(0,0,0,0.1);
+}

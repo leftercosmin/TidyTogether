@@ -11,11 +11,6 @@ document.addEventListener('DOMContentLoaded', function() {
     cityInput.placeholder = `Default: ${currentCity} (your main city)`;
     updateChartTitle();
     loadReportData('MONTH', currentCity);
-  } else {
-    document.getElementById('reportsBarChart').innerHTML = 
-      '<div style="text-align:center;padding:20px;color:#856404;background:#fff3cd;border-radius:5px;">Please enter a city name to view reports, or set your main city in your profile.</div>';
-    document.querySelector('#zoneReportTable tbody').innerHTML = 
-      '<tr><td colspan="6">Please enter a city name to filter reports</td></tr>';
   }
   
   updateDownloadLinks();

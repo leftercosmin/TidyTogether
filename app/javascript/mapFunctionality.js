@@ -5,6 +5,31 @@ document.addEventListener("DOMContentLoaded", function () {
     attribution: '&copy; OpenStreetMap contributors'
   }).addTo(map);
 
+  const recyclingMarkersLayer = L.layerGroup();
+
+  //Legenda
+  var legend = L.control({position: 'bottomright'});
+  legend.onAdd = function (map) {
+    var div = L.DomUtil.create('div', 'info legend');
+    var legendItems = [
+      {color: 'green', label: 'Organic materials'},
+      {color: 'marigold', label: 'Paper materials'},
+      {color: 'blue', label: 'Glass materials'},
+      {color: 'orange', label: 'Ceramic material'},
+      {color: 'red', label: 'Plastic material'},
+      {color: 'gray', label: 'Metal material'},
+      {color: 'purple', label: 'Toxic materials'},
+      {color: 'violet', label: 'Cloth materials'}
+    ];
+    
+    legendItems.forEach(function(item) {
+      div.innerHTML += '<i style="background:' + item.color + '"></i> ' + item.label + '<br>';
+    });
+    
+    div.innerHTML += '<div style="margin-top: 8px; font-size: 11px; color: #666;">Click markers for details</div>';
+    return div;
+  };
+
   const geocoderControl = new L.Control.Geocoder({
     defaultMarkGeocode: false,
     placeholder: "Search for a place or address..."
@@ -129,7 +154,70 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
-  //check for stored location to move to
+  function loadRecyclingAreas() {
+    recyclingMarkersLayer.clearLayers();
+
+    recyclingAreasData.forEach(area => {
+
+      let markerColor = '#4CAF50';
+      if (area.tags && area.tags.length > 0) {
+        if (area.tags.length === 1) {
+          markerColor = area.tags[0].color || '#4CAF50';
+        } else {
+          markerColor = '#2196F3';
+        }
+      }
+
+      const recyclingIcon = L.divIcon({
+        className: 'recycling-marker',
+        html: `<div style="
+          background-color: ${markerColor};
+          border: 2px solid #ffffff;
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 12px;
+          font-weight: bold;
+          color: white;
+        ">
+         <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="white"><path d="m368-592 89-147-59-98q-12-20-34.5-20T329-837l-98 163 137 82Zm387 272-89-148 139-80 64 107q11 17 12 38t-9 39q-10 20-29.5 32T800-320h-45ZM640-40 480-200l160-160v80h190l-58 116q-11 20-30 32t-42 12h-60v80Zm-387-80q-20 0-36.5-10.5T192-158q-8-16-7.5-33.5T194-224l34-56h172v160H253Zm-99-114L89-364q-9-18-8.5-38.5T92-441l16-27-68-41 219-55 55 220-69-42-91 152Zm540-342-219-55 69-41-125-208h141q21 0 39.5 10.5T629-841l52 87 68-42-55 220Z"/></svg>
+        </div>`,
+        iconSize: [30, 30],
+        iconAnchor: [15, 15],
+        popupAnchor: [0, -15]
+      });
+
+      let tagsList = '';
+      if (area.tags && area.tags.length > 0) {
+        tagsList = area.tags.map(tag => 
+          `<li style="color: black;">- ${tag.name}</li>`
+        ).join('');
+      }
+
+      const popupContent = `
+        <div style="min-width: 200px;">
+          <p style="margin: 0 0 8px 0; font-size: 12px; color: #666; font-weight: bold;">
+            ${area.address}
+          </p>
+          <div style="margin-bottom: 8px;">
+            <strong style="font-size: 13px;">Accepted materials:</strong>
+            <ul style="margin: 4px 0; padding-left: 16px; font-size: 12px; color: #666;">
+              ${tagsList}
+            </ul>
+          </div>
+        </div>
+      `;
+
+      const marker = L.marker([area.lat, area.lng], { icon: recyclingIcon })
+        .bindPopup(popupContent);
+      
+      recyclingMarkersLayer.addLayer(marker);
+    });
+  }
+
   const panLat = localStorage.getItem('panToLat');
   const panLng = localStorage.getItem('panToLng');
   const panLabel = localStorage.getItem('panToLabel');
@@ -157,6 +245,22 @@ document.addEventListener("DOMContentLoaded", function () {
     map.setView(latlng, 16);
     handleLocation(latlng.lat, latlng.lng);
   });
+
+  let recyclingAreasVisible = false;
+  loadRecyclingAreas();
+  
+  document.getElementById('toggleRecyclingBtn').onclick = function () {
+    const btn = document.getElementById('toggleRecyclingBtn');
+    if (recyclingAreasVisible) {
+      map.removeLayer(recyclingMarkersLayer);
+      map.removeControl(legend);
+      recyclingAreasVisible = false;
+    } else {
+      map.addLayer(recyclingMarkersLayer);
+      legend.addTo(map);
+      recyclingAreasVisible = true;
+    }
+  };
 
   document.getElementById('locateMeBtn').onclick = function () {
     if (navigator.geolocation) {

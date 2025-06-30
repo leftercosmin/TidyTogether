@@ -49,12 +49,12 @@ INSERT INTO Zone (name, city, country) VALUES ('Moara De Foc', 'Iasi', 'Romania'
 
 
 INSERT INTO Tag (name, color) VALUES ('organic', 'green');
-INSERT INTO Tag (name, color) VALUES ('paper', 'yellow');
-INSERT INTO Tag (name, color) VALUES ('glass', 'orange');
+INSERT INTO Tag (name, color) VALUES ('paper', 'marigold');
+INSERT INTO Tag (name, color) VALUES ('glass', 'blue');
 INSERT INTO Tag (name, color) VALUES ('ceramic', 'orange');
 INSERT INTO Tag (name, color) VALUES ('plastic', 'red');
-INSERT INTO Tag (name, color) VALUES ('metal', 'blue');
+INSERT INTO Tag (name, color) VALUES ('metal', 'gray');
 INSERT INTO Tag (name, color) VALUES ('toxic', 'purple');
-INSERT INTO Tag (name, color) VALUES ('cloth', 'red');
+INSERT INTO Tag (name, color) VALUES ('cloth', 'violet');
 
 COMMIT;

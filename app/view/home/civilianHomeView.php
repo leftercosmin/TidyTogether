@@ -49,6 +49,11 @@
           </div>
         </div>
 
+        <button id="toggleRecyclingBtn" class="topbar-button">
+          <?php require 'view/components/svg/recycleSvg.php'; ?>
+          Recycling areas
+        </button>
+
         <button id="locateMeBtn" class="topbar-button">
           <?php require 'view/components/svg/zoneSvg.php'; ?>
           My Location
@@ -74,6 +79,19 @@
 
   const initialLat = userCityLat == "" ? fallbackLat : userCityLat;
   const initialLon = userCityLon == "" ? fallbackLon : userCityLon;
+
+  const recyclingAreasData = <?= json_encode(array_values(array_map(function($userAreas) {
+    $areas = [];
+    foreach ($userAreas as $coordId => $areaData) {
+      $areas[] = [
+        'lat' => (float)$areaData['lat'],
+        'lng' => (float)$areaData['lon'],
+        'address' => $areaData['address'],
+        'tags' => $areaData['tag'] ?? []
+      ];
+    }
+    return $areas;
+  }, $recyclingAreas ?? []))) ?>.flat();
 </script>
 <script src="javascript/mapFunctionality.js"></script>
 <script src="javascript/navbarCollapse.js"></script>

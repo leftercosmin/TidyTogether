@@ -84,7 +84,7 @@ CREATE TABLE Media (
 CREATE TABLE Tag (
   id    BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
   name  VARCHAR(255) UNIQUE NOT NULL,
-  color ENUM('red', 'orange', 'yellow', 'blue', 'purple', 'green') NOT NULL
+  color ENUM('red', 'orange', 'marigold', 'blue', 'purple', 'green', 'gray', 'violet') NOT NULL
 );
 
 CREATE TABLE Mark (
