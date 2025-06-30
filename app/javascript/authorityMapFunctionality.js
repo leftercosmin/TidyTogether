@@ -106,6 +106,23 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
+  //check for stored location to move to
+  const panLat = localStorage.getItem('panToLat');
+  const panLng = localStorage.getItem('panToLng');
+  const panLabel = localStorage.getItem('panToLabel');
+
+  if (panLat && panLng) {
+    console.log("Panning to:", panLat, panLng, panLabel);
+    map.setView([parseFloat(panLat), parseFloat(panLng)], 16);
+
+    handleLocation(parseFloat(panLat), parseFloat(panLng));
+
+    localStorage.removeItem('panToLat');
+    localStorage.removeItem('panToLng');
+    localStorage.removeItem('panToLabel');
+  }
+
+  //map listeners
   map.on('click', function (e) {
     console.log('Map clicked', e.latlng);
     const { lat, lng } = e.latlng;
@@ -114,7 +131,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
   geocoderControl.on('markgeocode', function (e) {
     const latlng = e.geocode.center;
-
     map.setView(latlng, 16);
     handleLocation(latlng.lat, latlng.lng);
   });
@@ -135,9 +151,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
         map.setView([userLat, userLng], 16);
         handleLocation(userLat, userLng);
-      }, function (error) {
-        alert("Unable to get your location. Showing city center instead.");
-        map.setView([initialLat, initialLon], 16);
       });
     } else {
       alert("Geolocation is not supported by your browser.");

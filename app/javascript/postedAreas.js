@@ -64,7 +64,7 @@ window.selectPostedArea = function (lat, lng, address) {
   localStorage.setItem('panToLat', lat);
   localStorage.setItem('panToLng', lng);
   localStorage.setItem('panToLabel', address);
-  L.map('map').setView([lat, lng], 12);
+  window.location.href = '?fetch=true&fromFavorites=true';
 };
 
 window.deletePostedArea = function (coordId, buttonElement) {
