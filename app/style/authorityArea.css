@@ -26,17 +26,6 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
-.empty-message {
-    color: var(--offwhite1);
-    text-align: center;
-    font-size: 1.2rem;
-    margin-top: 2rem;
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 2rem;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
 .report-list {
     list-style: none;
     padding: 0;
