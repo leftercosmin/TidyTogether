@@ -32,3 +32,9 @@ if (isset($_GET["deleteArea"])) {
   echo json_encode(['success' => !isError($res), 'message' => $res]);
   exit();
 }
+
+if (isset($_GET['fromFavorites'])) {
+  $tags = getTagModel();
+  header("Location: /");
+  exit();
+}

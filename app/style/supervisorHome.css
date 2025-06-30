@@ -107,10 +107,3 @@ form button:hover {
 .report-item p {
   margin: 0.5rem 0;
 }
-
-.empty-message {
-  color: var(--offwhite1);
-  text-align: center;
-  font-size: 1.2rem;
-  margin-top: 2rem;
-}

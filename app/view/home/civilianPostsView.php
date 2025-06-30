@@ -24,7 +24,7 @@
     <h1 class="page-title">Your Report History</h1>
 
     <?php if (empty($posts)): ?>
-      <p>You haven't submitted any reports yet.</p>
+      <p class="empty-message">You haven't submitted any reports yet.</p>
     <?php else: ?>
       <div class="report-list">
         <?php foreach ($posts as $onePost): ?>
