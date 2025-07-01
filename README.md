@@ -44,13 +44,13 @@
 # :notebook_with_decorative_cover: Table of Contents
 
 - [About the Project](#star2-about-the-project)
+  - [Features](#dart-features)
   - [Screenshots](#camera-screenshots)
   - [Tech Stack](#space_invader-tech-stack)
-  - [Features](#dart-features)
   - [Color Reference](#art-color-reference)
-  - [Environment Variables](#key-environment-variables)
 - [Getting Started](#toolbox-getting-started)
   - [Prerequisites](#bangbang-prerequisites)
+  - [Environment Variables](#key-environment-variables)
   - [Run Locally](#running-run-locally)
   - [Deployment](#triangular_flag_on_post-deployment)
 - [Roadmap](#compass-roadmap)
@@ -60,6 +60,23 @@
 - [Acknowledgements](#gem-acknowledgements)
 
 ## :star2: About the Project
+
+### :dart: Features
+
+- three different perspectives
+
+  - posting procedures for civilians
+  - approval of their requests by supervisor (Mayor)
+  - the executive forces responses (SalubrIs)
+
+- map geolocation of waste collecting ares
+
+  - city preference for every user
+  - favorite zones and profile management
+
+- signup protection for unauthorised personnel
+- mime media types storage
+- responsive UI
 
 ### :camera: Screenshots
 
@@ -90,14 +107,6 @@
 
   [![MySQL](https://img.shields.io/badge/mysql-F8EFE0.svg?style=for-the-badge&logo=mysql&logoColor=000)](./bin/resetSchema.sh)
 
-### :dart: Features
-
-- three different perspectives
-- responsive UI
-- map geolocation
-- favorite zones
-- media storage
-
 ### :art: Color Reference
 
 | Name            |   Hex   |              Color               |
@@ -110,10 +119,6 @@
 | Status Color    | #0C5460 | <img src="doc/color/color6.png"> |
 | Text Color      | #000000 | <img src="doc/color/color7.png"> |
 
-### :key: Environment Variables
-
-To run this project, you will need to add the following [variables](.env.example) to your .env file
-
 ## :toolbox: Getting Started
 
 ### :bangbang: Prerequisites
@@ -121,11 +126,50 @@ To run this project, you will need to add the following [variables](.env.example
 - [documentation](https://docs.google.com/document/d/1-aHo15U2-sPB9klRUCRxpozfseOrwraKnAo_gaaENro/edit?tab=t.0)
 - [database](https://appdb-dyh6iv7f0wnm.adminer.wasmer.app/?server=db.be-mons1.bengt.wasmernet.com%3A3306&username=edd1c866799d80002ba7aff986fa&db=TidyTogether&dbid=appdb_KwGIWtwaUVoe&magiclogin=wott_43Z3T2ZQK34DMBOLDR56TXOAZWYZI2VX)
 
-This project uses Composer as package manager
+This project uses Composer as package manager and the following dependencies:
 
 - [php-css-lint](https://github.com/neilime/php-css-lint)
 - [phpdotenv](https://github.com/vlucas/phpdotenv)
 - [mpdf](https://github.com/mpdf/phpdotenv)
+
+### :key: Environment Variables
+
+To run this project, you will need to add the following [variables](.env.example) to your **.env** file.
+
+The "SERVER" variable should be declared only for the remote container (don't declare it locally).
+
+### :running: Run Locally
+
+Windows has our support too: use the `.cmd` scripts instead of `.sh` ones.
+
+```bash
+git clone https://github.com/leftercosmin/TidyTogether.git
+cd TidyTogether
+# closes the Apache server from Debian in Xampp's favor
+./bin/startServer.sh
+```
+
+If "reset" is provided as argument `./bin/startServer.sh reset` - the database reached by you local **.env** is dropped and updated with [./bin/schema.sql](./bin/schema.sql)
+
+```bash
+# use this when you want to update the solution with you current directory
+./bin/build.sh
+# use this to have some default values in your database
+./bin/insertSchema.sh
+```
+
+### :triangular_flag_on_post: Deployment
+
+To deploy this project, configure it according to:
+
+- [workflow](.github/workflows/ci.yml)
+- [yaml](app.yaml)
+- [toml](wasmer.toml)
+- the source code must be inside of the [app](./app/index.php) directory
+
+Then go to [Wasmer](https://wasmer.io/) and set up the remote **.env**.
+
+The "SERVER" variable is a must have here.
 
 ### :test_tube: Running Linter
 
@@ -136,29 +180,6 @@ php vendor/bin/php-css-lint app/style/path-to-file.css
 php vendor/bin/php-css-lint app/style/civilianHome.css
 php vendor/bin/php-css-lint app/style/globals.css
 ```
-
-### :running: Run Locally
-
-```bash
-git clone https://github.com/leftercosmin/TidyTogether.git
-cd TidyTogether
-composer install
-
-# Start the server with these scripts: Both Linux and Windows compatible
-
-./bin/build.sh
-./bin/startServer.sh
-./bin/startServer.sh reset
-```
-
-### :triangular_flag_on_post: Deployment
-
-To deploy this project, configure it according to:
-
-- [workflow](.github/workflows/ci.yml)
-- [yaml](app.yaml)
-- [toml](wasmer.toml)
-- all the source code must be inside of the [app](./app/index.php) directory
 
 ## :compass: Roadmap
 
