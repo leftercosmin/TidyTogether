@@ -31,7 +31,7 @@
 <h4>
     <a href="https://github.com/leftercosmin/TidyTogether/">View Demo</a>
   <span> · </span>
-    <a href="https://github.com/leftercosmin/TidyTogether/">Documentation</a>
+    <a href="./doc/requirements.md">System requirments</a>
   <span> · </span>
     <a href="https://github.com/leftercosmin/TidyTogether/issues/">Report Bug</a>
   <span> · </span>
@@ -91,21 +91,21 @@
 
 ### :space_invader: Tech Stack
 
-- Client:
+#### Client:
 
-  [![HTML5](https://img.shields.io/badge/html5-017852.svg?style=for-the-badge&logo=html5&logoColor=000)](./app/view/home/authorityHomeView.php)
-  [![CSS3](https://img.shields.io/badge/css3-017852.svg?style=for-the-badge&logo=css&logoColor=000)](./app/style/profile.css)
-  [![JavaScript](https://img.shields.io/badge/JavaScript-017852?style=for-the-badge&logo=javascript&logoColor=000)](./app/javascript/mapFunctionality.js)
+[![HTML5](https://img.shields.io/badge/html5-017852.svg?style=for-the-badge&logo=html5&logoColor=000)](./app/view/home/authorityHomeView.php)
+[![CSS3](https://img.shields.io/badge/css3-017852.svg?style=for-the-badge&logo=css&logoColor=000)](./app/style/profile.css)
+[![JavaScript](https://img.shields.io/badge/JavaScript-017852?style=for-the-badge&logo=javascript&logoColor=000)](./app/javascript/mapFunctionality.js)
 
-- Server (Xampp):
+#### Server (Xampp):
 
-  [![PHP](https://img.shields.io/badge/php-8EBCA6.svg?style=for-the-badge&logo=php&logoColor=000)](./app/controller/civilianController.php)
-  [![Bash](https://img.shields.io/badge/bash_script-8EBCA6.svg?style=for-the-badge&logo=gnu-bash&logoColor=000)](./bin/build.sh)
-  [![PowerShell](https://img.shields.io/badge/PowerShell-8EBCA6.svg?style=for-the-badge&logo=ps&logoColor=000)](./bin/build.cmd)
+[![PHP](https://img.shields.io/badge/php-8EBCA6.svg?style=for-the-badge&logo=php&logoColor=000)](./app/controller/civilianController.php)
+[![Bash](https://img.shields.io/badge/bash_script-8EBCA6.svg?style=for-the-badge&logo=gnu-bash&logoColor=000)](./bin/build.sh)
+[![PowerShell](https://img.shields.io/badge/PowerShell-8EBCA6.svg?style=for-the-badge&logo=ps&logoColor=000)](./bin/build.cmd)
 
-- Database:
+#### Database:
 
-  [![MySQL](https://img.shields.io/badge/mysql-F8EFE0.svg?style=for-the-badge&logo=mysql&logoColor=000)](./bin/resetSchema.sh)
+[![MySQL](https://img.shields.io/badge/mysql-F8EFE0.svg?style=for-the-badge&logo=mysql&logoColor=000)](./bin/resetSchema.sh)
 
 ### :art: Color Reference
 
@@ -123,8 +123,9 @@
 
 ### :bangbang: Prerequisites
 
-- [documentation](https://docs.google.com/document/d/1-aHo15U2-sPB9klRUCRxpozfseOrwraKnAo_gaaENro/edit?tab=t.0)
-- [database](https://appdb-dyh6iv7f0wnm.adminer.wasmer.app/?server=db.be-mons1.bengt.wasmernet.com%3A3306&username=edd1c866799d80002ba7aff986fa&db=TidyTogether&dbid=appdb_KwGIWtwaUVoe&magiclogin=wott_43Z3T2ZQK34DMBOLDR56TXOAZWYZI2VX)
+- <a href="./doc/requirements.md">System requirments</a>
+- [Documentation](https://docs.google.com/document/d/1-aHo15U2-sPB9klRUCRxpozfseOrwraKnAo_gaaENro/edit?tab=t.0)
+- [Database](https://appdb-dyh6iv7f0wnm.adminer.wasmer.app/?server=db.be-mons1.bengt.wasmernet.com%3A3306&username=edd1c866799d80002ba7aff986fa&db=TidyTogether&dbid=appdb_KwGIWtwaUVoe&magiclogin=wott_43Z3T2ZQK34DMBOLDR56TXOAZWYZI2VX)
 
 This project uses Composer as package manager and the following dependencies:
 
@@ -134,9 +135,7 @@ This project uses Composer as package manager and the following dependencies:
 
 ### :key: Environment Variables
 
-To run this project, you will need to add the following [variables](.env.example) to your **.env** file.
-
-The "SERVER" variable should be declared only for the remote container (don't declare it locally).
+To run this project, you will need to add the following [variables](.env.example) to your **.env** file. The "SERVER" variable should be declared only for the remote container (don't declare it locally).
 
 ### :running: Run Locally
 
@@ -167,9 +166,7 @@ To deploy this project, configure it according to:
 - [toml](wasmer.toml)
 - the source code must be inside of the [app](./app/index.php) directory
 
-Then go to [Wasmer](https://wasmer.io/) and set up the remote **.env**.
-
-The "SERVER" variable is a must have here.
+Then go to [Wasmer](https://wasmer.io/) and set up the remote **.env**. The "SERVER" variable is a must have here.
 
 ### :test_tube: Running Linter
 
@@ -185,8 +182,8 @@ php vendor/bin/php-css-lint app/style/globals.css
 
 - [x] C4 diagrams
 - [x] Checklist
-- [ ] System Requirments
-- [ ] video
+- [x] System Requirments
+- [x] video
 
 - [x] favorite zone press
 - [x] load map based on mainCity
