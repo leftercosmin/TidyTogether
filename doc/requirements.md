@@ -1,9 +1,7 @@
-# Software Requirements Specification
-## For TidyTogether
+# TidyTogether - Software Requirements Specification
 Prepared by Braha Petru and Lefter Cosmin,
-2E3, Computer Science, FII, Iasi
-
-01.07.2025
+2E3, Computer Science, FII, Iasi,
+on 01.07.2025
 
 Table of Contents
 =================
@@ -54,9 +52,9 @@ Table of Contents
 ## 1. Introduction
 ### 1.1 Purpose 
 
-This document defines the software requirements for the TidyTogether application - a platform that facilitates the identification, localization, and management of recycling sites, involving three types of users: civilians, supervisors and local authorities. Information related to the collection, sorting, and recycling of waste is shared among these roles. Civilians may report spots where substantial amount of garbage has accumulated, which are first validated by supervisors and then sent directly to the local authoroties. the goal of facilitating clean-up efforts. 
+This document defines the software requirements for the TidyTogether application—a platform designed to support the identification, localization, and management of recycling sites. The system involves three primary user roles: civilians, supervisors, and local authorities. The application enables civilians to locate and report areas with accumulated waste, which are then reviewed and validated by supervisors before being forwarded to the appropriate local authorities for action. This collaborative process aims to facilitate timely clean-up efforts and promote environmental responsibility.
 
-The current version of the product is 1.0. This SRS describes the entire codebase of this software solution and does not neglect any part of it.
+This Software Requirements Specification (SRS) refers to version 1.0 of the system and covers the complete functionality of the application, without excluding any components or subsystems.
 
 ### 1.2 Document Conventions
 
@@ -68,143 +66,241 @@ The important terms are `indented`.
 
 ### 1.3 Intended Audience and Reading Suggestions
 
-Everyone is welcomed to stimulate their cortical pleasure with the present document. For those with limited time, it is advised to get along with the [README](./../README.md) document first. If more questions arise, they might be explained faster in [User Documentation](#26-user-documentation).
+This document is intended for a diverse audience involved in the development, use, or evaluation of the TidyTogether application. Depending on the reader’s role and purpose, different sections of the document may be of particular relevance.
 
-Users: Section 2.3 and 4.
+Before delving into the technical specifications, it is recommended that readers first consult the [README](./../README.md) document for a high-level overview. Additional user-facing information may also be found in the [User Documentation](#26-user-documentation), which provides practical guidance and usage details.
 
-
-Developers may find intersting the 4th and 5th sections.
-
-Project Managers: Sections 1, 2 and 5.
-
-Testers: Sections 3 and 4.
-
-Local authorities: Sections 2.
-
-Professors: all sections.
-
-IT companies: Section 2.3 and 4.
-
-marketing staff:Section 2.3 and 4
+Recommended reading paths by role:
+- End Users (Civilians, Supervisors, Authorities): Sections 2.3 (User Classes) and 4 (System Features)
+- Developers: Sections 4 (System Features) and 5 (Nonfunctional Requirements)
+- Project Managers: Sections 1 (Introduction), 2 (Overall Description), and 5 (Nonfunctional Requirements)
+- Testers: Sections 3 (External Interface Requirements) and 4 (System Features)
+- Local Authorities: Section 2 (Overall Description)
+- Academic Reviewers (e.g., Professors): All sections
+- IT Companies & Marketing Staff: Sections 2.3 (User Classes) and 4 (System Features)
 
 ### 1.4 Product Scope
 
-TidyTogether offers a collaborative platform where:
+TidyTogether is a collaborative platform designed to streamline the management and awareness of recycling sites within urban areas. The system facilitates cooperation between three main user groups:
 
-- Authorities publish recycling locations.
-- Civilians can view them, and report dirty locations.
-- Supervisors validate reports before authorities are notified.
+- Authorities are responsible for publishing verified recycling locations.
+- Civilians can view these locations and report additional areas with significant waste accumulation.
+- Supervisors review and validate civilian reports before forwarding them to the appropriate authorities.
 
-By reporting civilians giving up a hand for local authorities to find dirty areas.
-transparent data of the progress regarding the cleaning of the city.
-supervisors validate the civilians' requests.
-benefits: better temperature, eco life, cit atmosphere, long term mindfullness of every civilian
-corporate goals: easy to track progress and real time feedback/status from the local authorities. being a free and easy to use product could be easily integrated the lifes of the locals here in iasi. as a business strategies: could attract investors and make a good image of the city for eyes of the european gouvernaments.
+Through this coordinated workflow, the platform enables civilians to assist local authorities in identifying neglected or polluted areas. Our project also provides transparent data regarding the status and progress of clean-up efforts across the city.
+
+Key Benefits:
+- Improved environmental conditions (e.g., better air quality and cleaner public spaces)
+- Promotion of eco-conscious behavior and community engagement
+- A more pleasant and livable urban atmosphere
+- Long-term environmental awareness and responsibility among citizens
+
+Corporate Goals and Strategic Vision:
+- Enable real-time progress tracking and feedback from local authorities
+- Offer a free, user-friendly application that can be seamlessly integrated into the daily lives of local residents, particularly in the city of Iași
+- Support sustainability initiatives and potentially attract investment by presenting Iași as an environmentally responsible and technologically forward-thinking city, especially in the context of European Union visibility and funding opportunities
 
 ### 1.5 References
 
-IEEE Std 830-1998: IEEE Recommended Practice for Software Requirements Specifications
-- [Buraga-Sabin-Course](https://edu.info.uaic.ro/web-technologies/web-projects.html)
-- [Panu-Andrei-Course](https://profs.info.uaic.ro/andrei.panu/courses/web/lab/)
-[@Louis3797](https://github.com/Louis3797)
-[c4]()
-[sysReq](https://github.com/rick4470/IEEE-SRS-Tempate) / [scholarly](https://w3c.github.io/scholarly-html/)
-[checklist1](https://technical-reference.readthedocs.io/en/latest/quality/software-checklist.html)
-[checklist2](https://www.toptal.com/developers/webdevchecklist)
-including title, author, version number, date, and source or location.
+IEEE Std 830-1998
+IEEE Recommended Practice for Software Requirements Specifications
+Institute of Electrical and Electronics Engineers (IEEE), Version 1998.
+https://standards.ieee.org/standard/830-1998.html
+
+- IEEE SRS Template Repository
+System Requirements Specification Template (IEEE Format)
+Author: Rick4470, Version 1.0, GitHub Repository, 2020.
+https://github.com/rick4470/IEEE-SRS-Tempate
+
+- Scholarly HTML Specification
+Scholarly HTML: A W3C Community Proposal for Semantically Rich Scientific Documents
+Authors: W3C Community Group, Draft Version, Ongoing Work.
+https://w3c.github.io/scholarly-html/
+
+- Software Quality Checklist
+Technical Reference: Software Checklist for Quality Requirements
+Maintained by: Technical Reference Documentation Team, Version: Latest, 2021.
+https://technical-reference.readthedocs.io/en/latest/quality/software-checklist.html
+
+- Web Development Checklist
+Toptal WebDevChecklist: Best Practices for Web Projects
+Maintained by: Toptal Engineering Team, Version: Latest, 2022.
+https://www.toptal.com/developers/webdevchecklist
+
+- Web Technologies Course — Prof. Sabin Buraga
+Web Technologies – Course Materials and Project Guidelines
+Author: Prof. Sabin Buraga, Faculty of Computer Science, Alexandru Ioan Cuza University of Iași, 2024.
+https://edu.info.uaic.ro/web-technologies/web-projects.html
+
+- Web Development Course — Prof. Andrei Panu
+Web Programming Laboratory Resources
+Author: Prof. Andrei Panu, Faculty of Computer Science, Alexandru Ioan Cuza University of Iași, 2024.
+https://profs.info.uaic.ro/andrei.panu/courses/web/lab/
+
+- README Template Repository
+Developer-Friendly Project README Template
+Author: Louis3797, GitHub Repository, Version 1.0, 2021.
+https://github.com/Louis3797
 
 ## Overall Description
 ### 2.1 Product Perspective
 
-The app is a standalone web and mobile system that can integrate with geolocation services and map APIs.
+TidyTogether is an independent, self-contained software platform designed to operate seamlessly across both web and mobile environments. It is not a successor, extension, or replacement of any pre-existing waste management or geolocation system. While it is a standalone solution, its functionality is enhanced through the integration of a carefully selected set of external services and dependencies (see Section [2.7](#27-assumptions-and-dependencies)).
 
-not a follow-on member of a product family, and NOT a replacement for certain existing systems. This is a new, self-contained product. There are some components of larger systems: services - explain here
+As a modern civic engagement tool, TidyTogether leverages lightweight, reliable technologies to deliver a scalable and sustainable solution. Its modular architecture allows it to remain autonomous while benefiting from robust, community-supported third-party services.
 
 ### 2.2 Product Functions
 
-Vizualizare locații de reciclare
+The core system enables the following key operations:
 
-Raportare locații de către civili
+- Search and View of Recycling Locations: Civilians can browse and locate registered recycling sites using an interactive map and search interface.
+- Report Polluted Areas: Civilians can submit reports regarding areas with significant waste accumulation, optionally attaching photos, location data, and comments.
+- Validate Reports: Supervisors are responsible for reviewing and verifying civilian-submitted reports before escalating them to local authorities.
+- Notify Authorities: Verified reports are forwarded to the appropriate local authorities, who are notified in real time to coordinate cleanup operations.
+- Upload and Manage Recycling Sites: Local authorities can add, update, or remove official recycling site listings accessible to all users.
+- Generate Technical Reports: Civilians can generate detailed reports (in HTML, CSV, or PDF formats) summarizing cleanup activities, unresolved issues, and status per neighborhood or city.
 
-Validare rapoarte de către supervisori
-
-Notificare și gestionare de către autorități
-
-Read of the raports made by city/zone
-
-Details will be provided in Section 3
+Further implementation details and functional workflows are described in Section [3](#external-interface-requirements).
 
 ### 2.3 User Classes and Characteristics
 
 | Func | Civilians | Supervisors | Authority |
 |:----:|:---------:|:-----------:|:---------:|
-|frequency of use   | | daily | daily |
-|product functions  | area view and report zone | reports validation | report marking |
-|technical expertise| | | |
-|privilege levels   | read areas, write reports | read areas, read/write reports | read/write areas, read/write reports |
-
-|educational level  | highschool, englush a2 | | |
+| frequency of use   | Occasional or situational (e.g., when noticing dirty areas) | daily | daily |
+| product functions  | View recycling sites, report polluted zones | Validate or reject civilian reports | Add/update official recycling locations, confirm validated reports |
+| technical expertise| Intermediate web/mobile usage(report forms, data exports) | Basic (familiar with validation workflows) | Intermediate (map administrative interface usage) |
+| privilege levels   | Read areas, write reports | Read areas, read/write reports | Read/write areas, read/write reports |
+| motivation  | hCivic engagement, desire to keep neighborhood clean | Maintaining data integrity and verifying user contributions | Managing waste response efforts; improving city hygiene |
 
 ### 2.4 Operating Environment
 
-Any os, any version: Web: Browsere moderne (Chrome, Firefox, Edge)
+Operating System Compatibility: Platform-independent. The application is designed to function reliably on any modern operating system (Windows, macOS, Linux, Android, iOS), without version-specific constraints.
 
-Mobile: Android 9+ și iOS 13+
+Web Compatibility: Accessible via all major modern browsers, including:
+- Google Chrome (latest two versions)
+- Mozilla Firefox (latest two versions)
+- Microsoft Edge (Chromium-based, latest two versions)
 
-Backend: servere Linux, server baze de date Mysql
+Mobile Compatibility:
+- Android: Version 9.0 (Pie) and above
+- iOS: Version 13.0 and above
+
+Backend Environment:
+- Server: Linux-based server environment (e.g., Ubuntu, Debian)
+- Database: MySQL or MariaDB
 
 ### 2.5 Design and Implementation Constraints
 
-Respectarea GDPR (pentru protecția datelor civili)
+The design and development of TidyTogether must adhere to the following constraints, which define the boundaries within which the software must operate. These constraints include legal requirements, technical limitations, architectural decisions, and external dependencies:
 
-Folosirea Leaflet API
+- Legal and Regulatory Compliance
+GDPR Compliance: The system must comply with the General Data Protection Regulation (GDPR) to ensure the protection of personal data collected from users, particularly civilians submitting reports or location-based data.
 
-Interfață mobilă adaptabilă
+- Cross-Platform Compatibility - The application must be functional across
+  - Web Browsers: Chrome, Firefox, Edge (latest two versions)
+  - Mobile Devices: Android 9+ and iOS 13+
+  - Operating Systems: No restrictions on operating system version for client access; the platform must run independently of specific OS constraints.
+  - Backend Hosting: The backend must be deployed on a Linux-based server with a MySQL or MariaDB database.
 
-Describe any items or issues that will limit the options available to the developers. These might include: corporate or regulatory policies; hardware limitations (timing requirements, memory requirements); interfaces to other applications; specific technologies, tools, and databases to be used; parallel operations; language requirements; communications protocols; security considerations; design conventions or programming standards (for example, if the customer’s organization will be responsible for maintaining the delivered software).
+- Third-Party APIs
+  - [Leaflet](https://leafletjs.com/)
+  - [ipify.org](https://api.ipify.org/?format=json)
+  - [ip-api.com](https://ip-api.com/)
+  - [nominatim.openstreetmap.org](https://nominatim.openstreetmap.org/ui/search.html)
+
+- Third-Party Dependencies
+  - [php-css-lint](https://github.com/neilime/php-css-lint)
+  - [phpdotenv](https://github.com/vlucas/phpdotenv)
+  - [mpdf](https://github.com/mpdf/phpdotenv)
+
+- User Interface Constraints
+  - The platform must provide an adaptive and responsive mobile interface to ensure usability across various screen sizes and input methods.
+  - English
+
+- Security Constraints
+  - Secure communication protocols (HTTPS) are mandatory for all network interactions.
+  - Sensitive user data must be securely stored and transmitted using industry best practices (e.g., hashed passwords, encrypted tokens).
+
+- Development Standards and Conventions
+  - Source code must adhere to commonly accepted best practices and naming conventions (e.g., PSR standards for PHP).
+  - The platform must be developed using a modular architecture, MVC to allow scalability and maintainability.
+  - Open-source technologies should be prioritized to reduce licensing constraints.
 
 ### 2.6 User Documentation
 
-Logarea
+**General Access and Profile Management**
 
-pentru s a trebuie cheie suplimentara comunicata in avans
+- **Signup Requirements**:
+  - Supervisors and authorities require a special access key, communicated in advance via email, to complete registration.
+- **Login Behavior**:
+  - Upon successful login, users are redirected to their respective home dashboards.
+- **Profile Navigation**:
+  - All user types have access to a *Profile* button in the navigation bar.
+  - This redirects to a panel displaying personal information: first name, last name, and preferred city (*mainCity*).
+  - Users can edit their information or log out.
+  - The *mainCity* field plays an important role in filtering content and personalizing views.
 
-daca aceasta va avea success veti fi redirectionati la home page
+---
 
-#### supervisor
+#### Civilian
 
--
--
--
--
+- **Dashboard Functions**:
+  - **Report Dirty Area**: Opens a form where the user manually inputs a description, address, neighborhood, city, country, photo, and tags.
+  - **Saved Zones**: Lists previously saved locations by the user.
+  - **Recycling Areas**: Displays all official recycling locations created by authorities on the map.
+  - **My Location**: Centers the map on the user’s current location.
+  - **mainCity**: Centers the map on the user’s preferred city for exploration or reporting.
+  - **Map Interaction**:
+    - Clicking on the map creates a marker and popup with the following options:
+      - *Report Dirty Area*: Opens a pre-filled form with the selected coordinates.
+      - *Save*: Adds the location to the user's saved zones.
+      - *Generate Report*: Creates a report for the neighborhood corresponding to the marker's location.
+- **Other Options**:
+  - *Previous Reports*: Lists reports the user submitted in the past.
+  - *City Report*: Generates a summary report based on the user’s selected *mainCity*.
 
-#### authority
+---
 
--
--
--
--
+#### Supervisor
+
+- **Navigation**: Includes *Home* and *Profile*.
+- **Main Functionality**:
+  - Based on the *mainCity* preference, the supervisor sees all civilian-submitted reports for that area.
+  - Each report may be accepted or rejected:
+    - *Accepting* sends it to the authority's dashboard.
+    - *Rejecting* deletes the report permanently.
+
+---
+
+#### Authority
+
+- **Navigation**: Includes *Home*, *Areas*, and *Profile*.
+- **Home Dashboard**:
+  - Displays all validated reports from supervisors within the *mainCity*.
+  - Shows detailed information from the initial report form.
+- **Areas Dashboard**:
+  - Allows the creation of official recycling zone markers, restricted to the selected *mainCity*.
+  - *Posted Areas*: Lists all created recycling zones by the authority.
+  - *My Location*: Centers the map on the authority’s real-time location.
+  - *Map Interaction*: Clicking on the map opens a popup to create a new recycling spot, followed by a form specifying waste categories handled at that location.
 
 ### 2.7 Assumptions and Dependencies
 
-All TidyTogether consumers should have a stable internet connection while using the app.
+The following assumptions and external dependencies are relevant to the continued operation and functionality of the TidyTogether application:
 
-Leaflet and Wasmer will stay available and out of charge.
+- **Internet Connectivity**: All users are expected to have access to a stable internet connection when interacting with the platform on both web and mobile devices.
+- **Availability of External Services**: The following third-party services are assumed to remain freely accessible and operational:
+  - [Wasmer](https://wasmer.io/) – for lightweight execution of WebAssembly modules.
+  - [Leaflet](https://leafletjs.com/) – for map rendering and interaction.
+  - [ipify.org](https://api.ipify.org/?format=json) – for obtaining public IP addresses.
+  - [ip-api.com](https://ip-api.com/) – for IP-based geolocation.
+  - [nominatim.openstreetmap.org](https://nominatim.openstreetmap.org/ui/search.html) – for geocoding and reverse geocoding services.
+- **Integrity of Development Dependencies**: The following tools and libraries are presumed to remain functional, free to use, and actively maintained:
+  - [php-css-lint](https://github.com/neilime/php-css-lint)
+  - [phpdotenv](https://github.com/vlucas/phpdotenv)
+  - [mpdf](https://github.com/mpdf/mpdf)
 
-Usability of the services that bring life to what TidyTogether means:
-
-- [ipify.org](https://api.ipify.org/?format=json)
-- [ip-api.com](https://ip-api.com/)
-- [nominatim.openstreetmap.org](https://nominatim.openstreetmap.org/ui/search.html)
-
-The correctness of the following dependencies:
-
-- [php-css-lint](https://github.com/neilime/php-css-lint)
-- [phpdotenv](https://github.com/vlucas/phpdotenv)
-- [mpdf](https://github.com/mpdf/phpdotenv)
-
-
-The project could be affected if these assumptions are incorrect, are not shared, or change. 
+If any of these assumptions prove to be invalid or if dependencies become deprecated, monetized, or unstable, the overall reliability and performance of the platform may be negatively affected. Continuous monitoring and contingency planning are advised to mitigate such risks.
 
 ## External Interface Requirements
 ### 3.1 User Interfaces
@@ -213,8 +309,8 @@ Ecrane intuitive cu acces diferențiat în funcție de rol
 
 Funcționalități: hartă interactivă, butoane de raportare, validare, notificare
 
-
 Describe the logical characteristics of each interface between the software product and the users. This may include sample screen images, any GUI standards or product family style guides that are to be followed, screen layout constraints, standard buttons and functions (e.g., help) that will appear on every screen, keyboard shortcuts, error message display standards, and so on. Define the software components for which a user interface is needed. Details of the user interface design should be documented in a separate user interface specification.
+
 ### 3.2 Hardware Interfaces
 
 GPS pentru localizarea utilizatorului
@@ -222,6 +318,7 @@ GPS pentru localizarea utilizatorului
 Cameră foto (opțional, pentru poze la raport)
 
 Describe the logical and physical characteristics of each interface between the software product and the hardware components of the system. This may include the supported device types, the nature of the data and control interactions between the software and the hardware, and communication protocols to be used.
+
 ### 3.3 Software Interfaces
 
 Integrare cu:
@@ -233,6 +330,7 @@ Firebase Push Notifications
 PostgreSQL pentru stocare
 
 Describe the connections between this product and other specific software components (name and version), including databases, operating systems, tools, libraries, and integrated commercial components. Identify the data items or messages coming into the system and going out and describe the purpose of each. Describe the services needed and the nature of communications. Refer to documents that describe detailed application programming interface protocols. Identify data that will be shared across software components. If the data sharing mechanism must be implemented in a specific way (for example, use of a global data area in a multitasking operating system), specify this as an implementation constraint.
+
 ### 3.4 Communications Interfaces
 
 HTTPS pentru comunicare sigură
@@ -321,51 +419,43 @@ Marchează ca „rezolvat” sau actualizează
 4.3.3.3 Poate marca locația ca „nefuncțională” sau „activă”
 
 ## Other Nonfunctional Requirements
+
 ### 5.1 Performance Requirements
-If there are performance requirements for the product under various circumstances, state them here and explain their rationale, to help the developers understand the intent and make suitable design choices. Specify the timing relationships for real time systems. Make such requirements as specific as possible. You may need to state performance requirements for individual functional requirements or features.
-### 5.2 Safety Requirements
-Specify those requirements that are concerned with possible loss, damage, or harm that could result from the use of the product. Define any safeguards or actions that must be taken, as well as actions that must be prevented. Refer to any external policies or regulations that state safety issues that affect the product’s design or use. Define any safety certifications that must be satisfied.
-### 5.3 Security Requirements
-Specify any requirements regarding security or privacy issues surrounding use of the product or protection of the data used or created by the product. Define any user identity authentication requirements. Refer to any external policies or regulations containing security issues that affect the product. Define any security or privacy certifications that must be satisfied.
-### 5.4 Software Quality Attributes
-Specify any additional quality characteristics for the product that will be important to either the customers or the developers. Some to consider are: adaptability, availability, correctness, flexibility, interoperability, maintainability, portability, reliability, reusability, robustness, testability, and usability. Write these to be specific, quantitative, and verifiable when possible. At the least, clarify the relative preferences for various attributes, such as ease of use over ease of learning.
-### 5.5 Business Rules
-List any operating principles about the product, such as which individuals or roles can perform which functions under specific circumstances. These are not functional requirements in themselves, but they may imply certain functional requirements to enforce the rules.
 
-## Other Requirements
-Define any other requirements not covered elsewhere in the SRS. This might include database requirements, internationalization requirements, legal requirements, reuse objectives for the project, and so on. Add any new sections that are pertinent to the project.
-### Appendix A: Glossary
-Define all the terms necessary to properly interpret the SRS, including acronyms and abbreviations. You may wish to build a separate glossary that spans multiple projects or the entire organization, and just include terms specific to a single project in each SRS.
-### Appendix B: Analysis Models
-Optionally, include any pertinent analysis models, such as data flow diagrams, class diagrams, state-transition diagrams, or entity-relationship diagrams.
-### Appendix C: To Be Determined List
-Collect a numbered list of the TBD (to be determined) references that remain in the SRS so they can be tracked to closure.
-
-
-5. Other Nonfunctional Requirements
-5.1 Performance Requirements
 Timp de răspuns sub 1 secundă pentru operațiuni CRUD
 
 Suport pentru minim 10.000 utilizatori simultan
 
-5.2 Safety Requirements
+If there are performance requirements for the product under various circumstances, state them here and explain their rationale, to help the developers understand the intent and make suitable design choices. Specify the timing relationships for real time systems. Make such requirements as specific as possible. You may need to state performance requirements for individual functional requirements or features.
+
+### 5.2 Safety Requirements
+
 Validarea umană a rapoartelor pentru a preveni conținut malițios
 
 Limitări asupra locației (nu poate fi în afara granițelor)
 
-5.3 Security Requirements
+Specify those requirements that are concerned with possible loss, damage, or harm that could result from the use of the product. Define any safeguards or actions that must be taken, as well as actions that must be prevented. Refer to any external policies or regulations that state safety issues that affect the product’s design or use. Define any safety certifications that must be satisfied.
+
+### 5.3 Security Requirements
+
 Autentificare prin email/parolă și roluri
 
 Datele criptate în tranzit și în repaus
 
-5.4 Software Quality Attributes
+Specify any requirements regarding security or privacy issues surrounding use of the product or protection of the data used or created by the product. Define any user identity authentication requirements. Refer to any external policies or regulations containing security issues that affect the product. Define any security or privacy certifications that must be satisfied.
+
+### 5.4 Software Quality Attributes
+
 Disponibilitate: 99.9% uptime
 
 Portabilitate: Web + Mobile
 
 Ușurință în utilizare: Interfață adaptată fiecărui rol
 
-5.5 Business Rules
+Specify any additional quality characteristics for the product that will be important to either the customers or the developers. Some to consider are: adaptability, availability, correctness, flexibility, interoperability, maintainability, portability, reliability, reusability, robustness, testability, and usability. Write these to be specific, quantitative, and verifiable when possible. At the least, clarify the relative preferences for various attributes, such as ease of use over ease of learning.
+
+### 5.5 Business Rules
+
 Doar autoritățile pot adăuga locații „oficiale”
 
 Raportele de la civili trebuie validate
@@ -375,22 +465,28 @@ Fiecare raport trebuie să aibă un status: „nevalidat”, „aprobat”, „r
 Localizare în limba română și engleză
 
 Arhivarea datelor mai vechi de 2 ani
+List any operating principles about the product, such as which individuals or roles can perform which functions under specific circumstances. These are not functional requirements in themselves, but they may imply certain functional requirements to enforce the rules.
 
-Appendix A: Glossary
+## Other Requirements
+
+Define any other requirements not covered elsewhere in the SRS. This might include database requirements, internationalization requirements, legal requirements, reuse objectives for the project, and so on. Add any new sections that are pertinent to the project.
+
+### Appendix A: Glossary
+
 CRUD: Create, Read, Update, Delete
 
 FCM: Firebase Cloud Messaging
 
-TBD: To Be Determined
+Define all the terms necessary to properly interpret the SRS, including acronyms and abbreviations. You may wish to build a separate glossary that spans multiple projects or the entire organization, and just include terms specific to a single project in each SRS.
 
-Appendix B: Analysis Models
-TBD: Data Flow Diagram
+### Appendix B: Analysis Models
+Optionally, include any pertinent analysis models, such as data flow diagrams, class diagrams, state-transition diagrams, or entity-relationship diagrams.
 
-TBD: ER Diagram
-
-Appendix C: To Be Determined List
+### Appendix C: To Be Determined List
 TBD: Design UI Screens
 
 TBD: Lista completă de validări pentru supervisori
 
 TBD: Sistem de feedback pentru utilizatori
+
+Collect a numbered list of the TBD (to be determined) references that remain in the SRS so they can be tracked to closure.
