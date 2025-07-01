@@ -22,8 +22,6 @@
 
 <body>
 
-  <?php printFiles("public/uploads"); ?>
-
   <button class="menu-toggle" id="menuToggle">
     <?php require 'view/components/svg/menuSvg.php'; ?>
   </button>

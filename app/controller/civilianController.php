@@ -2,7 +2,7 @@
 
 //define constants if not already defined (for standalone requests)
 if (!defined('CONN')) {
-    define("CONN", "userSession");
+  define("CONN", "userSession");
 }
 
 require_once "util/getRoot.php";
@@ -54,7 +54,7 @@ if (isset($_POST["postAddress"])) {
     $_POST["postCountry"],
   );
 
-  $media = processMediaModel($id, $_FILES['postPhoto'] ?? null);
+  $media = processMediaModel($id, $_FILES['postPhoto[]'] ?? null);
   $marks = processTagsModel(); // this directly uses $_POST and unset()
 
   $res0 = "";
