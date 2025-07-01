@@ -82,9 +82,9 @@
 
 - Server (Xampp):
 
-  [![PHP](https://img.shields.io/badge/php-8ebca6.svg?style=for-the-badge&logo=php&logoColor=000)](./app/controller/civilianController.php)
-  [![Bash](https://img.shields.io/badge/bash_script-8ebca6.svg?style=for-the-badge&logo=gnu-bash&logoColor=000)](./bin/build.sh)
-  [![PowerShell](https://img.shields.io/badge/PowerShell-8ebca6.svg?style=for-the-badge&logo=ps&logoColor=000)](./bin/build.cmd)
+  [![PHP](https://img.shields.io/badge/php-8EBCA6.svg?style=for-the-badge&logo=php&logoColor=000)](./app/controller/civilianController.php)
+  [![Bash](https://img.shields.io/badge/bash_script-8EBCA6.svg?style=for-the-badge&logo=gnu-bash&logoColor=000)](./bin/build.sh)
+  [![PowerShell](https://img.shields.io/badge/PowerShell-8EBCA6.svg?style=for-the-badge&logo=ps&logoColor=000)](./bin/build.cmd)
 
 - Database:
 
@@ -100,15 +100,15 @@
 
 ### :art: Color Reference
 
-| Color                                               | Hex     |
-| --------------------------------------------------- | ------- |
-| <span style="color: #017852">Primary Color</span>   | #017852 |
-| <span style="color: #8ebca6">Secondary Color</span> | #8ebca6 |
-| <span style="color: #F8EFE0">Accent Color</span>    | #F8EFE0 |
-| <span style="color: #E62C20">Status Color</span>    | #E62C20 |
-| <span style="color: #FFAC25">Status Color</span>    | #FFAC25 |
-| <span style="color: #0C5460">Status Color</span>    | #0C5460 |
-| <span style="color: #000000">Text Color</span>      | #000000 |
+| Name            | Hex     | Color                            |
+| --------------- | ------- | -------------------------------- |
+| Primary Color   | #017852 | <img src="doc/color/color1.png"> |
+| Secondary Color | #8EBCA6 | <img src="doc/color/color2.png"> |
+| Accent Color    | #F8EFE0 | <img src="doc/color/color3.png"> |
+| Status Color    | #E62C20 | <img src="doc/color/color4.png"> |
+| Status Color    | #FFAC25 | <img src="doc/color/color5.png"> |
+| Status Color    | #0C5460 | <img src="doc/color/color6.png"> |
+| Text Color      | #000000 | <img src="doc/color/color7.png"> |
 
 ### :key: Environment Variables
 
