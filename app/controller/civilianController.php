@@ -54,7 +54,7 @@ if (isset($_POST["postAddress"])) {
     $_POST["postCountry"],
   );
 
-  $media = processMediaModel($id, $_FILES['postPhoto[]'] ?? null);
+  $media = processMediaModel($id, $_FILES['postPhoto'] ?? null);
   $marks = processTagsModel(); // this directly uses $_POST and unset()
 
   $res0 = "";
