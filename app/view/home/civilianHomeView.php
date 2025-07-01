@@ -36,13 +36,13 @@
       <div class="map-top-bar">
         <button id="openReportBtn" class="topbar-button">
           <?php require 'view/components/svg/dirtySvg.php'; ?>
-          Report a dirty area
+          <span class="button-text">Report dirty area</span>
         </button>
 
         <div class="topbar-dropdown">
           <button id="zonesDropdownBtn" class="topbar-button">
             <?php require 'view/components/svg/savedSvg.php'; ?>
-            Saved zones
+            <span class="button-text">Saved zones</span>
           </button>
           <div id="zonesDropdownContent" class="dropdown-content">
             <div style="padding:0.5em;color:#888;">Loading...</div>
@@ -51,12 +51,12 @@
 
         <button id="toggleRecyclingBtn" class="topbar-button">
           <?php require 'view/components/svg/recycleSvg.php'; ?>
-          Recycling areas
+          <span class="button-text">Recycling areas</span>
         </button>
 
         <button id="locateMeBtn" class="topbar-button">
           <?php require 'view/components/svg/zoneSvg.php'; ?>
-          My Location
+          <span class="button-text">My Location</span>
         </button>
       </div>
 

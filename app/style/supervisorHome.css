@@ -11,6 +11,14 @@ body {
   color: var(--green);
 }
 
+.reports-info {
+  color: var(--base-text);
+  font-size: 1rem;
+  margin: 0.5rem 0 1.5rem 0;
+  font-style: italic;
+  opacity: 0.8;
+}
+
 .below-title {
   color: var(--base-text);
   font-size: 1.2rem;

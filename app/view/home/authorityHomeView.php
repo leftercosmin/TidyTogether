@@ -24,6 +24,7 @@
 
   <div class="report-container">
     <h1 class="page-title">Approved Reports</h1>
+    <p class="reports-info">Showing the 10 oldest approved reports. Mark reports as done to see more.</p>
 
     <?php if (empty($approvedReports)): ?>
       <p class="empty-message">No approved reports at this time.</p>
