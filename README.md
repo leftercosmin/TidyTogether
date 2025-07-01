@@ -132,34 +132,20 @@ This project uses Composer as package manager
 To run the Css Linter, run the following command
 
 ```bash
-  php vendor/bin/php-css-lint app/style/path-to-file.css
-  php vendor/bin/php-css-lint app/style/civilianHome.css
-  php vendor/bin/php-css-lint app/style/globals.css
+php vendor/bin/php-css-lint app/style/path-to-file.css
+php vendor/bin/php-css-lint app/style/civilianHome.css
+php vendor/bin/php-css-lint app/style/globals.css
 ```
 
 ### :running: Run Locally
 
-Clone the project
-
 ```bash
-  git clone https://github.com/leftercosmin/TidyTogether.git
-```
+git clone https://github.com/leftercosmin/TidyTogether.git
+cd TidyTogether
+composer install
 
-Go to the project directory
+# Start the server with these scripts: Both Linux and Windows compatible
 
-```bash
-  cd TidyTogether
-```
-
-Install dependencies
-
-```bash
-  composer install
-```
-
-Start the server with these scripts: Both Linux and Windows compatible
-
-```sh
 ./bin/build.sh
 ./bin/startServer.sh
 ./bin/startServer.sh reset
@@ -176,16 +162,15 @@ To deploy this project, configure it according to:
 
 ## :compass: Roadmap
 
-- [x] README
 - [x] C4 diagrams
+- [x] Checklist
 - [ ] System Requirments
-- [ ] Checklist
 - [ ] video
 
-- [ ] favorite zone press
-- [ ] load map based on mainCity
-- [ ] download pdf
-- [ ] paths
+- [x] favorite zone press
+- [x] load map based on mainCity
+- [x] download pdf
+- [x] paths
 
 ## :wave: Contributing
 
