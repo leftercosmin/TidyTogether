@@ -366,8 +366,11 @@ form button {
   }
 }
 
-@media screen and (max-width: 970px) {
+@media screen and (max-width: 980px) {
   .map-top-bar{
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-evenly;
     gap: .4rem;
   }
 
