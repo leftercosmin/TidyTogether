@@ -16,7 +16,7 @@ function addRecyclingAreaModel(
     return "error - addRecyclingAreaModel(): " . $db->connect_error;
   }
 
-  $sql = "INSERT INTO RecyclingArea (idTag, idUser, idCoordinate)
+  $sql = "INSERT IGNORE INTO RecyclingArea (idTag, idUser, idCoordinate)
     VALUES (?,?,?)";
 
   foreach ($tags as $tag) {
