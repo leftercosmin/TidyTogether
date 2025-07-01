@@ -22,6 +22,9 @@
 
 <body>
 
+  <?php require 'util/printFiles.php';
+  printFiles("public/uploads"); ?>
+
   <button class="menu-toggle" id="menuToggle">
     <?php require 'view/components/svg/menuSvg.php'; ?>
   </button>
@@ -80,12 +83,12 @@
   const initialLat = userCityLat == "" ? fallbackLat : userCityLat;
   const initialLon = userCityLon == "" ? fallbackLon : userCityLon;
 
-  const recyclingAreasData = <?= json_encode(array_values(array_map(function($userAreas) {
+  const recyclingAreasData = <?= json_encode(array_values(array_map(function ($userAreas) {
     $areas = [];
     foreach ($userAreas as $coordId => $areaData) {
       $areas[] = [
-        'lat' => (float)$areaData['lat'],
-        'lng' => (float)$areaData['lon'],
+        'lat' => (float) $areaData['lat'],
+        'lng' => (float) $areaData['lon'],
         'address' => $areaData['address'],
         'tags' => $areaData['tag'] ?? []
       ];
