@@ -127,6 +127,13 @@
 - [Documentation](https://docs.google.com/document/d/1-aHo15U2-sPB9klRUCRxpozfseOrwraKnAo_gaaENro/edit?tab=t.0)
 - [Database](https://appdb-dyh6iv7f0wnm.adminer.wasmer.app/?server=db.be-mons1.bengt.wasmernet.com%3A3306&username=edd1c866799d80002ba7aff986fa&db=TidyTogether&dbid=appdb_KwGIWtwaUVoe&magiclogin=wott_43Z3T2ZQK34DMBOLDR56TXOAZWYZI2VX)
 
+Services that bring life to what TidyTogether means:
+
+- [Leaflet](https://leafletjs.com/)
+- [ipify.org](https://api.ipify.org/?format=json)
+- [ip-api.com](https://ip-api.com/)
+- [nominatim.openstreetmap.org](https://nominatim.openstreetmap.org/ui/search.html)
+
 This project uses Composer as package manager and the following dependencies:
 
 - [php-css-lint](https://github.com/neilime/php-css-lint)
@@ -220,3 +227,5 @@ Useful resources and libraries that you have used in your projects:
 - [Readme Template](https://github.com/othneildrew/Best-README-Template)
 - [@Louis3797](https://github.com/Louis3797)
 - [cheat-sheet](./doc/comm.md)
+- [Buraga-Sabin-Course](https://edu.info.uaic.ro/web-technologies/web-projects.html)
+- [Panu-Andrei-Course](https://profs.info.uaic.ro/andrei.panu/courses/web/lab/)

@@ -104,7 +104,8 @@ corporate goals: easy to track progress and real time feedback/status from the l
 ### 1.5 References
 
 IEEE Std 830-1998: IEEE Recommended Practice for Software Requirements Specifications
-[fetch()](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch)
+- [Buraga-Sabin-Course](https://edu.info.uaic.ro/web-technologies/web-projects.html)
+- [Panu-Andrei-Course](https://profs.info.uaic.ro/andrei.panu/courses/web/lab/)
 [@Louis3797](https://github.com/Louis3797)
 [c4]()
 [sysReq](https://github.com/rick4470/IEEE-SRS-Tempate) / [scholarly](https://w3c.github.io/scholarly-html/)
@@ -129,6 +130,8 @@ Validare rapoarte de către supervisori
 
 Notificare și gestionare de către autorități
 
+Read of the raports made by city/zone
+
 Details will be provided in Section 3
 
 ### 2.3 User Classes and Characteristics
@@ -142,24 +145,19 @@ Details will be provided in Section 3
 
 |educational level  | highschool, englush a2 | | |
 
-
-Autorități	Administrații locale; acces complet și privilegii decizionale
-
-
 ### 2.4 Operating Environment
 
-Web: Browsere moderne (Chrome, Firefox, Edge)
+Any os, any version: Web: Browsere moderne (Chrome, Firefox, Edge)
 
 Mobile: Android 9+ și iOS 13+
 
-Backend: REST API, servere Linux, baze de date PostgreSQL
+Backend: servere Linux, server baze de date Mysql
 
-Describe the environment in which the software will operate, including the hardware platform, operating system and versions, and any other software components or applications with which it must peacefully coexist.
 ### 2.5 Design and Implementation Constraints
 
 Respectarea GDPR (pentru protecția datelor civili)
 
-Folosirea Google Maps API
+Folosirea Leaflet API
 
 Interfață mobilă adaptabilă
 
@@ -167,21 +165,46 @@ Describe any items or issues that will limit the options available to the develo
 
 ### 2.6 User Documentation
 
-Manual utilizator civil (PDF și online)
+Logarea
 
-Ghid de administrare (pentru autorități și supervisori)
+pentru s a trebuie cheie suplimentara comunicata in avans
 
-List the user documentation components (such as user manuals, on-line help, and tutorials) that will be delivered along with the software. Identify any known user documentation delivery formats or standards.
+daca aceasta va avea success veti fi redirectionati la home page
+
+#### supervisor
+
+-
+-
+-
+-
+
+#### authority
+
+-
+-
+-
+-
 
 ### 2.7 Assumptions and Dependencies
 
-Utilizatorii au conexiune la internet
+All TidyTogether consumers should have a stable internet connection while using the app.
 
-Google Maps API va fi disponibil
+Leaflet and Wasmer will stay available and out of charge.
 
-Notificările push vor fi suportate de dispozitive
+Usability of the services that bring life to what TidyTogether means:
 
-List any assumed factors (as opposed to known facts) that could affect the requirements stated in the SRS. These could include third-party or commercial components that you plan to use, issues around the development or operating environment, or constraints. The project could be affected if these assumptions are incorrect, are not shared, or change. Also identify any dependencies the project has on external factors, such as software components that you intend to reuse from another project, unless they are already documented elsewhere (for example, in the vision and scope document or the project plan).
+- [ipify.org](https://api.ipify.org/?format=json)
+- [ip-api.com](https://ip-api.com/)
+- [nominatim.openstreetmap.org](https://nominatim.openstreetmap.org/ui/search.html)
+
+The correctness of the following dependencies:
+
+- [php-css-lint](https://github.com/neilime/php-css-lint)
+- [phpdotenv](https://github.com/vlucas/phpdotenv)
+- [mpdf](https://github.com/mpdf/phpdotenv)
+
+
+The project could be affected if these assumptions are incorrect, are not shared, or change. 
 
 ## External Interface Requirements
 ### 3.1 User Interfaces
@@ -203,7 +226,7 @@ Describe the logical and physical characteristics of each interface between the 
 
 Integrare cu:
 
-Google Maps API
+Leaflet API
 
 Firebase Push Notifications
 
@@ -349,7 +372,6 @@ Raportele de la civili trebuie validate
 
 Fiecare raport trebuie să aibă un status: „nevalidat”, „aprobat”, „respins”
 
-6. Other Requirements
 Localizare în limba română și engleză
 
 Arhivarea datelor mai vechi de 2 ani
