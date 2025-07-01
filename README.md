@@ -219,3 +219,4 @@ Useful resources and libraries that you have used in your projects:
 - [Emoji Cheat Sheet](https://github.com/ikatyang/emoji-cheat-sheet/blob/master/README.md#travel--places)
 - [Readme Template](https://github.com/othneildrew/Best-README-Template)
 - [@Louis3797](https://github.com/Louis3797)
+- [cheat-sheet](./doc/comm.md)
