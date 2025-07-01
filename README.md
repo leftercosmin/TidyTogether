@@ -64,12 +64,12 @@
 ### :camera: Screenshots
 
 <div style="display: grid; grid-template-columns: 1fr 1fr; justify-content: center; gap: 20px;"> 
-<img src="doc/ss/Screenshot from 2025-06-26 08-58-16.png" alt="screenshot" width="480" height="300" />
-<img src="doc/ss/Screenshot from 2025-06-26 08-58-33.png" alt="screenshot" width="480" height="300" />
-<img src="doc/ss/Screenshot from 2025-06-26 08-58-44.png" alt="screenshot" width="480" height="300" />
-<img src="doc/ss/Screenshot from 2025-06-26 08-58-50.png" alt="screenshot" width="480" height="300" />
-<img src="doc/ss/Screenshot from 2025-06-26 08-58-56.png" alt="screenshot" width="480" height="300" />
-<img src="doc/ss/Screenshot from 2025-06-26 08-59-04.png" alt="screenshot" width="480" height="300" />
+<img src="doc/ss/Screenshot from 2025-06-26 08-58-16.png" alt="screenshot" width="240" height="150" />
+<img src="doc/ss/Screenshot from 2025-06-26 08-58-33.png" alt="screenshot" width="240" height="150" />
+<img src="doc/ss/Screenshot from 2025-06-26 08-58-44.png" alt="screenshot" width="240" height="150" />
+<img src="doc/ss/Screenshot from 2025-06-26 08-58-50.png" alt="screenshot" width="240" height="150" />
+<img src="doc/ss/Screenshot from 2025-06-26 08-58-56.png" alt="screenshot" width="240" height="150" />
+<img src="doc/ss/Screenshot from 2025-06-26 08-59-04.png" alt="screenshot" width="240" height="150" />
 </div>
 
 ### :space_invader: Tech Stack
@@ -100,8 +100,8 @@
 
 ### :art: Color Reference
 
-| Name            | Hex     | Color                            |
-| --------------- | ------- | -------------------------------- |
+| Name            |   Hex   |              Color               |
+| --------------- | :-----: | :------------------------------: |
 | Primary Color   | #017852 | <img src="doc/color/color1.png"> |
 | Secondary Color | #8EBCA6 | <img src="doc/color/color2.png"> |
 | Accent Color    | #F8EFE0 | <img src="doc/color/color3.png"> |
