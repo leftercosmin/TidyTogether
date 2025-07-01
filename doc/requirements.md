@@ -27,7 +27,8 @@ Table of Contents
     * 3.4 [Communications Interfaces](#34-communications-interfaces)
   * [System Features](#system-features)
     * 4.1 [System Feature 1](#41-system-feature-1)
-    * 4.2 [System Feature 2 (and so on)](#42-system-feature-2-and-so-on)
+    * 4.2 [System Feature 2](#42-system-feature-2-and-so-on)
+    * 4.3 [System Feature 3](#43-system-feature-2-and-so-on)
   * [Other Nonfunctional Requirements](#other-nonfunctional-requirements)
     * 5.1 [Performance Requirements](#51-performance-requirements)
     * 5.2 [Safety Requirements](#52-safety-requirements)
@@ -303,190 +304,268 @@ The following assumptions and external dependencies are relevant to the continue
 If any of these assumptions prove to be invalid or if dependencies become deprecated, monetized, or unstable, the overall reliability and performance of the platform may be negatively affected. Continuous monitoring and contingency planning are advised to mitigate such risks.
 
 ## External Interface Requirements
+
 ### 3.1 User Interfaces
 
-Ecrane intuitive cu acces diferențiat în funcție de rol
+TidyTogether provides a modern, responsive user interface tailored to each of the three user roles: civilians, supervisors, and local authorities. The design emphasizes ease of use, clarity, and accessibility across both web and mobile platforms.
 
-Funcționalități: hartă interactivă, butoane de raportare, validare, notificare
+- **Common Elements**:
+  - Navigation bar with role-specific links and a universal *Profile* button.
+  - Responsive layout optimized for modern browsers (Chrome, Firefox, Edge) and mobile platforms (Android 9+, iOS 13+).
+  - Interactive map for viewing and managing locations.
+  - Standard UI components for form inputs, confirmation dialogs, modals, and status indicators.
+  - Clear error messages, success toasts, and loading indicators.
 
-Describe the logical characteristics of each interface between the software product and the users. This may include sample screen images, any GUI standards or product family style guides that are to be followed, screen layout constraints, standard buttons and functions (e.g., help) that will appear on every screen, keyboard shortcuts, error message display standards, and so on. Define the software components for which a user interface is needed. Details of the user interface design should be documented in a separate user interface specification.
+- **Civilian Interface**:
+  - Report dirty areas via a structured form (manual input or map interaction).
+  - View and save recycling or dirty locations.
+  - Generate reports for neighborhoods or cities.
+  - Access previous submissions and update preferences.
+
+- **Supervisor Interface**:
+  - Dashboard listing all pending civilian reports filtered by the chosen *mainCity*.
+  - Approve or reject reports with relevant status feedback.
+
+- **Authority Interface**:
+  - Dashboard displaying reports validated by supervisors.
+  - Interface for creating and managing official recycling area markers.
+  - Form for tagging types of waste per location.
+
+Detailed UI specifications, including wireframes and screen flow diagrams, are documented separately in the *User Interface Specification*.
+
+---
 
 ### 3.2 Hardware Interfaces
 
-GPS pentru localizarea utilizatorului
+TidyTogether interacts with a limited set of hardware features, primarily through mobile devices and geolocation services:
 
-Cameră foto (opțional, pentru poze la raport)
+- **GPS**:
+  - Used for determining the user’s current location and centering map views.
+  - Supports accurate geolocation tagging for reports and area markers.
 
-Describe the logical and physical characteristics of each interface between the software product and the hardware components of the system. This may include the supported device types, the nature of the data and control interactions between the software and the hardware, and communication protocols to be used.
+- **Camera (optional)**:
+  - Users may upload images when submitting reports using device-native file upload interfaces (not direct camera capture).
+
+- **Internet Connectivity**:
+  - A stable connection is required for most features, including data fetching, map rendering, and report submission.
+
+---
 
 ### 3.3 Software Interfaces
 
-Integrare cu:
+TidyTogether depends on several reliable, third-party and open-source libraries for enhanced functionality:
 
-Leaflet API
+- **Leaflet.js**:
+  - Interactive map rendering and marker management.
+  - Used across all user roles for location-based interactions.
 
-Firebase Push Notifications
+- **Wasmer**:
+  - Embedded WebAssembly runtime for improved performance in selected modules.
 
-PostgreSQL pentru stocare
+- **External APIs for Geolocation**:
+  - [ipify.org](https://api.ipify.org/?format=json): Determines client’s public IP address.
+  - [ip-api.com](https://ip-api.com/): Maps IP to approximate location.
+  - [nominatim.openstreetmap.org](https://nominatim.openstreetmap.org/ui/search.html): Performs reverse geocoding.
 
-Describe the connections between this product and other specific software components (name and version), including databases, operating systems, tools, libraries, and integrated commercial components. Identify the data items or messages coming into the system and going out and describe the purpose of each. Describe the services needed and the nature of communications. Refer to documents that describe detailed application programming interface protocols. Identify data that will be shared across software components. If the data sharing mechanism must be implemented in a specific way (for example, use of a global data area in a multitasking operating system), specify this as an implementation constraint.
+- **Validation and Output Libraries**:
+  - [php-css-lint](https://github.com/neilime/php-css-lint): Ensures consistent styling in PDF/HTML generation.
+  - [phpdotenv](https://github.com/vlucas/phpdotenv): Securely loads environment variables.
+  - [mpdf](https://github.com/mpdf/mpdf): Generates PDF documents from HTML content.
+
+- **Backend**:
+  - Hosted on a Linux server using PHP 8+.
+  - Data persistence handled via MySQL (MariaDB compatible).
+
+All these services are assumed to remain free and publicly available. They do not require payment or authentication under current usage conditions.
+
+---
 
 ### 3.4 Communications Interfaces
 
-HTTPS pentru comunicare sigură
+TidyTogether ensures secure, efficient, and reliable communication between users, services, and components:
 
-Push Notification (FCM)
+- **HTTPS**:
+  - All traffic between client and server is encrypted using HTTPS to ensure data confidentiality and integrity.
 
-REST API
-Describe the requirements associated with any communications functions required by this product, including e-mail, web browser, network server communications protocols, electronic forms, and so on. Define any pertinent message formatting. Identify any communication standards that will be used, such as FTP or HTTP. Specify any communication security or encryption issues, data transfer rates, and synchronization mechanisms.
+- **REST API**:
+  - JSON-based communication between the frontend and backend.
+  - Stateless interactions support scalability and maintainability.
+
+- **Error Handling & Messaging**:
+  - Consistent format for server responses (success, failure, validation errors).
+  - Client-side parsing and display follow accessibility and clarity standards.
+
+These interfaces ensure that all user actions are tracked, validated, and securely transferred across system components.
 
 ## System Features
 
-This template illustrates organizing the functional requirements for the product by system features, the major services provided by the product. You may prefer to organize this section by use case, mode of operation, user class, object class, functional hierarchy, or combinations of these, whatever makes the most logical sense for your product.
+This section outlines the core features of the TidyTogether platform, structured by user role and system functionality. Each feature includes a priority level, a typical user interaction flow, and the corresponding functional requirements necessary to ensure expected behavior.
+
+---
 
 ### 4.1 System Feature 1
 
-Don’t really say “System Feature 1.” State the feature name in just a few words.
+#### 4.1.1 Description and Priority
 
-4.1.1   Description and Priority
+This feature enables civilians to report areas in need of sanitation or attention by the local authorities. It includes optional photo upload and tagging.  
+**Priority**: High
 
-Permite raportarea locațiilor necunoscute sau deteriorate. Prioritate: Înaltă
+#### 4.1.2 Stimulus/Response Sequences
 
- Provide a short description of the feature and indicate whether it is of High, Medium, or Low priority. You could also include specific priority component ratings, such as benefit, penalty, cost, and risk (each rated on a relative scale from a low of 1 to a high of 9).
+1. User logs into the platform.
+2. Navigates to the *Report Dirty Area* option.
+3. Selects or clicks on a map location.
+4. Fills in the form with: description, address, neighborhood, city, country, optional photo, and tags.
+5. Submits the report.
+6. Receives confirmation that the report has been registered and is pending validation.
 
-4.1.2   Stimulus/Response Sequences
+#### 4.1.3 Functional Requirements
 
-Utilizator deschide aplicația
+- **4.1.3.1** The user can select a location directly from the interactive map.
+- **4.1.3.2** The user can add descriptive details and upload an optional photo.
+- **4.1.3.3** The system saves the submitted report with status: *unvalidated*.
+- **4.1.3.4** A notification is sent to the supervisors for review.
+- **4.1.3.5** Reports are bound to the city set in the user's *mainCity* profile setting.
+- **4.1.3.6** The user may generate a PDF/HTML/CSV report for a specific neighborhood, including all data submitted.
 
-Selectează „Raportează locație”
+---
 
-Introduce detalii + locație
+### 4.2 System Feature 2
 
-Primește confirmare
+#### 4.2.1 Description and Priority
 
- List the sequences of user actions and system responses that stimulate the behavior defined for this feature. These will correspond to the dialog elements associated with use cases.
-4.1.3   Functional Requirements
+Supervisors are responsible for reviewing, approving, or rejecting civilian-submitted reports.  
+**Priority**: Medium
 
+#### 4.2.2 Stimulus/Response Sequences
 
-4.1.3.1 Utilizatorul poate selecta locația pe hartă
+1. Supervisor receives a push notification when new reports are available.
+2. Logs in and accesses the *Home* dashboard filtered by their *mainCity*.
+3. Reviews each report with full details and attached media.
+4. Accepts or rejects reports.
+5. Accepted reports are forwarded to local authorities.
 
-4.1.3.2 Utilizatorul poate adăuga descriere și fotografie
+#### 4.2.3 Functional Requirements
 
-4.1.3.3 Sistemul salvează raportul ca „nevalidat”
+- **4.2.3.1** The supervisor can view all pending/unvalidated reports in their selected city.
+- **4.2.3.2** The supervisor can approve or reject each report.
+- **4.2.3.3** On approval, the system sends the report to the authority dashboard.
+- **4.2.3.4** On rejection, the report is removed and not persisted further.
+- **4.2.3.5** All actions are logged and timestamped for audit purposes.
 
-4.1.3.4 Trimite notificare către supervisori
+---
 
- Itemize the detailed functional requirements associated with this feature. These are the software capabilities that must be present in order for the user to carry out the services provided by the feature, or to execute the use case. Include how the product should respond to anticipated error conditions or invalid inputs. Requirements should be concise, complete, unambiguous, verifiable, and necessary. Use “TBD” as a placeholder to indicate when necessary information is not yet available.
- 
- Each requirement should be uniquely identified with a sequence number or a meaningful tag of some kind.
+### 4.3 System Feature 3
 
-### 4.2 System Feature 2 (and so on)
+#### 4.3.1 Description and Priority
 
-4.2 Validate Reports (Supervisori)
-4.2.1 Description and Priority
-Supraveghetorii validează autenticitatea rapoartelor. Prioritate: Medie
+Authorities oversee recycling and sanitation infrastructure. They can create official recycling locations and track reports passed through supervisor validation.  
+**Priority**: High
 
-4.2.2 Stimulus/Response Sequences
-Supervisor primește notificare
+#### 4.3.2 Stimulus/Response Sequences
 
-Deschide lista rapoarte
+1. Authority receives a notification about a validated report.
+2. Logs in and navigates to the *Home* or *Areas* interface.
+3. Reviews report details and decides on an action.
+4. May mark the location as resolved or create an official recycling marker.
+5. May update or disable existing area entries.
 
-Verifică și aprobă/respinge
+#### 4.3.3 Functional Requirements
 
-4.2.3 Functional Requirements
-4.2.3.1 Supervisor poate vedea toate rapoartele nevalidate
-
-4.2.3.2 Poate aproba sau respinge fiecare raport
-
-4.2.3.3 La aprobare, notificarea se trimite autorităților
-
-4.3 Manage Locations (Autorități)
-4.3.1 Description and Priority
-Autoritățile pot publica locații oficiale și rezolva probleme raportate. Prioritate: Înaltă
-
-4.3.2 Stimulus/Response Sequences
-Primește notificări din rapoarte
-
-Accesează locațiile afectate
-
-Marchează ca „rezolvat” sau actualizează
-
-4.3.3 Functional Requirements
-4.3.3.1 Poate crea/edită/șterge locații
-
-4.3.3.2 Primește notificări la validare
-
-4.3.3.3 Poate marca locația ca „nefuncțională” sau „activă”
+- **4.3.3.1** The authority can view validated reports specific to their *mainCity*.
+- **4.3.3.2** The authority can create, edit, or remove recycling area markers.
+- **4.3.3.3** On map interaction, the authority may define a new recycling point via a form specifying supported waste types.
+- **4.3.3.4** Existing locations can be marked as *active* or *inactive*.
+- **4.3.3.5** The system generates a record for every change, traceable by location and user.
+- **4.3.3.6** A *Posted Areas* section lists all active locations submitted by the logged-in authority.
 
 ## Other Nonfunctional Requirements
 
 ### 5.1 Performance Requirements
 
-Timp de răspuns sub 1 secundă pentru operațiuni CRUD
+- Response time must remain under **1 second** for all standard CRUD operations.
+- The system must support at least **10,000 concurrent users** without degradation.
+- Map-based interactions (e.g., placing markers, loading zones) should load within **2 seconds**.
+- Report generation (PDF/CSV/HTML) should complete within **3 seconds** for a standard dataset.
 
-Suport pentru minim 10.000 utilizatori simultan
-
-If there are performance requirements for the product under various circumstances, state them here and explain their rationale, to help the developers understand the intent and make suitable design choices. Specify the timing relationships for real time systems. Make such requirements as specific as possible. You may need to state performance requirements for individual functional requirements or features.
+---
 
 ### 5.2 Safety Requirements
 
-Validarea umană a rapoartelor pentru a preveni conținut malițios
+- All reports submitted by civilians must undergo **manual validation** by supervisors before becoming visible to authorities or the public.
+- Submitted locations must be constrained **within national borders** to prevent out-of-scope input.
+- Image uploads are limited in size and type to prevent malicious file injection.
+- Data is sanitized and validated before processing.
 
-Limitări asupra locației (nu poate fi în afara granițelor)
-
-Specify those requirements that are concerned with possible loss, damage, or harm that could result from the use of the product. Define any safeguards or actions that must be taken, as well as actions that must be prevented. Refer to any external policies or regulations that state safety issues that affect the product’s design or use. Define any safety certifications that must be satisfied.
+---
 
 ### 5.3 Security Requirements
 
-Autentificare prin email/parolă și roluri
+- User authentication is handled via **email and password**, with role-based access control (civilian, supervisor, authority).
+- All sensitive data must be **encrypted in transit (HTTPS)** and **at rest**.
+- Only authorized roles can perform write operations on restricted entities (e.g., only authorities can create official locations).
+- Login sessions must expire after **30 minutes of inactivity**.
 
-Datele criptate în tranzit și în repaus
-
-Specify any requirements regarding security or privacy issues surrounding use of the product or protection of the data used or created by the product. Define any user identity authentication requirements. Refer to any external policies or regulations containing security issues that affect the product. Define any security or privacy certifications that must be satisfied.
+---
 
 ### 5.4 Software Quality Attributes
 
-Disponibilitate: 99.9% uptime
+- **Availability**: Minimum system uptime must be **99.9%**, monitored through automated health checks.
+- **Portability**: The platform must be fully functional on:
+  - Modern web browsers: Chrome, Firefox, Edge
+  - Mobile devices: Android 9+ and iOS 13+
+- **Usability**: Interfaces are tailored to each user role, with minimal input required and a focus on intuitive map interactions.
+- **Maintainability**: The codebase will follow clean architecture principles, and dependency updates must not break functionality.
+- **Scalability**: The backend must be capable of horizontal scaling to meet future demand.
+- **Localization**: The UI must support **both Romanian and English**, with automatic language detection where possible.
 
-Portabilitate: Web + Mobile
-
-Ușurință în utilizare: Interfață adaptată fiecărui rol
-
-Specify any additional quality characteristics for the product that will be important to either the customers or the developers. Some to consider are: adaptability, availability, correctness, flexibility, interoperability, maintainability, portability, reliability, reusability, robustness, testability, and usability. Write these to be specific, quantitative, and verifiable when possible. At the least, clarify the relative preferences for various attributes, such as ease of use over ease of learning.
+---
 
 ### 5.5 Business Rules
 
-Doar autoritățile pot adăuga locații „oficiale”
-
-Raportele de la civili trebuie validate
-
-Fiecare raport trebuie să aibă un status: „nevalidat”, „aprobat”, „respins”
-
-Localizare în limba română și engleză
-
-Arhivarea datelor mai vechi de 2 ani
-List any operating principles about the product, such as which individuals or roles can perform which functions under specific circumstances. These are not functional requirements in themselves, but they may imply certain functional requirements to enforce the rules.
+- Only **authorities** can add or edit **official recycling locations**.
+- All **civilian reports** must be reviewed and validated by **supervisors** before reaching authorities.
+- Every report must carry one of the following statuses:
+  - `unvalidated`
+  - `approved`
+  - `rejected`
+- Archived data older than **2 years** will be stored in a separate, read-only environment.
+- System interfaces must be **bilingual** (Romanian and English), with the default set by the user's browser or device language.
 
 ## Other Requirements
 
-Define any other requirements not covered elsewhere in the SRS. This might include database requirements, internationalization requirements, legal requirements, reuse objectives for the project, and so on. Add any new sections that are pertinent to the project.
+This section captures all remaining requirements not previously addressed, including data handling rules, legal obligations, internationalization efforts, and open questions that must be resolved prior to deployment.
+
+---
 
 ### Appendix A: Glossary
 
-CRUD: Create, Read, Update, Delete
+- **CRUD**: Acronym for Create, Read, Update, Delete — standard database operations.
+- **FCM**: Firebase Cloud Messaging — service used for sending push notifications to mobile clients.
+- **GDPR**: General Data Protection Regulation — EU regulation governing user data protection and privacy.
+- **Leaflet**: Open-source JavaScript library for interactive maps.
+- **Wasmer**: Lightweight WebAssembly runtime used to run secure and fast modules.
+- **MainCity**: A preferred city set by users in their profile, used to center views and generate location-specific reports.
 
-FCM: Firebase Cloud Messaging
-
-Define all the terms necessary to properly interpret the SRS, including acronyms and abbreviations. You may wish to build a separate glossary that spans multiple projects or the entire organization, and just include terms specific to a single project in each SRS.
+---
 
 ### Appendix B: Analysis Models
-Optionally, include any pertinent analysis models, such as data flow diagrams, class diagrams, state-transition diagrams, or entity-relationship diagrams.
 
-### Appendix C: To Be Determined List
-TBD: Design UI Screens
+- Diagrams and models to support analysis and design (such as:
+  - **Entity-Relationship Diagrams** to outline database schema
+  - **State-transition diagrams** for report status management
+  - **Sequence diagrams** for major user interactions
+- These diagrams will be included in a separate design specification document and linked here upon finalization.
 
-TBD: Lista completă de validări pentru supervisori
+---
 
-TBD: Sistem de feedback pentru utilizatori
+### Appendix C: To Be Determined (TBD) List
 
-Collect a numbered list of the TBD (to be determined) references that remain in the SRS so they can be tracked to closure.
+The following items remain open and must be specified before final development stages:
+
+1. **TBD-1**: Complete user interface wireframes for all user roles.
+2. **TBD-2**: Finalize the full list of supervisor validation criteria.
+3. **TBD-3**: Define and implement the user feedback and rating system.
+4. **TBD-4**: Define rate limiting and spam prevention mechanisms.
+5. **TBD-5**: Establish accessibility standards (WCAG compliance level).
+6. **TBD-6**: Determine the frequency and method of data backup procedures.
