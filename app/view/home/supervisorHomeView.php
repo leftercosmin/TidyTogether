@@ -24,6 +24,7 @@
 
   <div class="report-container">
     <h1 class="page-title">Pending Reports</h1>
+    <p class="reports-info">Showing the 10 most recent pending reports. Accept or deny reports to see more.</p>
 
     <?php if (empty($pendingPosts)): ?>
       <p class="empty-message">No reports are pending at this time.</p>

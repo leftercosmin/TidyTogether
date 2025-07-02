@@ -22,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
           html += `
       <div style="display: flex; align-items: center; padding: 0.25em;">
         <button type="button" style="flex: 1; text-align: left; border: none; background: none; padding: 0.5em; cursor: pointer;" 
-          onclick="selectPostedArea(${area.lat}, ${area.lon}, ${area.address})"
+          onclick="selectPostedArea(${area.lat}, ${area.lon}, '${area.address}')"
           onmouseover="this.style.backgroundColor='#f0f0f0'"
           onmouseout="this.style.backgroundColor='transparent'">
           ${area.address}
@@ -61,10 +61,14 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 window.selectPostedArea = function (lat, lng, address) {
-  localStorage.setItem('panToLat', lat);
-  localStorage.setItem('panToLng', lng);
-  localStorage.setItem('panToLabel', address);
-  window.location.href = '?fetch=true&fromFavorites=true';
+  if (typeof window.panToLocation === 'function') {
+    window.panToLocation(lat, lng, address);
+  } else {
+    localStorage.setItem('panToLat', lat);
+    localStorage.setItem('panToLng', lng);
+    localStorage.setItem('panToLabel', address);
+    window.location.href = '?fetch=true&fromFavorites=true';
+  }
 };
 
 window.deletePostedArea = function (coordId, buttonElement) {
@@ -81,8 +85,6 @@ window.deletePostedArea = function (coordId, buttonElement) {
   })
     .then(res => res.json())
     .then(data => {
-
-      console.log(data);
       if (data.success) {
         const row = buttonElement.parentElement;
         row.remove();
@@ -91,17 +93,14 @@ window.deletePostedArea = function (coordId, buttonElement) {
         if (dropdown.children.length === 0) {
           dropdown.innerHTML = temp;
         }
-      }
-
-      else {
+      } else {
         alert('Failed to delete posted area: ' + data.message);
         buttonElement.disabled = false;
         buttonElement.textContent = '✕';
       }
     })
-
     .catch(error => {
-      console.error('Error deleting favorite:', error);
+      console.error('Error deleting posted area:', error);
       alert('Network error occurred while deleting the posted area.');
       buttonElement.disabled = false;
       buttonElement.textContent = '✕';

@@ -26,6 +26,16 @@ body {
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
+.reports-info {
+    color: var(--offwhite1);
+    background-color: var(--green);
+    font-size: 1rem;
+    margin: -1rem 0 1.5rem 0;
+    font-style: italic;
+    opacity: 0.9;
+    text-align: center;
+}
+
 .report-list {
     list-style: none;
     padding: 0;

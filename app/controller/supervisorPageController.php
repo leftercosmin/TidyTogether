@@ -3,7 +3,7 @@
 function supervisorFallbackPage(int $id): void
 {
   $city = getMainCityModel($id);
-  $pendingPosts = getReportModel("pending", $city);
+  $pendingPosts = getReportModel("pending", $city, 10);
   isError($pendingPosts);
 
   $mediaSupervisor = [];

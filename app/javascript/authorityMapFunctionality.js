@@ -31,7 +31,6 @@ document.addEventListener("DOMContentLoaded", function () {
   let currentLocation = null;
 
   function handleLocation(lat, lng) {
-
     if (typeof cityBounds !== 'undefined' && cityBounds) {
       if (lat < cityBounds.south || lat > cityBounds.north ||
         lng < cityBounds.west || lng > cityBounds.east) {
@@ -106,25 +105,20 @@ document.addEventListener("DOMContentLoaded", function () {
       });
   }
 
-  //check for stored location to move to
-  const panLat = localStorage.getItem('panToLat');
-  const panLng = localStorage.getItem('panToLng');
-  const panLabel = localStorage.getItem('panToLabel');
-
-  if (panLat && panLng) {
-    console.log("Panning to:", panLat, panLng, panLabel);
-    map.setView([parseFloat(panLat), parseFloat(panLng)], 16);
-
-    handleLocation(parseFloat(panLat), parseFloat(panLng));
-
-    localStorage.removeItem('panToLat');
-    localStorage.removeItem('panToLng');
-    localStorage.removeItem('panToLabel');
-  }
+  // Function to pan to a specific location (used by posted areas)
+  window.panToLocation = function(lat, lng, address) {
+    map.setView([parseFloat(lat), parseFloat(lng)], 16);
+    handleLocation(parseFloat(lat), parseFloat(lng));
+    
+    // Close the dropdown after selection
+    const dropdownContent = document.getElementById('zonesDropdownContent');
+    if (dropdownContent) {
+      dropdownContent.style.display = 'none';
+    }
+  };
 
   //map listeners
   map.on('click', function (e) {
-    console.log('Map clicked', e.latlng);
     const { lat, lng } = e.latlng;
     handleLocation(lat, lng);
   });

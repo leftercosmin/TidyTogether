@@ -3,7 +3,7 @@
 function authorityFallbackPage(int $id): void
 {
   $city = getMainCityModel($id);
-  $approvedReports = getReportModel("inProgress", $city);
+  $approvedReports = getReportModel("inProgress", $city, 10);
   isError($approvedReports);
 
   $mediaAuthority = [];
