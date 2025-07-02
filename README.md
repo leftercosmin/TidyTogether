@@ -29,7 +29,7 @@
 </p>
    
 <h4>
-    <a href="https://github.com/leftercosmin/TidyTogether/">View Demo</a>
+    <a href="./doc/demo.mp4">View Demo</a>
   <span> · </span>
     <a href="https://github.com/leftercosmin/TidyTogether/">Documentation</a>
   <span> · </span>
