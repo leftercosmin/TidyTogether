@@ -17,7 +17,7 @@ html {
   text-align: center;
 }
 
-.title-text{
+.title-text {
   color: #F8EFE0;
   font-size: 2.5em;
   margin: .3em;
@@ -34,7 +34,7 @@ body {
 .wrapper {
   box-sizing: border-box;
   background: rgba(255, 255, 255, 0.06);
-  border-radius:  0 16px 16px 0;
+  border-radius: 0 16px 16px 0;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   backdrop-filter: blur(4.2px);
   -webkit-backdrop-filter: blur(4.2px);
@@ -194,22 +194,22 @@ p {
   transition: all 0.2s ease;
 }
 
-.role-option input[type="radio"]:checked + .role-option-box {
+.role-option input[type="radio"]:checked+.role-option-box {
   background-color: var(--base-color);
   color: var(--accent-color);
 }
 
-.role-option input[type="radio"]:checked + .role-option-box svg {
+.role-option input[type="radio"]:checked+.role-option-box svg {
   fill: var(--accent-color);
 }
 
-.footer-text{
+.footer-text {
   color: var(--accent-color);
   margin-bottom: 0;
 }
 
-@media(max-width: 1251px){
-  .title-text{
+@media(max-width: 1251px) {
+  .title-text {
     font-size: 1.9em;
   }
 }
@@ -233,10 +233,15 @@ p {
 
 @media (max-width: 768px) {
   .wrapper {
+    width: 100%;
     margin: 0 auto;
     border-radius: 16px;
     left: 0;
     right: 0;
+  }
+
+  form {
+    width: 100%;
   }
 
   .role-option {
