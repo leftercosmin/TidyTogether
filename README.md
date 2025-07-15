@@ -1,5 +1,6 @@
 <div align="center">
 
+
   <img src="doc/tidytogether-logo.png" alt="logo" width="200" height="auto" />
   <h1>TidyTogether</h1>
   
